@@ -32,3 +32,8 @@ All notable changes to this project will be documented in this file.
 ## [0.0.3] - 2024-12-27
 ### Added
 - Populated `include/functions.h` with prototypes for all analyzed functions.
+
+## [0.0.4] - 2024-12-27
+### Changed
+- Updated `include/structs.h` with detailed analysis of `UnkStruct_10` (Vectors), `UnkStruct_8`, and others.
+- Updated `HANDOFF.md` to reflect the completion of the static analysis phase.

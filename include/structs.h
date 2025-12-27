@@ -40,7 +40,7 @@ struct UnkStruct_5 {
     s32 unk0;
     s32 unk4;
     s32 unk8;
-    s32 unkC;
+    s32 unkC; // Set by func_80083550
 };
 
 struct UnkStruct_6 {
@@ -51,8 +51,8 @@ struct UnkStruct_6 {
     s32 unk10;
     s32 unk14;
     s32 unk18;
-    s32 unk1C;
-    s32 unk20;
+    s32 unk1C; // Set by func_80083568
+    s32 unk20; // Set by func_80083568
 };
 
 struct UnkStruct_7 {
@@ -60,11 +60,12 @@ struct UnkStruct_7 {
     s32 unk4;
     s32 unk8;
     s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
+    s32 unk10; // Set by func_80083558
+    s32 unk14; // Set by func_80083558
+    s32 unk18; // Set by func_80083558
 };
 
+// Contains a 3-byte vector at the end (offsets 0x8, 0x9, 0xA)
 struct UnkStruct_8 {
     s8 unk0;
     s8 unk1;
@@ -74,19 +75,21 @@ struct UnkStruct_8 {
     s8 unk5;
     s8 unk6;
     s8 unk7;
-    s8 unk8;
-    s8 unk9;
-    s8 unkA;
+    s8 unk8; // Vector X?
+    s8 unk9; // Vector Y?
+    s8 unkA; // Vector Z?
 };
 
+// Likely contains two 3-byte vectors (0,1,2) and (4,5,6).
+// func_8006AFC8 sets both triplets to the same value.
 struct UnkStruct_10 {
-    s8 unk0;
-    s8 unk1;
-    s8 unk2;
-    s8 unk3;
-    s8 unk4;
-    s8 unk5;
-    s8 unk6;
+    s8 unk0; // Vector1 X
+    s8 unk1; // Vector1 Y
+    s8 unk2; // Vector1 Z
+    s8 unk3; // Padding or Alpha?
+    s8 unk4; // Vector2 X
+    s8 unk5; // Vector2 Y
+    s8 unk6; // Vector2 Z
 };
 
 #endif
