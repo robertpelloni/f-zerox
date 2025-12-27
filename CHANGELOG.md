@@ -22,3 +22,9 @@ All notable changes to this project will be documented in this file.
     - `src/game_73F0.c` (Bounds Check)
     - `src/game_11CF0.c` (Init Loop)
 - Updated `include/structs.h` and `include/variables.h` with findings.
+
+## [0.0.2] - 2024-12-27
+### Added
+- Documented `src/game_14440.c` (Audio utility).
+- Documented `src/game_194E0.c` (State setter).
+- Documented `src/game_4FFB0.c` (Low memory state update).
