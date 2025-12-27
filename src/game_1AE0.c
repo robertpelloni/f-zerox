@@ -1,5 +1,10 @@
 #include "common.h"
 
+/**
+ * @brief Rotates three global variables in a cycle.
+ *
+ * Cycle: D_800DCD04 -> D_800DCD08 -> D_800DCD0C -> D_800DCD04
+ */
 void func_80067AE0(void) {
    s32 temp_t7;
 

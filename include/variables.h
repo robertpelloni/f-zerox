@@ -11,7 +11,7 @@ extern s32 D_800CD520;
 extern s32 D_800D0AC0;
 extern s32 D_800D0AC4;
 extern s32 D_800D1C18;
-extern s32 D_800D46C0;
+extern s32 D_800D46C0; // gDebugPrintFormat (Used in game_197D0.c)
 extern s32 D_800D46C8;
 extern s32 D_800D46D8;
 extern s32 D_800D46FC;
@@ -36,7 +36,7 @@ extern s32 D_800DCD08;
 extern s32 D_800DCD0C;
 extern s32 D_800E4260;
 extern s32 D_800E4264;
-extern s32 D_800E4348;
+extern s32 D_800E4348; // gCurrentFramebuffer (Updated in game_197D0.c)
 extern s32 D_800E4350;
 extern s32 D_800E44D0;
 extern s32 D_800E4650;

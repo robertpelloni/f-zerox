@@ -36,6 +36,9 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1F510/func_800888D0.s")
 
+/**
+ * @brief Sets global variable D_800E5E84.
+ */
 void func_80088CAC(s32 arg0) {
     D_800E5E84 = arg0;
 }
@@ -96,6 +99,11 @@ void func_80088CAC(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1F510/func_8008D5F4.s")
 
+/**
+ * @brief Iterates over 30 items (likely machines/drivers).
+ *
+ * Loops from 29 down to 0, calling func_8008D3C4 for each index.
+ */
 void func_8008D7E8(void) {
     s32 var_s0;
 
