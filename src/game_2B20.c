@@ -41,6 +41,12 @@ void func_8006A904(s32 arg0, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2B20/func_8006A978.s")
 
+/**
+ * @brief Rounds a floating point number to the nearest integer.
+ *
+ * @param arg0 Input float.
+ * @return s32 Rounded integer.
+ */
 s32 func_8006A9E0(f32 arg0) {
     if (arg0 < 0.0f) {
         return (s32) (arg0 - 0.5f);
@@ -54,18 +60,37 @@ s32 func_8006A9E0(f32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2B20/func_8006ADE4.s")
 
+/**
+ * @brief Sets two 3-byte vectors (likely RGB colors) in the struct to the same values.
+ *
+ * @param arg0 Pointer to the struct.
+ * @param arg1 Value for index 0 and 4.
+ * @param arg2 Value for index 1 and 5.
+ * @param arg3 Value for index 2 and 6.
+ */
 void func_8006AFC8(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk0 = arg0->unk4 = arg1;
     arg0->unk1 = arg0->unk5 = arg2;
     arg0->unk2 = arg0->unk6 = arg3;
 }
 
+/**
+ * @brief Sets two 3-byte vectors in the struct to the same values. Identical to func_8006AFC8.
+ */
 void func_8006AFE4(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk0 = arg0->unk4 = arg1;
     arg0->unk1 = arg0->unk5 = arg2;
     arg0->unk2 = arg0->unk6 = arg3;
 }
 
+/**
+ * @brief Sets the last three bytes of the struct (offsets 0x8, 0x9, 0xA).
+ *
+ * @param arg0 Pointer to the struct.
+ * @param arg1 Value for offset 0x8.
+ * @param arg2 Value for offset 0x9.
+ * @param arg3 Value for offset 0xA.
+ */
 void func_8006B000(struct UnkStruct_8* arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0->unk8 = arg1;
     arg0->unk9 = arg2;
