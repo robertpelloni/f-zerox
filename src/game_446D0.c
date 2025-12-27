@@ -26,6 +26,14 @@ void func_800AAF7C(s32 arg0) {
     func_800AAD84(arg0, 7);
 }
 
+/**
+ * @brief Initializes a circular linked list node.
+ *
+ * Sets the next and prev pointers (unk0, unk4) to point to itself,
+ * effectively creating an empty list or isolated node.
+ *
+ * @param arg0 Pointer to the list node.
+ */
 void func_800AAF9C(struct UnkStruct_1* arg0) {
     arg0->unk0 = arg0;
     arg0->unk4 = arg0;

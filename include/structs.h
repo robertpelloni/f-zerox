@@ -11,10 +11,11 @@ struct UnkStruct_0 {
     s8 unk3;
 };
 
+// Likely a Linked List Node (circular)
 struct UnkStruct_1 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
+    s32 unk0; // next or prev
+    s32 unk4; // prev or next
+    s32 unk8; // value or type?
 };
 
 struct UnkStruct_2 {
