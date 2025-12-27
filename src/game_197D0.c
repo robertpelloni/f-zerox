@@ -8,6 +8,9 @@ void func_8007F904(void) {
     func_8007F86C(&D_800CD520, &D_80400008, &D_800E4350, &D_800E44D0, &D_800E4650);
 }
 
+/**
+ * @brief Updates the global framebuffer pointer with the current framebuffer.
+ */
 void func_8007F94C(void) {
     D_800E4348 = osViGetCurrentFramebuffer();
 }
@@ -20,6 +23,13 @@ void func_8007F94C(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_197D0/func_8007FB80.s")
 
+/**
+ * @brief Draws a debug integer to the screen.
+ *
+ * Uses sprintf to format the integer and then draws it.
+ *
+ * @param arg0 The integer to display.
+ */
 void func_8007FC68(s32 arg0) {
     s8* sp1C;
 
