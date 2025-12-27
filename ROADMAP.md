@@ -6,7 +6,7 @@ This document outlines the strategic roadmap to evolve the F-Zero X decompilatio
 **Goal:** A fully decompiled, C-based codebase that is "shiftable" (relocatable), allowing for code modification and expansion without breaking the ROM.
 
 1.  **Complete Decompilation**
-    -   **Current Status:** ~10% decompiled (700+ `GLOBAL_ASM` blobs remaining).
+    -   **Current Status:** ~10% decompiled. **Documentation Phase Active** (due to missing ROM).
     -   **Action:** Systematically replace `GLOBAL_ASM` blocks with matching C code.
     -   **Priority:** High. This is the prerequisite for any meaningful porting work.
     -   **Milestone:** 100% C codebase matching the original US ROM.
@@ -20,6 +20,7 @@ This document outlines the strategic roadmap to evolve the F-Zero X decompilatio
     -   **Milestone:** Ability to add a new function or asset and successfully compile a working ROM (even if checksum differs).
 
 3.  **Documentation & Naming**
+    -   **Current Status:** **Partial**. Identified linked list nodes, debug functions, and math utilities.
     -   **Action:** rename variables (e.g., `func_80076498` -> `Physics_UpdateMomentum`) and document structs (e.g., `PlayerState`, `VehiclePhysics`).
     -   **Milestone:** A codebase readable by human contributors.
 
