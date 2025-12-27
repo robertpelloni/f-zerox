@@ -41,3 +41,9 @@ All notable changes to this project will be documented in this file.
 ## [0.0.5] - 2024-12-27
 ### Changed
 - Updated `HANDOFF.md` with build system origins (forked from `mkst/sssv`).
+
+## [0.0.6] - 2024-12-27
+### Added
+- Created `src/pc/` directory for PC port specific code.
+- Created `src/pc/README.md` documenting the HAL architecture.
+- Created `include/pc/hal.h` defining the Hardware Abstraction Layer interface.
