@@ -1,5 +1,11 @@
 #include "common.h"
 
+/**
+ * @brief Checks if the argument is within the range [0, 22).
+ *
+ * @param arg0 The value to check.
+ * @return s32 1 if valid, 0 otherwise.
+ */
 s32 func_8006D3F0(s32 arg0) {
     if ((arg0 >= 0) && (arg0 < 0x16)) {
         return 1;
