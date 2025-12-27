@@ -28,3 +28,7 @@ All notable changes to this project will be documented in this file.
 - Documented `src/game_14440.c` (Audio utility).
 - Documented `src/game_194E0.c` (State setter).
 - Documented `src/game_4FFB0.c` (Low memory state update).
+
+## [0.0.3] - 2024-12-27
+### Added
+- Populated `include/functions.h` with prototypes for all analyzed functions.
