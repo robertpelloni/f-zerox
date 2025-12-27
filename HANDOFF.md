@@ -14,6 +14,7 @@
     - Versioning (`VERSION.md` v0.0.4).
     - Changelog updated.
     - Project Structure documented.
+    - Build System analyzed (Based on `mkst/sssv` fork).
 
 ## Immediate Next Steps
 1.  **Obtain ROM:** `baserom.us.z64` is required to resume actual decompilation.
