@@ -47,3 +47,8 @@ All notable changes to this project will be documented in this file.
 - Created `src/pc/` directory for PC port specific code.
 - Created `src/pc/README.md` documenting the HAL architecture.
 - Created `include/pc/hal.h` defining the Hardware Abstraction Layer interface.
+
+## [0.0.7] - 2024-12-27
+### Added
+- Implemented SDL2 backend for HAL Video (`src/pc/sdl2/hal_video.c`).
+- Implemented SDL2 backend for HAL Input and System (`src/pc/sdl2/hal_input.c`, `src/pc/sdl2/hal_system.c`).
