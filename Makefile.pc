@@ -1,0 +1,29 @@
+# Makefile for F-Zero X PC Port
+
+CC = gcc
+CFLAGS = -Wall -Wextra -g -Iinclude
+LDFLAGS = -lSDL2 -lGL
+
+SRC_DIRS = src/pc/sdl2
+BUILD_DIR = build/pc
+
+SRCS = $(wildcard $(SRC_DIRS)/*.c)
+OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
+
+TARGET = $(BUILD_DIR)/fzerox_pc
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	@mkdir -p $(dir $@)
+	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+	@echo "Build successful: $(TARGET)"
+
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -rf $(BUILD_DIR)

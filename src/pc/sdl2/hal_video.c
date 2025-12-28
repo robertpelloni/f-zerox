@@ -1,4 +1,4 @@
-#include "../../include/pc/hal.h"
+#include "pc/hal.h"
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
