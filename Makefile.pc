@@ -5,17 +5,15 @@ CFLAGS = -Wall -Wextra -g -Iinclude/pc -Iinclude -D_LANGUAGE_C
 LDFLAGS = -lSDL2 -lGL
 
 SRC_DIRS = src/pc/sdl2 src/pc
-# Add a game logic file to test linking (Math Utils + Debug Text)
-GAME_SRCS = src/game_2B20.c src/game_197D0.c
+# Add a game logic file to test linking (Math Utils + Debug Text + Audio State + Audio Util)
+GAME_SRCS = src/game_2B20.c src/game_197D0.c src/game_511D0.c src/game_14440.c
 
 # PC Implementation of Ultra64 functions
-PC_IMPL_SRCS = src/pc/ultra_impl.c
+PC_IMPL_SRCS = src/pc/ultra_impl.c src/pc/libaudio_impl.c
 
 BUILD_DIR = build/pc
 
 SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) $(GAME_SRCS) $(PC_IMPL_SRCS)
-
-SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) $(GAME_SRCS)
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 TARGET = $(BUILD_DIR)/fzerox_pc

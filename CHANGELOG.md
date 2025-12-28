@@ -88,6 +88,12 @@ All notable changes to this project will be documented in this file.
 - Updated `Makefile.pc` to compile `ultra_impl.c` and link `src/game_197D0.c`.
 - Defined mock global variables in `ultra_impl.c` to satisfy linker symbols for debug text.
 
+## [0.1.4] - 2024-12-27
+### Added
+- Created `include/pc/PR/libaudio.h` with LibAudio types and prototypes.
+- Created `src/pc/libaudio_impl.c` to stub audio library functions.
+- Updated `Makefile.pc` to link audio-related game files (`game_511D0.c`, `game_14440.c`).
+
 ## [0.0.11] - 2024-12-27
 ### Changed
 - Enhanced PC Shell to clear the screen with a specific color (Visual Confirmation).

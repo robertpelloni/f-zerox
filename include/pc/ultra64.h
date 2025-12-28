@@ -3,6 +3,7 @@
 
 #include <PR/ultratypes.h>
 #include <PR/os.h>
+#include <PR/libaudio.h>
 
 // Controller Button Constants
 #define CONT_A      0x8000
