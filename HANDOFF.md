@@ -23,7 +23,11 @@
     - `src/game_197D0.c` -> `src/debug_text.c`
     - `src/game_2B20.c` -> `src/math_utils.c`
     - `src/game_511D0.c` -> `src/audio_state.c`
-3.  **PC Port:** Start building HAL headers in a new `src/pc/` directory.
+3.  **PC Port:**
+    -   HAL interfaces defined in `include/pc/hal.h`.
+    -   SDL2 backend implemented in `src/pc/sdl2/`.
+    -   Main loop functional (`src/pc/main.c`).
+    -   Game logic linking proved possible (`Makefile.pc` links `game_2B20.c`).
 
 ## Critical Files
 - `ROADMAP.md`: The master plan.

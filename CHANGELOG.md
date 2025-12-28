@@ -65,6 +65,11 @@ All notable changes to this project will be documented in this file.
 - Mapped N64 types (`u32`, `s32`) to standard `stdint.h` types for cross-platform compatibility.
 - Linked `src/game_2B20.c` (Math Utils) into the PC build to test compilation.
 
+## [0.0.11] - 2024-12-27
+### Changed
+- Enhanced PC Shell to clear the screen with a specific color (Visual Confirmation).
+- Updated ROADMAP.md and HANDOFF.md to reflect PC Port progress.
+
 ## [0.0.8] - 2024-12-27
 ### Added
 - Created `Makefile.pc` for building the PC port.

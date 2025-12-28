@@ -1,5 +1,6 @@
 #include "pc/hal.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
 static SDL_Window* sWindow = NULL;
@@ -39,8 +40,8 @@ void HAL_Video_Shutdown(void) {
 }
 
 void HAL_Video_BeginFrame(void) {
-    // Clear screen (placeholder)
-    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // Dark Blue background
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void HAL_Video_EndFrame(void) {

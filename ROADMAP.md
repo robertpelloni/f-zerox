@@ -31,9 +31,12 @@ This document outlines the strategic roadmap to evolve the F-Zero X decompilatio
     -   **Action:** Replace N64 hardware calls with generic interfaces.
         -   **Video:** Map N64 GBI (Graphics Binary Interface) commands to a modern backend (OpenGL/Vulkan/DirectX).
             -   *Reference:* Fast3D (libultragfx) or similar N64-to-PC graphics translation layers.
+            -   *Status:* HAL defined (`hal.h`). SDL2 Backend initialized.
         -   **Audio:** Map N64 ABI (Audio Binary Interface) to SDL2/OpenAL.
+            -   *Status:* HAL defined. SDL2 Audio Stub implemented.
         -   **Input:** Map N64 controller inputs to SDL2 input (supporting Keyboard, Gamepad, Wheels).
-    -   **Milestone:** "F-Zero X PC" executable that boots and plays original content.
+            -   *Status:* HAL defined. SDL2 Input Poll implemented.
+    -   **Milestone:** "F-Zero X PC" executable that boots and plays original content. (Partially Achieved: Shell boots).
 
 2.  **High-FPS & Widescreen Support**
     -   **Action:**
