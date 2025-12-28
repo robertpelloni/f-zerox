@@ -1,18 +1,22 @@
 # Project Structure & Submodules
 
 ## Submodules
-| Name | Path | Version (Commit) | Description |
-|------|------|------------------|-------------|
-| **asm-differ** | `tools/asm-differ` | `1e81f18` | Tool for comparing C output with original assembly. |
-| **asm-processor** | `tools/asm-processor` | `742406e` | Pre-processor for handling inline assembly. |
-| **ido5.3_cc** | `tools/ido5.3_cc` | `faa773c` | SGI IDO 5.3 Compiler (recompiled). |
-| **splat** | `tools/splat` | `f44113b` | ROM splitting and disassembly tool. |
+| Name | Path | Version (Commit) | Date | Description |
+|------|------|------------------|------|-------------|
+| **asm-differ** | `tools/asm-differ` | `1e81f18` | 2022-11-16 | Tool for comparing C output with original assembly. |
+| **asm-processor** | `tools/asm-processor` | `742406e` | 2022-11-04 | Pre-processor for handling inline assembly. |
+| **ido5.3_cc** | `tools/ido5.3_cc` | `faa773c` | 2019-12-24 | SGI IDO 5.3 Compiler (recompiled). |
+| **splat** | `tools/splat` | `f44113b` | 2022-12-05 | ROM splitting and disassembly tool. |
 
 ## Directory Layout
-- **root**: Contains build scripts (`Makefile`), configuration (`.yaml`), and documentation.
-- **src/**: Decompiled C source code (`.c`) and top-level assembly (`.s`).
-    - Files are named `game_ADDRESS.c` pending proper renaming.
+- **root**: Contains build scripts (`Makefile`, `Makefile.pc`), configuration (`.yaml`), and documentation (`ROADMAP.md`, `CHANGELOG.md`).
+- **src/**: Source code.
+    - **game_*.c**: Decompiled N64 game logic (Original Engine).
+    - **pc/**: PC Port specific code.
+        - **sdl2/**: SDL2 Backend for HAL.
+        - **main.c**: PC Entry point.
 - **include/**: C header files (`.h`).
+    - **pc/**: PC Port headers (`hal.h`) and SDK compatibility layer (`ultra64.h`).
     - `structs.h`: Game structures (many auto-generated).
     - `variables.h`: Global variable declarations.
     - `functions.h`: Function prototypes.
