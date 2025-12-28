@@ -59,6 +59,12 @@ All notable changes to this project will be documented in this file.
 - Created PC Entry Point (`src/pc/main.c`).
 - Updated `Makefile.pc` to compile the full PC shell.
 
+## [0.0.10] - 2024-12-27
+### Added
+- Created PC-compatible Ultra64 headers in `include/pc/` (`ultra64.h`, `PR/ultratypes.h`).
+- Mapped N64 types (`u32`, `s32`) to standard `stdint.h` types for cross-platform compatibility.
+- Linked `src/game_2B20.c` (Math Utils) into the PC build to test compilation.
+
 ## [0.0.8] - 2024-12-27
 ### Added
 - Created `Makefile.pc` for building the PC port.

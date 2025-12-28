@@ -1,13 +1,16 @@
 # Makefile for F-Zero X PC Port
 
 CC = gcc
-CFLAGS = -Wall -Wextra -g -Iinclude
+CFLAGS = -Wall -Wextra -g -Iinclude/pc -Iinclude -D_LANGUAGE_C
 LDFLAGS = -lSDL2 -lGL
 
 SRC_DIRS = src/pc/sdl2 src/pc
+# Add a game logic file to test linking (Math Utils)
+GAME_SRCS = src/game_2B20.c
+
 BUILD_DIR = build/pc
 
-SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) $(GAME_SRCS)
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 TARGET = $(BUILD_DIR)/fzerox_pc
