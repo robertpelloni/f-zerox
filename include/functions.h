@@ -1,6 +1,8 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include "structs.h"
+
 void func_800B6910(s32, u8);
 
 /* src/game_2B20.c - Math & Vectors */

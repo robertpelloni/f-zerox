@@ -75,6 +75,12 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Finalized `src/pc/README.md` with build instructions and backend details.
 
+## [0.1.2] - 2024-12-27
+### Added
+- Defined `OSContPad` struct and button constants in `include/pc/ultra64.h`.
+- Implemented keyboard-to-controller mapping in `src/pc/sdl2/hal_input.c`.
+- Added input debug logging to `src/pc/main.c` (Logs "Button A Pressed!").
+
 ## [0.0.11] - 2024-12-27
 ### Changed
 - Enhanced PC Shell to clear the screen with a specific color (Visual Confirmation).

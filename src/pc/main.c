@@ -34,8 +34,15 @@ int main(int argc, char* argv[]) {
     printf("Initialization successful. Running main loop...\n");
 
     bool running = true;
+    OSContPad pad;
+
     while (running) {
         HAL_Input_Poll();
+        HAL_Input_GetState(0, &pad);
+
+        if (pad.button & CONT_A) {
+            printf("Button A Pressed!\n");
+        }
 
         HAL_Video_BeginFrame();
         // TODO: Call Game Render Loop Here

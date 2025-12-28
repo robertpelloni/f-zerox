@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "ultra64.h"
 
 // Basic types for HAL
 typedef struct {
@@ -32,7 +33,7 @@ void HAL_Audio_QueueSamples(const int16_t* samples, int count);
 
 // Input Interface
 void HAL_Input_Poll(void);
-// TODO: Define struct for N64 controller state mapping
+void HAL_Input_GetState(int controller_index, OSContPad* pad);
 
 // System Interface
 uint64_t HAL_GetTimeMillis(void);
