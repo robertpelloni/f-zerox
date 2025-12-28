@@ -88,6 +88,11 @@ All notable changes to this project will be documented in this file.
 - Updated `Makefile.pc` to compile `ultra_impl.c` and link `src/game_197D0.c`.
 - Defined mock global variables in `ultra_impl.c` to satisfy linker symbols for debug text.
 
+## [0.1.5] - 2024-12-27
+### Changed
+- Cleaned up comments in `src/pc/libaudio_impl.c`.
+- Updated `HANDOFF.md` to list ASM-only files.
+
 ## [0.1.4] - 2024-12-27
 ### Added
 - Created `include/pc/PR/libaudio.h` with LibAudio types and prototypes.
