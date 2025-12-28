@@ -53,6 +53,12 @@ All notable changes to this project will be documented in this file.
 - Implemented SDL2 backend for HAL Video (`src/pc/sdl2/hal_video.c`).
 - Implemented SDL2 backend for HAL Input and System (`src/pc/sdl2/hal_input.c`, `src/pc/sdl2/hal_system.c`).
 
+## [0.0.9] - 2024-12-27
+### Added
+- Implemented SDL2 backend for HAL Audio (`src/pc/sdl2/hal_audio.c`).
+- Created PC Entry Point (`src/pc/main.c`).
+- Updated `Makefile.pc` to compile the full PC shell.
+
 ## [0.0.8] - 2024-12-27
 ### Added
 - Created `Makefile.pc` for building the PC port.
