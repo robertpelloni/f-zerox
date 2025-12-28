@@ -1,0 +1,47 @@
+#include "pc/ultra64.h"
+#include "pc/hal.h"
+#include <stdio.h>
+
+// Mock Global Variables (usually defined in ld script or asm)
+s32 D_800E4348 = 0; // gCurrentFramebuffer
+s32 D_800D46C0 = 0; // gDebugPrintFormat?
+s32 D_800D46C8 = 0;
+s32 D_800D46D8 = 0;
+s32 D_800D46FC = 0;
+s32 D_800D471C = 0;
+s32 D_800D473C = 0;
+s32 D_800D474C = 0;
+s32 D_800D476C = 0;
+s32 D_800D478C = 0;
+s32 D_800D479C = 0;
+s32 D_800D47B4 = 0;
+s32 D_800D47D0 = 0;
+s32 D_800D47EC = 0;
+s32 D_800D480C = 0;
+s32 D_800D481C = 0;
+s32 D_800D4834 = 0;
+s32 D_800D4854 = 0;
+s32 D_800D4870 = 0;
+s32 D_800D488C = 0;
+s32 D_800CD520 = 0;
+s32 D_80400008 = 0;
+s32 D_800E4350 = 0;
+s32 D_800E44D0 = 0;
+s32 D_800E4650 = 0;
+
+OSTime osGetTime(void) {
+    return (OSTime)HAL_GetTimeMillis();
+}
+
+void* osViGetCurrentFramebuffer(void) {
+    return NULL; // Stub
+}
+
+// Stubs for functions called by game_197D0.c
+void func_8007F86C(void* a, void* b, void* c, void* d, void* e) { (void)a; }
+void func_8007F970(void) {}
+void func_8007F9E0(void) {}
+void func_8007FA64(void) {}
+void func_8007FB80(s32 x, s32 y, void* str) {
+    printf("DEBUG PRINT at (%d, %d)\n", x, y);
+}

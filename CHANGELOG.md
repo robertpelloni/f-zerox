@@ -81,6 +81,13 @@ All notable changes to this project will be documented in this file.
 - Implemented keyboard-to-controller mapping in `src/pc/sdl2/hal_input.c`.
 - Added input debug logging to `src/pc/main.c` (Logs "Button A Pressed!").
 
+## [0.1.3] - 2024-12-27
+### Added
+- Created `src/pc/ultra_impl.c` to implement/stub N64 OS functions for the PC port.
+- Added `include/pc/PR/os.h` with basic OS function prototypes.
+- Updated `Makefile.pc` to compile `ultra_impl.c` and link `src/game_197D0.c`.
+- Defined mock global variables in `ultra_impl.c` to satisfy linker symbols for debug text.
+
 ## [0.0.11] - 2024-12-27
 ### Changed
 - Enhanced PC Shell to clear the screen with a specific color (Visual Confirmation).

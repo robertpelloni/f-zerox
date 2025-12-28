@@ -2,6 +2,7 @@
 #define _ULTRA64_H_
 
 #include <PR/ultratypes.h>
+#include <PR/os.h>
 
 // Controller Button Constants
 #define CONT_A      0x8000
