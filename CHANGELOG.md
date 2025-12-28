@@ -71,6 +71,10 @@ All notable changes to this project will be documented in this file.
 - **Documentation**: Comprehensive analysis of C files and headers.
 - **Infrastructure**: Roadmap, Versioning, Changelog, and Dashboard (Project Structure).
 
+## [0.1.1] - 2024-12-27
+### Changed
+- Finalized `src/pc/README.md` with build instructions and backend details.
+
 ## [0.0.11] - 2024-12-27
 ### Changed
 - Enhanced PC Shell to clear the screen with a specific color (Visual Confirmation).

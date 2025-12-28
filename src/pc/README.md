@@ -7,12 +7,30 @@ The PC port uses a Hardware Abstraction Layer (HAL) to separate game logic from 
 
 - **Game Logic**: Uses the original N64 engine code (mostly preserved).
 - **HAL**: `include/pc/hal.h` defines the interface.
-- **Backends**: Implementations of the HAL (e.g., SDL2, OpenGL).
+- **Backends**: Implementations of the HAL (currently **SDL2**).
 
-## Planned Backends
-- **Video**: Fast3D (N64 GBI emulation) on top of OpenGL/Vulkan.
-- **Audio**: N64 ABI emulation on top of SDL2 Audio/OpenAL.
-- **Input**: SDL2 Controller/Keyboard mappings to `OSContPad`.
+## Implemented Backends
+- **Video**: SDL2 Window + OpenGL Context.
+- **Audio**: SDL2 Audio (stub/queue).
+- **Input**: SDL2 Event Polling.
 
 ## Build Instructions
-(TODO: Add CMake or Make targets for PC build)
+
+### Prerequisites
+- GCC or Clang
+- SDL2 Development Libraries (`libsdl2-dev`)
+- OpenGL Development Libraries
+
+### Compiling
+Run the standalone PC makefile from the root directory:
+
+```bash
+make -f Makefile.pc
+```
+
+The executable will be generated at `build/pc/fzerox_pc`.
+
+### Running
+```bash
+./build/pc/fzerox_pc
+```
