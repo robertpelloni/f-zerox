@@ -110,6 +110,10 @@ All notable changes to this project will be documented in this file.
 - Enhanced PC Shell to clear the screen with a specific color (Visual Confirmation).
 - Updated ROADMAP.md and HANDOFF.md to reflect PC Port progress.
 
+## [0.1.7] - 2024-12-27
+### Changed
+- Updated `HANDOFF.md` to explicitly state the "Missing ROM" blocker and provide resolution options.
+
 ## [0.0.8] - 2024-12-27
 ### Added
 - Created `Makefile.pc` for building the PC port.

@@ -16,8 +16,20 @@
     - Project Structure documented.
     - Build System analyzed (Based on `mkst/sssv` fork).
 
+## Blocker: Missing Base ROM
+**Current Status:** The project is blocked from further *decompilation* and *N64 verification* because `baserom.us.z64` is missing.
+**Impact:**
+- Cannot run `make extract` to generate assembly.
+- Cannot compile the N64 ROM (`make`).
+- Cannot verify if C code matches the original instructions.
+
+**Options for Resolution:**
+1.  **Furnish the ROM:** Place the legally obtained `baserom.us.z64` (SHA1: `5f658e88...`) in the root directory. This unlocks the full decompilation workflow.
+2.  **Provide a Mock ROM:** Create a dummy file to bypass file existence checks. *Warning:* This will allow the build system to run but will produce garbage/empty assembly, preventing meaningful decompilation. Useful only for testing build scripts.
+3.  **Shift Focus:** Continue working on the **PC Port** (which is ROM-independent) or **Documentation**.
+
 ## Immediate Next Steps
-1.  **Obtain ROM:** `baserom.us.z64` is required to resume actual decompilation.
+1.  **Resolve Blocker:** Choose one of the options above.
 2.  **Naming:** Rename `src/game_ADDRESS.c` to meaningful names based on findings:
     - `src/game_446D0.c` -> `src/linked_list.c`
     - `src/game_197D0.c` -> `src/debug_text.c`
