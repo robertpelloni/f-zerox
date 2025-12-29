@@ -11,7 +11,12 @@
 ## Directory Layout
 - **root**: Contains build scripts (`Makefile`, `Makefile.pc`), configuration (`.yaml`), and documentation (`ROADMAP.md`, `CHANGELOG.md`).
 - **src/**: Source code.
-    - **game_*.c**: Decompiled N64 game logic (Original Engine).
+    - **math_utils.c**: Math & Vector functions (was `game_2B20.c`).
+    - **linked_list.c**: Linked List implementation (was `game_446D0.c`).
+    - **debug_text.c**: Debug text & Framebuffer (was `game_197D0.c`).
+    - **audio_state.c**: Audio state management (was `game_511D0.c`).
+    - **audio_util.c**: Audio utilities (was `game_14440.c`).
+    - **game_*.c**: Remaining decompiled N64 game logic.
     - **pc/**: PC Port specific code.
         - **sdl2/**: SDL2 Backend for HAL.
         - **main.c**: PC Entry point.

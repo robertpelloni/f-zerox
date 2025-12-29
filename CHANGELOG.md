@@ -94,6 +94,12 @@ All notable changes to this project will be documented in this file.
 - Implemented and verified `tests/test_math_utils.c` running N64 game logic on PC.
 - Successfully verified `Math_RoundF` behavior on PC.
 
+## [0.1.8] - 2024-12-27
+### Changed
+- **Refactor**: Renamed key source files to meaningful names (`math_utils.c`, `debug_text.c`, etc.).
+- Updated `f-zerox.us.yaml` to reflect file renames.
+- Updated `Makefile.pc` and documentation to track file renames.
+
 ## [0.1.5] - 2024-12-27
 ### Changed
 - Cleaned up comments in `src/pc/libaudio_impl.c`.

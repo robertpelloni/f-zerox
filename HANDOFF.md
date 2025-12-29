@@ -30,11 +30,11 @@
 
 ## Immediate Next Steps
 1.  **Resolve Blocker:** Choose one of the options above.
-2.  **Naming:** Rename `src/game_ADDRESS.c` to meaningful names based on findings:
-    - `src/game_446D0.c` -> `src/linked_list.c`
-    - `src/game_197D0.c` -> `src/debug_text.c`
-    - `src/game_2B20.c` -> `src/math_utils.c`
-    - `src/game_511D0.c` -> `src/audio_state.c`
+2.  **Naming:** Rename `src/game_ADDRESS.c` to meaningful names based on findings (DONE):
+    - `src/game_446D0.c` -> `src/linked_list.c` (RENAMED)
+    - `src/game_197D0.c` -> `src/debug_text.c` (RENAMED)
+    - `src/game_2B20.c` -> `src/math_utils.c` (RENAMED)
+    - `src/game_511D0.c` -> `src/audio_state.c` (RENAMED)
     - *Note:* Several files (`game_36ED0.c`, `game_EA90.c`, `game_F0B0.c`, `game_18410.c`, `game_2A60.c`, `game_4EBC0.c`, `game_F1C0.c`) contain mostly/only `GLOBAL_ASM` blocks and need active decompilation.
 3.  **PC Port:**
     -   HAL interfaces defined in `include/pc/hal.h`.
