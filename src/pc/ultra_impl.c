@@ -28,6 +28,8 @@ s32 D_80400008 = 0;
 s32 D_800E4350 = 0;
 s32 D_800E44D0 = 0;
 s32 D_800E4650 = 0;
+s32 D_800CD178 = 0;
+s32 D_800CD17C = 0;
 
 OSTime osGetTime(void) {
     return (OSTime)HAL_GetTimeMillis();

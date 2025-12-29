@@ -88,6 +88,12 @@ All notable changes to this project will be documented in this file.
 - Updated `Makefile.pc` to compile `ultra_impl.c` and link `src/game_197D0.c`.
 - Defined mock global variables in `ultra_impl.c` to satisfy linker symbols for debug text.
 
+## [0.1.6] - 2024-12-27
+### Added
+- Created Unit Test infrastructure (`tests/minunit.h`, `tests/stubs.c`, `Makefile.pc` test target).
+- Implemented and verified `tests/test_math_utils.c` running N64 game logic on PC.
+- Successfully verified `Math_RoundF` behavior on PC.
+
 ## [0.1.5] - 2024-12-27
 ### Changed
 - Cleaned up comments in `src/pc/libaudio_impl.c`.

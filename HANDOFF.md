@@ -28,7 +28,7 @@
     -   HAL interfaces defined in `include/pc/hal.h`.
     -   SDL2 backend implemented in `src/pc/sdl2/`.
     -   Main loop functional (`src/pc/main.c`).
-    -   Game logic linking proved possible (`Makefile.pc` links `game_2B20.c`).
+    -   **Game logic verified:** `Math_RoundF` (game_2B20.c) passes unit tests on PC (`make -f Makefile.pc test`).
 
 ## Critical Files
 - `ROADMAP.md`: The master plan.
