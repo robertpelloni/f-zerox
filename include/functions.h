@@ -60,6 +60,7 @@ void func_800FC730(void);
 void func_8007F500(void);
 void func_80076848(void);
 void func_8007D9D0(void);
+void func_800FD184(s32 arg0);
 
 /* src/game_459A0.c - Variable Setters */
 void func_800B0784(s32 arg0);

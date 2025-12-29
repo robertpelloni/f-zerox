@@ -28,9 +28,17 @@ void func_80068B20(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2B20/func_80068F04.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2B20/func_800690FC.s")
-
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2B20/func_80069698.s")
+void func_80069698(void) {
+    s32 arg = 0; // Default or garbage value
+    if (D_800CD044 != 3) {
+        if (D_80106DA0 != 0) {
+            typedef s32 (*FuncPtr)(void);
+            FuncPtr target = (FuncPtr)D_800CD0FC[D_800DCE44 & 0x1F];
+            arg = target();
+        }
+    }
+    func_800FD184(arg);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2B20/func_80069700.s")
 

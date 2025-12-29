@@ -34,6 +34,9 @@ s32 D_800DCE44 = 0;
 s32 D_800DCE48 = 0;
 s32 D_800DCE60 = 0;
 s16 D_800CD16C = 0;
+s16 D_800CD044 = 0;
+s16 D_80106DA0 = 0;
+s32 D_800CD0FC[32]; // Jumptable mock
 
 // Stubs for functions called by func_80068B20
 void func_8008DB98(void) {}
@@ -45,6 +48,7 @@ void func_800FC730(void) {}
 void func_8007F500(void) {}
 void func_80076848(void) {}
 void func_8007D9D0(void) {}
+void func_800FD184(s32 arg0) { (void)arg0; }
 
 OSTime osGetTime(void) {
     return (OSTime)HAL_GetTimeMillis();
