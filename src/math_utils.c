@@ -42,7 +42,82 @@ void func_80069698(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069700.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069790.s")
+void func_80069790(void) {
+    u8* end = D_800DCE98 + (0x94 * 4); // D_800DD0E8
+
+    // The assembly loop iterates while ptr < end.
+    // But it accesses -0x94 relative to current ptr in some paths?
+    // Wait, the ASM starts with v0 = end.
+    // It decrements v0.
+    // So it iterates BACKWARDS.
+
+    u8* curr = end;
+    u8* start = D_800DCE98;
+
+    while (1) {
+        // 37A0: lbu t6, 0x6B(v0)
+        // Note: v0 is initially end (DD0E8).
+        // If the loop structure is "do while", it checks first?
+        // No, ASM logic:
+        // L37A4: bnel t6, zero, .L800697E0 (Break if t6 != 0)
+
+        // Wait, the initial load is `lbu t6, 0x6B(v0)` at 37A0.
+        // But 37A8 `addiu v0, v0, -0x94` is inside the loop body?
+        // Actually, let's look at the C logic I derived earlier:
+        // It scans the array.
+
+        u8 val = *(curr + 0x6B);
+        if (val != 0) {
+             // 37E0: sltu at, v0, a2 (v0 < start)
+             // If v0 >= start, loop.
+             // But here v0 hasn't been decremented yet?
+             // 37DC decrements it.
+             curr -= 0x94;
+             if (curr < start) break;
+             continue;
+        }
+
+        // if val == 0:
+        curr -= 0x94; // 37A8
+        // Clear fields
+        *(s16*)(curr + 0x80) = 0;
+        *(s16*)(curr + 0x7E) = 0;
+        *(s16*)(curr + 0x7C) = 0;
+        *(s16*)(curr + 0x7A) = 0;
+        *(s16*)(curr + 0x82) = 0;
+        *(u8*)(curr + 0x71) = 0;
+        *(u8*)(curr + 0x70) = 0;
+        *(u8*)(curr + 0x6F) = 0;
+        *(u8*)(curr + 0x6E) = 0;
+        *(u8*)(curr + 0x6D) = 0;
+        *(u8*)(curr + 0x6C) = 0;
+        *(s32*)(curr + 0x84) = 0;
+
+        curr -= 0x94; // 37DC
+
+        if (curr < start) break;
+    }
+
+    // After loop (L37E8):
+    // v0 = D_800DD180
+    // sb zero, 0x6D(v0)
+    // lb t3, 0x6D(v0) -> t3 = 0
+    // sh zero, 0x7E(v0)
+    // ...
+    // sb t3, 0x6C(v0)
+
+    u8* ptr2 = D_800DD180;
+    *(u8*)(ptr2 + 0x6D) = 0;
+    u8 t3 = *(u8*)(ptr2 + 0x6D); // 0
+    *(s16*)(ptr2 + 0x7E) = 0;
+    *(s16*)(ptr2 + 0x7C) = 0;
+    *(s16*)(ptr2 + 0x7A) = 0;
+    *(s16*)(ptr2 + 0x82) = 0;
+    *(u8*)(ptr2 + 0x70) = 0;
+    *(u8*)(ptr2 + 0x6F) = 0;
+    *(u8*)(ptr2 + 0x6E) = 0;
+    *(u8*)(ptr2 + 0x6C) = t3;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069820.s")
 

@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - **Decompilation**: Obtained base ROM and initialized decompilation environment (`make extract`).
 - **Decompilation**: Decompiled `func_80068B20` (System Init) in `src/math_utils.c`.
 - **Decompilation**: Decompiled `func_80069698` (State Machine) in `src/math_utils.c`.
+- **Decompilation**: Decompiled `func_80069790` (Controller Init) in `src/math_utils.c`.
 - **Infrastructure**: Updated `variables.h` with new globals.
 
 ## [0.1.13] - 2024-12-27

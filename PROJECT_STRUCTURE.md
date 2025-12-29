@@ -8,6 +8,12 @@
 | **ido5.3_cc** | `tools/ido5.3_cc` | `faa773c` | 2019-12-24 | SGI IDO 5.3 Compiler (recompiled). |
 | **splat** | `tools/splat` | `f44113b` | 2022-12-05 | ROM splitting and disassembly tool. |
 
+### Rationale for Submodules
+- **asm-differ**: Crucial for decompilation to compare the compiled C code against the original assembly instruction-by-instruction.
+- **asm-processor**: Works with the IDO compiler to handle `GLOBAL_ASM` blocks, allowing C and Assembly to coexist in the same file.
+- **ido5.3_cc**: The specific version of the Silicon Graphics compiler used for F-Zero X. Using a different compiler (like GCC) would result in non-matching machine code.
+- **splat**: The standard N64 ROM splitting tool, used to generate the initial assembly files and assets from the binary.
+
 ## Directory Layout
 - **root**: Contains build scripts (`Makefile`, `Makefile.pc`), configuration (`.yaml`), and documentation (`ROADMAP.md`, `CHANGELOG.md`).
 - **src/**: Source code.

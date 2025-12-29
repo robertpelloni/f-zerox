@@ -18,6 +18,7 @@
     - Update `CHANGELOG.md` with every significant change.
     - Increment `VERSION.md` on "Submit".
     - Commit messages MUST reference the new version (e.g., "v0.0.2: Added feature X").
+    - **Always** keep `CHANGELOG.md` synchronized with `VERSION.md`.
 3.  **Handoff:** Update `HANDOFF.md` at the end of your session.
 
 ## Tools

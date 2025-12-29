@@ -40,6 +40,8 @@ extern s32 D_800DCD0C;
 extern s32 D_800DCE44;
 extern s32 D_800DCE48;
 extern s32 D_800DCE60;
+extern u8 D_800DCE98[592];
+extern u8 D_800DD180[256];
 extern s32 D_800E4260;
 extern s32 D_800E4264;
 extern s32 D_800E4348; // gCurrentFramebuffer (Updated in game_197D0.c)
@@ -57,6 +59,7 @@ extern s8 D_800D1A0C;
 extern s8 D_800D1A18;
 extern s8 D_800D1A20;
 extern s8 D_800D1A3C;
+extern s16 D_800CD168;
 extern s8 D_800D4690;
 extern s8 D_800E4175;
 extern struct UnkStruct_4 D_8010B7B0;

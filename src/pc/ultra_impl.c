@@ -37,6 +37,9 @@ s16 D_800CD16C = 0;
 s16 D_800CD044 = 0;
 s16 D_80106DA0 = 0;
 s32 D_800CD0FC[32]; // Jumptable mock
+s16 D_800CD168 = 0;
+u8 D_800DCE98[592]; // 4 * 0x94
+u8 D_800DD180[256]; // Unknown struct size
 
 // Stubs for functions called by func_80068B20
 void func_8008DB98(void) {}
@@ -49,6 +52,8 @@ void func_8007F500(void) {}
 void func_80076848(void) {}
 void func_8007D9D0(void) {}
 void func_800FD184(s32 arg0) { (void)arg0; }
+void func_80069820(void) {}
+s32 __osMotorAccess(void* pfs, s32 flag) { (void)pfs; (void)flag; return 0; }
 
 OSTime osGetTime(void) {
     return (OSTime)HAL_GetTimeMillis();
