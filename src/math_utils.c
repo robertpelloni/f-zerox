@@ -1,6 +1,26 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2B20/func_80068B20.s")
+void func_80068B20(void) {
+    D_800DCE44 = -1;
+    D_800DCE48 = 0x8000;
+
+    if (D_800DCE60 != 0x20DE1529) {
+        func_8008DB98();
+        D_800DCE60 = 0x20DE1529;
+        func_800A4BAC();
+    } else {
+        func_8008DA68();
+        func_800A4B54();
+    }
+
+    func_80085510();
+    func_800FC730();
+    func_8007F500();
+    func_80076848();
+    func_8007D9D0();
+
+    D_800CD16C = 1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2B20/func_80068BC0.s")
 

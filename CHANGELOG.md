@@ -2,103 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.0.1] - 2024-12-27
-### Added
-- Created `ROADMAP.md` outlining the path to F-Zero GX/AX parity.
-- Added `VERSION.md` for version tracking.
-- Added `PROJECT_STRUCTURE.md` detailing the directory layout and submodules.
-- Added `HANDOFF.md` for session continuity.
-- Added `LLM_INSTRUCTIONS.md` and updated agent configuration files.
-- Added Doxygen documentation for:
-    - `src/game_197D0.c` (Debug/Framebuffer)
-    - `src/game_19F40.c` (Struct Setters)
-    - `src/game_1AE0.c` (Global Rotation)
-    - `src/game_1F510.c` (Machine Loop)
-    - `src/game_2B20.c` (Math/Vectors)
-    - `src/game_44620.c` (libmus)
-    - `src/game_446D0.c` (Linked List)
-    - `src/game_459A0.c` (Variable Setters)
-    - `src/game_511D0.c` (Audio State)
-    - `src/game_73F0.c` (Bounds Check)
-    - `src/game_11CF0.c` (Init Loop)
-- Updated `include/structs.h` and `include/variables.h` with findings.
+## [0.1.10] - 2024-12-27
+### Fixed
+- **PC Port**: Fixed linker errors by stubbing missing global variables and functions in `src/pc/ultra_impl.c`.
+- **Infrastructure**: Reordered changelog entries to be chronological.
 
-## [0.0.2] - 2024-12-27
-### Added
-- Documented `src/game_14440.c` (Audio utility).
-- Documented `src/game_194E0.c` (State setter).
-- Documented `src/game_4FFB0.c` (Low memory state update).
-
-## [0.0.3] - 2024-12-27
-### Added
-- Populated `include/functions.h` with prototypes for all analyzed functions.
-
-## [0.0.4] - 2024-12-27
+## [0.1.9] - 2024-12-27
 ### Changed
-- Updated `include/structs.h` with detailed analysis of `UnkStruct_10` (Vectors), `UnkStruct_8`, and others.
-- Updated `HANDOFF.md` to reflect the completion of the static analysis phase.
-
-## [0.0.5] - 2024-12-27
-### Changed
-- Updated `HANDOFF.md` with build system origins (forked from `mkst/sssv`).
-
-## [0.0.6] - 2024-12-27
-### Added
-- Created `src/pc/` directory for PC port specific code.
-- Created `src/pc/README.md` documenting the HAL architecture.
-- Created `include/pc/hal.h` defining the Hardware Abstraction Layer interface.
-
-## [0.0.7] - 2024-12-27
-### Added
-- Implemented SDL2 backend for HAL Video (`src/pc/sdl2/hal_video.c`).
-- Implemented SDL2 backend for HAL Input and System (`src/pc/sdl2/hal_input.c`, `src/pc/sdl2/hal_system.c`).
-
-## [0.0.9] - 2024-12-27
-### Added
-- Implemented SDL2 backend for HAL Audio (`src/pc/sdl2/hal_audio.c`).
-- Created PC Entry Point (`src/pc/main.c`).
-- Updated `Makefile.pc` to compile the full PC shell.
-
-## [0.0.10] - 2024-12-27
-### Added
-- Created PC-compatible Ultra64 headers in `include/pc/` (`ultra64.h`, `PR/ultratypes.h`).
-- Mapped N64 types (`u32`, `s32`) to standard `stdint.h` types for cross-platform compatibility.
-- Linked `src/game_2B20.c` (Math Utils) into the PC build to test compilation.
-
-## [0.1.0] - 2024-12-27
-### Added
-- **PC Port Foundation**: Established directory structure, HAL, and SDL2 backend.
-- **Documentation**: Comprehensive analysis of C files and headers.
-- **Infrastructure**: Roadmap, Versioning, Changelog, and Dashboard (Project Structure).
-
-## [0.1.1] - 2024-12-27
-### Changed
-- Finalized `src/pc/README.md` with build instructions and backend details.
-
-## [0.1.2] - 2024-12-27
-### Added
-- Defined `OSContPad` struct and button constants in `include/pc/ultra64.h`.
-- Implemented keyboard-to-controller mapping in `src/pc/sdl2/hal_input.c`.
-- Added input debug logging to `src/pc/main.c` (Logs "Button A Pressed!").
-
-## [0.1.3] - 2024-12-27
-### Added
-- Created `src/pc/ultra_impl.c` to implement/stub N64 OS functions for the PC port.
-- Added `include/pc/PR/os.h` with basic OS function prototypes.
-- Updated `Makefile.pc` to compile `ultra_impl.c` and link `src/game_197D0.c`.
-- Defined mock global variables in `ultra_impl.c` to satisfy linker symbols for debug text.
-
-## [0.1.6] - 2024-12-27
-### Added
-- Created Unit Test infrastructure (`tests/minunit.h`, `tests/stubs.c`, `Makefile.pc` test target).
-- Implemented and verified `tests/test_math_utils.c` running N64 game logic on PC.
-- Successfully verified `Math_RoundF` behavior on PC.
+- **Decompilation**: Obtained base ROM and initialized decompilation environment (`make extract`).
+- **Decompilation**: Decompiled `func_80068B20` (System Init) in `src/math_utils.c`.
+- **Infrastructure**: Updated `variables.h` with new globals.
 
 ## [0.1.8] - 2024-12-27
 ### Changed
 - **Refactor**: Renamed key source files to meaningful names (`math_utils.c`, `debug_text.c`, etc.).
 - Updated `f-zerox.us.yaml` to reflect file renames.
 - Updated `Makefile.pc` and documentation to track file renames.
+
+## [0.1.7] - 2024-12-27
+### Changed
+- Updated `HANDOFF.md` to explicitly state the "Missing ROM" blocker and provide resolution options.
+
+## [0.1.6] - 2024-12-27
+### Added
+- Created Unit Test infrastructure (`tests/minunit.h`, `tests/stubs.c`, `Makefile.pc` test target).
+- Implemented and verified `tests/test_math_utils.c` running N64 game logic on PC.
+- Successfully verified `Math_RoundF` behavior on PC.
 
 ## [0.1.5] - 2024-12-27
 ### Changed
@@ -111,16 +40,80 @@ All notable changes to this project will be documented in this file.
 - Created `src/pc/libaudio_impl.c` to stub audio library functions.
 - Updated `Makefile.pc` to link audio-related game files (`game_511D0.c`, `game_14440.c`).
 
+## [0.1.3] - 2024-12-27
+### Added
+- Created `src/pc/ultra_impl.c` to implement/stub N64 OS functions for the PC port.
+- Added `include/pc/PR/os.h` with basic OS function prototypes.
+- Updated `Makefile.pc` to compile `ultra_impl.c` and link `src/game_197D0.c`.
+- Defined mock global variables in `ultra_impl.c` to satisfy linker symbols for debug text.
+
+## [0.1.2] - 2024-12-27
+### Added
+- Defined `OSContPad` struct and button constants in `include/pc/ultra64.h`.
+- Implemented keyboard-to-controller mapping in `src/pc/sdl2/hal_input.c`.
+- Added input debug logging to `src/pc/main.c` (Logs "Button A Pressed!").
+
+## [0.1.1] - 2024-12-27
+### Changed
+- Finalized `src/pc/README.md` with build instructions and backend details.
+
+## [0.1.0] - 2024-12-27
+### Added
+- **PC Port Foundation**: Established directory structure, HAL, and SDL2 backend.
+- **Documentation**: Comprehensive analysis of C files and headers.
+- **Infrastructure**: Roadmap, Versioning, Changelog, and Dashboard (Project Structure).
+
 ## [0.0.11] - 2024-12-27
 ### Changed
 - Enhanced PC Shell to clear the screen with a specific color (Visual Confirmation).
 - Updated ROADMAP.md and HANDOFF.md to reflect PC Port progress.
 
-## [0.1.7] - 2024-12-27
-### Changed
-- Updated `HANDOFF.md` to explicitly state the "Missing ROM" blocker and provide resolution options.
+## [0.0.9] - 2024-12-27
+### Added
+- Implemented SDL2 backend for HAL Audio (`src/pc/sdl2/hal_audio.c`).
+- Created PC Entry Point (`src/pc/main.c`).
+- Updated `Makefile.pc` to compile the full PC shell.
 
 ## [0.0.8] - 2024-12-27
 ### Added
 - Created `Makefile.pc` for building the PC port.
 - Fixed include paths in HAL implementation to be relative to include root.
+
+## [0.0.7] - 2024-12-27
+### Added
+- Implemented SDL2 backend for HAL Video (`src/pc/sdl2/hal_video.c`).
+- Implemented SDL2 backend for HAL Input and System (`src/pc/sdl2/hal_input.c`, `src/pc/sdl2/hal_system.c`).
+
+## [0.0.6] - 2024-12-27
+### Added
+- Created `src/pc/` directory for PC port specific code.
+- Created `src/pc/README.md` documenting the HAL architecture.
+- Created `include/pc/hal.h` defining the Hardware Abstraction Layer interface.
+
+## [0.0.5] - 2024-12-27
+### Changed
+- Updated `HANDOFF.md` with build system origins (forked from `mkst/sssv`).
+
+## [0.0.4] - 2024-12-27
+### Changed
+- Updated `include/structs.h` with detailed analysis of `UnkStruct_10` (Vectors), `UnkStruct_8`, and others.
+- Updated `HANDOFF.md` to reflect the completion of the static analysis phase.
+
+## [0.0.3] - 2024-12-27
+### Added
+- Populated `include/functions.h` with prototypes for all analyzed functions.
+
+## [0.0.2] - 2024-12-27
+### Added
+- Documented `src/game_14440.c` (Audio utility).
+- Documented `src/game_194E0.c` (State setter).
+- Documented `src/game_4FFB0.c` (Low memory state update).
+
+## [0.0.1] - 2024-12-27
+### Added
+- Created `ROADMAP.md` outlining the path to F-Zero GX/AX parity.
+- Added `VERSION.md` for version tracking.
+- Added `PROJECT_STRUCTURE.md` detailing the directory layout and submodules.
+- Added `HANDOFF.md` for session continuity.
+- Added `LLM_INSTRUCTIONS.md` and updated agent configuration files.
+- Added Doxygen documentation for various C files and headers.

@@ -30,10 +30,14 @@ extern s32 D_800D4834;
 extern s32 D_800D4854;
 extern s32 D_800D4870;
 extern s32 D_800D488C;
+extern s16 D_800CD16C;
 extern s32 D_800DCCF8;
 extern s32 D_800DCD04;
 extern s32 D_800DCD08;
 extern s32 D_800DCD0C;
+extern s32 D_800DCE44;
+extern s32 D_800DCE48;
+extern s32 D_800DCE60;
 extern s32 D_800E4260;
 extern s32 D_800E4264;
 extern s32 D_800E4348; // gCurrentFramebuffer (Updated in game_197D0.c)

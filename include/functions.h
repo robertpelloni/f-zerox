@@ -48,6 +48,19 @@ void func_800B6A18(void);
 void func_8007E0AC(s32 arg0);
 s8 func_8007E10C(s32 arg0);
 
+/* src/math_utils.c - Decompiled Logic */
+void func_80068B20(void);
+// Dependencies of func_80068B20
+void func_8008DB98(void);
+void func_800A4BAC(void);
+void func_8008DA68(void);
+void func_800A4B54(void);
+void func_80085510(void);
+void func_800FC730(void);
+void func_8007F500(void);
+void func_80076848(void);
+void func_8007D9D0(void);
+
 /* src/game_459A0.c - Variable Setters */
 void func_800B0784(s32 arg0);
 void func_800B0790(s32 arg0);

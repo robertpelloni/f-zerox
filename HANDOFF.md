@@ -36,6 +36,7 @@
     - `src/game_2B20.c` -> `src/math_utils.c` (RENAMED)
     - `src/game_511D0.c` -> `src/audio_state.c` (RENAMED)
     - *Note:* Several files (`game_36ED0.c`, `game_EA90.c`, `game_F0B0.c`, `game_18410.c`, `game_2A60.c`, `game_4EBC0.c`, `game_F1C0.c`) contain mostly/only `GLOBAL_ASM` blocks and need active decompilation.
+    - **Successfully Decompiled:** `func_80068B20` in `src/math_utils.c`.
 3.  **PC Port:**
     -   HAL interfaces defined in `include/pc/hal.h`.
     -   SDL2 backend implemented in `src/pc/sdl2/`.

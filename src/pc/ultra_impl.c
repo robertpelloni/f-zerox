@@ -30,6 +30,21 @@ s32 D_800E44D0 = 0;
 s32 D_800E4650 = 0;
 s32 D_800CD178 = 0;
 s32 D_800CD17C = 0;
+s32 D_800DCE44 = 0;
+s32 D_800DCE48 = 0;
+s32 D_800DCE60 = 0;
+s16 D_800CD16C = 0;
+
+// Stubs for functions called by func_80068B20
+void func_8008DB98(void) {}
+void func_800A4BAC(void) {}
+void func_8008DA68(void) {}
+void func_800A4B54(void) {}
+void func_80085510(void) {}
+void func_800FC730(void) {}
+void func_8007F500(void) {}
+void func_80076848(void) {}
+void func_8007D9D0(void) {}
 
 OSTime osGetTime(void) {
     return (OSTime)HAL_GetTimeMillis();
