@@ -4,9 +4,16 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007F86C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007F904.s")
+void func_8007F904(void) {
+    func_8007F86C(&D_800CD520, &D_80400008, &D_800E4350, &D_800E44D0, &D_800E4650);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007F94C.s")
+/**
+ * @brief Updates the global framebuffer pointer with the current framebuffer.
+ */
+void func_8007F94C(void) {
+    D_800E4348 = osViGetCurrentFramebuffer();
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007F970.s")
 
@@ -16,18 +23,69 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FB80.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FC68.s")
+/**
+ * @brief Draws a debug integer to the screen.
+ *
+ * Uses sprintf to format the integer and then draws it.
+ *
+ * @param arg0 The integer to display.
+ */
+void func_8007FC68(s32 arg0) {
+    s8* sp1C;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FCB8.s")
+    sprintf(&sp1C, &D_800D46C0, arg0);
+    func_8007FB80(0x61, 0x50, &D_800D46C8);
+    func_8007FB80(0xC9, 0x50, &sp1C);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FCF4.s")
+void func_8007FCB8(void) {
+    func_8007F94C();
+    func_8007F970();
+    func_8007FB80(0x28, 0x6E, &D_800D46D8);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FD58.s")
+void func_8007FCF4(void) {
+    func_8007F94C();
+    func_8007F970();
+    func_8007FB80(0x2D, 0x5A, &D_800D46FC);
+    func_8007FB80(0x2D, 0x6E, &D_800D471C);
+    func_8007FB80(0x2D, 0x82, &D_800D473C);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FDD0.s")
+void func_8007FD58(void) {
+    func_8007F94C();
+    func_8007F970();
+    func_8007FB80(0x2D, 0x6E, &D_800D474C);
+    func_8007FB80(0x2D, 0x82, &D_800D476C);
+    func_8007FB80(0x2D, 0x96, &D_800D478C);
+    func_8007FB80(0x2D, 0xAA, &D_800D479C);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FE48.s")
+void func_8007FDD0(void) {
+    func_8007F94C();
+    func_8007F970();
+    func_8007FB80(0x35, 0x6E, &D_800D47B4);
+    func_8007FB80(0x35, 0x82, &D_800D47D0);
+    func_8007FB80(0x35, 0x96, &D_800D47EC);
+    func_8007FB80(0x35, 0xAA, &D_800D480C);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FE98.s")
+void func_8007FE48(void) {
+    func_8007F94C();
+    func_8007F970();
+    func_8007FB80(0x38, 0x64, &D_800D481C);
+    func_8007FB80(0x38, 0x78, &D_800D4834);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debug_text/func_8007FED4.s")
+void func_8007FE98(void) {
+    func_8007F94C();
+    func_8007F970();
+    func_8007FB80(0x3B, 0x6E, &D_800D4854);
+}
+
+void func_8007FED4(void) {
+    func_8007F94C();
+    func_8007F970();
+    func_8007FB80(0x37, 0x64, &D_800D4870);
+    func_8007FB80(0x37, 0x78, &D_800D488C);
+}
