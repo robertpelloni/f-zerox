@@ -17,19 +17,19 @@
     - Build System analyzed (Based on `mkst/sssv` fork).
 
 ## Blocker: Missing Base ROM
-**Current Status:** The project is blocked from further *decompilation* and *N64 verification* because `baserom.us.z64` is missing.
+**Current Status:** The project has the base ROM and extraction (`make extract`) is successful.
+**New Blocker:** The N64 compilation (`make`) fails due to missing `mips64-elf-as` (binutils).
 **Impact:**
-- Cannot run `make extract` to generate assembly.
-- Cannot compile the N64 ROM (`make`).
-- Cannot verify if C code matches the original instructions.
+- Can decompile C code (as shown with `math_utils.c`).
+- Cannot verify N64 binary matching.
+- PC Port compilation is fully functional.
 
 **Options for Resolution:**
-1.  **Furnish the ROM:** Place the legally obtained `baserom.us.z64` (SHA1: `5f658e88...`) in the root directory. This unlocks the full decompilation workflow.
-2.  **Provide a Mock ROM:** Create a dummy file to bypass file existence checks. *Warning:* This will allow the build system to run but will produce garbage/empty assembly, preventing meaningful decompilation. Useful only for testing build scripts.
-3.  **Shift Focus:** Continue working on the **PC Port** (which is ROM-independent) or **Documentation**.
+1.  **Install Toolchain:** Install `mips64-elf-binutils` (and `gcc`) to enable N64 compilation.
+2.  **Continue PC Port:** Focus on the PC port (does not require MIPS toolchain).
 
 ## Immediate Next Steps
-1.  **Resolve Blocker:** Choose one of the options above.
+1.  **Install Toolchain:** Get `mips64-elf-as` on the path.
 2.  **Naming:** Rename `src/game_ADDRESS.c` to meaningful names based on findings (DONE):
     - `src/game_446D0.c` -> `src/linked_list.c` (RENAMED)
     - `src/game_197D0.c` -> `src/debug_text.c` (RENAMED)

@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 - **PC Port**: Fixed linker errors by stubbing missing global variables and functions in `src/pc/ultra_impl.c`.
 - **Infrastructure**: Reordered changelog entries to be chronological.
 
+## [0.1.11] - 2024-12-27
+### Changed
+- Updated `HANDOFF.md` to reflect that the ROM blocker is resolved but a Toolchain blocker remains.
+
 ## [0.1.9] - 2024-12-27
 ### Changed
 - **Decompilation**: Obtained base ROM and initialized decompilation environment (`make extract`).
