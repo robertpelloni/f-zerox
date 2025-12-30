@@ -140,9 +140,23 @@ void func_8006A904(s32 arg0, s32 arg1) {
     D_800CD17C = arg1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006A918.s")
+s32 func_8006A918(void) {
+    s32 state1 = D_800CD170;
+    u32 next_state1 = (u32)state1 * 0x41C64E6D + 0x3039;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006A978.s")
+    s32 state2 = D_800CD174;
+    if (state2 & 1) {
+        D_800CD170 = next_state1;
+        state2 ^= 0x11020;
+        D_800CD174 = state2;
+    }
+
+    state1 = D_800CD170; // Reload potential update
+    s32 final_state2 = (u32)state2 >> 1;
+    D_800CD174 = final_state2;
+
+    return state1 ^ final_state2;
+}
 
 /**
  * @brief Rounds a floating point number to the nearest integer.
@@ -158,8 +172,6 @@ s32 func_8006A9E0(f32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006AA38.s")
-
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006AC10.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006ADE4.s")
 

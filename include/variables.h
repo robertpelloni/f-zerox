@@ -4,6 +4,10 @@
 extern s16 D_800E42CC;
 extern s32 D_80025D78;
 extern s32 D_8002AA18;
+extern s32 D_800CD170; // gRngState1
+extern s32 D_800CD174; // gRngState2
+extern s32 D_800CD170;
+extern s32 D_800CD174;
 extern s32 D_800CD178;
 extern s32 D_800CD17C;
 extern s32 D_800CD510;

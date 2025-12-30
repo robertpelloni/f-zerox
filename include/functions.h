@@ -6,6 +6,7 @@
 void func_800B6910(s32, u8);
 
 /* src/math_utils.c (game_2B20.c) - Math & Vectors */
+s32 func_8006A918(void); // Math_Rand
 s32 func_8006A9E0(f32 arg0); // Math_RoundF
 void func_8006AFC8(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3); // SetVectors
 void func_8006AFE4(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3); // SetVectors (Alias)
