@@ -44,6 +44,11 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_14440/osAfterPreNMI.s")
 
+/**
+ * @brief Sets a sound/audio ID (likely).
+ *
+ * Masks the argument to 8 bits and calls the audio library function func_800BAF30.
+ */
 void func_8007E0AC(s32 arg0) {
     func_800BAF30(arg0 & 0xFF);
 }
@@ -54,6 +59,12 @@ void func_8007E0EC(void) {
     func_800BB078();
 }
 
+/**
+ * @brief Gets a byte from a global array.
+ *
+ * @param arg0 Index.
+ * @return s8 The value at D_800D4690[arg0].
+ */
 s8 func_8007E10C(s32 arg0) {
     return *(&D_800D4690 + arg0);
 }

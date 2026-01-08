@@ -28,6 +28,12 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_11CF0/func_80078F80.s")
 
+/**
+ * @brief Initialization loop (Unknown purpose).
+ *
+ * Iterates from 1 to 16. The body is empty, suggesting an optimized-out operation
+ * or a delay.
+ */
 void func_80079080(void) {
     s32 var_v0;
 

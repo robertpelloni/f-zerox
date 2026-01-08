@@ -22,6 +22,9 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_4FFB0/func_800B6994.s")
 
+/**
+ * @brief Updates global state variables in low memory (possibly input related).
+ */
 void func_800B6A18(void) {
     D_8002B347 = D_8002B346;
     D_8002B348 = 0;

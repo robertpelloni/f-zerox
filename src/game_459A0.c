@@ -161,10 +161,16 @@ void func_800B0754(s32 arg0) {
     func_800B12EC(arg0);
 }
 
+/**
+ * @brief Sets global variable D_800D0AC0.
+ */
 void func_800B0784(s32 arg0) {
     D_800D0AC0 = arg0;
 }
 
+/**
+ * @brief Sets global variable D_800D0AC4.
+ */
 void func_800B0790(s32 arg0) {
     D_800D0AC4 = arg0;
 }

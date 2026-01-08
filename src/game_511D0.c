@@ -58,10 +58,18 @@ void func_800BA28C(u8 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_511D0/func_800BA2B4.s")
 
+// Audio/Sound State Management
+
+/**
+ * @brief Sets global audio state variable D_800D1A3C.
+ */
 void func_800BA2D0(s8 arg0) {
     D_800D1A3C = arg0;
 }
 
+/**
+ * @brief Sets global audio state variable D_800D1A20.
+ */
 void func_800BA2E0(s8 arg0) {
     D_800D1A20 = arg0;
 }
@@ -113,6 +121,9 @@ void func_800BAF28(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_511D0/func_800BAFA4.s")
 
+/**
+ * @brief Sets audio state D_800D1A48 to 1 if currently 0.
+ */
 void func_800BAFF4(void) {
     if (D_800D1A48 == 0) {
         D_800D1A48 = 1;
@@ -122,6 +133,9 @@ void func_800BB018(void) {
     func_800BAFA4(0x17);
 }
 
+/**
+ * @brief Sets audio state D_800D19E0 to 1.
+ */
 void func_800BB038(void) {
     D_800D19E0 = 1;
 }

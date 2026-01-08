@@ -108,10 +108,16 @@
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_19F40/func_80083500.s")
 
+/**
+ * @brief Sets the value of an integer pointer.
+ */
 void func_80083548(s32* arg0, s32 arg1) {
     *arg0 = arg1;
 }
 
+/**
+ * @brief Sets member unkC of UnkStruct_5.
+ */
 void func_80083550(struct UnkStruct_5* arg0, s32 arg1) {
     arg0->unkC = arg1;
 }
@@ -127,6 +133,11 @@ void func_80083568(struct UnkStruct_6* arg0, s32 arg1, s32 arg2) {
     arg0->unk20 = arg2;
 }
 
+/**
+ * @brief Updates a linked list node (UnkStruct_1).
+ *
+ * Sets the second pointer (unk4) to a new value and clears unk8.
+ */
 void func_80083574(struct UnkStruct_1* arg0, s32 arg1) {
     arg0->unk4 = arg1;
     arg0->unk8 = 0;

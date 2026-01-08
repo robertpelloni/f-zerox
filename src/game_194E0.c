@@ -1,5 +1,8 @@
 #include "common.h"
 
+/**
+ * @brief Sets a state flag and saves arguments.
+ */
 void func_8007F4E0(s32 arg0, s32 arg1) {
     D_800CD510 = 1;
     D_800E4264 = arg0;
