@@ -1,25 +1,33 @@
 #include "common.h"
 
-void func_80068B20(void) {
+/**
+ * @brief Initialize the game system and all subsystems
+ *
+ * Called during startup to initialize the entire game state including
+ * audio system, graphics system, input system, and core game systems.
+ * Uses state check to avoid re-initialization on soft resets.
+ */
+void System_Init(void) {
     D_800DCE44 = -1;
     D_800DCE48 = 0x8000;
 
+    // Check if already initialized using magic number
     if (D_800DCE60 != 0x20DE1529) {
-        func_8008DB98();
-        D_800DCE60 = 0x20DE1529;
-        func_800A4BAC();
+        func_8008DB98(); // Audio system init (cold boot)
+        D_800DCE60 = 0x20DE1529; // Set initialized flag
+        func_800A4BAC(); // Additional audio init
     } else {
-        func_8008DA68();
-        func_800A4B54();
+        func_8008DA68(); // Audio system re-init (warm boot)
+        func_800A4B54(); // Audio shutdown/restart
     }
 
-    func_80085510();
-    func_800FC730();
-    func_8007F500();
-    func_80076848();
-    func_8007D9D0();
+    func_80085510(); // Machine system init
+    func_800FC730(); // Graphics system init
+    func_8007F500(); // Memory system init
+    func_80076848(); // Input system init
+    func_8007D9D0(); // Timing system init
 
-    D_800CD16C = 1;
+    D_800CD16C = 1; // Mark system as fully initialized
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068BC0.s")
@@ -28,95 +36,84 @@ void func_80068B20(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068F04.s")
 
-void func_80069698(void) {
-    s32 arg = 0; // Default or garbage value
-    if (D_800CD044 != 3) {
-        if (D_80106DA0 != 0) {
-            typedef s32 (*FuncPtr)(void);
-            FuncPtr target = (FuncPtr)D_800CD0FC[D_800DCE44 & 0x1F];
-            arg = target();
+/**
+ * @brief Execute the current game state function from the state machine
+ *
+ * Routes to the appropriate state handler based on the current state index.
+ * Uses a jump table with bounds checking to select the correct function.
+ *
+ * @return The result code from the state handler (0 for success, non-zero for errors)
+ */
+s32 StateMachine_ExecuteCurrentState(void) {
+    s32 result = 0; // Default return value
+
+    if (D_800CD044 != 3) { // If not in debug/demo mode
+        if (D_80106DA0 != 0) { // If state machine is active
+            typedef s32 (*StateHandler)(void);
+            // Calculate index with modulo from state value
+            StateHandler handler = (StateHandler)D_800CD0FC[D_800DCE44 & 0x1F];
+            result = handler();
         }
     }
-    func_800FD184(arg);
+
+    func_800FD184(result); // Process state result
+    return result;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069700.s")
 
-void func_80069790(void) {
-    u8* end = D_800DCE98 + (0x94 * 4); // D_800DD0E8
-
-    // The assembly loop iterates while ptr < end.
-    // But it accesses -0x94 relative to current ptr in some paths?
-    // Wait, the ASM starts with v0 = end.
-    // It decrements v0.
-    // So it iterates BACKWARDS.
-
+/**
+ * @brief Initialize or reset the machine state array
+ *
+ * Scans through an array of machine state structures (each 0x94 bytes)
+ * and resets all fields for inactive machines. Active machines are skipped.
+ * Also resets a special machine at a fixed memory offset.
+ */
+void Controller_ResetMachineStates(void) {
+    u8* end = D_800DCE98 + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
     u8* curr = end;
     u8* start = D_800DCE98;
 
+    // Iterate backwards through machine states
     while (1) {
-        // 37A0: lbu t6, 0x6B(v0)
-        // Note: v0 is initially end (DD0E8).
-        // If the loop structure is "do while", it checks first?
-        // No, ASM logic:
-        // L37A4: bnel t6, zero, .L800697E0 (Break if t6 != 0)
-
-        // Wait, the initial load is `lbu t6, 0x6B(v0)` at 37A0.
-        // But 37A8 `addiu v0, v0, -0x94` is inside the loop body?
-        // Actually, let's look at the C logic I derived earlier:
-        // It scans the array.
-
-        u8 val = *(curr + 0x6B);
-        if (val != 0) {
-             // 37E0: sltu at, v0, a2 (v0 < start)
-             // If v0 >= start, loop.
-             // But here v0 hasn't been decremented yet?
-             // 37DC decrements it.
-             curr -= 0x94;
-             if (curr < start) break;
-             continue;
+        u8 isActive = *(curr + 0x6B);
+        if (isActive != 0) {
+            // Skip active machine, continue to previous
+            curr -= 0x94;
+            if (curr < start) break;
+            continue;
         }
 
-        // if val == 0:
-        curr -= 0x94; // 37A8
-        // Clear fields
-        *(s16*)(curr + 0x80) = 0;
-        *(s16*)(curr + 0x7E) = 0;
-        *(s16*)(curr + 0x7C) = 0;
-        *(s16*)(curr + 0x7A) = 0;
-        *(s16*)(curr + 0x82) = 0;
-        *(u8*)(curr + 0x71) = 0;
-        *(u8*)(curr + 0x70) = 0;
-        *(u8*)(curr + 0x6F) = 0;
-        *(u8*)(curr + 0x6E) = 0;
-        *(u8*)(curr + 0x6D) = 0;
-        *(u8*)(curr + 0x6C) = 0;
-        *(s32*)(curr + 0x84) = 0;
-
-        curr -= 0x94; // 37DC
+        // Clear all fields for inactive machine
+        curr -= 0x94;
+        *(s16*)(curr + 0x80) = 0; // Unknown field A
+        *(s16*)(curr + 0x7E) = 0; // Unknown field B
+        *(s16*)(curr + 0x7C) = 0; // Unknown field C
+        *(s16*)(curr + 0x7A) = 0; // Unknown field D
+        *(s16*)(curr + 0x82) = 0; // Unknown field E
+        *(u8*)(curr + 0x71) = 0;  // Flag A
+        *(u8*)(curr + 0x70) = 0;  // Flag B
+        *(u8*)(curr + 0x6F) = 0;  // Flag C
+        *(u8*)(curr + 0x6E) = 0;  // Flag D
+        *(u8*)(curr + 0x6D) = 0;  // Flag E
+        *(u8*)(curr + 0x6C) = 0;  // Flag F
+        *(s32*)(curr + 0x84) = 0; // Unknown pointer/value
 
         if (curr < start) break;
     }
 
-    // After loop (L37E8):
-    // v0 = D_800DD180
-    // sb zero, 0x6D(v0)
-    // lb t3, 0x6D(v0) -> t3 = 0
-    // sh zero, 0x7E(v0)
-    // ...
-    // sb t3, 0x6C(v0)
-
-    u8* ptr2 = D_800DD180;
-    *(u8*)(ptr2 + 0x6D) = 0;
-    u8 t3 = *(u8*)(ptr2 + 0x6D); // 0
-    *(s16*)(ptr2 + 0x7E) = 0;
-    *(s16*)(ptr2 + 0x7C) = 0;
-    *(s16*)(ptr2 + 0x7A) = 0;
-    *(s16*)(ptr2 + 0x82) = 0;
-    *(u8*)(ptr2 + 0x70) = 0;
-    *(u8*)(ptr2 + 0x6F) = 0;
-    *(u8*)(ptr2 + 0x6E) = 0;
-    *(u8*)(ptr2 + 0x6C) = t3;
+    // Reset special machine at fixed offset
+    u8* specialMachine = D_800DD180;
+    *(u8*)(specialMachine + 0x6D) = 0;
+    u8 temp = *(u8*)(specialMachine + 0x6D); // 0
+    *(s16*)(specialMachine + 0x7E) = 0;
+    *(s16*)(specialMachine + 0x7C) = 0;
+    *(s16*)(specialMachine + 0x7A) = 0;
+    *(s16*)(specialMachine + 0x82) = 0;
+    *(u8*)(specialMachine + 0x70) = 0;
+    *(u8*)(specialMachine + 0x6F) = 0;
+    *(u8*)(specialMachine + 0x6E) = 0;
+    *(u8*)(specialMachine + 0x6C) = temp;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069820.s")
@@ -135,12 +132,33 @@ void func_80069790(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/osSetTime.s")
 
-void func_8006A904(s32 arg0, s32 arg1) {
-    D_800CD178 = arg0;
-    D_800CD17C = arg1;
+/**
+ * @brief Set the time-related global variables
+ *
+ * @param timeValue1 First timing value (likely milliseconds or ticks)
+ * @param timeValue2 Second timing value (likely seconds or frame count)
+ */
+void System_SetTime(s32 timeValue1, s32 timeValue2) {
+    D_800CD178 = timeValue1;
+    D_800CD17C = timeValue2;
 }
 
-s32 func_8006A918(void) {
+/**
+ * @brief XOR Shift Random Number Generator
+ *
+ * Implementation of a custom pseudorandom number generator using XOR shift
+ * with two state variables. This is likely the game's main RNG used for
+ * AI behavior, particle effects, and random game events.
+ *
+ * The algorithm:
+ * - Uses two 32-bit state values (D_800CD170 and D_800CD174)
+ * - Updates state1 using linear congruential generation
+ * - Conditionally updates state2 based on its LSB
+ * - Returns XOR of the two states
+ *
+ * @return 32-bit pseudo-random value
+ */
+s32 Math_Rand(void) {
     s32 state1 = D_800CD170;
     u32 next_state1 = (u32)state1 * 0x41C64E6D + 0x3039;
 
@@ -151,7 +169,7 @@ s32 func_8006A918(void) {
         D_800CD174 = state2;
     }
 
-    state1 = D_800CD170; // Reload potential update
+    state1 = D_800CD170;
     s32 final_state2 = (u32)state2 >> 1;
     D_800CD174 = final_state2;
 
@@ -159,16 +177,25 @@ s32 func_8006A918(void) {
 }
 
 /**
- * @brief Rounds a floating point number to the nearest integer.
+ * @brief Round a floating point number to the nearest integer
  *
- * @param arg0 Input float.
- * @return s32 Rounded integer.
+ * Uses standard rounding where values at exactly 0.5 round to the nearest
+ * integer with ties rounding away from zero.
+ *
+ * Examples:
+ * - Math_RoundF(3.4f) → 3
+ * - Math_RoundF(3.6f) → 4
+ * - Math_RoundF(-2.4f) → -2
+ * - Math_RoundF(-2.6f) → -3
+ *
+ * @param value Input float value to round
+ * @return Rounded integer value
  */
-s32 func_8006A9E0(f32 arg0) {
-    if (arg0 < 0.0f) {
-        return (s32) (arg0 - 0.5f);
+s32 Math_RoundF(f32 value) {
+    if (value < 0.0f) {
+        return (s32)(value - 0.5f);
     }
-    return (s32) (arg0 + 0.5f);
+    return (s32)(value + 0.5f);
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006AA38.s")
@@ -176,40 +203,56 @@ s32 func_8006A9E0(f32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006ADE4.s")
 
 /**
- * @brief Sets two 3-byte vectors (likely RGB colors) in the struct to the same values.
+ * @brief Set a dual-vector structure (both vectors to same values)
  *
- * @param arg0 Pointer to the struct.
- * @param arg1 Value for index 0 and 4.
- * @param arg2 Value for index 1 and 5.
- * @param arg3 Value for index 2 and 6.
+ * Sets two 3-component vectors (likely RGB colors or XYZ positions) in the
+ * structure to identical values. This is commonly used for color gradients
+ * or symmetric positioning.
+ *
+ * @param vecStruct Pointer to the UnkStruct_10 containing two vectors
+ * @param compX Value for X/Red component in both vectors
+ * @param compY Value for Y/Green component in both vectors
+ * @param compZ Value for Z/Blue component in both vectors
  */
-void func_8006AFC8(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0->unk0 = arg0->unk4 = arg1;
-    arg0->unk1 = arg0->unk5 = arg2;
-    arg0->unk2 = arg0->unk6 = arg3;
+void Vector_SetDual(struct UnkStruct_10* vecStruct, s32 compX, s32 compY, s32 compZ) {
+    vecStruct->unk0 = vecStruct->unk4 = compX;
+    vecStruct->unk1 = vecStruct->unk5 = compY;
+    vecStruct->unk2 = vecStruct->unk6 = compZ;
 }
 
 /**
- * @brief Sets two 3-byte vectors in the struct to the same values. Identical to func_8006AFC8.
+ * @brief Set a dual-vector structure (alias of Vector_SetDual)
+ *
+ * Identical functionality to Vector_SetDual. Likely created by compiler
+ * inlining or function duplication for optimization purposes.
+ *
+ * @param vecStruct Pointer to the UnkStruct_10 containing two vectors
+ * @param compX Value for X/Red component in both vectors
+ * @param compY Value for Y/Green component in both vectors
+ * @param compZ Value for Z/Blue component in both vectors
  */
-void func_8006AFE4(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0->unk0 = arg0->unk4 = arg1;
-    arg0->unk1 = arg0->unk5 = arg2;
-    arg0->unk2 = arg0->unk6 = arg3;
+void Vector_SetDual_Alias(struct UnkStruct_10* vecStruct, s32 compX, s32 compY, s32 compZ) {
+    vecStruct->unk0 = vecStruct->unk4 = compX;
+    vecStruct->unk1 = vecStruct->unk5 = compY;
+    vecStruct->unk2 = vecStruct->unk6 = compZ;
 }
 
 /**
- * @brief Sets the last three bytes of the struct (offsets 0x8, 0x9, 0xA).
+ * @brief Set the tail 3-component vector in UnkStruct_8
  *
- * @param arg0 Pointer to the struct.
- * @param arg1 Value for offset 0x8.
- * @param arg2 Value for offset 0x9.
- * @param arg3 Value for offset 0xA.
+ * Sets the vector components at offsets 0x8, 0x9, 0xA which appear to be
+ * the last three bytes of the structure. Likely used for XYZ positions,
+ * RGB colors, or velocity vectors.
+ *
+ * @param vecStruct Pointer to the UnkStruct_8
+ * @param compX Value for component at offset 0x8
+ * @param compY Value for component at offset 0x9
+ * @param compZ Value for component at offset 0xA
  */
-void func_8006B000(struct UnkStruct_8* arg0, s32 arg1, s32 arg2, s32 arg3) {
-    arg0->unk8 = arg1;
-    arg0->unk9 = arg2;
-    arg0->unkA = arg3;
+void Vector_SetTriple(struct UnkStruct_8* vecStruct, s32 compX, s32 compY, s32 compZ) {
+    vecStruct->unk8 = compX;
+    vecStruct->unk9 = compY;
+    vecStruct->unkA = compZ;
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B010.s")
