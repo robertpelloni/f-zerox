@@ -1,46 +1,56 @@
 # F-Zero X PC Port Manual
 
 ## Introduction
-Welcome to the F-Zero X PC Port (Decompilation). This project aims to bring the classic N64 racer to modern platforms with native performance, enhanced visuals, and new features from F-Zero GX/AX.
+Welcome to the ultimate F-Zero X experience. This port combines the precision of the N64 original with the high-octane mechanics of F-Zero GX, the arcade intensity of F-Zero AX, and the modern flair of spiritual successors like Redout.
 
 ## Features Overview
-This port includes features that are either implemented or planned for future updates. Please refer to the Roadmap for development status.
+### Graphics & Immersion (Redout-Inspired)
+- **Post-Processing:**
+  - *Motion Blur:* Simulates high-speed camera shutter effects.
+  - *Chromatic Aberration:* Adds color fringing at extreme speeds.
+  - *Lens Flare:* Anamorphic flares from engines and sunlight.
+  - *Bloom:* Dynamic glow for neon tracks and energy strips.
+- **Camera:**
+  - *Dynamic FOV:* Field of view increases with speed for a greater sense of velocity.
+  - *Cockpit View:* Fully immersive first-person perspective.
+  - *Camera Shake:* Procedural vibration based on boost usage and collisions.
+- **HUD Styles:** Choose between Classic X, Modern GX, or Minimalist Redout interfaces.
 
-### Graphics
-- **Resolution:** Supports arbitrary resolutions including 4K and Ultrawide (21:9).
-- **Widescreen:** Native widescreen support without stretching HUD elements.
-- **High FPS:** Unlocked framerate (up to 360Hz) with interpolation for smooth gameplay.
-- **Textures:** Support for high-resolution texture packs and model replacements.
-- **Lighting:** Enhanced lighting engine with dynamic shadows and bloom (Planned).
+### Gameplay Mechanics (GX/AX/Redout)
+- **Physics Engines:**
+  - *Classic (X):* 100% accurate N64 physics.
+  - *Modern (GX):* Includes Momentum Turbo Slide (MTS) and heavy gravity.
+  - *Arcade (AX):* Tuned for arcade cabinet steering wheels.
+  - *Redout Mode:* Adds lateral strafing and shield mechanics.
+- **Advanced Techniques:**
+  - *Quick Turn (X):* Sharp turning via L+R triggers.
+  - *Side Attack (X/GX):* Aggressive lateral ramming.
+  - *Spin Attack (GX/AX):* Rotational attack to damage nearby enemies.
+  - *Shift Boost (Snaking):* Gain speed by shifting weight during drifts.
+- **Health System:** Option for Redout-style shield regeneration vs classic energy strips.
 
-### Audio
-- **High Quality:** Replaced MIDI sequences with high-quality streaming audio (WAV/FLAC).
-- **3D Spatial Audio:** Implements HRTF for realistic sound positioning (Planned).
-- **Volume Control:** Independent sliders for Music, SFX, and Voice.
+### Customization & Garage
+- **Pilot Profile:** Track stats for Body, Boost, and Grip.
+- **Paint Shop:** Customize Primary, Secondary, and Tertiary colors (GX Style).
+- **Emblem Editor:** Create custom pixel art emblems and decals.
+- **Parts Shop:** Purchase new boosters, cockpits, and bodies with race winnings.
 
-### Input
-- **Controller Support:** Native support for XInput, DirectInput, and SDL2-compatible controllers.
-- **Mapping:** Fully remappable controls for all actions.
-- **Deadzone:** Adjustable analog stick deadzone and sensitivity.
-- **Rumble:** Force feedback support for compatible controllers.
+### Online Multiplayer
+- **30-Player Death Race:** Massive online races with rollback netcode.
+- **Lobby Browser:** Find open servers worldwide.
+- **Spectator Mode:** Watch live races as a free-roaming camera drone.
+- **Netcode Settings:** Adjust rollback frames and input delay to minimize lag.
 
-### Gameplay
-- **Physics Modes:**
-  - *Classic (X):* Original N64 physics. 100% accurate.
-  - *Modern (GX):* Physics from F-Zero GX including Momentum Turbo Slide (MTS).
-  - *Arcade (AX):* Physics from F-Zero AX arcade cabinets.
-- **Story Mode:** A new mission-based campaign inspired by GX's story mode (Planned).
-- **Track Editor:** Built-in track editor to create and share custom courses (Planned).
-
-### Cheats & Mods
-- **God Mode:** Infinite energy and invincibility.
-- **Unlock All:** Instantly unlocks all machines, cups, and difficulties.
-- **Debug Menu:** Access to internal game variables and state machine visualization.
+### Track Editor (Expansion)
+- **Construction Kit:** Build custom tracks using pieces from X, GX, and AX.
+- **Segments:** Straights, Curves, Loops, Pipes, Cylinders, Corkscrews.
+- **Surfaces:** Asphalt, Dirt, Ice, Heal Strips, Slip Zones.
+- **Sharing:** Save and load custom tracks to share with the community.
 
 ## Troubleshooting
-- **Performance:** If experiencing stuttering, try lowering the resolution or disabling V-Sync.
-- **Input:** If your controller is not recognized, check the SDL2 mapping database.
-- **Crashes:** Please report crashes on the GitHub repository with a reproduction log.
+- **Performance:** Lower 'Motion Blur' or 'Bloom' if framerate drops.
+- **Input:** Ensure your controller is mapped in the 'Input' tab.
+- **Network:** Port forward UDP 7000 for hosting direct connections.
 
 ## Credits
 - **Decompilation Team:** The original authors of the N64 decompilation.

@@ -4,7 +4,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g -Iinclude/pc -Iinclude -D_LANGUAGE_C
 LDFLAGS = -lSDL2 -lGL
 
-SRC_DIRS = src/pc/sdl2 src/pc src/pc/ui
+SRC_DIRS = src/pc/sdl2 src/pc src/pc/ui src/pc/ui/tabs
 # Add a game logic file to test linking (Math Utils + Debug Text + Audio State + Audio Util)
 GAME_SRCS = src/math_utils.c src/debug_text.c src/audio_state.c src/audio_util.c
 
