@@ -1,5 +1,8 @@
 #include "pc/hal.h"
+#include "pc/ui/ui.h"
+#include "pc/configfile.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]) {
     (void)argc;
@@ -7,10 +10,13 @@ int main(int argc, char* argv[]) {
 
     printf("F-Zero X PC Port (Shell)\n");
 
+    Config_SetDefaults();
+    Config_Load("fzerox_pc.bin");
+
     VideoConfig videoConfig = {
-        .width = 640,
-        .height = 480,
-        .fullscreen = false,
+        .width = gConfig.width,
+        .height = gConfig.height,
+        .fullscreen = gConfig.fullscreen,
         .title = "F-Zero X (Decompilation)"
     };
 
@@ -31,6 +37,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    if (!UI_Init()) {
+        printf("Failed to init UI.\n");
+    }
+
     printf("Initialization successful. Running main loop...\n");
 
     bool running = true;
@@ -46,12 +56,16 @@ int main(int argc, char* argv[]) {
 
         HAL_Video_BeginFrame();
         // TODO: Call Game Render Loop Here
+
+        UI_Render();
         HAL_Video_EndFrame();
 
         // Limit FPS (simple delay)
         HAL_Delay(16);
     }
 
+    Config_Save("fzerox_pc.bin");
+    UI_Shutdown();
     HAL_Audio_Shutdown();
     HAL_Video_Shutdown();
     return 0;

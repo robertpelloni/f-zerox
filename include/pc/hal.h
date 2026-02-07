@@ -25,6 +25,7 @@ void HAL_Video_Shutdown(void);
 void HAL_Video_BeginFrame(void);
 void HAL_Video_EndFrame(void);
 void HAL_Video_SetFullscreen(bool enabled);
+void* HAL_Video_GetWindow(void);
 
 // Audio Interface
 bool HAL_Audio_Init(AudioConfig* config);
