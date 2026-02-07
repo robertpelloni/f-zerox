@@ -1,4 +1,5 @@
 #include "pc/hal.h"
+#include "pc/ui/ui.h"
 #include <stdio.h>
 
 int main(int argc, char* argv[]) {
@@ -31,6 +32,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    if (!UI_Init()) {
+        printf("Failed to init UI.\n");
+    }
+
     printf("Initialization successful. Running main loop...\n");
 
     bool running = true;
@@ -46,12 +51,15 @@ int main(int argc, char* argv[]) {
 
         HAL_Video_BeginFrame();
         // TODO: Call Game Render Loop Here
+
+        UI_Render();
         HAL_Video_EndFrame();
 
         // Limit FPS (simple delay)
         HAL_Delay(16);
     }
 
+    UI_Shutdown();
     HAL_Audio_Shutdown();
     HAL_Video_Shutdown();
     return 0;
