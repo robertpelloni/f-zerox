@@ -53,3 +53,7 @@ void HAL_Video_SetFullscreen(bool enabled) {
         SDL_SetWindowFullscreen(sWindow, enabled ? SDL_WINDOW_FULLSCREEN : 0);
     }
 }
+
+void* HAL_Video_GetWindow(void) {
+    return (void*)sWindow;
+}

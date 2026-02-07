@@ -1,4 +1,5 @@
 #include "pc/hal.h"
+#include "pc/ui/ui.h"
 #include <SDL2/SDL.h>
 #include <string.h>
 
@@ -7,9 +8,16 @@ static OSContPad sControllerState[4];
 void HAL_Input_Poll(void) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
+        UI_HandleEvent(&event);
         if (event.type == SDL_QUIT) {
             exit(0); // Simple exit for now
         }
+    }
+
+    // If UI is using input, don't update game controller state from keyboard
+    if (UI_IsCapturingInput()) {
+        memset(sControllerState, 0, sizeof(sControllerState));
+        return;
     }
 
     const Uint8* state = SDL_GetKeyboardState(NULL);
