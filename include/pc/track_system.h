@@ -10,4 +10,8 @@ extern Gfx mute_city_dl[];
 void Track_Init(void);
 void Track_Render(void);
 
+// Collision Query
+// Returns true if position is on valid track
+bool Track_GetSurfaceInfo(float x, float z, float* out_height, float* out_width);
+
 #endif

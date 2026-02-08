@@ -1,6 +1,8 @@
 #include "pc/ui/ui.h"
 #include "pc/hal.h"
 #include "pc/ui/ui_tabs.h"
+#include "pc/ui/hud.h"
+#include "pc/game_loop.h" // For gPlayerVehicle
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -89,8 +91,14 @@ void UI_Shutdown(void) {
     nk_sdl_shutdown();
 }
 
+// Extern from game_loop.c
+extern Vehicle gPlayerVehicle; // We need to expose this or add a getter
+
 void UI_Render(void) {
     if (!ctx) return;
+
+    // Draw HUD first (so menu is on top)
+    HUD_Render(ctx, &gPlayerVehicle);
 
     // Draw the main menu bar or overlay
     UI_DrawTabs(ctx);

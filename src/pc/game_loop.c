@@ -11,8 +11,11 @@
 #include <SDL2/SDL_opengl.h>
 
 // Game State
-static Vehicle gPlayerVehicle;
+Vehicle gPlayerVehicle; // Exposed for HUD
 static OSContPad gInputState;
+
+// Shared with HAL Audio
+extern float gPlayerSpeedRatio;
 
 void Game_Init(void) {
     printf("Game Loop: Initializing...\n");
@@ -27,6 +30,9 @@ void Game_RunFrame(void) {
 
     // 2. Physics Update
     Physics_Update(&gPlayerVehicle, &gInputState);
+
+    // Update Audio Pitch
+    gPlayerSpeedRatio = gPlayerVehicle.velocity / 300.0f; // Normalize max speed ~1200 kph
 
     // 3. Camera Update
     Camera_Update(&gPlayerVehicle);

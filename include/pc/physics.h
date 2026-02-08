@@ -10,6 +10,10 @@ typedef struct {
     float pitch; // Rotation X (0 = Flat)
     float roll;  // Rotation Z (0 = Flat)
 
+    // Gameplay state
+    float energy; // 0.0 - 100.0
+    bool boost_active;
+
     // Derived state
     float speed_kph;
 } Vehicle;
