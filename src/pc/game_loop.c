@@ -3,34 +3,50 @@
 #include "pc/ultra64.h"
 #include "pc/configfile.h"
 #include "pc/assets.h"
+#include "pc/track_system.h"
+#include "pc/physics.h"
+#include "pc/camera.h"
+#include "pc/hal.h"
 #include <stdio.h>
 #include <SDL2/SDL_opengl.h>
 
-// Mock Game State variables
-static int sFrameCounter = 0;
+// Game State
+static Vehicle gPlayerVehicle;
+static OSContPad gInputState;
 
 void Game_Init(void) {
     printf("Game Loop: Initializing...\n");
-    // TODO: Initialize real game systems (Physics, Track, Machines)
+    Physics_Init(&gPlayerVehicle);
+    Track_Init();
 }
 
 void Game_RunFrame(void) {
-    sFrameCounter++;
+    // 1. Update Input
+    HAL_Input_Poll();
+    HAL_Input_GetState(0, &gInputState);
 
-    // 1. Update Input (Read from HAL)
-    // 2. Physics Update (Update positions based on gConfig physics settings)
+    // 2. Physics Update
+    Physics_Update(&gPlayerVehicle, &gInputState);
 
-    // 3. Render
-    static float angle = 0.0f;
-    angle += 1.0f;
+    // 3. Camera Update
+    Camera_Update(&gPlayerVehicle);
 
-    // Apply Camera (ModelView)
+    // 4. Render
     glLoadIdentity();
-    glTranslatef(0.0f, 0.0f, -400.0f); // Zoom out to see the model (units are ~50-150)
-    glRotatef(angle, 0.0f, 1.0f, 0.0f);
-    glRotatef(20.0f, 1.0f, 0.0f, 0.0f); // Tilt slightly
 
-    // Pass the Blue Falcon DL to the renderer
+    // Apply Camera Transform
+    Camera_Apply();
+
+    // Draw Track
+    Track_Render();
+
+    // Draw Player Machine
+    glPushMatrix();
+    glTranslatef(gPlayerVehicle.x, gPlayerVehicle.y, gPlayerVehicle.z);
+    glRotatef(-gPlayerVehicle.yaw, 0.0f, 1.0f, 0.0f); // Rotate model to match yaw
+    // Tilt for banking/turning?
     Fast3D_ProcessDisplayList(blue_falcon_dl);
+    glPopMatrix();
+
     Fast3D_Render();
 }

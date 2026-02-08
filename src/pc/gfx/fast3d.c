@@ -89,6 +89,11 @@ void Fast3D_ProcessDisplayList(Gfx* dl) {
                 Fast3D_DrawTriangle(v0, v1, v2);
                 break;
             }
+            case G_SETOTHERMODE_L:
+            case G_SETOTHERMODE_H:
+                // TODO: Implement Render Modes (Z-Compare, Culling, Blending)
+                // For now, we assume standard OPA_SURF
+                break;
             case G_ENDDL:
                 return;
             default:
