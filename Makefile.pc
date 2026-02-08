@@ -4,12 +4,12 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g -Iinclude/pc -Iinclude -D_LANGUAGE_C
 LDFLAGS = -lSDL2 -lGL
 
-SRC_DIRS = src/pc/sdl2 src/pc
+SRC_DIRS = src/pc/sdl2 src/pc src/pc/ui src/pc/ui/tabs
 # Add a game logic file to test linking (Math Utils + Debug Text + Audio State + Audio Util)
 GAME_SRCS = src/math_utils.c src/debug_text.c src/audio_state.c src/audio_util.c
 
 # PC Implementation of Ultra64 functions
-PC_IMPL_SRCS = src/pc/ultra_impl.c src/pc/libaudio_impl.c
+PC_IMPL_SRCS = src/pc/ultra_impl.c src/pc/libaudio_impl.c src/pc/game_stubs.c src/pc/game_loop.c src/pc/controller_api.c src/pc/configfile.c src/pc/gfx/fast3d.c src/pc/gfx/post_processing.c src/pc/physics.c src/pc/camera.c src/pc/track_editor.c src/pc/audio/audio_engine.c src/pc/ui/hud.c src/assets/machines/blue_falcon.c src/assets/tracks/mute_city_test.c
 
 BUILD_DIR = build/pc
 

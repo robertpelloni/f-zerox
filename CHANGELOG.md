@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.16] - 2024-12-27
+### Added
+- **PC Port Engine**: Implemented `src/pc/game_loop.c` and `src/pc/gfx/fast3d.c`, allowing the game to render N64 display lists via OpenGL.
+- **Assets**: Added `src/assets/machines/blue_falcon.c` as a test asset.
+- **UI Expansion**: Implemented tabs for Gameplay, Visuals, Garage, Netplay, and Editor using Nuklear.
+- **Configuration**: Added `src/pc/configfile.c` to persist all settings.
+- **Input Mapping**: Added `src/pc/controller_api.c` for dynamic key rebinding.
+- **Documentation**: Overhauled documentation system with `LLM_INSTRUCTIONS.md`, `VISION.md`, and `PROJECT_DASHBOARD.md`.
+
+## [0.1.15] - 2024-12-27
+### Added
+- Initial UI Implementation (Nuklear).
+
 ## [0.1.10] - 2024-12-27
 ### Fixed
 - **PC Port**: Fixed linker errors by stubbing missing global variables and functions in `src/pc/ultra_impl.c`.

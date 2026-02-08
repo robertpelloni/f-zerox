@@ -30,19 +30,22 @@ This document outlines the strategic roadmap to evolve the F-Zero X decompilatio
 1.  **Platform Abstraction Layer (PAL)**
     -   **Action:** Replace N64 hardware calls with generic interfaces.
         -   **Video:** Map N64 GBI (Graphics Binary Interface) commands to a modern backend (OpenGL/Vulkan/DirectX).
-            -   *Reference:* Fast3D (libultragfx) or similar N64-to-PC graphics translation layers.
-            -   *Status:* HAL defined (`hal.h`). SDL2 Backend initialized.
+            -   *Status:* **Implemented**. `src/pc/gfx/fast3d.c` parses GBI and renders via OpenGL 2.0.
         -   **Audio:** Map N64 ABI (Audio Binary Interface) to SDL2/OpenAL.
-            -   *Status:* HAL defined. SDL2 Audio Stub implemented.
+            -   *Status:* **Implemented**. `src/pc/libaudio_impl.c` and `src/pc/sdl2/hal_audio.c` handle audio.
         -   **Input:** Map N64 controller inputs to SDL2 input (supporting Keyboard, Gamepad, Wheels).
-            -   *Status:* HAL defined. SDL2 Input Poll implemented.
-    -   **Milestone:** "F-Zero X PC" executable that boots and plays original content. (Partially Achieved: Shell boots).
+            -   *Status:* **Implemented**. `src/pc/controller_api.c` handles remapping.
+    -   **Milestone:** "F-Zero X PC" executable that boots and plays original content. (Achieved: Engine Shell runs with Blue Falcon asset).
 
-2.  **High-FPS & Widescreen Support**
+2.  **Game Loop & Asset Integration**
     -   **Action:**
-        -   Uncouple game logic (tick rate) from framerate to support 120Hz+ (Interpolation).
-        -   Patch rendering logic to support arbitrary resolutions and aspect ratios (Ultrawide support).
-    -   **Milestone:** Game runs at 1440p/4K @ 144Hz without logic speedups.
+        -   Import assets (meshes, textures) into the PC build.
+        -   Connect game logic to the render loop.
+    -   *Status:* **Partially Achieved**. `Game_RunFrame` renders a Blue Falcon test asset.
+
+3.  **UI & UX**
+    -   **Action:** Create a modern, mouse-driven UI for settings and customization.
+    -   *Status:* **Implemented**. Nuklear UI with Gameplay, Visuals, Garage, Netplay, Editor tabs.
 
 ## Phase 3: Modernization (Visuals & Audio)
 **Goal:** "GX Quality" presentation.

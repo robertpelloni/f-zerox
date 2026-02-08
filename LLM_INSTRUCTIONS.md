@@ -1,30 +1,45 @@
-# Universal LLM Instructions
+# F-Zero X PC Port (Decompilation) - LLM Instructions
 
-**Core Directive:** You are a skilled software engineer tasked with decompiling F-Zero X and porting it to PC with F-Zero GX/AX feature parity.
+## Universal Directives for AI Agents
+You are an expert software engineer working on the F-Zero X PC Port. This file is the **Source of Truth** for your behavior, instructions, and project goals.
 
-## Codebase Rules
-1.  **Read-Only First:** Always analyze files before modifying them.
-2.  **No Blind Edits:** Do not modify `GLOBAL_ASM` blocks unless you are actively decompiling them with verification.
-3.  **Documentation:** Use Doxygen-style comments (`/** ... */`) for all functions and structs.
-4.  **Naming:**
-    - Use `Snake_Case` for file names and functions (e.g., `Math_RoundF`).
-    - Use `PascalCase` for structs (e.g., `PlayerState`).
-    - Rename `func_800XXXX` only when functionality is certain.
+### 1. Core Principles
+*   **Safety First:** Do not break the build. Do not delete files without verification. Do not overwrite logic without understanding it.
+*   **Verification:** Always verify your changes. If you write code, try to compile it. If you cannot compile, verify syntax and structure rigorously.
+*   **Documentation:** Every new feature must be documented in `MANUAL.md`. Every major architectural change must be updated in `PROJECT_STRUCTURE.md`.
+*   **Versioning:** Check `VERSION.md`. If you merge a significant feature, bump the patch version (e.g., 0.1.15 -> 0.1.16) and update `CHANGELOG.md`.
 
-## Workflow
-1.  **Check Roadmap:** Refer to `ROADMAP.md` for the current phase.
-2.  **Versioning:**
-    - Read `VERSION.md`.
-    - Update `CHANGELOG.md` with every significant change.
-    - Increment `VERSION.md` on "Submit".
-    - Commit messages MUST reference the new version (e.g., "v0.0.2: Added feature X").
-    - **Always** keep `CHANGELOG.md` synchronized with `VERSION.md`.
-3.  **Handoff:** Update `HANDOFF.md` at the end of your session.
+### 2. Project Goals (The Vision)
+*   **Goal 1: PC Port Shell:** Create a native Windows/Linux executable that runs the game logic without an emulator. (Status: Achieved via `src/pc/`).
+*   **Goal 2: Feature Parity:** Implement features from F-Zero GX (Story Mode, Customization) and AX (Arcade Physics). (Status: UI Implemented, Logic In-Progress).
+*   **Goal 3: Modernization:** Add High-FPS support, Widescreen, and Post-Processing (Bloom, Motion Blur).
 
-## Tools
-- **Python:** Used for `splat` and diff tools.
-- **Make:** Used for building.
-- **Git:** Use standard git commands.
+### 3. Workflow Protocol
+1.  **Analyze:** Read `ROADMAP.md` and `HANDOFF.md` before starting.
+2.  **Plan:** Use `set_plan` to outline your steps.
+3.  **Implement:** Write code in small, testable chunks.
+4.  **Verify:** Check for linker errors, undefined symbols, and logical consistency.
+5.  **Document:** Update `CHANGELOG.md` and `VERSION.md` before submitting.
 
-## Special Instructions
-- **Missing ROM:** If `baserom.us.z64` is missing, focus on **Documentation** and **Static Analysis**. Do not attempt to compile.
+### 4. Technical Guidelines
+*   **Style:** Use C99 standard. Indent with 4 spaces.
+*   **Naming:** Use `PascalCase` for functions (`Game_RunFrame`) and `gCamelCase` for globals (`gConfig`).
+*   **Structure:**
+    *   `src/pc/`: Platform-specific code (SDL2, OpenGL, UI).
+    *   `src/game_*.c`: Original decompiled game logic.
+    *   `include/pc/`: PC-specific headers.
+*   **UI:** Use the **Nuklear** library (`src/pc/ui/`). All settings must be persisted via `gConfig`.
+
+### 5. Specific Instructions for Models
+*   **Claude:** Focus on architectural correctness and deep reasoning.
+*   **GPT-4:** Focus on code generation and syntax verification.
+*   **Gemini:** Focus on rapid implementation and searching for solutions.
+
+### 6. Submodule Management
+*   Always ensure submodules (`tools/asm-differ`, etc.) are documented in `PROJECT_DASHBOARD.md`.
+*   If a submodule is updated, document the version and date.
+
+### 7. Versioning Protocol
+*   **File:** `VERSION.md` contains the single version string (e.g., `0.1.16`).
+*   **Changelog:** `CHANGELOG.md` must have a new entry for the current version.
+*   **Commit:** The commit message should reference the version bump.
