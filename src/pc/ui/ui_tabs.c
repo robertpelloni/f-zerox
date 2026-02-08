@@ -1,28 +1,10 @@
-#include "pc/ui/ui_tabs.h"
-#include "pc/ui/ui_manual.h"
-#include "pc/hal.h"
-#include "pc/nuklear.h"
-#include "pc/ui/ui_tabs_content.h"
 #include "pc/ui/ui_helpers.h"
+#include "pc/configfile.h"
+#include "pc/ui/ui_manual.h"
+#include "pc/ui/ui_tabs_content.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-// Mock Configuration State (Legacy)
-static int sResWidth = 1280;
-static int sResHeight = 720;
-static int sVSync = 1;
-static int sFullscreen = 0;
-static int sTextureQuality = 2; // 0: Low, 1: Med, 2: High, 3: Ultra
-static int sShadowQuality = 1;
-static int sBloom = 1;
-static int sMasterVolume = 80;
-static int sMusicVolume = 70;
-static int sSFXVolume = 100;
-static int s3DAudio = 0;
-static int sGodMode = 0;
-static int sUnlockAll = 0;
-static int sDebugMode = 0;
 
 void UI_Tab_General(struct nk_context *ctx) {
     UI_Header(ctx, "F-Zero X PC Port - Status Dashboard");
@@ -33,7 +15,12 @@ void UI_Tab_General(struct nk_context *ctx) {
     nk_label(ctx, "Uptime: 00:01:23", NK_TEXT_LEFT);
 
     if (nk_button_label(ctx, "Exit Game")) {
+        Config_Save("fzerox_pc.bin");
         exit(0);
+    }
+
+    if (nk_button_label(ctx, "Reset Config to Defaults")) {
+        Config_SetDefaults();
     }
 }
 
@@ -41,78 +28,58 @@ void UI_Tab_Video(struct nk_context *ctx) {
     UI_Header(ctx, "Display Settings");
 
     nk_layout_row_dynamic(ctx, 25, 2);
-    UI_Property_Int(ctx, "Width", 640, &sResWidth, 3840, 10, 1, "Horizontal Resolution.");
-    UI_Property_Int(ctx, "Height", 480, &sResHeight, 2160, 10, 1, "Vertical Resolution.");
+    UI_Property_Int(ctx, "Width", 640, &gConfig.width, 3840, 10, 1, "Horizontal Resolution.");
+    UI_Property_Int(ctx, "Height", 480, &gConfig.height, 2160, 10, 1, "Vertical Resolution.");
 
     nk_layout_row_dynamic(ctx, 25, 1);
-    UI_Checkbox(ctx, "Fullscreen", &sFullscreen, "Toggle fullscreen mode.");
-    UI_Checkbox(ctx, "V-Sync", &sVSync, "Vertical Synchronization to prevent tearing.");
+    int fullscreen = gConfig.fullscreen;
+    int vsync = gConfig.vsync;
+    int bloom = gConfig.bloom;
+
+    UI_Checkbox(ctx, "Fullscreen", &fullscreen, "Toggle fullscreen mode.");
+    UI_Checkbox(ctx, "V-Sync", &vsync, "Vertical Synchronization to prevent tearing.");
+
+    gConfig.fullscreen = fullscreen;
+    gConfig.vsync = vsync;
 
     UI_Header(ctx, "Advanced Graphics");
 
     nk_layout_row_dynamic(ctx, 25, 1);
     nk_label(ctx, "Texture Quality:", NK_TEXT_LEFT);
     const char *quality[] = {"Low (N64)", "Medium", "High (GX)", "Ultra (4K Pack)"};
-    sTextureQuality = nk_combo(ctx, quality, 4, sTextureQuality, 25, nk_vec2(200, 200));
+    gConfig.texture_quality = nk_combo(ctx, quality, 4, gConfig.texture_quality, 25, nk_vec2(200, 200));
 
-    UI_Checkbox(ctx, "Enable Bloom", &sBloom, "Adds a glowing effect to bright areas.");
-    UI_Property_Int(ctx, "Shadow Quality", 0, &sShadowQuality, 3, 1, 1, "Controls the resolution of dynamic shadows.");
+    UI_Checkbox(ctx, "Enable Bloom", &bloom, "Adds a glowing effect to bright areas.");
+    gConfig.bloom = bloom;
+
+    UI_Property_Int(ctx, "Shadow Quality", 0, &gConfig.shadow_quality, 3, 1, 1, "Controls the resolution of dynamic shadows.");
 }
 
 void UI_Tab_Audio(struct nk_context *ctx) {
     UI_Header(ctx, "Audio Settings");
 
     nk_layout_row_dynamic(ctx, 25, 1);
-    UI_Property_Int(ctx, "Master Volume", 0, &sMasterVolume, 100, 1, 1, "Global volume level.");
-    UI_Property_Int(ctx, "Music Volume", 0, &sMusicVolume, 100, 1, 1, "Music volume level.");
-    UI_Property_Int(ctx, "SFX Volume", 0, &sSFXVolume, 100, 1, 1, "Sound effects volume level.");
+    UI_Property_Int(ctx, "Master Volume", 0, &gConfig.master_volume, 100, 1, 1, "Global volume level.");
+    UI_Property_Int(ctx, "Music Volume", 0, &gConfig.music_volume, 100, 1, 1, "Music volume level.");
+    UI_Property_Int(ctx, "SFX Volume", 0, &gConfig.sfx_volume, 100, 1, 1, "Sound effects volume level.");
 
-    UI_Checkbox(ctx, "Enable 3D Audio (HRTF)", &s3DAudio, "Enables binaural audio processing for headphones.");
-}
-
-void UI_Tab_Input(struct nk_context *ctx) {
-    UI_Header(ctx, "Input Configuration");
-
-    nk_layout_row_dynamic(ctx, 25, 1);
-    nk_label(ctx, "Current Device: Keyboard", NK_TEXT_LEFT);
-
-    if (nk_tree_push(ctx, NK_TREE_TAB, "Button Mapping", NK_MAXIMIZED)) {
-        nk_layout_row_dynamic(ctx, 25, 2);
-        nk_label(ctx, "Accelerate (A):", NK_TEXT_LEFT); nk_button_label(ctx, "Z Key");
-        nk_label(ctx, "Boost (B):", NK_TEXT_LEFT);      nk_button_label(ctx, "X Key");
-        nk_label(ctx, "Drift Left (L):", NK_TEXT_LEFT);  nk_button_label(ctx, "A Key");
-        nk_label(ctx, "Drift Right (R):", NK_TEXT_LEFT); nk_button_label(ctx, "S Key");
-        nk_label(ctx, "Attack (Z):", NK_TEXT_LEFT);      nk_button_label(ctx, "D Key");
-        nk_tree_pop(ctx);
-    }
-
-    UI_Header(ctx, "Sensitivity");
-    static float deadzone = 0.1f;
-    UI_Property_Float(ctx, "Deadzone", 0.0f, &deadzone, 1.0f, 0.05f, 0.01f, "Adjusts the analog stick deadzone to prevent drift.");
+    int audio_3d = gConfig.audio_3d;
+    UI_Checkbox(ctx, "Enable 3D Audio (HRTF)", &audio_3d, "Enables binaural audio processing for headphones.");
+    gConfig.audio_3d = audio_3d;
 }
 
 void UI_Tab_Cheats(struct nk_context *ctx) {
     UI_Header(ctx, "Cheats & Modifications");
 
     nk_layout_row_dynamic(ctx, 25, 1);
-    UI_Checkbox(ctx, "God Mode (Invincibility)", &sGodMode, "Prevents all damage and infinite boost.");
-    UI_Checkbox(ctx, "Unlock All Content", &sUnlockAll, "Unlocks all machines, cups, and difficulties immediately.");
-}
+    int god = gConfig.god_mode;
+    int unlock = gConfig.unlock_all;
 
-void UI_Tab_Debug(struct nk_context *ctx) {
-    UI_Header(ctx, "Developer Tools");
+    UI_Checkbox(ctx, "God Mode (Invincibility)", &god, "Prevents all damage and infinite boost.");
+    UI_Checkbox(ctx, "Unlock All Content", &unlock, "Unlocks all machines, cups, and difficulties immediately.");
 
-    nk_layout_row_dynamic(ctx, 25, 1);
-    UI_Checkbox(ctx, "Enable Debug Overlay", &sDebugMode, "Show debug text.");
-
-    if (nk_tree_push(ctx, NK_TREE_TAB, "Variable Watcher", NK_MINIMIZED)) {
-        nk_layout_row_dynamic(ctx, 20, 1);
-        nk_label(ctx, "Player 1 X: 0.00", NK_TEXT_LEFT);
-        nk_label(ctx, "Player 1 Y: 0.00", NK_TEXT_LEFT);
-        nk_label(ctx, "Player 1 Z: 0.00", NK_TEXT_LEFT);
-        nk_label(ctx, "Speed: 0 km/h", NK_TEXT_LEFT);
-        nk_tree_pop(ctx);
-    }
+    gConfig.god_mode = god;
+    gConfig.unlock_all = unlock;
 }
 
 void UI_Tab_Help(struct nk_context *ctx) {

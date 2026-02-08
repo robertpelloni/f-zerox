@@ -1,17 +1,7 @@
 #include "pc/ui/ui_helpers.h"
-
-// Garage State
-static int sSelectedMachine = 0;
-static float sColorPrimary[3] = {0.8f, 0.1f, 0.1f};
-static float sColorSecondary[3] = {0.1f, 0.1f, 0.8f};
-static float sColorTertiary[3] = {0.1f, 0.1f, 0.1f};
-static int sEmblemLayer = 0;
+#include "pc/configfile.h"
 
 void UI_Tab_Garage(struct nk_context *ctx) {
-    // Suppress unused variable warnings for placeholders
-    (void)sSelectedMachine;
-    (void)sColorSecondary;
-    (void)sColorTertiary;
     UI_Header(ctx, "Pilot Profile & Stats");
     nk_layout_row_dynamic(ctx, 100, 2);
     if (nk_group_begin(ctx, "Machine_Preview", NK_WINDOW_NO_SCROLLBAR)) {
@@ -31,17 +21,17 @@ void UI_Tab_Garage(struct nk_context *ctx) {
     nk_label(ctx, "Primary Color:", NK_TEXT_LEFT);
     nk_layout_row_dynamic(ctx, 120, 1);
 
-    struct nk_colorf color = {sColorPrimary[0], sColorPrimary[1], sColorPrimary[2], 1.0f};
+    struct nk_colorf color = {gConfig.color_primary[0], gConfig.color_primary[1], gConfig.color_primary[2], 1.0f};
     if (nk_color_pick(ctx, &color, NK_RGB)) {
-        sColorPrimary[0] = color.r;
-        sColorPrimary[1] = color.g;
-        sColorPrimary[2] = color.b;
+        gConfig.color_primary[0] = color.r;
+        gConfig.color_primary[1] = color.g;
+        gConfig.color_primary[2] = color.b;
     }
 
     UI_Header(ctx, "Emblem Editor (Canvas)");
     nk_layout_row_dynamic(ctx, 30, 2);
     nk_label(ctx, "Layer:", NK_TEXT_LEFT);
-    nk_property_int(ctx, "#", 0, &sEmblemLayer, 10, 1, 1);
+    UI_Property_Int(ctx, "#", 0, &gConfig.emblem_layer, 10, 1, 1, "Select emblem layer.");
 
     nk_layout_row_dynamic(ctx, 200, 1);
     if (nk_group_begin(ctx, "Canvas", NK_WINDOW_BORDER)) {

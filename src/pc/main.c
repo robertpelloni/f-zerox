@@ -1,6 +1,10 @@
 #include "pc/hal.h"
 #include "pc/ui/ui.h"
+#include "pc/configfile.h"
+#include "pc/game_loop.h"
+#include "pc/gfx/fast3d.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]) {
     (void)argc;
@@ -8,10 +12,13 @@ int main(int argc, char* argv[]) {
 
     printf("F-Zero X PC Port (Shell)\n");
 
+    Config_SetDefaults();
+    Config_Load("fzerox_pc.bin");
+
     VideoConfig videoConfig = {
-        .width = 640,
-        .height = 480,
-        .fullscreen = false,
+        .width = gConfig.width,
+        .height = gConfig.height,
+        .fullscreen = gConfig.fullscreen,
         .title = "F-Zero X (Decompilation)"
     };
 
@@ -36,6 +43,10 @@ int main(int argc, char* argv[]) {
         printf("Failed to init UI.\n");
     }
 
+    // Initialize Game Engine (Physics, Graphics Parser)
+    Fast3D_Init();
+    Game_Init();
+
     printf("Initialization successful. Running main loop...\n");
 
     bool running = true;
@@ -50,8 +61,11 @@ int main(int argc, char* argv[]) {
         }
 
         HAL_Video_BeginFrame();
-        // TODO: Call Game Render Loop Here
 
+        // 1. Run Game Logic & Render 3D Scene
+        Game_RunFrame();
+
+        // 2. Render UI Overlay on top
         UI_Render();
         HAL_Video_EndFrame();
 
@@ -59,6 +73,8 @@ int main(int argc, char* argv[]) {
         HAL_Delay(16);
     }
 
+    Config_Save("fzerox_pc.bin");
+    Fast3D_Shutdown();
     UI_Shutdown();
     HAL_Audio_Shutdown();
     HAL_Video_Shutdown();

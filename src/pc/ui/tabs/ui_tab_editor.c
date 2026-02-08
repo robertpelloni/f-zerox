@@ -1,6 +1,7 @@
 #include "pc/ui/ui_helpers.h"
+#include "pc/configfile.h"
 
-// Track Editor State
+// Track Editor State (Not persisted in global config yet, usually per-track file)
 static int sSelectedPiece = 0;
 static float sPieceBank = 0.0f;
 static float sPieceWidth = 50.0f;
