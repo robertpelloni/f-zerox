@@ -9,11 +9,11 @@ SRC_DIRS = src/pc/sdl2 src/pc src/pc/ui src/pc/ui/tabs
 GAME_SRCS = src/math_utils.c src/debug_text.c src/audio_state.c src/audio_util.c
 
 # PC Implementation of Ultra64 functions
-PC_IMPL_SRCS = src/pc/ultra_impl.c src/pc/libaudio_impl.c
+PC_IMPL_SRCS = src/pc/ultra_impl.c src/pc/libaudio_impl.c src/pc/game_stubs.c src/pc/game_loop.c src/pc/controller_api.c src/pc/configfile.c src/pc/gfx/fast3d.c
 
 BUILD_DIR = build/pc
 
-SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) $(GAME_SRCS)
+SRCS = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) $(GAME_SRCS) $(PC_IMPL_SRCS)
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 TARGET = $(BUILD_DIR)/fzerox_pc
