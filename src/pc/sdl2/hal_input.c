@@ -29,12 +29,6 @@ void HAL_Input_Poll(void) {
         return;
     }
 
-    // If UI is using input, don't update game controller state from keyboard
-    if (UI_IsCapturingInput()) {
-        memset(sControllerState, 0, sizeof(sControllerState));
-        return;
-    }
-
     const Uint8* state = SDL_GetKeyboardState(NULL);
     OSContPad* pad = &sControllerState[0];
 
