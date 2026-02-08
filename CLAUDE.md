@@ -1,1 +1,1 @@
-See `LLM_INSTRUCTIONS.md`.
+See `LLM_INSTRUCTIONS.md` for master instructions.

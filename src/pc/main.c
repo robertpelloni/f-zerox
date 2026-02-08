@@ -3,6 +3,8 @@
 #include "pc/configfile.h"
 #include "pc/game_loop.h"
 #include "pc/gfx/fast3d.h"
+#include "pc/gfx/post_processing.h"
+#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,6 +23,12 @@ int main(int argc, char* argv[]) {
         .fullscreen = gConfig.fullscreen,
         .title = "F-Zero X (Decompilation)"
     };
+
+    // Request Accumulation Buffer for Motion Blur
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE, 8);
 
     if (!HAL_Video_Init(&videoConfig)) {
         printf("Failed to init video.\n");
@@ -45,6 +53,7 @@ int main(int argc, char* argv[]) {
 
     // Initialize Game Engine (Physics, Graphics Parser)
     Fast3D_Init();
+    Post_Init(gConfig.width, gConfig.height);
     Game_Init();
 
     printf("Initialization successful. Running main loop...\n");
@@ -65,7 +74,10 @@ int main(int argc, char* argv[]) {
         // 1. Run Game Logic & Render 3D Scene
         Game_RunFrame();
 
-        // 2. Render UI Overlay on top
+        // 2. Apply Post-Processing (Motion Blur, etc.)
+        Post_Process();
+
+        // 3. Render UI Overlay on top
         UI_Render();
         HAL_Video_EndFrame();
 
