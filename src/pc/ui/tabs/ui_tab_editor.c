@@ -1,5 +1,6 @@
 #include "pc/ui/ui_helpers.h"
 #include "pc/configfile.h"
+#include "pc/track_data.h"
 
 // Track Editor State (Not persisted in global config yet, usually per-track file)
 static int sSelectedPiece = 0;
@@ -14,14 +15,14 @@ void UI_Tab_Editor(struct nk_context *ctx) {
     // Tools Palette
     if (nk_group_begin(ctx, "Tools", NK_WINDOW_BORDER)) {
         nk_layout_row_dynamic(ctx, 30, 1);
-        if (nk_button_label(ctx, "Straight")) sSelectedPiece = 0;
-        if (nk_button_label(ctx, "Curve")) sSelectedPiece = 1;
+        if (nk_button_label(ctx, "Add Straight")) Track_Editor_AddSegment(SEG_STRAIGHT);
+        if (nk_button_label(ctx, "Add Curve")) Track_Editor_AddSegment(SEG_CURVE);
+        if (nk_button_label(ctx, "Clear Track")) Track_Editor_Clear();
+
+        // Placeholders
         if (nk_button_label(ctx, "Loop")) sSelectedPiece = 2;
         if (nk_button_label(ctx, "Pipe")) sSelectedPiece = 3;
         if (nk_button_label(ctx, "Cylinder")) sSelectedPiece = 4;
-        if (nk_button_label(ctx, "Half-Pipe")) sSelectedPiece = 5;
-        if (nk_button_label(ctx, "Corkscrew")) sSelectedPiece = 6;
-        if (nk_button_label(ctx, "Jump Plate")) sSelectedPiece = 7;
         nk_group_end(ctx);
     }
 
