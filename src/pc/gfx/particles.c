@@ -2,7 +2,8 @@
 #include <SDL2/SDL_opengl.h>
 #include <stdlib.h>
 
-#define MAX_PARTICLES 1024
+// Increase max particles for 30-player chaos
+#define MAX_PARTICLES 4096
 
 typedef struct {
     bool active;
@@ -14,26 +15,39 @@ typedef struct {
 } Particle;
 
 static Particle sParticles[MAX_PARTICLES];
+static int sNextParticleIndex = 0; // Ring buffer index
 
 void Particles_Init(void) {
-    for (int i = 0; i < MAX_PARTICLES; i++) sParticles[i].active = false;
+    for (int i = 0; i < MAX_PARTICLES; i++) {
+        sParticles[i].active = false;
+    }
+    sNextParticleIndex = 0;
 }
 
+// Rewritten to act as a Ring Buffer (Object Pool)
+// O(1) insertion time instead of O(N) search. Will overwrite oldest particles.
 void Particles_Spawn(float x, float y, float z, float r, float g, float b, float size) {
-    for (int i = 0; i < MAX_PARTICLES; i++) {
-        if (!sParticles[i].active) {
-            sParticles[i].active = true;
-            sParticles[i].x = x; sParticles[i].y = y; sParticles[i].z = z;
-            // Random velocity spread
-            sParticles[i].vx = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
-            sParticles[i].vy = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
-            sParticles[i].vz = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
+    int idx = sNextParticleIndex;
 
-            sParticles[i].r = r; sParticles[i].g = g; sParticles[i].b = b;
-            sParticles[i].size = size;
-            sParticles[i].life = 1.0f;
-            return;
-        }
+    sParticles[idx].active = true;
+    sParticles[idx].x = x;
+    sParticles[idx].y = y;
+    sParticles[idx].z = z;
+
+    // Random velocity spread
+    sParticles[idx].vx = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
+    sParticles[idx].vy = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
+    sParticles[idx].vz = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
+
+    sParticles[idx].r = r;
+    sParticles[idx].g = g;
+    sParticles[idx].b = b;
+    sParticles[idx].size = size;
+    sParticles[idx].life = 1.0f;
+
+    sNextParticleIndex++;
+    if (sNextParticleIndex >= MAX_PARTICLES) {
+        sNextParticleIndex = 0;
     }
 }
 
@@ -45,22 +59,20 @@ void Particles_Update(void) {
             sParticles[i].z += sParticles[i].vz;
 
             sParticles[i].life -= 0.02f; // Fade out
-            if (sParticles[i].life <= 0.0f) sParticles[i].active = false;
+            if (sParticles[i].life <= 0.0f) {
+                sParticles[i].active = false;
+            }
         }
     }
 }
 
 void Particles_Render(void) {
-    // Simple Immediate Mode Billboards
-    // We should disable texture and enable blending
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE); // Additive blending for glow
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE); // Additive blending
 
-    // We need the Camera matrix to billboard correctly (View Plane Aligned)
-    // For simplicity, we just draw quads facing Z for now, or points.
-    // Points are easiest and look okay for "sparks".
-
+    // Dynamic point size not perfectly supported in basic GL without point sprites extension
+    // But glPointSize works for simple squares
     glPointSize(5.0f);
     glBegin(GL_POINTS);
     for (int i = 0; i < MAX_PARTICLES; i++) {
