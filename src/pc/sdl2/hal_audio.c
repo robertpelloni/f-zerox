@@ -1,8 +1,15 @@
 #include "pc/hal.h"
+#include "pc/configfile.h"
+#include "pc/audio/audio_engine.h"
+#include "pc/audio/music_player.h"
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <math.h>
 
 static SDL_AudioDeviceID sAudioDevice = 0;
+// Internal reference to player speed (hacky, but effective for now)
+extern float gPlayerSpeedRatio; // defined in hal_audio usually, but we'll expose it from game_loop
+float gPlayerSpeedRatio = 0.0f; // Default
 
 bool HAL_Audio_Init(AudioConfig* config) {
     SDL_AudioSpec want, have;
@@ -26,6 +33,8 @@ bool HAL_Audio_Init(AudioConfig* config) {
     }
 
     SDL_PauseAudioDevice(sAudioDevice, 0); // Start playing
+    Music_Init();
+    Music_Play("music/big_blue.wav"); // Placeholder autostart
     return true;
 }
 
@@ -39,7 +48,26 @@ void HAL_Audio_Shutdown(void) {
 
 void HAL_Audio_QueueSamples(const int16_t* samples, int count) {
     if (sAudioDevice != 0) {
+        // Apply Volume
+        int16_t* processed = (int16_t*)malloc(count * sizeof(int16_t));
+        if (!processed) return;
+
+        float volume = (gConfig.master_volume / 100.0f) * (gConfig.sfx_volume / 100.0f);
+        if (volume > 1.0f) volume = 1.0f;
+        if (volume < 0.0f) volume = 0.0f;
+
+        for (int i = 0; i < count; i++) {
+            processed[i] = (int16_t)(samples[i] * volume);
+        }
+
+        // Generate Engine Sound
+        AudioEngine_Generate(processed, count, gPlayerSpeedRatio);
+
+        // Mix Music
+        Music_Update(processed, count);
+
         // count is number of samples (int16), size in bytes is count * sizeof(int16)
-        SDL_QueueAudio(sAudioDevice, samples, count * sizeof(int16_t));
+        SDL_QueueAudio(sAudioDevice, processed, count * sizeof(int16_t));
+        free(processed);
     }
 }
