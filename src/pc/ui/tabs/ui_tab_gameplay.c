@@ -4,6 +4,10 @@
 #include "pc/audio/music_player.h"
 
 void UI_Tab_Gameplay(struct nk_context *ctx) {
+    UI_Header(ctx, "Race Settings");
+    nk_layout_row_dynamic(ctx, 25, 1);
+    UI_Property_Int(ctx, "AI Opponent Count", 0, &gConfig.num_ai_machines, 28, 1, 1, "Number of AI bots to spawn (0 = Time Attack solo, 28 = Full Grid). Changes apply next race.");
+
     UI_Header(ctx, "Audio Settings");
     nk_layout_row_dynamic(ctx, 30, 2);
     if (nk_button_label(ctx, "Play Track 1")) Music_Play("music/track1.wav");

@@ -40,9 +40,21 @@ static void GetVelocityVector(Vehicle* v, float* vx, float* vy, float* vz) {
 void Game_Init(void) {
     printf("Game Loop: Initializing...\n");
 
+    // Hide all machines initially
+    for (int i = 0; i < MAX_MACHINES; i++) {
+        gMachines[i].y = -10000.0f; // Deep underground so they get culled
+    }
+
+    // Init Player
     Physics_Init(gPlayerVehicle);
 
-    for (int i = 1; i < MAX_MACHINES; i++) {
+    // Init Configured AI
+    // Ensure we don't overflow bounds, slot 29 is reserved for ghost.
+    int num_ai = gConfig.num_ai_machines;
+    if (num_ai > 28) num_ai = 28;
+    if (num_ai < 0) num_ai = 0;
+
+    for (int i = 1; i <= num_ai; i++) {
         Physics_Init(&gMachines[i]);
         gMachines[i].x = ((i % 3) - 1) * 30.0f;
         gMachines[i].z = i * 50.0f;
@@ -79,7 +91,10 @@ void Game_Update(void) {
 
     Arcade_SendMotion(gPlayerVehicle->pitch, gPlayerVehicle->roll, 0.0f);
 
-    for (int i = 1; i < MAX_MACHINES; i++) {
+    int num_ai = gConfig.num_ai_machines;
+    if (num_ai > 28) num_ai = 28;
+
+    for (int i = 1; i <= num_ai; i++) {
         if (i == 29 && gGhost.playing) continue;
 
         OSContPad aiPad = {0};
@@ -93,8 +108,10 @@ void Game_Update(void) {
     Weapons_Update();
     Particles_Update();
 
-    // Spawn Engine Trails and Damage Smoke for all machines
+    // Spawn Engine Trails and Damage Smoke for active machines
     for (int i = 0; i < MAX_MACHINES; i++) {
+        if (gMachines[i].y < -1000.0f) continue; // Inactive
+
         if (gMachines[i].velocity > 50.0f) {
              Particles_Spawn(gMachines[i].x, gMachines[i].y + 5.0f, gMachines[i].z + 20.0f, 0.2f, 0.5f, 1.0f, 5.0f);
         }
@@ -121,10 +138,9 @@ void Game_Update(void) {
     float camVx, camVy, camVz;
     GetVelocityVector(gPlayerVehicle, &camVx, &camVy, &camVz);
 
-    // In chase cam, camera vel is roughly player vel
     AudioEngine_Update3D(gCamera.x, gCamera.y, gCamera.z, camVx, camVy, camVz);
 
-    for (int i = 1; i < MAX_MACHINES; i++) {
+    for (int i = 1; i <= num_ai; i++) {
         if (gMachines[i].y > -1000.0f) {
             float vx, vy, vz;
             GetVelocityVector(&gMachines[i], &vx, &vy, &vz);

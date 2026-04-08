@@ -30,7 +30,7 @@ typedef struct {
     float camera_shake;
     bool cockpit_view;
     int hud_style;
-    bool bilinear_filtering; // NEW
+    bool bilinear_filtering;
     float motion_blur;
     float chromatic_aberration;
     float lens_flare;
@@ -40,12 +40,15 @@ typedef struct {
     float color_primary[3];
     int emblem_layer;
 
-    // Netplay
+    // Netplay & Game Settings
     char player_name[32];
     char server_ip[32];
     int rollback_frames;
     int input_delay;
     bool spectator_mode;
+
+    // Game Rules
+    int num_ai_machines; // 0 to 28 (Slot 29 is ghost)
 
 } Config;
 
