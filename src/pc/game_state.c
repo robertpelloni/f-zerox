@@ -1,5 +1,6 @@
 #include "pc/game_state.h"
 #include "pc/game_loop.h"
+#include "pc/scenes/results_screen.h"
 #include <stdio.h>
 
 // Extern references
@@ -9,8 +10,6 @@ extern void Scene_Menu_Update(void);
 extern void Scene_Menu_Render(void);
 extern void Scene_Select_Update(void);
 extern void Scene_Select_Render(void);
-extern void Scene_Result_Update(void);
-extern void Scene_Result_Render(void);
 
 static GameStateID sCurrentState = STATE_BOOT;
 static GameStateID sNextState = STATE_BOOT;
@@ -53,5 +52,12 @@ void GameState_Render(void) {
         case STATE_RACE: Game_Render(); break;
         case STATE_RESULT: Scene_Result_Render(); break;
         default: break;
+    }
+}
+
+void GameState_UI(struct nk_context* ctx) {
+    // Only call UI overlay for specific scenes
+    if (sCurrentState == STATE_RESULT) {
+        Scene_Result_UI(ctx);
     }
 }

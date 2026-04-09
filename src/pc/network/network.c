@@ -1,5 +1,6 @@
 #include "pc/network/network.h"
 #include "pc/configfile.h"
+#include "pc/hal.h" // For HAL_GetTimeMillis
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -22,41 +23,42 @@
 #endif
 
 static SOCKET sSocket = INVALID_SOCKET;
-static struct sockaddr_in sTargetAddr; // Where we send to
+static struct sockaddr_in sTargetAddr;
 
 // Packet Types
 #define PACKET_STATE 0
 #define PACKET_EVENT 1
 
+#define DEGTORAD 0.0174532925f
+
 typedef struct {
     uint32_t magic; // 'FZXN'
     uint8_t type;
-    uint8_t id;     // Player ID
-    uint16_t seq;   // Sequence number
+    uint8_t id;
+    uint16_t seq;
+    uint32_t timestamp; // Sender's local time
 
     // State Data
     float x, y, z;
     float yaw, pitch, roll;
     float velocity;
-    float steer;
     bool boost;
 } NetPacket;
 
 #define MAX_NET_MACHINES 30
+
 // Buffer for interpolation
 typedef struct {
     float x, y, z;
     float yaw, pitch, roll;
     float velocity;
-    uint32_t timestamp;
+    uint32_t recvTimestamp; // Local time when received
+    uint32_t sentTimestamp; // Remote time when sent
 } NetState;
 
 static NetState sNetBuffer[MAX_NET_MACHINES];
 static bool sNetActive[MAX_NET_MACHINES];
 static uint16_t sSeqNum = 0;
-
-// Config: Client/Server mode? For now P2P Mesh or Broadcast.
-// We broadcast state to everyone on the LAN.
 
 bool Net_Init(int port) {
 #ifdef _WIN32
@@ -99,7 +101,7 @@ bool Net_Init(int port) {
     memset(&sTargetAddr, 0, sizeof(sTargetAddr));
     sTargetAddr.sin_family = AF_INET;
     sTargetAddr.sin_port = htons(port);
-    sTargetAddr.sin_addr.s_addr = INADDR_BROADCAST; // 255.255.255.255
+    sTargetAddr.sin_addr.s_addr = INADDR_BROADCAST;
 
     printf("Net: Initialized UDP socket on port %d (Broadcast).\n", port);
     return true;
@@ -111,15 +113,14 @@ void Net_BroadcastPos(Vehicle* v) {
     NetPacket pkt;
     pkt.magic = 0x4E585A46; // FZXN
     pkt.type = PACKET_STATE;
-    // ID determination: We need a unique ID.
-    // For now, use lower byte of IP? Or random ID generated at startup?
-    // Let's rely on config or random.
-    // Use configfile nick hash?
+
     static uint8_t myId = 0;
-    if (myId == 0) myId = (uint8_t)(rand() % 255 + 1); // Random 1-255
+    if (myId == 0) myId = (uint8_t)(rand() % 255 + 1);
     pkt.id = myId;
 
     pkt.seq = sSeqNum++;
+    pkt.timestamp = HAL_GetTimeMillis();
+
     pkt.x = v->x; pkt.y = v->y; pkt.z = v->z;
     pkt.yaw = v->yaw; pkt.pitch = v->pitch; pkt.roll = v->roll;
     pkt.velocity = v->velocity;
@@ -140,14 +141,7 @@ void Net_Receive(void) {
         if (len < 0) break;
 
         if (len == sizeof(NetPacket) && pkt.magic == 0x4E585A46) {
-            // Ignore self loopback (if broadcast goes to self)
-            // But we don't know our ID until we send?
-            // Actually broadcast usually reflects.
-            // We need to filter based on ID.
-
-            // Map ID to slot index (1..29)
-            // Simple hash: ID % 29 + 1
-            int slot = pkt.id % 29 + 1;
+            int slot = pkt.id % 29 + 1; // Basic hashing to array
 
             sNetBuffer[slot].x = pkt.x;
             sNetBuffer[slot].y = pkt.y;
@@ -156,27 +150,65 @@ void Net_Receive(void) {
             sNetBuffer[slot].pitch = pkt.pitch;
             sNetBuffer[slot].roll = pkt.roll;
             sNetBuffer[slot].velocity = pkt.velocity;
+            sNetBuffer[slot].sentTimestamp = pkt.timestamp;
+            sNetBuffer[slot].recvTimestamp = HAL_GetTimeMillis();
             sNetActive[slot] = true;
         }
     }
 }
 
 void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
-    // Apply buffered states
-    // In a real system we'd use timestamps and interpolation buffers.
-    // Here we just snap/lerp to latest packet.
+    uint32_t now = HAL_GetTimeMillis();
 
     for (int i = 1; i < max_machines; i++) {
         if (sNetActive[i]) {
-            // Lerp 20%
-            float k = 0.2f;
-            machines[i].x += (sNetBuffer[i].x - machines[i].x) * k;
-            machines[i].y += (sNetBuffer[i].y - machines[i].y) * k;
-            machines[i].z += (sNetBuffer[i].z - machines[i].z) * k;
+            // 1. Calculate Latency/Age of packet
+            uint32_t ageMs = now - sNetBuffer[i].recvTimestamp;
+            float ageSec = (float)ageMs / 1000.0f;
 
-            // Angle lerp needs shortest path
-            // For now simple lerp
-            machines[i].yaw += (sNetBuffer[i].yaw - machines[i].yaw) * k;
+            // Timeout disconnect
+            if (ageSec > 3.0f) {
+                sNetActive[i] = false;
+                machines[i].y = -10000.0f; // Hide
+                continue;
+            }
+
+            // 2. Dead Reckoning: Predict where they are NOW
+            // Forward Vector
+            float radYaw = sNetBuffer[i].yaw * DEGTORAD;
+            float radPitch = sNetBuffer[i].pitch * DEGTORAD;
+            float fwdX = sinf(radYaw) * cosf(radPitch);
+            float fwdY = sinf(radPitch);
+            float fwdZ = -cosf(radYaw) * cosf(radPitch);
+
+            float speed = sNetBuffer[i].velocity; // Units per frame? Assuming 60fps
+            float speedPerSec = speed * 60.0f;
+
+            float predX = sNetBuffer[i].x + (fwdX * speedPerSec * ageSec);
+            float predY = sNetBuffer[i].y + (fwdY * speedPerSec * ageSec);
+            float predZ = sNetBuffer[i].z + (fwdZ * speedPerSec * ageSec);
+
+            // 3. Interpolate Towards Predicted Position
+            // If they are far off prediction (packet loss), snap faster.
+            // If close, smooth lerp.
+            float dx = predX - machines[i].x;
+            float dy = predY - machines[i].y;
+            float dz = predZ - machines[i].z;
+            float distSq = dx*dx + dy*dy + dz*dz;
+
+            float k = 0.2f;
+            if (distSq > 10000.0f) k = 0.8f; // Snap if too far off
+
+            machines[i].x += dx * k;
+            machines[i].y += dy * k;
+            machines[i].z += dz * k;
+
+            // Shortest Path Angle Lerp for Yaw
+            float diffYaw = sNetBuffer[i].yaw - machines[i].yaw;
+            while (diffYaw > 180.0f) diffYaw -= 360.0f;
+            while (diffYaw < -180.0f) diffYaw += 360.0f;
+            machines[i].yaw += diffYaw * k;
+
             machines[i].pitch += (sNetBuffer[i].pitch - machines[i].pitch) * k;
             machines[i].roll += (sNetBuffer[i].roll - machines[i].roll) * k;
 

@@ -2,7 +2,8 @@
 #include "pc/hal.h"
 #include "pc/ui/ui_tabs.h"
 #include "pc/ui/hud.h"
-#include "pc/game_loop.h" // For gPlayerVehicle
+#include "pc/game_loop.h"
+#include "pc/game_state.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -100,6 +101,9 @@ extern Vehicle gPlayerVehicle;
 
 void UI_Render(void) {
     if (!ctx) return;
+
+    // Hook State-specific UI
+    GameState_UI(ctx);
 
     HUD_Render(ctx, &gPlayerVehicle);
 
