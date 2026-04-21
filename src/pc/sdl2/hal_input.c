@@ -4,10 +4,22 @@
 #include "pc/controller_api.h"
 #include <SDL2/SDL.h>
 #include <string.h>
+#include <stdio.h>
 
 static OSContPad sControllerState[4];
+static SDL_GameController* sGameController = NULL;
 
 void HAL_Input_Poll(void) {
+    // Init Controller if needed
+    if (!sGameController && SDL_NumJoysticks() > 0) {
+        if (SDL_IsGameController(0)) {
+            sGameController = SDL_GameControllerOpen(0);
+            if (sGameController) {
+                printf("HAL Input: Opened GameController 0 (%s)\n", SDL_GameControllerName(sGameController));
+            }
+        }
+    }
+
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         UI_HandleEvent(&event);

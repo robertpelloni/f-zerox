@@ -50,95 +50,50 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.6] - 2024-12-27
 ### Added
-- Created Unit Test infrastructure (`tests/minunit.h`, `tests/stubs.c`, `Makefile.pc` test target).
-- Implemented and verified `tests/test_math_utils.c` running N64 game logic on PC.
-- Successfully verified `Math_RoundF` behavior on PC.
+- **Documentation**: Overhauled global AI documentation rules (`LLM_INSTRUCTIONS.md`, `CLAUDE.md`, `GPT.md`, `GEMINI.md`, `copilot-instructions.md`) to establish a universal source of truth.
+- **UI**: Added configuration options for Track segment width and banking directly in `ui_tab_editor.c`.
+- **UI**: Integrated the global `PROJECT_VERSION` macro into the build system so the UI automatically reads `VERSION.md`.
 
-## [0.1.5] - 2024-12-27
-### Changed
-- Cleaned up comments in `src/pc/libaudio_impl.c`.
-- Updated `HANDOFF.md` to list ASM-only files.
-
-## [0.1.4] - 2024-12-27
+## [0.1.27] - 2024-05-24
 ### Added
-- Created `include/pc/PR/libaudio.h` with LibAudio types and prototypes.
-- Created `src/pc/libaudio_impl.c` to stub audio library functions.
-- Updated `Makefile.pc` to link audio-related game files (`game_511D0.c`, `game_14440.c`).
+- **Audio**: Implemented 3D Doppler pitch shifting and distance attenuation for remote AI engines in the software mixer.
+- **Visuals**: Implemented Damage Smoke Trails. Machines with low energy spawn black smoke and fire particles.
 
-## [0.1.3] - 2024-12-27
+## [0.1.26] - 2024-05-24
 ### Added
-- Created `src/pc/ultra_impl.c` to implement/stub N64 OS functions for the PC port.
-- Added `include/pc/PR/os.h` with basic OS function prototypes.
-- Updated `Makefile.pc` to compile `ultra_impl.c` and link `src/game_197D0.c`.
-- Defined mock global variables in `ultra_impl.c` to satisfy linker symbols for debug text.
+- **Logic Injection**: Intercepted N64 `func_8007FB80` (DrawText) to buffer debug strings.
+- **UI**: Rendered N64 debug text over the PC GUI using Nuklear layout spaces.
 
-## [0.1.2] - 2024-12-27
+## [0.1.24] - 2024-05-24
 ### Added
-- Defined `OSContPad` struct and button constants in `include/pc/ultra64.h`.
-- Implemented keyboard-to-controller mapping in `src/pc/sdl2/hal_input.c`.
-- Added input debug logging to `src/pc/main.c` (Logs "Button A Pressed!").
+- **Logic Injection**: Wired `Math_Rand` to use the authentic decompiled N64 XOR Shift RNG sequence.
 
-## [0.1.1] - 2024-12-27
-### Changed
-- Finalized `src/pc/README.md` with build instructions and backend details.
-
-## [0.1.0] - 2024-12-27
+## [0.1.23] - 2024-05-24
 ### Added
-- **PC Port Foundation**: Established directory structure, HAL, and SDL2 backend.
-- **Documentation**: Comprehensive analysis of C files and headers.
-- **Infrastructure**: Roadmap, Versioning, Changelog, and Dashboard (Project Structure).
+- **Graphics**: Fast3D Lighting (`GL_LIGHT0`) and blob shadows.
+- **Audio**: 8-channel software mixer with ADSR envelopes.
+- **Physics**: Wired UI config (Gravity, Grip) dynamically into update loop.
 
-## [0.0.11] - 2024-12-27
-### Changed
-- Enhanced PC Shell to clear the screen with a specific color (Visual Confirmation).
-- Updated ROADMAP.md and HANDOFF.md to reflect PC Port progress.
-
-## [0.0.9] - 2024-12-27
+## [0.1.22] - 2024-05-24
 ### Added
-- Implemented SDL2 backend for HAL Audio (`src/pc/sdl2/hal_audio.c`).
-- Created PC Entry Point (`src/pc/main.c`).
-- Updated `Makefile.pc` to compile the full PC shell.
+- **Game Flow**: Grand Prix mode, tracking points across races.
 
-## [0.0.8] - 2024-12-27
+## [0.1.21] - 2024-05-24
 ### Added
-- Created `Makefile.pc` for building the PC port.
-- Fixed include paths in HAL implementation to be relative to include root.
+- **Combat**: Spin Attack and Side Attack implemented with UI toggles.
+- **Docs**: Created `VISION.md` and `IDEAS.md`.
 
-## [0.0.7] - 2024-12-27
+## [0.1.20] - 2024-05-24
 ### Added
-- Implemented SDL2 backend for HAL Video (`src/pc/sdl2/hal_video.c`).
-- Implemented SDL2 backend for HAL Input and System (`src/pc/sdl2/hal_input.c`, `src/pc/sdl2/hal_system.c`).
+- **Game Flow**: Scene graph management (Title -> Menu -> Select -> Race).
+- **Persistence**: Ghost Recorder and Track Save/Load.
+- **Audio**: WAV streaming music player.
 
-## [0.0.6] - 2024-12-27
+## [0.1.18] - 2024-05-23
 ### Added
-- Created `src/pc/` directory for PC port specific code.
-- Created `src/pc/README.md` documenting the HAL architecture.
-- Created `include/pc/hal.h` defining the Hardware Abstraction Layer interface.
+- **Physics**: 360-degree loop support, gravity on slopes, dynamic wall collision.
+- **AI**: Spline-following AI with look-ahead steering.
 
-## [0.0.5] - 2024-12-27
-### Changed
-- Updated `HANDOFF.md` with build system origins (forked from `mkst/sssv`).
-
-## [0.0.4] - 2024-12-27
-### Changed
-- Updated `include/structs.h` with detailed analysis of `UnkStruct_10` (Vectors), `UnkStruct_8`, and others.
-- Updated `HANDOFF.md` to reflect the completion of the static analysis phase.
-
-## [0.0.3] - 2024-12-27
+## [0.1.15] - 2024-05-22
 ### Added
-- Populated `include/functions.h` with prototypes for all analyzed functions.
-
-## [0.0.2] - 2024-12-27
-### Added
-- Documented `src/game_14440.c` (Audio utility).
-- Documented `src/game_194E0.c` (State setter).
-- Documented `src/game_4FFB0.c` (Low memory state update).
-
-## [0.0.1] - 2024-12-27
-### Added
-- Created `ROADMAP.md` outlining the path to F-Zero GX/AX parity.
-- Added `VERSION.md` for version tracking.
-- Added `PROJECT_STRUCTURE.md` detailing the directory layout and submodules.
-- Added `HANDOFF.md` for session continuity.
-- Added `LLM_INSTRUCTIONS.md` and updated agent configuration files.
-- Added Doxygen documentation for various C files and headers.
+- **Core**: Initial PC Port Shell (SDL2 + OpenGL).

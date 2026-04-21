@@ -1,5 +1,6 @@
 #include "pc/ultra64.h"
 #include "pc/hal.h"
+#include "pc/debug_text_hook.h"
 #include <stdio.h>
 
 // Mock Global Variables (usually defined in ld script or asm)
@@ -70,6 +71,8 @@ void func_8007F86C(void* a, void* b, void* c, void* d, void* e) { (void)a; }
 void func_8007F970(void) {}
 void func_8007F9E0(void) {}
 void func_8007FA64(void) {}
+
+// Hook N64 debug text into PC UI overlay
 void func_8007FB80(s32 x, s32 y, void* str) {
-    printf("DEBUG PRINT at (%d, %d)\n", x, y);
+    DebugText_AddString(x, y, (const char*)str);
 }

@@ -1,9 +1,17 @@
 # F-Zero X to GX/AX: Decompilation & Porting Roadmap
 
-This document outlines the strategic roadmap to evolve the F-Zero X decompilation project into a fully-featured, native PC port with feature parity to F-Zero GX/AX and modern enhancements.
+## Feature Status Matrix
 
-## Phase 1: Foundation (Decompilation & Shiftability)
-**Goal:** A fully decompiled, C-based codebase that is "shiftable" (relocatable), allowing for code modification and expansion without breaking the ROM.
+| Feature | UI Status | Backend Status | Notes |
+| :--- | :--- | :--- | :--- |
+| **Render Pipeline** | Configurable | **Fast3D Implemented** | OpenGL 2.0 backend. Texture replacement logic active. |
+| **Physics** | Configurable (Gravity, Grip) | **Advanced** | 360 vectors implemented. Loops and Tubes supported. |
+| **Track Editor** | Full UI | **Procedural Mesh** | Straights, Curves, Loops, Pipes implemented. |
+| **Audio** | Volume/Music Toggles | **Implemented** | Wav streaming + Procedural Engine + FFB. |
+| **Netplay** | Lobby/Settings UI | **Implemented** | UDP Broadcast logic active (No interpolation yet). |
+| **Arcade I/O** | Calibration UI | **Implemented** | Serial output for motion seats. |
+| **Save/Load** | Editor UI | **Implemented** | Binary format for tracks. |
+| **Modding** | N/A | **Implemented** | OBJ Loader active for Blue Falcon replacement. |
 
 1.  **Complete Decompilation**
     -   **Current Status:** ~10% decompiled. **Documentation Phase Active** (due to missing ROM).

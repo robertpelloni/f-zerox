@@ -32,6 +32,8 @@ bool HAL_Audio_Init(AudioConfig* config) {
     }
 
     SDL_PauseAudioDevice(sAudioDevice, 0); // Start playing
+    Music_Init();
+    Music_Play("music/big_blue.wav"); // Placeholder autostart
     return true;
 }
 

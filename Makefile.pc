@@ -1,7 +1,9 @@
 # Makefile for F-Zero X PC Port
 
 CC = gcc
-CFLAGS = -Wall -Wextra -g -Iinclude/pc -Iinclude -D_LANGUAGE_C
+# Inject VERSION.md into compilation as a macro
+VERSION_STR = $(shell cat VERSION.md)
+CFLAGS = -Wall -Wextra -g -Iinclude/pc -Iinclude -Iinclude/2.0I -D_LANGUAGE_C -DPROJECT_VERSION="\"$(VERSION_STR)\""
 LDFLAGS = -lSDL2 -lGL
 
 SRC_DIRS = src/pc/sdl2 src/pc src/pc/ui src/pc/ui/tabs
@@ -10,6 +12,7 @@ GAME_SRCS = src/math_utils.c src/debug_text.c src/audio_state.c src/audio_util.c
 
 # PC Implementation of Ultra64 functions
 PC_IMPL_SRCS = src/pc/ultra_impl.c src/pc/libaudio_impl.c src/pc/game_stubs.c src/pc/game_loop.c src/pc/controller_api.c src/pc/configfile.c src/pc/gfx/fast3d.c src/pc/gfx/post_processing.c src/pc/physics.c src/pc/camera.c src/pc/track_editor.c src/pc/audio/audio_engine.c src/pc/ui/hud.c src/assets/machines/blue_falcon.c src/assets/tracks/mute_city_test.c
+PC_IMPL_SRCS = src/pc/ultra_impl.c src/pc/libaudio_impl.c src/pc/game_stubs.c src/pc/game_loop.c src/pc/game_state.c src/pc/controller_api.c src/pc/configfile.c src/pc/gfx/fast3d.c src/pc/gfx/post_processing.c src/pc/gfx/tex_loader.c src/pc/gfx/particles.c src/pc/physics.c src/pc/ai_system.c src/pc/race_logic.c src/pc/weapons.c src/pc/camera.c src/pc/track_editor.c src/pc/track_system.c src/pc/fs/file_system.c src/pc/audio/audio_engine.c src/pc/audio/music_player.c src/pc/ui/hud.c src/pc/ui/ui_system.c src/pc/ui/ui_helpers.c src/pc/ui/ui_manual.c src/pc/ui/ui_tabs.c src/pc/ui/tabs/ui_tab_arcade.c src/pc/sdl2/hal_haptic.c src/pc/assets.c src/pc/assets/obj_loader.c src/assets/machines/blue_falcon.c src/assets/tracks/mute_city_test.c src/pc/scenes/title_screen.c src/pc/scenes/main_menu.c src/pc/scenes/machine_select.c src/pc/scenes/results_screen.c src/pc/ghost_recorder.c src/pc/cup_system.c src/pc/ui/debug_text_hook.c src/pc/arcade/cabinet_io.c
 
 BUILD_DIR = build/pc
 
