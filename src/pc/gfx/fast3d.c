@@ -14,6 +14,20 @@ void Fast3D_Init(void) {
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
 
+    // Setup Basic Directional Lighting
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_COLOR_MATERIAL); // Allow glColor to control material properties
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+
+    GLfloat light_dir[] = { 0.5f, 1.0f, 0.5f, 0.0f }; // Directional light
+    GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    GLfloat light_ambient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+
+    glLightfv(GL_LIGHT0, GL_POSITION, light_dir);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+
     // Set perspective projection (for testing)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

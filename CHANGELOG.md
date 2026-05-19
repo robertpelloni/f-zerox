@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.16] - 2024-12-27
+## [0.1.17] - $(date +%Y-%m-%d)
+### Added
+- **Graphics**: Implemented basic directional lighting in Fast3D.
+### Fixed
+
 ### Added
 - **PC Port Engine**: Implemented `src/pc/game_loop.c` and `src/pc/gfx/fast3d.c`, allowing the game to render N64 display lists via OpenGL.
 - **Assets**: Added `src/assets/machines/blue_falcon.c` as a test asset.

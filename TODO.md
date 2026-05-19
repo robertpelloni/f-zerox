@@ -7,7 +7,7 @@
 
 ## Visuals
 - [ ] **Particles:** Add smoke trails for damaged machines.
-- [ ] **Lighting:** Implement basic directional lighting in `Fast3D` (currently flat/vertex colored).
+- [x] **Lighting:** Implement basic directional lighting in `Fast3D` (currently flat/vertex colored).
 - [ ] **Shadows:** Render a simple blob shadow under vehicles.
 
 ## Audio

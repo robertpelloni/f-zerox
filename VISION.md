@@ -28,3 +28,7 @@ We learn from modern racers:
 
 ## User Experience
 The user launches `fzerox_pc`. They are greeted by a sleek, modern dashboard overlaying the classic title screen. They can tweak resolution, bind controls, and select "Netplay" to join a server immediately. The friction of emulators (plugins, rom hacks) is gone.
+
+## Render Pipeline Vision
+- The rendering pipeline is migrating towards a "GX Quality" presentation.
+- Fast3D is being actively extended to support dynamic directional lighting, blob shadows, and eventually bloom, to bridge the gap between classic N64 visuals and modern expectations.

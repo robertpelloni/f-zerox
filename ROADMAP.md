@@ -61,7 +61,7 @@
 1.  **Render Pipeline Enhancements**
     -   **Action:**
         -   Implement programmable shaders to replace fixed-function N64 combiner logic.
-        -   Add support for dynamic lighting, shadows, and bloom (mimicking GX's visual style).
+        -   Add support for dynamic lighting (basic directional lighting implemented), shadows, and bloom (mimicking GX's visual style).
         -   Implement Model Replacement: Allow loading .obj/.fbx/.gltf models to replace low-poly N64 assets.
     -   **Milestone:** Ability to load a "High-Res Texture/Model Pack".
 

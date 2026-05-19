@@ -1,3 +1,7 @@
+#ifndef __gnuc_va_list
+#define __gnuc_va_list __builtin_va_list
+#endif
+
 #ifndef STDARG_H
 #define STDARG_H
 

@@ -25,3 +25,11 @@
 *   **Missing Audio:** Ensure SDL2 Audio is configured.
 *   **Black Screen:** Press 'V' to toggle View/Camera modes (if implemented) or check console for GBI errors.
 *   **Input:** Default keys are Arrow Keys (Steer), Z (Gas), X (Boost/Brake).
+
+## Environment Setup
+- To compile the PC port, ensure you have GCC, Python 3.10+, and SDL2 development headers installed (`sudo apt-get install libsdl2-dev` on Debian/Ubuntu).
+- Note: The current codebase has known conflicts between the N64 SDK headers and standard PC headers.
+
+## Environment Variables
+- `FZX_API_KEY`: (Placeholder) Add any necessary API keys here in the future.
+- `FZX_SERVER_PORT`: (Placeholder) Port for the Netplay server, default 7000.
