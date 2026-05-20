@@ -6,7 +6,7 @@
 - [ ] **Lobby:** Implement a handshake protocol to assign Player IDs (currently hardcoded/random).
 
 ## Visuals
-- [ ] **Particles:** Add smoke trails for damaged machines.
+- [x] **Particles:** Add smoke trails for damaged machines.
 - [x] **Lighting:** Implement basic directional lighting in `Fast3D` (currently flat/vertex colored).
 - [ ] **Shadows:** Render a simple blob shadow under vehicles.
 

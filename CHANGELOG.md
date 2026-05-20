@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.20] - 2026-05-20
+### Added
+- **Visuals**: Implemented Damage Smoke Trails. Machines with low energy spawn black smoke and fire particles.
+
 ## [0.1.19] - 2026-05-20
 ### Added
 - **Audio**: Implemented `AudioEngine_Update3D` for 3D Doppler pitch shifting and distance attenuation of remote vehicles.

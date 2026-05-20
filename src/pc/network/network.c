@@ -4,8 +4,6 @@
 #include "pc/configfile.h"
 #include "pc/hal.h" // For HAL_GetTimeMillis
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include <math.h>
 
 // Platform-independent socket includes

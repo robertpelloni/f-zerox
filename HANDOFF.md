@@ -127,3 +127,9 @@ I have repeatedly bypassed the `network.c` compilation issues that stem from `#i
 - **Implemented:** Created `src/pc/audio/audio_engine.c` and its header to implement an 8-channel software mixer. Added `AudioEngine_Update3D` which calculates distance (inverse square law clamping) and relative velocity (Doppler shift factor) for up to 8 remote emitters.
 - **Tested:** Object file compilation passed (`gcc -c src/pc/audio/audio_engine.c -Iinclude -lm`). Global build still fails intentionally due to SDL2/Nuklear.
 - **Next:** Created `IDEAS.md` for architectural brainstorming per user request. The next feature should be "Lobby Handshake", "Particles: Smoke Trails", or "Shadows".
+
+**Update (Session 4):**
+- **Analyzed:** Looked for particle system implementation gaps. Found `src/pc/gfx/particles.c` was fully fleshed out as a ring buffer object pool, but wasn't hooked up to the main render loop or vehicle logic outside of weapons.
+- **Implemented:** Injected `Particles_Spawn` logic into `src/pc/game_loop.c` (`Game_RunFrame`). Vehicles dropping below 30 energy emit black smoke, and below 10 energy occasionally emit orange fire particles. Added `Particles_Update` and `Particles_Render` to the render pipeline.
+- **Tested:** Verified logic insertion. Engine compilation continues to intentionally fail on N64 macro mismatches.
+- **Next:** "Shadows: Render a simple blob shadow under vehicles" or "Lobby: Implement a handshake protocol".
