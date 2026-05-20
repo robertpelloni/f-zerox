@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <math.h>
 #include "pc/game_loop.h"
 #include "pc/gfx/fast3d.h"
 #include "pc/ultra64.h"
@@ -58,6 +59,35 @@ void Game_RunFrame(void) {
 
     // Draw Track
     Track_Render();
+
+    // Render Blob Shadow
+    glPushMatrix();
+    // Translate slightly above ground (assuming y is altitude, we should query TrackSurfaceInfo)
+    // For now, render it just below the vehicle's center.
+    glTranslatef(gPlayerVehicle.x, gPlayerVehicle.y - 15.0f, gPlayerVehicle.z);
+    glRotatef(90.0f, 1.0f, 0.0f, 0.0f); // Face flat on the ground
+
+    glDisable(GL_LIGHTING);
+    glDisable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDepthMask(GL_FALSE); // Don't write to depth buffer
+
+    glColor4f(0.0f, 0.0f, 0.0f, 0.5f); // Semi-transparent black
+
+    // Draw an octagon as a blob shadow approximation
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3f(0.0f, 0.0f, 0.0f); // Center
+    for (int i = 0; i <= 8; i++) {
+        float angle = i * (3.14159f * 2.0f / 8.0f);
+        glVertex3f(cosf(angle) * 20.0f, sinf(angle) * 20.0f, 0.0f);
+    }
+    glEnd();
+
+    glDepthMask(GL_TRUE);
+    glDisable(GL_BLEND);
+    glEnable(GL_LIGHTING);
+    glPopMatrix();
 
     // Draw Player Machine
     glPushMatrix();

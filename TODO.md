@@ -8,7 +8,7 @@
 ## Visuals
 - [x] **Particles:** Add smoke trails for damaged machines.
 - [x] **Lighting:** Implement basic directional lighting in `Fast3D` (currently flat/vertex colored).
-- [ ] **Shadows:** Render a simple blob shadow under vehicles.
+- [x] **Shadows:** Render a simple blob shadow under vehicles.
 
 ## Audio
 - [x] **Mixer:** Implement a software mixer to handle volume envelopes and multiple SFX channels properly.

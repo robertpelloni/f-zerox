@@ -133,3 +133,9 @@ I have repeatedly bypassed the `network.c` compilation issues that stem from `#i
 - **Implemented:** Injected `Particles_Spawn` logic into `src/pc/game_loop.c` (`Game_RunFrame`). Vehicles dropping below 30 energy emit black smoke, and below 10 energy occasionally emit orange fire particles. Added `Particles_Update` and `Particles_Render` to the render pipeline.
 - **Tested:** Verified logic insertion. Engine compilation continues to intentionally fail on N64 macro mismatches.
 - **Next:** "Shadows: Render a simple blob shadow under vehicles" or "Lobby: Implement a handshake protocol".
+
+**Update (Session 5):**
+- **Analyzed:** Looked for where to implement vehicle shadows in `src/pc/game_loop.c`.
+- **Implemented:** Injected fixed-function OpenGL logic (`GL_TRIANGLE_FAN`) into `Game_RunFrame` to render a dark, semi-transparent blob shadow underneath the `gPlayerVehicle`.
+- **Tested:** Verified syntax via object compilation.
+- **Next:** "Lobby: Implement a handshake protocol".
