@@ -91,7 +91,7 @@ bool Net_Init(int port) {
     bindAddr.sin_addr.s_addr = INADDR_ANY;
 
     if (bind(sSocket, (struct sockaddr*)&bindAddr, sizeof(bindAddr)) < 0) {
-        printf("Net: Failed to bind port %d. Network disabled.\\n", port);
+        printf("Net: Failed to bind port %d. Network disabled.\n", port);
         closesocket(sSocket);
         sSocket = INVALID_SOCKET;
         return false;
@@ -100,7 +100,7 @@ bool Net_Init(int port) {
     // Setup Broadcast Target
     int broadcast = 1;
     if (setsockopt(sSocket, SOL_SOCKET, SO_BROADCAST, (const char*)&broadcast, sizeof(broadcast)) < 0) {
-        printf("Net: Failed to enable broadcast.\\n");
+        printf("Net: Failed to enable broadcast.\n");
     }
 
     memset(&sTargetAddr, 0, sizeof(sTargetAddr));
@@ -108,7 +108,7 @@ bool Net_Init(int port) {
     sTargetAddr.sin_port = htons(port);
     sTargetAddr.sin_addr.s_addr = INADDR_BROADCAST;
 
-    printf("Net: Initialized UDP socket on port %d (Broadcast).\\n", port);
+    printf("Net: Initialized UDP socket on port %d (Broadcast).\n", port);
     return true;
 }
 

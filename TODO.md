@@ -11,8 +11,8 @@
 - [ ] **Shadows:** Render a simple blob shadow under vehicles.
 
 ## Audio
-- [ ] **Mixer:** Implement a software mixer to handle volume envelopes and multiple SFX channels properly.
-- [ ] **Doppler:** Pitch shift engine sounds based on relative velocity to camera.
+- [x] **Mixer:** Implement a software mixer to handle volume envelopes and multiple SFX channels properly.
+- [x] **Doppler:** Pitch shift engine sounds based on relative velocity to camera.
 
 ## Content
 - [ ] **Cup Logic:** Implement the "Grand Prix" state machine (5 tracks, point tracking).

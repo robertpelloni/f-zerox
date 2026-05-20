@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.18] - $(date +%Y-%m-%d)
+## [0.1.19] - 2026-05-20
+### Added
+- **Audio**: Implemented `AudioEngine_Update3D` for 3D Doppler pitch shifting and distance attenuation of remote vehicles.
+- **Audio**: Implemented an 8-channel software mixer with procedural synthesis for engine noises.
+
+## [0.1.18] - 2026-05-20
 ### Added
 - **Netplay**: Implemented capped Dead Reckoning prediction for remote machines.
 - **Netplay**: Implemented exponential decay Lerp for smoother visual correction of network jitter.
