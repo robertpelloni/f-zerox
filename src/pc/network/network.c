@@ -1,8 +1,11 @@
+#include <string.h>
+#include <stdlib.h>
 #include "pc/network/network.h"
 #include "pc/configfile.h"
 #include "pc/hal.h" // For HAL_GetTimeMillis
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <math.h>
 
 // Platform-independent socket includes
@@ -11,11 +14,13 @@
     #include <ws2tcpip.h>
     #pragma comment(lib, "ws2_32.lib")
 #else
+    #include <sys/types.h>
     #include <sys/socket.h>
     #include <arpa/inet.h>
     #include <unistd.h>
     #include <fcntl.h>
     #include <errno.h>
+
     typedef int SOCKET;
     #define INVALID_SOCKET -1
     #define SOCKET_ERROR -1
@@ -86,7 +91,7 @@ bool Net_Init(int port) {
     bindAddr.sin_addr.s_addr = INADDR_ANY;
 
     if (bind(sSocket, (struct sockaddr*)&bindAddr, sizeof(bindAddr)) < 0) {
-        printf("Net: Failed to bind port %d. Network disabled.\n", port);
+        printf("Net: Failed to bind port %d. Network disabled.\\n", port);
         closesocket(sSocket);
         sSocket = INVALID_SOCKET;
         return false;
@@ -95,7 +100,7 @@ bool Net_Init(int port) {
     // Setup Broadcast Target
     int broadcast = 1;
     if (setsockopt(sSocket, SOL_SOCKET, SO_BROADCAST, (const char*)&broadcast, sizeof(broadcast)) < 0) {
-        printf("Net: Failed to enable broadcast.\n");
+        printf("Net: Failed to enable broadcast.\\n");
     }
 
     memset(&sTargetAddr, 0, sizeof(sTargetAddr));
@@ -103,7 +108,7 @@ bool Net_Init(int port) {
     sTargetAddr.sin_port = htons(port);
     sTargetAddr.sin_addr.s_addr = INADDR_BROADCAST;
 
-    printf("Net: Initialized UDP socket on port %d (Broadcast).\n", port);
+    printf("Net: Initialized UDP socket on port %d (Broadcast).\\n", port);
     return true;
 }
 
@@ -184,20 +189,31 @@ void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
             float speed = sNetBuffer[i].velocity; // Units per frame? Assuming 60fps
             float speedPerSec = speed * 60.0f;
 
-            float predX = sNetBuffer[i].x + (fwdX * speedPerSec * ageSec);
-            float predY = sNetBuffer[i].y + (fwdY * speedPerSec * ageSec);
-            float predZ = sNetBuffer[i].z + (fwdZ * speedPerSec * ageSec);
+            // We want to account for the velocity damping (drag) and network jitter.
+            // Instead of linear extrapolation to infinity, we cap the prediction time.
+            float predAgeSec = ageSec;
+            if (predAgeSec > 0.5f) predAgeSec = 0.5f; // Cap prediction to 500ms max
+
+            float predX = sNetBuffer[i].x + (fwdX * speedPerSec * predAgeSec);
+            float predY = sNetBuffer[i].y + (fwdY * speedPerSec * predAgeSec);
+            float predZ = sNetBuffer[i].z + (fwdZ * speedPerSec * predAgeSec);
 
             // 3. Interpolate Towards Predicted Position
-            // If they are far off prediction (packet loss), snap faster.
-            // If close, smooth lerp.
+            // We use an exponential decay lerp for smoother visual arrival
             float dx = predX - machines[i].x;
             float dy = predY - machines[i].y;
             float dz = predZ - machines[i].z;
             float distSq = dx*dx + dy*dy + dz*dz;
 
-            float k = 0.2f;
-            if (distSq > 10000.0f) k = 0.8f; // Snap if too far off
+            // k is the lerp factor. 1.0 means snap instantly.
+            // If the predicted distance is very large (e.g., > 100 units), we snap harder.
+            float k = 0.15f;
+            if (distSq > 2500.0f) { // > 50 units away
+                k = 0.5f;
+            }
+            if (distSq > 10000.0f) { // > 100 units away
+                k = 1.0f; // Instant snap to correct extreme desync
+            }
 
             machines[i].x += dx * k;
             machines[i].y += dy * k;

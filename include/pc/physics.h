@@ -1,6 +1,7 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
+#include <stdbool.h>
 #include "pc/ultra64.h"
 
 typedef struct {

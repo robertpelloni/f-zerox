@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.17] - $(date +%Y-%m-%d)
+## [0.1.18] - $(date +%Y-%m-%d)
+### Added
+- **Netplay**: Implemented capped Dead Reckoning prediction for remote machines.
+- **Netplay**: Implemented exponential decay Lerp for smoother visual correction of network jitter.
+
 ### Added
 - **Graphics**: Implemented basic directional lighting in Fast3D.
 ### Fixed
