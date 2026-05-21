@@ -9,6 +9,7 @@
 #include "pc/physics.h"
 #include "pc/camera.h"
 #include "pc/gfx/particles.h"
+#include "pc/audio/audio_engine.h"
 #include "pc/hal.h"
 #include <stdio.h>
 #include <SDL2/SDL_opengl.h>
@@ -36,6 +37,40 @@ void Game_RunFrame(void) {
 
     // Update Audio Pitch
     gPlayerSpeedRatio = gPlayerVehicle.velocity / 300.0f; // Normalize max speed ~1200 kph
+
+    // Hook up 3D Doppler audio for remote machines
+    // For simplicity, we query a few global slots (e.g. slot 1-4) or mock it.
+    // In a full implementation, we'd loop over active `gMachines`.
+    extern Vehicle gMachines[30];
+    float em_x[4], em_y[4], em_z[4];
+    float em_vx[4], em_vy[4], em_vz[4];
+    int em_count = 0;
+
+    for (int i = 1; i < 5 && i < 30; i++) {
+        if (gMachines[i].y > -9000.0f) { // Active check
+            em_x[em_count] = gMachines[i].x;
+            em_y[em_count] = gMachines[i].y;
+            em_z[em_count] = gMachines[i].z;
+
+            // Reconstruct velocity vector approximation for Doppler
+            float yaw_rad = gMachines[i].yaw * 0.017453f;
+            em_vx[em_count] = sinf(yaw_rad) * gMachines[i].velocity;
+            em_vy[em_count] = 0.0f;
+            em_vz[em_count] = -cosf(yaw_rad) * gMachines[i].velocity;
+            em_count++;
+        }
+    }
+
+    if (em_count > 0) {
+        float p_yaw = gPlayerVehicle.yaw * 0.017453f;
+        AudioEngine_Update3D(
+            gPlayerVehicle.x, gPlayerVehicle.y, gPlayerVehicle.z,
+            sinf(p_yaw) * gPlayerVehicle.velocity, 0.0f, -cosf(p_yaw) * gPlayerVehicle.velocity,
+            em_x, em_y, em_z,
+            em_vx, em_vy, em_vz,
+            em_count
+        );
+    }
 
     // Particle: Smoke trails for damage
     if (gPlayerVehicle.energy < 30.0f) {

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.22] - 2026-05-21
+### Added
+- **Netplay**: Implemented `Net_ConnectLobby` handshake protocol to negotiate and assign Player IDs dynamically, resolving collisions instead of relying on immediate randomized broadcast.
+
 ## [0.1.21] - 2026-05-20
 ### Added
 - **Visuals**: Implemented blob shadow rendering under the player vehicle.

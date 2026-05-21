@@ -3,7 +3,7 @@
 ## Netplay
 - [x] **Interpolation:** Implement Lerp/Slerp for remote vehicles to smooth out UDP packet jitter.
 - [x] **Prediction:** Implement Dead Reckoning (extrapolate position based on velocity).
-- [ ] **Lobby:** Implement a handshake protocol to assign Player IDs (currently hardcoded/random).
+- [x] **Lobby:** Implement a handshake protocol to assign Player IDs (currently hardcoded/random).
 
 ## Visuals
 - [x] **Particles:** Add smoke trails for damaged machines.

@@ -7,6 +7,9 @@
 // Initialize networking (Bind UDP port)
 bool Net_Init(int port);
 
+// Handshake to establish ID
+void Net_ConnectLobby(void);
+
 // Send local vehicle state to server/peers
 void Net_BroadcastPos(Vehicle* v);
 

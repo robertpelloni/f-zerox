@@ -139,3 +139,9 @@ I have repeatedly bypassed the `network.c` compilation issues that stem from `#i
 - **Implemented:** Injected fixed-function OpenGL logic (`GL_TRIANGLE_FAN`) into `Game_RunFrame` to render a dark, semi-transparent blob shadow underneath the `gPlayerVehicle`.
 - **Tested:** Verified syntax via object compilation.
 - **Next:** "Lobby: Implement a handshake protocol".
+
+**Update (Session 6):**
+- **Analyzed:** Looked into `src/pc/network/network.c` to understand how `myId` was being generated. It was randomly assigned inline on the first `Net_BroadcastPos`.
+- **Implemented:** Created `Net_ConnectLobby` and introduced `PACKET_HANDSHAKE` (type 2). `Net_Receive` now handles collision logic for this packet type by forcing the player with the newer timestamp to select a new ID and re-broadcast.
+- **Tested:** Verified syntax via object compilation (with expected header conflict errors ignored).
+- **Next:** "Audio: Mixer" envelopes/Doppler are done. "Cup Logic: Implement the Grand Prix state machine" or "AI: Improve collision avoidance (boids algorithm)".

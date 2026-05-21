@@ -62,7 +62,11 @@ void AudioEngine_Generate(int16_t* buffer, int samples, float speed_ratio) {
         if (sample < -1.0f) sample = -1.0f;
 
         // Convert to 16-bit
-        buffer[i] = (int16_t)(sample * 32767.0f);
+        // Mix into existing buffer safely to avoid overwriting music
+        int32_t mixed = buffer[i] + (int32_t)(sample * 32767.0f);
+        if (mixed > 32767) mixed = 32767;
+        if (mixed < -32768) mixed = -32768;
+        buffer[i] = (int16_t)mixed;
     }
 }
 

@@ -31,6 +31,10 @@ static struct sockaddr_in sTargetAddr;
 // Packet Types
 #define PACKET_STATE 0
 #define PACKET_EVENT 1
+#define PACKET_HANDSHAKE 2
+
+static uint8_t sMyPlayerId = 0;
+static bool sLobbyConnected = false;
 
 #define DEGTORAD 0.0174532925f
 
@@ -110,6 +114,32 @@ bool Net_Init(int port) {
     return true;
 }
 
+void Net_ConnectLobby(void) {
+    if (sSocket == INVALID_SOCKET) return;
+
+    // We don't have a server, so we broadcast a handshake request.
+    // In a peer-to-peer setup, if someone responds with a conflict, we pick a new ID.
+    // For simplicity, we just generate a random ID and broadcast it.
+    // If we receive another handshake with this ID, we change ours.
+
+    if (sMyPlayerId == 0) {
+        sMyPlayerId = (uint8_t)(rand() % 29 + 1); // 1-29
+    }
+
+    NetPacket pkt;
+    memset(&pkt, 0, sizeof(pkt));
+    pkt.magic = 0x4E585A46;
+    pkt.type = PACKET_HANDSHAKE;
+    pkt.id = sMyPlayerId;
+    pkt.timestamp = HAL_GetTimeMillis();
+
+    sendto(sSocket, (const char*)&pkt, sizeof(pkt), 0, (struct sockaddr*)&sTargetAddr, sizeof(sTargetAddr));
+
+    // Optimistically assume we are connected
+    sLobbyConnected = true;
+    printf("Net: Sent Lobby Handshake. Claiming ID %d\n", sMyPlayerId);
+}
+
 void Net_BroadcastPos(Vehicle* v) {
     if (sSocket == INVALID_SOCKET) return;
 
@@ -117,9 +147,10 @@ void Net_BroadcastPos(Vehicle* v) {
     pkt.magic = 0x4E585A46; // FZXN
     pkt.type = PACKET_STATE;
 
-    static uint8_t myId = 0;
-    if (myId == 0) myId = (uint8_t)(rand() % 255 + 1);
-    pkt.id = myId;
+    if (!sLobbyConnected) {
+        Net_ConnectLobby(); // Ensure we have an ID
+    }
+    pkt.id = sMyPlayerId;
 
     pkt.seq = sSeqNum++;
     pkt.timestamp = HAL_GetTimeMillis();
@@ -144,6 +175,22 @@ void Net_Receive(void) {
         if (len < 0) break;
 
         if (len == sizeof(NetPacket) && pkt.magic == 0x4E585A46) {
+            if (pkt.type == PACKET_HANDSHAKE) {
+                // Someone else is claiming an ID.
+                if (pkt.id == sMyPlayerId) {
+                    // Collision! The one with the smaller timestamp keeps it.
+                    // This is a naive collision resolution for UDP P2P.
+                    if (pkt.timestamp < HAL_GetTimeMillis()) {
+                        printf("Net: ID Collision! Changing our ID.\n");
+                        sMyPlayerId = (uint8_t)(rand() % 29 + 1);
+                        Net_ConnectLobby(); // Re-broadcast our new claim
+                    }
+                }
+                continue; // Handshake processed, skip state update
+            }
+
+            if (pkt.type != PACKET_STATE) continue;
+
             int slot = pkt.id % 29 + 1; // Basic hashing to array
 
             sNetBuffer[slot].x = pkt.x;
