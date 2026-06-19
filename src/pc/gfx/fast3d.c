@@ -1,6 +1,7 @@
 #include "pc/gfx/fast3d.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
+#include <stdbool.h>
 #include <stdio.h>
 
 // Internal Vertex Buffer

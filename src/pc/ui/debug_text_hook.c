@@ -1,5 +1,6 @@
-#include "pc/debug_text_hook.h"
+#include <stddef.h>
 #include <string.h>
+#include "pc/debug_text_hook.h"
 
 DebugString gDebugStrings[MAX_DEBUG_STRINGS];
 

@@ -1,6 +1,7 @@
 #ifndef DEBUG_TEXT_HOOK_H
 #define DEBUG_TEXT_HOOK_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #define MAX_DEBUG_STRINGS 32

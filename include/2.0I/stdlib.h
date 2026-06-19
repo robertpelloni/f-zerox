@@ -19,3 +19,5 @@ typedef struct ldiv_t
 lldiv_t lldiv(long long num, long long denom);
 ldiv_t ldiv(long num, long denom);
 #endif /* !__STDLIB_H__ */
+#include <stddef.h>
+extern void qsort(void *base, size_t nel, size_t width, int (*compar)(const void *, const void *));

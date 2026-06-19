@@ -1,3 +1,5 @@
+#include "pc/assets/obj_loader.h"
+#include "pc/gfx/fast3d.h"
 #include "pc/game_state.h"
 #include "pc/hal.h"
 #include "pc/race_logic.h"
@@ -63,7 +65,8 @@ void Scene_Result_Render(void) {
 }
 
 void Scene_Result_UI(struct nk_context* ctx) {
-    int rank = Race_GetRank(gPlayerVehicle);
+    extern Vehicle gPlayerVehicle;
+    int rank = Race_GetRank(&gPlayerVehicle);
 
     struct nk_style_window original_style = ctx->style.window;
 
@@ -113,7 +116,7 @@ void Scene_Result_UI(struct nk_context* ctx) {
                 char ptsStr[32];
                 if (gCupState.active) {
                     extern Vehicle gMachines[];
-                    int idx = gPlayerVehicle - gMachines;
+                    int idx = 0;
                     snprintf(ptsStr, sizeof(ptsStr), "%d pts", gCupState.points[idx]);
                 } else {
                     snprintf(ptsStr, sizeof(ptsStr), "FINISHED");

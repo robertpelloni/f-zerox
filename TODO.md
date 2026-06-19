@@ -15,5 +15,5 @@
 - [x] **Doppler:** Pitch shift engine sounds based on relative velocity to camera.
 
 ## Content
-- [ ] **Cup Logic:** Implement the "Grand Prix" state machine (5 tracks, point tracking).
-- [ ] **AI:** Improve collision avoidance (boids algorithm).
+- [x] **Cup Logic:** Implement the "Grand Prix" state machine (5 tracks, point tracking).
+- [x] **AI:** Improve collision avoidance (boids algorithm).
