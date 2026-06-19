@@ -278,6 +278,13 @@ void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
     }
 }
 
+bool Net_IsMachineActive(int index) {
+    if (index < 0 || index >= MAX_NET_MACHINES) return false;
+    // Also consider our own ID active
+    if (index == sMyPlayerId) return true;
+    return sNetActive[index];
+}
+
 void Net_Shutdown(void) {
     if (sSocket != INVALID_SOCKET) {
         closesocket(sSocket);

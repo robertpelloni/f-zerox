@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.24] - 2026-06-19
+### Added
+- **UI**: Added a "Lobby Participants" UI group to `UI_Tab_Netplay` to list currently active network machines.
+- **UI**: Added a "Broadcast Lobby Handshake" button to allow users to manually broadcast their presence.
+- **Netplay**: Added `Net_IsMachineActive` to check connection state of specific peer indices.
+
 ## [0.1.22] - 2026-05-21
 ### Added
 - **Netplay**: Implemented `Net_ConnectLobby` handshake protocol to negotiate and assign Player IDs dynamically, resolving collisions instead of relying on immediate randomized broadcast.

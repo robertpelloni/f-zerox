@@ -19,6 +19,9 @@ void Net_Receive(void);
 // Apply received state to the game world (interpolation)
 void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines);
 
+// Get lobby connections state
+bool Net_IsMachineActive(int index);
+
 // Shutdown sockets
 void Net_Shutdown(void);
 
