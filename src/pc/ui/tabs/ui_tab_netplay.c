@@ -1,5 +1,7 @@
 #include "pc/ui/ui_helpers.h"
 #include "pc/configfile.h"
+#include "pc/network/network.h"
+#include <stdio.h>
 
 void UI_Tab_Netplay(struct nk_context *ctx) {
     UI_Header(ctx, "Online Multiplayer (30-Player Death Race)");
@@ -7,16 +9,39 @@ void UI_Tab_Netplay(struct nk_context *ctx) {
     nk_label(ctx, "Pilot Name:", NK_TEXT_LEFT);
     nk_edit_string_zero_terminated(ctx, NK_EDIT_FIELD, gConfig.player_name, sizeof(gConfig.player_name), nk_filter_default);
 
-    UI_Header(ctx, "Lobby Browser");
+    UI_Header(ctx, "Lobby Participants (LAN Broadcast)");
     nk_layout_row_dynamic(ctx, 150, 1);
+    if (nk_group_begin(ctx, "ParticipantList", NK_WINDOW_BORDER)) {
+        nk_layout_row_dynamic(ctx, 25, 2);
+        int connected_count = 0;
+        for (int i = 1; i <= 30; i++) {
+            if (Net_IsMachineActive(i)) {
+                char label[64];
+                snprintf(label, sizeof(label), "Machine %d", i);
+                nk_label(ctx, label, NK_TEXT_LEFT);
+                nk_label(ctx, "Connected", NK_TEXT_RIGHT);
+                connected_count++;
+            }
+        }
+
+        if (connected_count == 0) {
+            nk_label(ctx, "Waiting for players to join...", NK_TEXT_LEFT);
+            nk_label(ctx, "", NK_TEXT_LEFT); // Empty spacer
+        }
+        nk_group_end(ctx);
+    }
+
+    nk_layout_row_dynamic(ctx, 30, 1);
+    if (nk_button_label(ctx, "Broadcast Lobby Handshake")) {
+        Net_ConnectLobby();
+    }
+
+    UI_Header(ctx, "Lobby Browser (Simulated)");
+    nk_layout_row_dynamic(ctx, 100, 1);
     if (nk_group_begin(ctx, "ServerList", NK_WINDOW_BORDER)) {
         nk_layout_row_dynamic(ctx, 25, 3);
         nk_label(ctx, "Mute City Open", NK_TEXT_LEFT);
         nk_label(ctx, "24/30 Players", NK_TEXT_LEFT);
-        if (nk_button_label(ctx, "Join")) { /* Connect */ }
-
-        nk_label(ctx, "Big Blue Time Attack", NK_TEXT_LEFT);
-        nk_label(ctx, "5/30 Players", NK_TEXT_LEFT);
         if (nk_button_label(ctx, "Join")) { /* Connect */ }
 
         nk_group_end(ctx);
