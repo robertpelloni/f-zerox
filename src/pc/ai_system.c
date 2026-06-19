@@ -1,8 +1,13 @@
+#include <stdlib.h>
 #include "pc/ai_system.h"
+#include "pc/ultra64.h"
+#include "pc/PR/gbi.h"
+#include "pc/track_system.h"
 #include "pc/track_data.h"
 #include "pc/configfile.h" // reuse grip loss if needed
 #include <math.h>
-#include <stdlib.h>
+
+extern Vehicle gMachines[30];
 
 void AI_Update(Vehicle* v, OSContPad* out_pad) {
     // 1. Throttle Logic
@@ -23,26 +28,53 @@ void AI_Update(Vehicle* v, OSContPad* out_pad) {
         float targetX, targetY, targetZ;
         Track_GetPointAtDist(targetDist, &targetX, &targetY, &targetZ);
 
-        // Calculate Steering Error
         // Vector to target
         float dx = targetX - v->x;
         float dz = targetZ - v->z;
 
-        // Transform to Local Space (relative to car heading)
-        float radYaw = v->yaw * 0.0174532925f;
-        float cosY = cosf(radYaw);
-        float sinY = sinf(radYaw);
+        // Boids Separation: Avoid other machines
+        float sepX = 0.0f;
+        float sepZ = 0.0f;
+        int neighbors = 0;
+        float avoidanceRadius = 150.0f;
 
-        // Local X = Dot(Diff, Right) ?
-        // Right Vector = (cosY, 0, sinY)
-        // Forward = (sinY, 0, -cosY)
+        for (int i = 0; i < 30; i++) {
+            if (&gMachines[i] == v) continue;
+            if (gMachines[i].y <= -9000.0f) continue; // Inactive
+
+            float dmx = v->x - gMachines[i].x;
+            float dmz = v->z - gMachines[i].z;
+            float distSq = dmx*dmx + dmz*dmz;
+
+            if (distSq > 0.001f && distSq < avoidanceRadius * avoidanceRadius) {
+                float dist = sqrtf(distSq);
+                sepX += (dmx / dist) * (avoidanceRadius - dist);
+                sepZ += (dmz / dist) * (avoidanceRadius - dist);
+                neighbors++;
+            }
+        }
+
+        if (neighbors > 0) {
+            sepX /= neighbors;
+            sepZ /= neighbors;
+
+            // Blend track following with separation (prioritize staying on track if near edge)
+            float trackCenterDist = info.x; // Simplified, assuming x is lateral
+            float edgeDist = (info.width / 2.0f) - fabsf(trackCenterDist);
+
+            float sepWeight = 1.0f;
+            if (edgeDist < 50.0f) {
+                // Near edge, reduce separation weight to avoid driving off track
+                sepWeight = edgeDist / 50.0f;
+                if (sepWeight < 0.0f) sepWeight = 0.0f;
+            }
+
+            dx += sepX * sepWeight * 2.0f; // Multiplier to tune avoidance strength
+            dz += sepZ * sepWeight * 2.0f;
+        }
 
         // Let's use simple angle difference
         float targetYaw = atan2f(dx, -dz) * (180.0f / 3.14159f); // atan2(x, z) gives angle from Z axis?
-        // atan2(y, x) -> angle from X.
-        // We want angle from North (-Z).
-        // if dx=0, dz=-1 -> atan2(0, 1) = 0. Correct.
-        // if dx=1, dz=0 -> atan2(1, 0) = 90. Correct.
 
         float angleDiff = targetYaw - v->yaw;
         // Normalize angle

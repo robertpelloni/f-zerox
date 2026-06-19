@@ -1,6 +1,11 @@
 #include "pc/gfx/particles.h"
 #include <SDL2/SDL_opengl.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+#ifndef RAND_MAX
+#define RAND_MAX 2147483647
+#endif
 
 // Increase max particles for 30-player chaos
 #define MAX_PARTICLES 4096

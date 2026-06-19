@@ -4,9 +4,9 @@ CC = gcc
 # Inject VERSION.md into compilation as a macro
 VERSION_STR = $(shell cat VERSION.md)
 CFLAGS = -Wall -Wextra -g -Iinclude/pc -Iinclude -Iinclude/2.0I -D_LANGUAGE_C -DPROJECT_VERSION="\"$(VERSION_STR)\""
-LDFLAGS = -lSDL2 -lGL
+LDFLAGS = -lSDL2 -lGL -lm
 
-SRC_DIRS = src/pc/sdl2 src/pc src/pc/ui src/pc/ui/tabs
+SRC_DIRS = src/pc/sdl2 src/pc src/pc/ui src/pc/ui/tabs src/pc/gfx src/pc/audio src/pc/fs src/pc/scenes src/pc/arcade
 # Add a game logic file to test linking (Math Utils + Debug Text + Audio State + Audio Util)
 GAME_SRCS = src/math_utils.c src/debug_text.c src/audio_state.c src/audio_util.c
 
@@ -38,7 +38,7 @@ $(TARGET): $(OBJS)
 # Link game logic (Math) but NOT the main PC entry point or SDL/Audio stubs if not needed.
 # For this simple test, we only need game_2B20.o and the test runner.
 # But game_2B20 might have dependencies.
-$(TEST_TARGET): tests/test_math_utils.c tests/stubs.c $(BUILD_DIR)/src/math_utils.o $(BUILD_DIR)/src/pc/ultra_impl.o
+$(TEST_TARGET): tests/test_math_utils.c tests/stubs.c $(BUILD_DIR)/src/math_utils.o $(BUILD_DIR)/src/pc/ultra_impl.o $(BUILD_DIR)/src/pc/ui/debug_text_hook.o
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $^ -o $@
 

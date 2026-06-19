@@ -1,5 +1,8 @@
+#include <SDL2/SDL_opengl.h>
 #include "pc/track_system.h"
 #include "pc/track_data.h"
+#define G_IM_FMT_RGBA 0
+#define G_IM_SIZ_16b 2
 #include "pc/gfx/fast3d.h"
 #include "pc/track_editor.h" // For dynamic track
 #include "pc/assets.h" // For texture binding

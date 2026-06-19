@@ -2,6 +2,7 @@
 #define FAST3D_H
 
 #include "pc/ultra64.h"
+#include "pc/PR/gbi.h"
 
 // Initialize the Fast3D Graphics system (OpenGLES 2.0 or OpenGL 3.3)
 void Fast3D_Init(void);

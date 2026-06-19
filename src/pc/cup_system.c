@@ -1,6 +1,7 @@
+#include <stddef.h>
+#include <string.h>
 #include "pc/cup_system.h"
 #include <stdio.h>
-#include <string.h>
 
 CupState gCupState;
 

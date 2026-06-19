@@ -1,3 +1,5 @@
+#include <stdbool.h>
+#include <stdint.h>
 #include "pc/audio/music_player.h"
 #include <SDL2/SDL.h>
 #include <stdio.h>

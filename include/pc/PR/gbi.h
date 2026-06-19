@@ -16,6 +16,18 @@ typedef union {
     long long int force_structure_alignment;
 } Gfx;
 
+typedef struct {
+	short		ob[3];	/* x, y, z */
+	unsigned short	flag;
+	short		tc[2];	/* texture coord */
+	unsigned char	cn[4];	/* color & alpha */
+} Vtx_t;
+
+typedef union {
+	Vtx_t		v;
+	long long int	force_structure_alignment;
+} Vtx;
+
 // Helper Macros
 #define _SHIFTL(v, s, w) ((((unsigned long)(v)) & ((0x01UL << (w)) - 1)) << (s))
 #define _SHIFTR(v, s, w) ((((unsigned long)(v)) >> (s)) & ((0x01UL << (w)) - 1))

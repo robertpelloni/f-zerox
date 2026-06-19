@@ -1,6 +1,9 @@
+#include <stdlib.h>
 #include "pc/race_logic.h"
 #include "pc/track_data.h"
-#include <stdlib.h>
+#include "pc/track_system.h"
+#include "pc/game_state.h"
+#include "pc/cup_system.h"
 #include <stdio.h>
 
 // Machine State Extension for Race Logic
@@ -19,6 +22,8 @@ typedef struct {
 
 static RaceState sRaceStates[30];
 extern float gTrackTotalLength; // From track_editor.c
+
+#define TOTAL_LAPS 3
 
 void Race_Init(void) {
     for (int i = 0; i < 30; i++) {
@@ -57,15 +62,25 @@ void Race_UpdateRankings(Vehicle* machines, int count) {
             // Check for Lap Crossing
             // Forward: 90% -> 10%
             if (oldProgress > gTrackTotalLength * 0.9f && newProgress < gTrackTotalLength * 0.1f) {
-                sRaceStates[i].currentLap++;
+                if (sRaceStates[i].currentLap <= TOTAL_LAPS) {
+                    sRaceStates[i].currentLap++;
+                }
             }
             // Backward: 10% -> 90% (Respawn/Glitch)
             else if (oldProgress < gTrackTotalLength * 0.1f && newProgress > gTrackTotalLength * 0.9f) {
-                sRaceStates[i].currentLap--;
+                if (sRaceStates[i].currentLap > 1) {
+                    sRaceStates[i].currentLap--;
+                }
             }
 
-            sRaceStates[i].lapProgress = newProgress;
-            sRaceStates[i].totalDist = (sRaceStates[i].currentLap - 1) * gTrackTotalLength + newProgress;
+            if (sRaceStates[i].currentLap <= TOTAL_LAPS) {
+                sRaceStates[i].lapProgress = newProgress;
+                sRaceStates[i].totalDist = (sRaceStates[i].currentLap - 1) * gTrackTotalLength + newProgress;
+            } else {
+                sRaceStates[i].finished = true;
+                sRaceStates[i].totalDist = TOTAL_LAPS * gTrackTotalLength + 1000.0f; // Large offset to secure rank
+            }
+
         } else {
             // Off track, estimate based on last known?
             // For now, don't update progress (freeze rank until returned)
@@ -108,5 +123,19 @@ int Race_GetLap(Vehicle* v) {
 }
 
 void Race_Update(void) {
-    // Timer logic could go here
+    // If the player is finished, transition to Results Screen
+    extern Vehicle gPlayerVehicle;
+    extern Vehicle gMachines[];
+
+    int idx = &gPlayerVehicle - gMachines;
+    if (idx >= 0 && idx < 30 && sRaceStates[idx].finished) {
+        // Collect final ranks for all machines to pass to cup
+        int finalRanks[30];
+        for (int i=0; i<30; i++) {
+             finalRanks[i] = sRaceStates[i].rank;
+        }
+
+        Cup_RecordRaceResults(finalRanks, 30);
+        GameState_Change(STATE_RESULT);
+    }
 }

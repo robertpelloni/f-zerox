@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include "pc/arcade/arcade_io.h"
 #include <stdio.h>
 #include <string.h>
@@ -26,7 +27,7 @@ void Arcade_SendMotion(float pitch, float roll, float heave) {
     // Packet: [Header][Pitch][Roll][Heave][Checksum]
 
     uint8_t packet[8];
-    packet[0] = 0xAX; // Header
+    packet[0] = 0x0A; // Header
     packet[1] = (int8_t)(pitch * 127.0f);
     packet[2] = (int8_t)(roll * 127.0f);
     packet[3] = (uint8_t)(heave * 255.0f);
