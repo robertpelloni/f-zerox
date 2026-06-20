@@ -7,6 +7,11 @@ void UI_Tab_Visuals(struct nk_context *ctx) {
     UI_Property_Float(ctx, "Motion Blur Intensity", 0.0f, &gConfig.motion_blur, 1.0f, 0.05f, 0.01f, "Simulates camera shutter speed at high velocities (Redout feel).");
     UI_Property_Float(ctx, "Chromatic Aberration", 0.0f, &gConfig.chromatic_aberration, 1.0f, 0.05f, 0.01f, "Color fringing at screen edges. Increases with boost.");
     UI_Property_Float(ctx, "Lens Flare Strength", 0.0f, &gConfig.lens_flare, 1.0f, 0.05f, 0.01f, "Anamorphic lens flares from engines and sun.");
+
+    int bloom = gConfig.bloom;
+    UI_Checkbox(ctx, "Enable Bloom Shader", &bloom, "Toggle glowing track elements and intense light blooming.");
+    gConfig.bloom = bloom;
+
     UI_Property_Float(ctx, "Bloom Threshold", 0.0f, &gConfig.bloom_threshold, 1.0f, 0.05f, 0.01f, "Brightness level at which glow begins.");
 
     UI_Header(ctx, "Camera & Immersion");
