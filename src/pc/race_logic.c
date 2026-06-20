@@ -127,7 +127,8 @@ void Race_Update(void) {
     extern Vehicle gPlayerVehicle;
     extern Vehicle gMachines[];
 
-    int idx = &gPlayerVehicle - gMachines;
+    // gMachines[0] is strictly the player vehicle slot
+    int idx = 0;
     if (idx >= 0 && idx < 30 && sRaceStates[idx].finished) {
         // Collect final ranks for all machines to pass to cup
         int finalRanks[30];

@@ -14,7 +14,7 @@ void UI_Tab_Netplay(struct nk_context *ctx) {
     if (nk_group_begin(ctx, "ParticipantList", NK_WINDOW_BORDER)) {
         nk_layout_row_dynamic(ctx, 25, 2);
         int connected_count = 0;
-        for (int i = 1; i <= 30; i++) {
+        for (int i = 0; i < 30; i++) {
             if (Net_IsMachineActive(i)) {
                 char label[64];
                 snprintf(label, sizeof(label), "Machine %d", i);

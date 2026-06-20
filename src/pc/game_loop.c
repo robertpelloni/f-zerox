@@ -1,6 +1,6 @@
-#include "pc/game_loop.h"
 #include <stdlib.h>
 #include <math.h>
+#include "pc/game_loop.h"
 #include "pc/gfx/fast3d.h"
 #include "pc/ultra64.h"
 #include "pc/configfile.h"
@@ -11,7 +11,6 @@
 #include "pc/gfx/particles.h"
 #include "pc/audio/audio_engine.h"
 #include "pc/hal.h"
-#include "pc/race_logic.h"
 #include <stdio.h>
 #include <SDL2/SDL_opengl.h>
 
@@ -26,10 +25,9 @@ void Game_Init(void) {
     printf("Game Loop: Initializing...\n");
     Physics_Init(&gPlayerVehicle);
     Track_Init();
-    Race_Init();
 }
 
-void Game_Update(void) {
+void Game_RunFrame(void) {
     // 1. Update Input
     HAL_Input_Poll();
     HAL_Input_GetState(0, &gInputState);
@@ -85,17 +83,9 @@ void Game_Update(void) {
         }
     }
 
-    // Race logic update
-    gMachines[0] = gPlayerVehicle;
-    Race_UpdateRankings(gMachines, 30);
-    Race_Update();
-
     // 3. Camera Update
     Camera_Update(&gPlayerVehicle);
-    Particles_Update();
-}
 
-void Game_Render(void) {
     // 4. Render
     glLoadIdentity();
 
@@ -142,6 +132,9 @@ void Game_Render(void) {
     Fast3D_ProcessDisplayList(blue_falcon_dl);
     glPopMatrix();
 
+    // Render & Update Particles
+    Particles_Update();
     Particles_Render();
+
     Fast3D_Render();
 }
