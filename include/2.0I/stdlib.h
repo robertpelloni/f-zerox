@@ -1,7 +1,8 @@
 #ifndef __STDLIB_H__
 #define __STDLIB_H__
 
-#ifdef _LANGUAGE_C
+// For the PC Port Native build, we need to gracefully defer to standard libraries
+#ifdef __GNUC__
 #include_next <stdlib.h>
 #else
 
@@ -23,5 +24,5 @@ typedef struct ldiv_t
 lldiv_t lldiv(long long num, long long denom);
 ldiv_t ldiv(long num, long denom);
 
-#endif /* _LANGUAGE_C */
+#endif // __GNUC__
 #endif /* !__STDLIB_H__ */

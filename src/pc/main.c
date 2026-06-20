@@ -1,7 +1,7 @@
 #include "pc/hal.h"
 #include "pc/ui/ui.h"
 #include "pc/configfile.h"
-#include "pc/game_loop.h"
+#include "pc/game_state.h"
 #include "pc/gfx/fast3d.h"
 #include "pc/gfx/post_processing.h"
 #include <SDL2/SDL.h>
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
     // Initialize Game Engine (Physics, Graphics Parser)
     Fast3D_Init();
     Post_Init(gConfig.width, gConfig.height);
-    Game_Init();
+    GameState_Init();
 
     printf("Initialization successful. Running main loop...\n");
 
@@ -72,7 +72,8 @@ int main(int argc, char* argv[]) {
         HAL_Video_BeginFrame();
 
         // 1. Run Game Logic & Render 3D Scene
-        Game_RunFrame();
+        GameState_Update();
+        GameState_Render();
 
         // 2. Apply Post-Processing (Motion Blur, etc.)
         Post_Process();

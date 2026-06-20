@@ -44,8 +44,10 @@ void Post_Process(void) {
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, sBloomTex);
-        // Copy screen to texture (using a 512x512 power of 2 for legacy compatibility)
-        glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 0, 0, 512, 512, 0);
+        // Copy screen to texture (cap to dimensions to prevent out-of-bounds read garbage)
+        int texHeight = sHeight < 512 ? 256 : 512;
+        int texWidth = sWidth < 512 ? 256 : 512;
+        glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 0, 0, texWidth, texHeight, 0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 

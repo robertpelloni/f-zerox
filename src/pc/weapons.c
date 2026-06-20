@@ -33,9 +33,9 @@ void Weapons_Fire(Vehicle* shooter, WeaponType type) {
             // Estimate shooter velocity vector from Forward * Velocity?
             // Yes, assuming car is moving forward.
 
-            sProjectiles[i].velocity[0] = sinf(shooter->yaw * 0.017453f) * speed;
-            sProjectiles[i].velocity[1] = 0.0f * speed;
-            sProjectiles[i].velocity[2] = -cosf(shooter->yaw * 0.017453f) * speed;
+            sProjectiles[i].velocity[0] = shooter->forward[0] * speed;
+            sProjectiles[i].velocity[1] = shooter->forward[1] * speed;
+            sProjectiles[i].velocity[2] = shooter->forward[2] * speed;
 
             printf("Weapon: Fired Type %d from %.1f, %.1f, %.1f\n", type, sProjectiles[i].x, sProjectiles[i].y, sProjectiles[i].z);
             break;

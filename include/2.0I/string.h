@@ -1,5 +1,10 @@
 #ifndef __STRING_H__
 #define __STRING_H__
+
+#ifdef __GNUC__
+#include_next <string.h>
+#else
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -31,11 +36,6 @@ extern "C" {
 /*	actual or intended publication of such source code.	*/
 
 
-// For the PC Port Native build, we need to gracefully defer to standard libraries
-// while preserving this file's structure.
-#ifdef _LANGUAGE_C
-#include_next <string.h>
-#else
 #if !defined(_SIZE_T) && !defined(_SIZE_T_)
 #define _SIZE_T
 #if (_MIPS_SZLONG == 32)
@@ -45,19 +45,19 @@ typedef unsigned int	size_t;
 typedef unsigned long	size_t;
 #endif
 #endif
-#endif
 
 #ifndef NULL
 #define NULL	0
 #endif
 
-#ifndef _LANGUAGE_C
 extern void *memcpy(void *, const void *, size_t);
 extern char *strchr(const char *, int);
 extern size_t strlen(const char *);
-#endif
 
 #ifdef __cplusplus
 }
 #endif
+
+#endif // __GNUC__
+
 #endif /* !__STRING_H__ */

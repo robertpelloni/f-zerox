@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "minunit.h"
 #include "../include/pc/ultra64.h"
+#include "../include/functions.h"
 
 int tests_run = 0;
 
