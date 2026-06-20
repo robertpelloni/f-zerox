@@ -5,20 +5,23 @@
 
 // Simple accumulation buffer for motion blur simulation on legacy GL
 static bool sInitialized = false;
+static int sWidth = 640;
+static int sHeight = 480;
+
+static GLuint sBloomTex = 0;
 
 void Post_Init(int width, int height) {
-    // In a full implementation, we would setup FBOs here.
-    // For legacy GL, we rely on the window having an accumulation buffer requested.
-    // (This requires SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE, 8) in main.c)
-    (void)width;
-    (void)height;
+    sWidth = width;
+    sHeight = height;
     sInitialized = true;
     printf("Post-Processing Initialized.\n");
+
+    glGenTextures(1, &sBloomTex);
 }
 
 void Post_Resize(int width, int height) {
-    (void)width;
-    (void)height;
+    sWidth = width;
+    sHeight = height;
 }
 
 void Post_Process(void) {
@@ -27,21 +30,72 @@ void Post_Process(void) {
     // 1. Motion Blur
     if (gConfig.motion_blur > 0.05f) {
         // Accumulate current frame
-        // Factor depends on shutter speed (gConfig.motion_blur)
-        // High blur = retain more of previous frame
-
-        // This is a simplified "Trails" effect suitable for legacy GL
         float blur = gConfig.motion_blur;
         glAccum(GL_MULT, 1.0f - blur);
         glAccum(GL_ACCUM, blur);
         glAccum(GL_RETURN, 1.0f);
     }
 
+    // 1.5 Bloom
+    if (gConfig.bloom) {
+        // Pseudo-bloom for legacy GL without shaders:
+        // We copy the framebuffer to a texture, draw it over the screen multiple times
+        // with an additive blend and slight offset/scaling to simulate blurring.
+
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, sBloomTex);
+        // Copy screen to texture (using a 512x512 power of 2 for legacy compatibility)
+        glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 0, 0, 512, 512, 0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE); // Additive blending
+
+        // Use threshold as the inverse of strength here for simplicity
+        float str = 0.5f - (gConfig.bloom_threshold * 0.4f);
+        if (str < 0.0f) str = 0.0f;
+        glColor4f(str, str, str, 1.0f);
+
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+
+        glDisable(GL_DEPTH_TEST);
+
+        // Multi-pass blur approximations
+        float offsets[4] = {-0.02f, 0.02f, -0.04f, 0.04f};
+        for (int pass = 0; pass < 4; pass++) {
+            float o = offsets[pass];
+            glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 0.0f); glVertex2f(-1.0f + o, -1.0f - o);
+            glTexCoord2f(1.0f, 0.0f); glVertex2f( 1.0f + o, -1.0f - o);
+            glTexCoord2f(1.0f, 1.0f); glVertex2f( 1.0f + o,  1.0f - o);
+            glTexCoord2f(0.0f, 1.0f); glVertex2f(-1.0f + o,  1.0f - o);
+            glEnd();
+        }
+
+        glEnable(GL_DEPTH_TEST);
+        glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
+
+        glPopMatrix();
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+        glMatrixMode(GL_MODELVIEW);
+    }
+
     // 2. Chromatic Aberration (Simulated via multipass render logic in shader-less pipeline)
     // Real Chromatic Aberration requires shaders or complex FBO blitting.
-    // For now, we stub it or implement a simple Red/Blue shift if we had FBO access.
 }
 
 void Post_Shutdown(void) {
     sInitialized = false;
+    if (sBloomTex) {
+        glDeleteTextures(1, &sBloomTex);
+        sBloomTex = 0;
+    }
 }

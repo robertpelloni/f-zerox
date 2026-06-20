@@ -1,6 +1,10 @@
 #ifndef __STDLIB_H__
 #define __STDLIB_H__
 
+#ifdef _LANGUAGE_C
+#include_next <stdlib.h>
+#else
+
 #ifndef	NULL
 #define NULL	0
 #endif
@@ -18,6 +22,6 @@ typedef struct ldiv_t
 
 lldiv_t lldiv(long long num, long long denom);
 ldiv_t ldiv(long num, long denom);
+
+#endif /* _LANGUAGE_C */
 #endif /* !__STDLIB_H__ */
-#include <stddef.h>
-extern void qsort(void *base, size_t nel, size_t width, int (*compar)(const void *, const void *));

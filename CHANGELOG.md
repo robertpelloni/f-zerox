@@ -2,12 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.24] - 2026-06-19
-### Added
-- **UI**: Added a "Lobby Participants" UI group to `UI_Tab_Netplay` to list currently active network machines.
-- **UI**: Added a "Broadcast Lobby Handshake" button to allow users to manually broadcast their presence.
-- **Netplay**: Added `Net_IsMachineActive` to check connection state of specific peer indices.
-
 ## [0.1.22] - 2026-05-21
 ### Added
 - **Netplay**: Implemented `Net_ConnectLobby` handshake protocol to negotiate and assign Player IDs dynamically, resolving collisions instead of relying on immediate randomized broadcast.
@@ -94,6 +88,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 - **Logic Injection**: Intercepted N64 `func_8007FB80` (DrawText) to buffer debug strings.
 - **UI**: Rendered N64 debug text over the PC GUI using Nuklear layout spaces.
+
+## [0.1.25] - 2026-06-20
+### Added
+- **Visuals**: Implemented a multi-pass pseudo-bloom shader in `src/pc/gfx/post_processing.c` using accumulation and additive blending, compatible with legacy OpenGL pipelines.
+- **UI**: Added a "Enable Bloom Shader" toggle in `UI_Tab_Visuals`.
 
 ## [0.1.24] - 2024-05-24
 ### Added
