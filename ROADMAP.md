@@ -8,7 +8,7 @@
 | **Physics** | Configurable (Gravity, Grip) | **Advanced** | 360 vectors implemented. Loops and Tubes supported. |
 | **Track Editor** | Full UI | **Procedural Mesh** | Straights, Curves, Loops, Pipes implemented. |
 | **Audio** | Volume/Music Toggles | **Implemented** | Wav streaming + Procedural Engine + FFB. |
-| **Netplay** | Lobby/Settings UI | **Implemented** | UDP Broadcast logic active (No interpolation yet). |
+| **Netplay** | Lobby/Settings UI | **Implemented** | UDP Broadcast logic active with Prediction and Lerping. |
 | **Arcade I/O** | Calibration UI | **Implemented** | Serial output for motion seats. |
 | **Save/Load** | Editor UI | **Implemented** | Binary format for tracks. |
 | **Modding** | N/A | **Implemented** | OBJ Loader active for Blue Falcon replacement. |
