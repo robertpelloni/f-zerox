@@ -15,7 +15,7 @@
 ## Audio
 - [x] **Mixer:** Implement a software mixer to handle volume envelopes and multiple SFX channels properly.
 - [x] **Doppler:** Pitch shift engine sounds based on relative velocity to camera.
-- [ ] **Dynamic Music:** Transition music intensity based on lap number.
+- [x] **Dynamic Music:** Transition music intensity based on lap number.
 
 ## Content
 - [x] **Cup Logic:** Implement the "Grand Prix" state machine (5 tracks, point tracking).

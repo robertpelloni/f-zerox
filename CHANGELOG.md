@@ -89,6 +89,10 @@ All notable changes to this project will be documented in this file.
 - **Logic Injection**: Intercepted N64 `func_8007FB80` (DrawText) to buffer debug strings.
 - **UI**: Rendered N64 debug text over the PC GUI using Nuklear layout spaces.
 
+## [0.1.26] - 2026-06-21
+### Added
+- **Audio**: Implemented Dynamic Music intensity that increases (`Music_SetIntensity(1.5f)`) when the player reaches the final lap.
+
 ## [0.1.25] - 2026-06-20
 ### Added
 - **Visuals**: Implemented a multi-pass pseudo-bloom shader in `src/pc/gfx/post_processing.c` using accumulation and additive blending, compatible with legacy OpenGL pipelines.
