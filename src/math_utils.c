@@ -198,8 +198,6 @@ s32 Math_RoundF(f32 value) {
     return (s32)(value + 0.5f);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006AA38.s")
-
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006ADE4.s")
 
 /**
