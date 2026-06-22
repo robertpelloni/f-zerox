@@ -44,15 +44,9 @@ void Post_Process(void) {
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, sBloomTex);
-
-        // Calculate nearest power of two that fits the screen to avoid stretching artifacts
-        int texWidth = 1; while (texWidth < sWidth) texWidth <<= 1;
-        int texHeight = 1; while (texHeight < sHeight) texHeight <<= 1;
-
-        // Cap at 1024 to save memory/VRAM on older GPUs
-        if (texWidth > 1024) texWidth = 1024;
-        if (texHeight > 1024) texHeight = 1024;
-
+        // Copy screen to texture (cap to dimensions to prevent out-of-bounds read garbage)
+        int texHeight = sHeight < 512 ? 256 : 512;
+        int texWidth = sWidth < 512 ? 256 : 512;
         glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 0, 0, texWidth, texHeight, 0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -76,25 +70,13 @@ void Post_Process(void) {
 
         // Multi-pass blur approximations
         float offsets[4] = {-0.02f, 0.02f, -0.04f, 0.04f};
-
-        // We must map texture coordinates strictly to the aspect ratio of the copied buffer
-        // Note: texWidth/texHeight are locally scoped inside the previous block, so we need to recalculate or scope them out.
-        // Let's recalculate locally to avoid changing earlier scopes in this merge
-        int tw = 1; while (tw < sWidth) tw <<= 1;
-        if (tw > 1024) tw = 1024;
-        int th = 1; while (th < sHeight) th <<= 1;
-        if (th > 1024) th = 1024;
-
-        float uMax = (float)sWidth / (float)tw;
-        float vMax = (float)sHeight / (float)th;
-
         for (int pass = 0; pass < 4; pass++) {
             float o = offsets[pass];
             glBegin(GL_QUADS);
             glTexCoord2f(0.0f, 0.0f); glVertex2f(-1.0f + o, -1.0f - o);
-            glTexCoord2f(uMax, 0.0f); glVertex2f( 1.0f + o, -1.0f - o);
-            glTexCoord2f(uMax, vMax); glVertex2f( 1.0f + o,  1.0f - o);
-            glTexCoord2f(0.0f, vMax); glVertex2f(-1.0f + o,  1.0f - o);
+            glTexCoord2f(1.0f, 0.0f); glVertex2f( 1.0f + o, -1.0f - o);
+            glTexCoord2f(1.0f, 1.0f); glVertex2f( 1.0f + o,  1.0f - o);
+            glTexCoord2f(0.0f, 1.0f); glVertex2f(-1.0f + o,  1.0f - o);
             glEnd();
         }
 

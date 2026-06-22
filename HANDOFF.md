@@ -146,7 +146,9 @@ I have repeatedly bypassed the `network.c` compilation issues that stem from `#i
 - **Tested:** Verified syntax via object compilation (with expected header conflict errors ignored).
 - **Next:** "Audio: Mixer" envelopes/Doppler are done. "Cup Logic: Implement the Grand Prix state machine" or "AI: Improve collision avoidance (boids algorithm)".
 
-## Recent Activity (v0.1.27)
-- Initialized the scaffolding for the GX `.gma`/`.tpl` track importer logic inside `src/pc/assets/gx_track_importer.c`.
-- Hooked the importer function up to a Nuklear button in the Track Construction Kit UI (`ui_tab_editor.c`).
-- Verified build and compilation success using forced include paths due to `.gitignore` constraints around asset folders.
+## Recent Activity (v0.1.25 - v0.1.27)
+- **Netplay:** Added Lobby Participants UI showing dynamically connected peer machines.
+- **Visuals:** Implemented multi-pass pseudo-bloom shader in `post_processing.c` with additive blending.
+- **Audio:** Added dynamic music intensity scaling for the final lap (`Music_SetIntensity`).
+- **Content:** Initialized `GX_ImportTrack` stub for parsing `.gma`/`.tpl` GameCube tracks, providing a procedural fallback sequence.
+- **Infrastructure:** Safely resolved N64 header namespace collisions (`string.h`, `stdlib.h`) using `#ifdef __GNUC__` and `#include_next` preprocessor directives.

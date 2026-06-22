@@ -20,4 +20,4 @@
 ## Content
 - [x] **Cup Logic:** Implement the "Grand Prix" state machine (5 tracks, point tracking).
 - [x] **AI:** Improve collision avoidance (boids algorithm).
-- [ ] **Track Importer:** Create an importer script/logic for GX `.gma`/`.tpl` track formats.
+- [x] **Track Importer:** Create an importer script/logic for GX `.gma`/`.tpl` track formats.

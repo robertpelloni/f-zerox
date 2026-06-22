@@ -84,7 +84,7 @@ All notable changes to this project will be documented in this file.
 - **Audio**: Implemented 3D Doppler pitch shifting and distance attenuation for remote AI engines in the software mixer.
 - **Visuals**: Implemented Damage Smoke Trails. Machines with low energy spawn black smoke and fire particles.
 
-## [0.1.27] - 2026-06-21
+## [0.1.27] - 2026-06-22
 ### Added
 - **Content**: Created stub logic for importing GameCube GX `.gma`/`.tpl` track formats in `src/pc/assets/gx_track_importer.c`.
 - **UI**: Wired the track importer to the Track Construction Kit tab in the Nuklear UI.
