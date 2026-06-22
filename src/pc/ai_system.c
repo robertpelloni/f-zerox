@@ -59,16 +59,11 @@ void AI_Update(Vehicle* v, OSContPad* out_pad) {
             sepZ /= neighbors;
 
             // Blend track following with separation (prioritize staying on track if near edge)
-            float trackCenterDist = info.x; // Simplified, assuming x is lateral
-            float edgeDist = (info.width / 2.0f) - fabsf(trackCenterDist);
+            // info.x is world space. We need distance to center. Since we don't have the explicit
+            // lateral offset mapped yet, we can't reliably scale based on edge distance here.
+            // Safe fallback:
 
             float sepWeight = 1.0f;
-            if (edgeDist < 50.0f) {
-                // Near edge, reduce separation weight to avoid driving off track
-                sepWeight = edgeDist / 50.0f;
-                if (sepWeight < 0.0f) sepWeight = 0.0f;
-            }
-
             dx += sepX * sepWeight * 2.0f; // Multiplier to tune avoidance strength
             dz += sepZ * sepWeight * 2.0f;
         }
