@@ -81,7 +81,7 @@
 
 2.  **Content Import (Tracks & Machines)**
     -   **Action:**
-        -   Create importers for GX/AX track data (.gma, .tpl).
+        -   Create importers for GX/AX track data (.gma, .tpl). (Importer scaffolding complete).
         -   Implement GX-specific track elements: Cylinders, Half-pipes (if not fully present in X), and complex moving geometry.
         -   Port the 30+ GX machines and AX arcade exclusives.
     -   **Milestone:** Play "Mute City: Twist Road" (GX) in the F-Zero X engine.
