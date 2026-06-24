@@ -1,7 +1,6 @@
 #include "pc/ui/ui_helpers.h"
 #include "pc/configfile.h"
 #include "pc/track_data.h"
-#include "pc/assets/gx_track_importer.h"
 
 // Track Editor State (Not persisted in global config yet, usually per-track file)
 static int sSelectedPiece = 0;
@@ -43,11 +42,6 @@ void UI_Tab_Editor(struct nk_context *ctx) {
         if (nk_button_label(ctx, "Test Track")) { /* Launch Test */ }
         if (nk_button_label(ctx, "Save Course")) { /* Save */ }
         if (nk_button_label(ctx, "Load Course")) { /* Load */ }
-
-        nk_label(ctx, "External Assets:", NK_TEXT_LEFT);
-        if (nk_button_label(ctx, "Import GX GMA/TPL")) {
-            GX_ImportTrack("assets/tracks/gx_sample.gma");
-        }
 
         nk_group_end(ctx);
     }

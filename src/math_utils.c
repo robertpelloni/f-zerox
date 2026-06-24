@@ -198,8 +198,21 @@ s32 Math_RoundF(f32 value) {
     return (s32)(value + 0.5f);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006AA38.s")
-
+/**
+ * @brief Round a floating point number to the nearest integer
+ *
+ * Uses standard rounding where values at exactly 0.5 round to the nearest
+ * integer with ties rounding away from zero.
+ *
+ * Examples:
+ * - Math_RoundF(3.4f) → 3
+ * - Math_RoundF(3.6f) → 4
+ * - Math_RoundF(-2.4f) → -2
+ * - Math_RoundF(-2.6f) → -3
+ *
+ * @param value Input float value to round
+ * @return Rounded integer value
+ */
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006ADE4.s")
 
 /**
