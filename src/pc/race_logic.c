@@ -3,7 +3,6 @@
 #include "pc/track_data.h"
 #include "pc/track_system.h"
 #include "pc/game_state.h"
-#include "pc/audio/music_player.h"
 #include "pc/cup_system.h"
 #include <stdio.h>
 
@@ -78,17 +77,8 @@ void Race_UpdateRankings(Vehicle* machines, int count) {
                 sRaceStates[i].lapProgress = newProgress;
                 sRaceStates[i].totalDist = (sRaceStates[i].currentLap - 1) * gTrackTotalLength + newProgress;
             } else {
-                if (!sRaceStates[i].finished) {
-                    // Just crossed the finish line
-                    if (i == 0) { // Player
-                        // Restore music to normal if race finished
-                        Music_SetIntensity(1.0f);
-                    }
-                }
-
                 sRaceStates[i].finished = true;
-                // Stagger totalDist by rank to prevent unstable qsort swapping on ties
-                sRaceStates[i].totalDist = TOTAL_LAPS * gTrackTotalLength + 1000.0f + (30 - sRaceStates[i].rank);
+                sRaceStates[i].totalDist = TOTAL_LAPS * gTrackTotalLength + 1000.0f; // Large offset to secure rank
             }
 
         } else {
@@ -97,11 +87,6 @@ void Race_UpdateRankings(Vehicle* machines, int count) {
         }
 
         sortedPtrs[i] = &sRaceStates[i];
-    }
-
-    // Dynamic Music for Player (Index 0)
-    if (sRaceStates[0].currentLap == TOTAL_LAPS && !sRaceStates[0].finished) {
-        Music_SetIntensity(1.5f); // Final lap hype!
     }
 
     // 2. Sort
