@@ -4,15 +4,15 @@
 extern s16 D_800E42CC;
 extern s32 D_80025D78;
 extern s32 D_8002AA18;
-extern s32 D_800CD170; // gRngState1
-extern s32 D_800CD174; // gRngState2
-extern s32 D_800CD170;
-extern s32 D_800CD174;
-extern s32 D_800CD178;
-extern s32 D_800CD17C;
+extern s32 gRngState1; // gRngState1
+extern s32 gRngState2; // gRngState2
+extern s32 gRngState1;
+extern s32 gRngState2;
+extern s32 gTimer1;
+extern s32 gTimer2;
 extern s32 D_800CD510;
-extern s16 D_800CD044;
-extern s32 D_800CD0FC[];
+extern s16 gDebugModeFlag;
+extern s32 gStateHandlerJumpTable[];
 extern s32 D_800CD520;
 extern s32 D_800D0AC0;
 extern s32 D_800D0AC4;
@@ -36,19 +36,19 @@ extern s32 D_800D4834;
 extern s32 D_800D4854;
 extern s32 D_800D4870;
 extern s32 D_800D488C;
-extern s16 D_800CD16C;
+extern s16 gSystemReadyFlag;
 extern s32 D_800DCCF8;
 extern s32 D_800DCD04;
 extern s32 D_800DCD08;
 extern s32 D_800DCD0C;
-extern s32 D_800DCE44;
+extern s32 gCurrentStateIndex;
 extern s32 D_800DCE48;
-extern s32 D_800DCE60;
-extern u8 D_800DCE98[592];
-extern u8 D_800DD180[256];
+extern s32 gSystemInitializedFlag;
+extern u8 gMachineStateArray[592];
+extern u8 gSpecialMachineState[256];
 extern s32 D_800E4260;
 extern s32 D_800E4264;
-extern s32 D_800E4348; // gCurrentFramebuffer (Updated in game_197D0.c)
+extern s32 gCurrentFramebuffer; // gCurrentFramebuffer (Updated in game_197D0.c)
 extern s32 D_800E4350;
 extern s32 D_800E44D0;
 extern s32 D_800E4650;
@@ -67,7 +67,7 @@ extern s16 D_800CD168;
 extern s8 D_800D4690;
 extern s8 D_800E4175;
 extern struct UnkStruct_4 D_8010B7B0;
-extern s16 D_80106DA0;
+extern s16 gStateMachineActiveFlag;
 extern u8 D_8002B346;
 extern u8 D_8002B347;
 extern u8 D_800D16D0;

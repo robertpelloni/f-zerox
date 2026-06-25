@@ -8,13 +8,13 @@
  * Uses state check to avoid re-initialization on soft resets.
  */
 void System_Init(void) {
-    D_800DCE44 = -1;
+    gCurrentStateIndex = -1;
     D_800DCE48 = 0x8000;
 
     // Check if already initialized using magic number
-    if (D_800DCE60 != 0x20DE1529) {
+    if (gSystemInitializedFlag != 0x20DE1529) {
         func_8008DB98(); // Audio system init (cold boot)
-        D_800DCE60 = 0x20DE1529; // Set initialized flag
+        gSystemInitializedFlag = 0x20DE1529; // Set initialized flag
         func_800A4BAC(); // Additional audio init
     } else {
         func_8008DA68(); // Audio system re-init (warm boot)
@@ -27,7 +27,7 @@ void System_Init(void) {
     func_80076848(); // Input system init
     func_8007D9D0(); // Timing system init
 
-    D_800CD16C = 1; // Mark system as fully initialized
+    gSystemReadyFlag = 1; // Mark system as fully initialized
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068BC0.s")
@@ -47,11 +47,11 @@ void System_Init(void) {
 s32 StateMachine_ExecuteCurrentState(void) {
     s32 result = 0; // Default return value
 
-    if (D_800CD044 != 3) { // If not in debug/demo mode
-        if (D_80106DA0 != 0) { // If state machine is active
+    if (gDebugModeFlag != 3) { // If not in debug/demo mode
+        if (gStateMachineActiveFlag != 0) { // If state machine is active
             typedef s32 (*StateHandler)(void);
             // Calculate index with modulo from state value
-            StateHandler handler = (StateHandler)D_800CD0FC[D_800DCE44 & 0x1F];
+            StateHandler handler = (StateHandler)gStateHandlerJumpTable[gCurrentStateIndex & 0x1F];
             result = handler();
         }
     }
@@ -70,9 +70,9 @@ s32 StateMachine_ExecuteCurrentState(void) {
  * Also resets a special machine at a fixed memory offset.
  */
 void Controller_ResetMachineStates(void) {
-    u8* end = D_800DCE98 + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
+    u8* end = gMachineStateArray + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
     u8* curr = end;
-    u8* start = D_800DCE98;
+    u8* start = gMachineStateArray;
 
     // Iterate backwards through machine states
     while (1) {
@@ -103,7 +103,7 @@ void Controller_ResetMachineStates(void) {
     }
 
     // Reset special machine at fixed offset
-    u8* specialMachine = D_800DD180;
+    u8* specialMachine = gSpecialMachineState;
     *(u8*)(specialMachine + 0x6D) = 0;
     u8 temp = *(u8*)(specialMachine + 0x6D); // 0
     *(s16*)(specialMachine + 0x7E) = 0;
@@ -139,8 +139,8 @@ void Controller_ResetMachineStates(void) {
  * @param timeValue2 Second timing value (likely seconds or frame count)
  */
 void System_SetTime(s32 timeValue1, s32 timeValue2) {
-    D_800CD178 = timeValue1;
-    D_800CD17C = timeValue2;
+    gTimer1 = timeValue1;
+    gTimer2 = timeValue2;
 }
 
 /**
@@ -151,7 +151,7 @@ void System_SetTime(s32 timeValue1, s32 timeValue2) {
  * AI behavior, particle effects, and random game events.
  *
  * The algorithm:
- * - Uses two 32-bit state values (D_800CD170 and D_800CD174)
+ * - Uses two 32-bit state values (gRngState1 and gRngState2)
  * - Updates state1 using linear congruential generation
  * - Conditionally updates state2 based on its LSB
  * - Returns XOR of the two states
@@ -159,19 +159,19 @@ void System_SetTime(s32 timeValue1, s32 timeValue2) {
  * @return 32-bit pseudo-random value
  */
 s32 Math_Rand(void) {
-    s32 state1 = D_800CD170;
+    s32 state1 = gRngState1;
     u32 next_state1 = (u32)state1 * 0x41C64E6D + 0x3039;
 
-    s32 state2 = D_800CD174;
+    s32 state2 = gRngState2;
     if (state2 & 1) {
-        D_800CD170 = next_state1;
+        gRngState1 = next_state1;
         state2 ^= 0x11020;
-        D_800CD174 = state2;
+        gRngState2 = state2;
     }
 
-    state1 = D_800CD170;
+    state1 = gRngState1;
     s32 final_state2 = (u32)state2 >> 1;
-    D_800CD174 = final_state2;
+    gRngState2 = final_state2;
 
     return state1 ^ final_state2;
 }

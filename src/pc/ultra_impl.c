@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 // Mock Global Variables (usually defined in ld script or asm)
-s32 D_800E4348 = 0; // gCurrentFramebuffer
+s32 gCurrentFramebuffer = 0; // gCurrentFramebuffer
 s32 D_800D46C0 = 0; // gDebugPrintFormat?
 s32 D_800D46C8 = 0;
 s32 D_800D46D8 = 0;
@@ -29,20 +29,20 @@ s32 D_80400008 = 0;
 s32 D_800E4350 = 0;
 s32 D_800E44D0 = 0;
 s32 D_800E4650 = 0;
-s32 D_800CD170 = 0;
-s32 D_800CD174 = 0;
-s32 D_800CD178 = 0;
-s32 D_800CD17C = 0;
-s32 D_800DCE44 = 0;
+s32 gRngState1 = 0;
+s32 gRngState2 = 0;
+s32 gTimer1 = 0;
+s32 gTimer2 = 0;
+s32 gCurrentStateIndex = 0;
 s32 D_800DCE48 = 0;
-s32 D_800DCE60 = 0;
-s16 D_800CD16C = 0;
-s16 D_800CD044 = 0;
-s16 D_80106DA0 = 0;
-s32 D_800CD0FC[32]; // Jumptable mock
+s32 gSystemInitializedFlag = 0;
+s16 gSystemReadyFlag = 0;
+s16 gDebugModeFlag = 0;
+s16 gStateMachineActiveFlag = 0;
+s32 gStateHandlerJumpTable[32]; // Jumptable mock
 s16 D_800CD168 = 0;
-u8 D_800DCE98[592]; // 4 * 0x94
-u8 D_800DD180[256]; // Unknown struct size
+u8 gMachineStateArray[592]; // 4 * 0x94
+u8 gSpecialMachineState[256]; // Unknown struct size
 
 // Stubs for functions called by func_80068B20
 void func_8008DB98(void) {}
