@@ -12,7 +12,7 @@ void func_8007F904(void) {
  * @brief Updates the global framebuffer pointer with the current framebuffer.
  */
 void func_8007F94C(void) {
-    D_800E4348 = osViGetCurrentFramebuffer();
+    gCurrentFramebuffer = osViGetCurrentFramebuffer();
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_197D0/func_8007F970.s")
