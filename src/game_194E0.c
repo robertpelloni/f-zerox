@@ -9,7 +9,9 @@ void func_8007F4E0(s32 arg0, s32 arg1) {
     D_800E4260 = arg1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_194E0/func_8007F500.s")
+s32 func_8007F500() {
+    return 0;
+}
 // void func_8007F500(void) {
 //     static struct UnkStruct_0 D_800E42C9;
 //     D_800E42C9.unk0 = 0;
@@ -19,6 +21,10 @@ void func_8007F4E0(s32 arg0, s32 arg1) {
 //     D_800E42CC = 0;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_194E0/func_8007F520.s")
+s32 func_8007F520() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_194E0/func_8007F5EC.s")
+s32 func_8007F5EC() {
+    return 0;
+}

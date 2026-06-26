@@ -1,11 +1,21 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007E410.s")
+s32 func_8007E410() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007ECCC.s")
+s32 func_8007ECCC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007EF68.s")
+s32 func_8007EF68() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007EFBC.s")
+s32 func_8007EFBC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007F090.s")
+s32 func_8007F090() {
+    return 0;
+}

@@ -1,13 +1,25 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EA90/func_80074A90.s")
+s32 func_80074A90() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EA90/func_80074B10.s")
+s32 func_80074B10() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EA90/func_80074BB4.s")
+s32 func_80074BB4() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EA90/func_80074C60.s")
+s32 func_80074C60() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EA90/func_80074CE4.s")
+s32 func_80074CE4() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EA90/func_80074F98.s")
+s32 func_80074F98() {
+    return 0;
+}
