@@ -48,8 +48,8 @@ s32 func_800B6994() {
  * @brief Updates global state variables in low memory (possibly input related).
  */
 void func_800B6A18(void) {
-    D_8002B347 = D_8002B346;
-    D_8002B348 = 0;
+    gAudioStateI = gAudioStateH;
+    gAudioStateJ = 0;
 }
 
 s32 func_800B6A34() {
@@ -93,7 +93,7 @@ s32 func_800B7030() {
 }
 
 void func_800B7060(void) {
-    D_80025D78 = 0;
+    gAudioStateK = 0;
 }
 
 s32 func_800B706C() {

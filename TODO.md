@@ -21,3 +21,9 @@
 - [x] **Cup Logic:** Implement the "Grand Prix" state machine (5 tracks, point tracking).
 - [x] **AI:** Improve collision avoidance (boids algorithm).
 - [ ] **Track Importer:** Create an importer script/logic for GX `.gma`/`.tpl` track formats.
+
+## Decompilation
+- [x] **Math Utils:** Decompile all 100% logic in `src/math_utils.c`.
+
+## Engine / Shiftability
+- [x] **Data:** Decouple hardcoded IDO pointers into linkable symbols.
