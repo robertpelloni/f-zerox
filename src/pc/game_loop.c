@@ -95,12 +95,40 @@ void Game_RunFrame(void) {
     // Draw Track
     Track_Render();
 
+    // 3.5 Update Dynamic Lighting (Simulate a moving sun/light source)
+    static float sLightAngle = 0.0f;
+    sLightAngle += 0.005f;
+    gLightDirection[0] = cosf(sLightAngle) * 0.8f;
+    gLightDirection[1] = 1.0f;
+    gLightDirection[2] = sinf(sLightAngle) * 0.8f;
+    Fast3D_UpdateLighting();
+
     // Render Blob Shadow
     glPushMatrix();
-    // Translate slightly above ground (assuming y is altitude, we should query TrackSurfaceInfo)
-    // For now, render it just below the vehicle's center.
+    // Find the track surface normal below the vehicle to orient the shadow
+    TrackSurfaceInfo surf = Track_GetInfoAt(gPlayerVehicle.x, gPlayerVehicle.y, gPlayerVehicle.z);
+
+    // Translate slightly above ground
     glTranslatef(gPlayerVehicle.x, gPlayerVehicle.y - 15.0f, gPlayerVehicle.z);
-    glRotatef(90.0f, 1.0f, 0.0f, 0.0f); // Face flat on the ground
+
+    // Rotate to match surface normal using cross product approximation for simple pitch/roll
+    // The default up vector is (0, 1, 0)
+    // We want the Y axis to align with surf.nx, surf.ny, surf.nz
+    if (surf.isValid) {
+        float dot = surf.ny; // Dot product with (0,1,0)
+        float angle = acosf(dot) * 180.0f / 3.14159f;
+
+        // Axis of rotation is cross product of (0,1,0) and normal
+        float axisX = surf.nz;
+        float axisY = 0.0f;
+        float axisZ = -surf.nx;
+
+        if (angle > 0.01f) {
+            glRotatef(angle, axisX, axisY, axisZ);
+        }
+    }
+
+    glRotatef(90.0f, 1.0f, 0.0f, 0.0f); // Face flat on the local plane
 
     glDisable(GL_LIGHTING);
     glDisable(GL_TEXTURE_2D);

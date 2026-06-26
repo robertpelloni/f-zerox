@@ -6,6 +6,10 @@
 
 // Initialize the Fast3D Graphics system (OpenGLES 2.0 or OpenGL 3.3)
 void Fast3D_Init(void);
+void Fast3D_UpdateLighting(void);
+extern float gLightDirection[4];
+extern float gLightDiffuse[4];
+extern float gLightAmbient[4];
 
 // Process a Display List (Gfx*)
 void Fast3D_ProcessDisplayList(Gfx* dl);
