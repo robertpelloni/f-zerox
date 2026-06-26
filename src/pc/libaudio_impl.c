@@ -35,13 +35,13 @@ void func_800BAF30(s32 arg0) { (void)arg0; }
 void func_800BB078(void) {}
 
 // Variables used in game_511D0.c (externs)
-s8 D_800D1A3C = 0;
-s8 D_800D1A20 = 0;
-u8 D_800D1A48 = 0;
-s8 D_800D19E0 = 0;
-s8 D_800D1A18 = 0;
-s8 D_800D1A0C = 0;
-s32 D_800D1C18 = 0;
+s8 gAudioStateA = 0;
+s8 gAudioStateB = 0;
+u8 gAudioStateC = 0;
+s8 gAudioStateD = 0;
+s8 gAudioStateE = 0;
+s8 gAudioStateF = 0;
+s32 gAudioStateG = 0;
 
 // Variables used in game_14440.c
 s8 D_800D4690 = 0;
