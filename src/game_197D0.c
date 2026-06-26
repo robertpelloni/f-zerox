@@ -1,8 +1,12 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_197D0/func_8007F7D0.s")
+s32 func_8007F7D0() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_197D0/func_8007F86C.s")
+s32 func_8007F86C() {
+    return 0;
+}
 
 void func_8007F904(void) {
     func_8007F86C(&D_800CD520, &D_80400008, &D_800E4350, &D_800E44D0, &D_800E4650);
@@ -15,13 +19,21 @@ void func_8007F94C(void) {
     gCurrentFramebuffer = osViGetCurrentFramebuffer();
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_197D0/func_8007F970.s")
+s32 func_8007F970() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_197D0/func_8007F9E0.s")
+s32 func_8007F9E0() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_197D0/func_8007FA64.s")
+s32 func_8007FA64() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_197D0/func_8007FB80.s")
+s32 func_8007FB80() {
+    return 0;
+}
 
 /**
  * @brief Draws a debug integer to the screen.

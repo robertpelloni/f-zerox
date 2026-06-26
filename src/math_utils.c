@@ -30,11 +30,17 @@ void System_Init(void) {
     gSystemReadyFlag = 1; // Mark system as fully initialized
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068BC0.s")
+s32 func_80068BC0() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068DCC.s")
+s32 func_80068DCC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068F04.s")
+s32 func_80068F04() {
+    return 0;
+}
 
 /**
  * @brief Execute the current game state function from the state machine
@@ -60,7 +66,9 @@ s32 StateMachine_ExecuteCurrentState(void) {
     return result;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069700.s")
+s32 func_80069700() {
+    return 0;
+}
 
 /**
  * @brief Initialize or reset the machine state array
@@ -116,21 +124,35 @@ void Controller_ResetMachineStates(void) {
     *(u8*)(specialMachine + 0x6C) = temp;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069820.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069D44.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069ED0.s")
+s32 func_80069D44() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069F5C.s")
+s32 func_80069ED0() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006A00C.s")
+s32 func_80069F5C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006A3AC.s")
+s32 func_8006A00C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006A6E4.s")
+s32 func_8006A3AC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/osSetTime.s")
+s32 func_8006A6E4() {
+    return 0;
+}
+
+s32 osSetTime() {
+    return 0;
+}
 
 /**
  * @brief Set the time-related global variables
@@ -213,7 +235,9 @@ s32 Math_RoundF(f32 value) {
  * @param value Input float value to round
  * @return Rounded integer value
  */
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006ADE4.s")
+s32 func_8006ADE4() {
+    return 0;
+}
 
 /**
  * @brief Set a dual-vector structure (both vectors to same values)
@@ -268,34 +292,66 @@ void Vector_SetTriple(struct UnkStruct_8* vecStruct, s32 compX, s32 compY, s32 c
     vecStruct->unkA = compZ;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B010.s")
+s32 func_8006B010() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B07C.s")
+s32 func_8006B07C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B18C.s")
+s32 func_8006B18C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B33C.s")
+s32 func_8006B33C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B908.s")
+s32 func_8006B908() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006BB80.s")
+s32 func_8006BB80() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006BBE8.s")
+s32 func_8006BBE8() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006BC84.s")
+s32 func_8006BC84() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006BFCC.s")
+s32 func_8006BFCC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006C278.s")
+s32 func_8006C278() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006C378.s")
+s32 func_8006C378() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006C520.s")
+s32 func_8006C520() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006CB0C.s")
+s32 func_8006CB0C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006CC98.s")
+s32 func_8006CC98() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006D03C.s")
+s32 func_8006D03C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006D2E0.s")
+s32 func_8006D2E0() {
+    return 0;
+}

@@ -1,6 +1,10 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_44620/func_800AA620.s")
+s32 func_800AA620() {
+    return 0;
+}
 
 // Music Library (libmus) function
-#pragma GLOBAL_ASM("asm/nonmatchings/game_44620/MusFxBankNumberOfEffects.s")
+s32 MusFxBankNumberOfEffects() {
+    return 0;
+}

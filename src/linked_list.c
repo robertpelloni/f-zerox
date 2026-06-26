@@ -1,22 +1,40 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA6D0.s")
+s32 func_800AA6D0() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA7D4.s")
+s32 func_800AA7D4() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA84C.s")
+s32 func_800AA84C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA8E4.s")
+s32 func_800AA8E4() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA940.s")
+s32 func_800AA940() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AACF0.s")
+s32 func_800AACF0() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAD2C.s")
+s32 func_800AAD2C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAD58.s")
+s32 func_800AAD58() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAD84.s")
+s32 func_800AAD84() {
+    return 0;
+}
 
 void func_800AAF5C(s32 arg0) {
     func_800AAD84(arg0, 6);
@@ -40,25 +58,45 @@ void func_800AAF9C(struct UnkStruct_1* arg0) {
     arg0->unk8 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAFAC.s")
+s32 func_800AAFAC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAFFC.s")
+s32 func_800AAFFC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB0AC.s")
+s32 func_800AB0AC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB204.s")
+s32 func_800AB204() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB340.s")
+s32 func_800AB340() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB380.s")
+s32 func_800AB380() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB3AC.s")
+s32 func_800AB3AC() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB41C.s")
+s32 func_800AB41C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB51C.s")
+s32 func_800AB51C() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB550.s")
+s32 func_800AB550() {
+    return 0;
+}
 
 s32 func_800AB57C(s32 arg0, s32 arg1) {
     s32 temp_v0;
@@ -85,8 +123,14 @@ s32 func_800AB5C8(s32 arg0, s32 arg1) {
 }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB618.s")
+s32 func_800AB618() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB710.s")
+s32 func_800AB710() {
+    return 0;
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB888.s")
+s32 func_800AB888() {
+    return 0;
+}
