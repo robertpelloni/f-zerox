@@ -8,18 +8,6 @@
 #define MAX_VERTICES 32
 static Vtx sVertexBuffer[MAX_VERTICES];
 
-// Global dynamic light direction (can be updated per-frame by weather/track)
-GLfloat gLightDirection[] = { 0.5f, 1.0f, 0.5f, 0.0f };
-GLfloat gLightDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-GLfloat gLightAmbient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
-
-void Fast3D_UpdateLighting(void) {
-    // Allows the game loop to dynamically shift the sun/light source
-    glLightfv(GL_LIGHT0, GL_POSITION, gLightDirection);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, gLightDiffuse);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, gLightAmbient);
-}
-
 void Fast3D_Init(void) {
     printf("Fast3D: Initializing OpenGL...\n");
     glEnable(GL_DEPTH_TEST);
@@ -33,15 +21,13 @@ void Fast3D_Init(void) {
     glEnable(GL_COLOR_MATERIAL); // Allow glColor to control material properties
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 
-    // Normalize light direction vector
-    float len = sqrtf(gLightDirection[0]*gLightDirection[0] + gLightDirection[1]*gLightDirection[1] + gLightDirection[2]*gLightDirection[2]);
-    if (len > 0.0f) {
-        gLightDirection[0] /= len;
-        gLightDirection[1] /= len;
-        gLightDirection[2] /= len;
-    }
+    GLfloat light_dir[] = { 0.5f, 1.0f, 0.5f, 0.0f }; // Directional light
+    GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    GLfloat light_ambient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
 
-    Fast3D_UpdateLighting();
+    glLightfv(GL_LIGHT0, GL_POSITION, light_dir);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 
     // Set perspective projection (for testing)
     glMatrixMode(GL_PROJECTION);
