@@ -10,6 +10,14 @@ void Fast3D_Init(void);
 // Process a Display List (Gfx*)
 void Fast3D_ProcessDisplayList(Gfx* dl);
 
+// HAL Hardware Stubs
+void osSyncPrintf(const char* fmt, ...);
+void osWritebackDCache(void* vaddr, int nbytes);
+void osInvalDCache(void* vaddr, int nbytes);
+void gSPDisplayList(Gfx* dl, Gfx* branch);
+void gDPPipeSync(Gfx* dl);
+void gDPFullSync(Gfx* dl);
+
 // Render the processed Display List to the screen
 void Fast3D_Render(void);
 

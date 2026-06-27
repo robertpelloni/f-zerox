@@ -127,3 +127,63 @@ void Fast3D_Render(void) {
 void Fast3D_Shutdown(void) {
     printf("Fast3D: Shutdown.\n");
 }
+
+// System Hardware Shims (For compilation)
+#include <stdarg.h>
+void osSyncPrintf(const char* fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    vprintf(fmt, args);
+    va_end(args);
+}
+
+void osWritebackDCache(void* vaddr, int nbytes) {
+    (void)vaddr; (void)nbytes;
+}
+
+void osInvalDCache(void* vaddr, int nbytes) {
+    (void)vaddr; (void)nbytes;
+}
+
+void gSPDisplayList(Gfx* dl, Gfx* branch) {
+    (void)dl;
+    Fast3D_ProcessDisplayList(branch);
+}
+
+void gDPPipeSync(Gfx* dl) {
+    (void)dl;
+}
+
+void gDPFullSync(Gfx* dl) {
+    (void)dl;
+}
+
+// System Hardware Shims (For compilation)
+#include <stdarg.h>
+void osSyncPrintf(const char* fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    vprintf(fmt, args);
+    va_end(args);
+}
+
+void osWritebackDCache(void* vaddr, int nbytes) {
+    (void)vaddr; (void)nbytes;
+}
+
+void osInvalDCache(void* vaddr, int nbytes) {
+    (void)vaddr; (void)nbytes;
+}
+
+void gSPDisplayList(Gfx* dl, Gfx* branch) {
+    (void)dl;
+    Fast3D_ProcessDisplayList(branch);
+}
+
+void gDPPipeSync(Gfx* dl) {
+    (void)dl;
+}
+
+void gDPFullSync(Gfx* dl) {
+    (void)dl;
+}

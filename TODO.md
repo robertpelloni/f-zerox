@@ -26,4 +26,5 @@
 - [x] **Math Utils:** Decompile all 100% logic in `src/math_utils.c`.
 
 ## Engine / Shiftability
+- [x] **Compatibility:** Create compat headers and shims for N64/PC toolchain.
 - [x] **Data:** Decouple hardcoded IDO pointers into linkable symbols.
