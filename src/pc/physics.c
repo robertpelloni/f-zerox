@@ -19,41 +19,6 @@ void Physics_Init(Vehicle* v) {
     v->speed_kph = 0.0f;
 }
 
-// Vehicle Suspension and Collision Response Logic
-// This replaces the old GLOBAL_ASM blocks with native C implementations, bringing the 360-degree vectors
-// from MEMORY.md directly into the core engine simulation.
-
-static void ApplySuspension(Vehicle* v, float trackHeight, float trackNormalY) {
-    // Basic Spring-Damper for hover suspension
-    float restLength = 15.0f;
-    float currentLength = v->y - trackHeight;
-    float force = 0.0f;
-
-    if (currentLength < restLength) {
-        // Compress spring
-        force = (restLength - currentLength) * 0.8f; // Stiffness
-    } else {
-        // Gravity (configurable)
-        force = -gConfig.gravity_scale;
-    }
-
-    // Apply vertical velocity (Y)
-    v->y += force;
-}
-
-static void HandleWallCollision(Vehicle* v, float nextX, float trackWidth) {
-    // Hit Wall
-    v->velocity *= 0.7f; // Lose speed
-    v->energy -= 5.0f; // Take Damage
-    if (v->energy < 0.0f) v->energy = 0.0f;
-
-    // Bounce
-    if (nextX > trackWidth) v->x = trackWidth - 5.0f;
-    if (nextX < -trackWidth) v->x = -trackWidth + 5.0f;
-
-    // Optional visual shake can be applied to v->roll or v->yaw
-}
-
 void Physics_Update(Vehicle* v, OSContPad* pad) {
     // 1. Acceleration (Button A)
     float accel = 0.0f;
@@ -114,14 +79,23 @@ void Physics_Update(Vehicle* v, OSContPad* pad) {
     if (Track_GetSurfaceInfo(nextX, nextZ, &trackHeight, &trackWidth)) {
         // Wall Collision
         if (nextX > trackWidth || nextX < -trackWidth) {
-            HandleWallCollision(v, nextX, trackWidth);
-        } else {
-            v->x = nextX;
+            // Hit Wall
+            v->velocity *= 0.7f; // Lose speed
+            v->energy -= 5.0f; // Take Damage
+            if (v->energy < 0.0f) v->energy = 0.0f;
+
+            // Bounce
+            if (nextX > trackWidth) nextX = trackWidth - 5.0f;
+            if (nextX < -trackWidth) nextX = -trackWidth + 5.0f;
+            // Simple visual shake or yaw change could happen here
         }
+
+        v->x = nextX;
         v->z = nextZ;
 
-        // Floor Glue / Hover via Suspension Model
-        ApplySuspension(v, trackHeight, 1.0f);
+        // Floor Glue / Hover
+        float hoverTarget = trackHeight + 10.0f; // 10 units above ground
+        v->y += (hoverTarget - v->y) * 0.2f; // Smooth spring
     } else {
         // Off-Road / Fall
         v->x = nextX;

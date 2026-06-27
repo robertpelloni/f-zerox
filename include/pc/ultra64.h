@@ -1,9 +1,6 @@
 #ifndef _ULTRA64_H_
 #define _ULTRA64_H_
 
-// Resolve common N64 type collisions early
-#include "pc/compat.h"
-
 #include <PR/ultratypes.h>
 #include <PR/os.h>
 #include <PR/libaudio.h>

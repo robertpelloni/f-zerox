@@ -2,7 +2,7 @@
 #define VARIABLES_H
 
 extern s16 D_800E42CC;
-extern s32 D_80025D78;
+extern s32 gAudioStateK;
 extern s32 D_8002AA18;
 extern s32 gRngState1; // gRngState1
 extern s32 gRngState2; // gRngState2
@@ -16,7 +16,7 @@ extern s32 gStateHandlerJumpTable[];
 extern s32 D_800CD520;
 extern s32 D_800D0AC0;
 extern s32 D_800D0AC4;
-extern s32 D_800D1C18;
+extern s32 gAudioStateG;
 extern s32 D_800D46C0; // gDebugPrintFormat (Used in game_197D0.c)
 extern s32 D_800D46C8;
 extern s32 D_800D46D8;
@@ -37,10 +37,10 @@ extern s32 D_800D4854;
 extern s32 D_800D4870;
 extern s32 D_800D488C;
 extern s16 gSystemReadyFlag;
-extern s32 D_800DCCF8;
-extern s32 D_800DCD04;
-extern s32 D_800DCD08;
-extern s32 D_800DCD0C;
+extern s32 gCycleStateD;
+extern s32 gCycleStateA;
+extern s32 gCycleStateB;
+extern s32 gCycleStateC;
 extern s32 gCurrentStateIndex;
 extern s32 D_800DCE48;
 extern s32 gSystemInitializedFlag;
@@ -57,21 +57,21 @@ extern s32 D_80400008;
 extern s32 D_A4500000;
 extern s32 D_A4500004;
 extern s32 D_A450000C;
-extern s8 D_8002B348;
-extern s8 D_800D19E0;
-extern s8 D_800D1A0C;
-extern s8 D_800D1A18;
-extern s8 D_800D1A20;
-extern s8 D_800D1A3C;
+extern s8 gAudioStateJ;
+extern s8 gAudioStateD;
+extern s8 gAudioStateF;
+extern s8 gAudioStateE;
+extern s8 gAudioStateB;
+extern s8 gAudioStateA;
 extern s16 D_800CD168;
 extern s8 D_800D4690;
 extern s8 D_800E4175;
 extern struct UnkStruct_4 D_8010B7B0;
 extern s16 gStateMachineActiveFlag;
-extern u8 D_8002B346;
-extern u8 D_8002B347;
+extern u8 gAudioStateH;
+extern u8 gAudioStateI;
 extern u8 D_800D16D0;
-extern u8 D_800D1A48;
+extern u8 gAudioStateC;
 extern void* D_800F8510;
 extern s32 D_800E33C0[];
 extern s32 D_800E4068;

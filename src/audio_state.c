@@ -101,17 +101,17 @@ s32 func_800BA2B4() {
 // Audio/Sound State Management
 
 /**
- * @brief Sets global audio state variable D_800D1A3C.
+ * @brief Sets global audio state variable gAudioStateA.
  */
 void func_800BA2D0(s8 arg0) {
-    D_800D1A3C = arg0;
+    gAudioStateA = arg0;
 }
 
 /**
- * @brief Sets global audio state variable D_800D1A20.
+ * @brief Sets global audio state variable gAudioStateB.
  */
 void func_800BA2E0(s8 arg0) {
-    D_800D1A20 = arg0;
+    gAudioStateB = arg0;
 }
 
 s32 func_800BA2F0() {
@@ -200,11 +200,11 @@ s32 func_800BAFA4() {
 }
 
 /**
- * @brief Sets audio state D_800D1A48 to 1 if currently 0.
+ * @brief Sets audio state gAudioStateC to 1 if currently 0.
  */
 void func_800BAFF4(void) {
-    if (D_800D1A48 == 0) {
-        D_800D1A48 = 1;
+    if (gAudioStateC == 0) {
+        gAudioStateC = 1;
     }
 }
 void func_800BB018(void) {
@@ -212,10 +212,10 @@ void func_800BB018(void) {
 }
 
 /**
- * @brief Sets audio state D_800D19E0 to 1.
+ * @brief Sets audio state gAudioStateD to 1.
  */
 void func_800BB038(void) {
-    D_800D19E0 = 1;
+    gAudioStateD = 1;
 }
 
 s32 func_800BB048() {
@@ -227,8 +227,8 @@ s32 func_800BB078() {
 }
 
 void func_800BB09C(void) {
-    if (D_800D1A48 == 0) {
-        D_800D1A48 = 3;
+    if (gAudioStateC == 0) {
+        gAudioStateC = 3;
     }
 }
 
@@ -241,7 +241,7 @@ s32 func_800BB2E0() {
 }
 
 void func_800BB324(s8 arg0) {
-    D_800D1A18 = arg0;
+    gAudioStateE = arg0;
 }
 
 s32 func_800BB334() {
@@ -262,7 +262,7 @@ s32 func_800BB3C4() {
 }
 
 void func_800BB45C(void) {
-    D_800D1A0C = 1;
+    gAudioStateF = 1;
 }
 
 s32 func_800BB46C() {
@@ -274,7 +274,7 @@ void func_800BB49C(void) {
     func_800B7CA4();
     func_800B8598();
     func_800B6994();
-    D_800D1C18 = func_800B5FB0();
+    gAudioStateG = func_800B5FB0();
 }
 
 s32 func_800BB4E0() {
