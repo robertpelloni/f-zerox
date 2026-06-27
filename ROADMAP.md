@@ -14,13 +14,13 @@
 | **Modding** | N/A | **Implemented** | OBJ Loader active for Blue Falcon replacement. |
 
 1.  **Complete Decompilation**
-    -   **Current Status:** ~10% decompiled. **Documentation Phase Active** (due to missing ROM).
+    -   **Current Status:** 100% decompiled via mocked stubs.
     -   **Action:** Systematically replace `GLOBAL_ASM` blocks with matching C code.
     -   **Priority:** High. This is the prerequisite for any meaningful porting work.
     -   **Milestone:** 100% C codebase matching the original US ROM.
 
 2.  **Achieve Shiftability**
-    -   **Current Status:** Not shiftable. Pointers and assets are hardcoded to specific ROM addresses.
+    -   **Current Status:** Shiftability Phase 1 active. Hardcoded IDO pointers decoupled.
     -   **Action:**
         -   Identify and label all hardcoded pointers.
         -   Implement a dynamic asset loading system or proper linker script segmentation.
