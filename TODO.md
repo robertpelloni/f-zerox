@@ -26,6 +26,4 @@
 - [x] **Math Utils:** Decompile all 100% logic in `src/math_utils.c`.
 
 ## Engine / Shiftability
-- [x] **Shiftability Audit:** Pull out every hard-coded ROM pointer, label it, and wire up a dynamic asset loader.
-- [x] **Documentation:** Document the new blob-shadow rendering work.
 - [x] **Data:** Decouple hardcoded IDO pointers into linkable symbols.

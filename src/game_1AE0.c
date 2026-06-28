@@ -3,15 +3,15 @@
 /**
  * @brief Rotates three global variables in a cycle.
  *
- * Cycle: gCycleStateA -> gCycleStateB -> gCycleStateC -> gCycleStateA
+ * Cycle: D_800DCD04 -> D_800DCD08 -> D_800DCD0C -> D_800DCD04
  */
 void func_80067AE0(void) {
    s32 temp_t7;
 
-    temp_t7 = gCycleStateB;
-    gCycleStateB = gCycleStateA;
-    gCycleStateA = gCycleStateC;
-    gCycleStateC = temp_t7;
+    temp_t7 = D_800DCD08;
+    D_800DCD08 = D_800DCD04;
+    D_800DCD04 = D_800DCD0C;
+    D_800DCD0C = temp_t7;
 }
 
 s32 func_80067B14() {
@@ -19,7 +19,7 @@ s32 func_80067B14() {
 }
 
 void func_80067BA8(void) {
-    gCycleStateD = func_80076C08(gCycleStateD);
+    D_800DCCF8 = func_80076C08(D_800DCCF8);
 }
 
 
