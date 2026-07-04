@@ -8,7 +8,7 @@
 #define MAX_PROJECTILES 64
 static Projectile sProjectiles[MAX_PROJECTILES];
 
-extern Vehicle gMachines[30]; // Access global machines
+extern Vehicle gMachines[]; // Access global machines
 
 void Weapons_Init(void) {
     for (int i = 0; i < MAX_PROJECTILES; i++) {

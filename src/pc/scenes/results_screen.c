@@ -78,7 +78,7 @@ void Scene_Result_UI(struct nk_context* ctx) {
 
         char rankTitle[64];
         if (gCupState.active) {
-            snprintf(rankTitle, sizeof(rankTitle), "CUP STANDINGS - TRACK %d/6", gCupState.currentTrackIndex + 1);
+            snprintf(rankTitle, sizeof(rankTitle), "CUP STANDINGS - TRACK %d/%d", gCupState.currentTrackIndex + 1, MAX_CUP_TRACKS);
         } else {
             snprintf(rankTitle, sizeof(rankTitle), "RACE RESULTS");
         }

@@ -1,22 +1,22 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA6D0.s")
+void func_800AA6D0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA7D4.s")
+void func_800AA7D4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA84C.s")
+void func_800AA84C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA8E4.s")
+void func_800AA8E4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AA940.s")
+void func_800AA940(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AACF0.s")
+void func_800AACF0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAD2C.s")
+void func_800AAD2C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAD58.s")
+void func_800AAD58(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAD84.s")
+void func_800AAD84(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800AAF5C(s32 arg0) {
     func_800AAD84(arg0, 6);
@@ -40,25 +40,25 @@ void func_800AAF9C(struct UnkStruct_1* arg0) {
     arg0->unk8 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAFAC.s")
+void func_800AAFAC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AAFFC.s")
+void func_800AAFFC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB0AC.s")
+void func_800AB0AC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB204.s")
+void func_800AB204(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB340.s")
+void func_800AB340(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB380.s")
+void func_800AB380(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB3AC.s")
+void func_800AB3AC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB41C.s")
+void func_800AB41C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB51C.s")
+void func_800AB51C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB550.s")
+void func_800AB550(void) { /* TODO: SHIFTABLE - Implement */ }
 
 s32 func_800AB57C(s32 arg0, s32 arg1) {
     s32 temp_v0;
@@ -85,8 +85,8 @@ s32 func_800AB5C8(s32 arg0, s32 arg1) {
 }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB618.s")
+void func_800AB618(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB710.s")
+void func_800AB710(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/linked_list/func_800AB888.s")
+void func_800AB888(void) { /* TODO: SHIFTABLE - Implement */ }

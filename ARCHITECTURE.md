@@ -29,6 +29,7 @@ This is the heart of the PC port. It replaces the N64's scheduler.
 This is a custom GBI (Graphics Binary Interface) parser.
 *   **Purpose:** The original game logic outputs Display Lists (`Gfx*`). The PC port must interpret these commands to draw 3D geometry.
 *   **Architecture:** It mimics the N64 RCP state machine. It maintains a vertex buffer (`sVertexBuffer`) and processes commands like `G_VTX` (load verts) and `G_TRI1` (draw triangle).
+*   **GBI Extensions:** The PC port introduces a custom header (`include/pc/PR/gbi.h`) defining 64-bit safe `Gfx` and `Vtx` structures. These use `uintptr_t` to store pointers and N64 standard macros, preventing truncation issues on modern 64-bit systems during Display List generation and processing.
 *   **Translation:** N64 vertices are translated to `glVertex3s` calls. Textures are bound via `G_SETTIMG` which triggers the texture loader lookup.
 
 ### 2.4. Vector Physics Engine (`src/pc/physics.c`)
@@ -54,3 +55,11 @@ Built on the **Nuklear** immediate-mode GUI library.
                                       |
                                  `Arcade IO` (Output)
                                  `Network` (Sync)
+
+### 2.7. Network System (`src/pc/network/`)
+Implements LAN multiplayer over UDP.
+*   **Handshake Protocol:** Connects to the lobby via `Net_ConnectLobby` and handles ID collisions via `PACKET_HANDSHAKE`.
+*   **Dead Reckoning:** Calculates extrapolated positions (`pos + velocity * latency`) and visually smooths remote vehicles over time.
+
+### 2.8. Visual Effects and Post-Processing (`src/pc/gfx/`)
+*   **Shadows:** Renders semi-transparent blob shadows under vehicles using fixed-function OpenGL logic (`GL_TRIANGLE_FAN`) during the main loop.

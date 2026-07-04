@@ -14,4 +14,15 @@ void Track_Render(void);
 // Returns true if position is on valid track
 bool Track_GetSurfaceInfo(float x, float z, float* out_height, float* out_width);
 
+
+typedef struct {
+    float y;
+    float width;
+    float normal[3];
+    float trackDist;
+    bool isValid;
+} TrackSurfaceInfo;
+extern TrackSurfaceInfo Track_GetInfoAt(float x, float y, float z);
+extern void Track_GetPointAtDist(float dist, float* x, float* y, float* z);
+
 #endif

@@ -1,11 +1,11 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007E410.s")
+void func_8007E410(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007ECCC.s")
+void func_8007ECCC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007EF68.s")
+void func_8007EF68(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007EFBC.s")
+void func_8007EFBC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18410/func_8007F090.s")
+void func_8007F090(void) { /* TODO: SHIFTABLE - Implement */ }

@@ -56,6 +56,10 @@ typedef struct {
     bool cockpit_view;
     int hud_style; // 0: Classic, 1: GX, 2: Redout
 
+    // Lighting (Dynamic)
+    float light_dir[3];
+    float light_color[3];
+
     // Garage
     float color_primary[3];
     float color_secondary[3];

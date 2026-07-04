@@ -4,15 +4,9 @@
 extern s16 D_800E42CC;
 extern s32 D_80025D78;
 extern s32 D_8002AA18;
-extern s32 D_800CD170; // gRngState1
-extern s32 D_800CD174; // gRngState2
-extern s32 D_800CD170;
-extern s32 D_800CD174;
-extern s32 D_800CD178;
-extern s32 D_800CD17C;
 extern s32 D_800CD510;
-extern s16 D_800CD044;
-extern s32 D_800CD0FC[];
+extern s16 gDebugMode;
+extern s32 gStateHandlers[];
 extern s32 D_800CD520;
 extern s32 D_800D0AC0;
 extern s32 D_800D0AC4;
@@ -36,16 +30,16 @@ extern s32 D_800D4834;
 extern s32 D_800D4854;
 extern s32 D_800D4870;
 extern s32 D_800D488C;
-extern s16 D_800CD16C;
+extern s16 gSystemFullyInitialized;
 extern s32 D_800DCCF8;
 extern s32 D_800DCD04;
 extern s32 D_800DCD08;
 extern s32 D_800DCD0C;
-extern s32 D_800DCE44;
-extern s32 D_800DCE48;
-extern s32 D_800DCE60;
-extern u8 D_800DCE98[592];
-extern u8 D_800DD180[256];
+extern s32 gCurrentStateIndex;
+extern s32 gUnknownStateVar;
+extern s32 gSystemInitialized;
+extern u8 gMachineStates[592];
+extern u8 gSpecialMachineState[256];
 extern s32 D_800E4260;
 extern s32 D_800E4264;
 extern s32 D_800E4348; // gCurrentFramebuffer (Updated in game_197D0.c)
@@ -67,7 +61,7 @@ extern s16 D_800CD168;
 extern s8 D_800D4690;
 extern s8 D_800E4175;
 extern struct UnkStruct_4 D_8010B7B0;
-extern s16 D_80106DA0;
+extern s16 gStateMachineActive;
 extern u8 D_8002B346;
 extern u8 D_8002B347;
 extern u8 D_800D16D0;
@@ -75,5 +69,18 @@ extern u8 D_800D1A48;
 extern void* D_800F8510;
 extern s32 D_800E33C0[];
 extern s32 D_800E4068;
+
+
+typedef struct {
+    s32 state1;
+    s32 state2;
+} RandState;
+extern RandState gRandState;
+
+typedef struct {
+    s32 timeValue1;
+    s32 timeValue2;
+} TimeState;
+extern TimeState gTimeState;
 
 #endif

@@ -15,4 +15,8 @@ void Fast3D_Render(void);
 // Clean up resources
 void Fast3D_Shutdown(void);
 
+// Update directional lighting dynamically
+void Fast3D_SetLightDirection(float x, float y, float z);
+void Fast3D_SetLightColor(float r, float g, float b);
+
 #endif

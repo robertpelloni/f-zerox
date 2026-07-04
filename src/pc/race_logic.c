@@ -1,7 +1,12 @@
 #include "pc/race_logic.h"
 #include "pc/track_data.h"
+#include "pc/cup_system.h"
+#include "pc/game_state.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "pc/track_data.h"
+#include "pc/track_system.h"
 
 // Machine State Extension for Race Logic
 // Ideally this would be in vehicle struct, but we are keeping it separate for now
@@ -107,6 +112,23 @@ int Race_GetLap(Vehicle* v) {
     return 1;
 }
 
+#define MAX_LAPS 3
+
 void Race_Update(void) {
     // Timer logic could go here
+
+    // Check if player has finished the race.
+    if (sRaceStates[0].currentLap > MAX_LAPS && !sRaceStates[0].finished) {
+        sRaceStates[0].finished = true;
+        printf("Race Logic: Player Finished!\n");
+
+        // Collect ranks for all 30 machines to record results
+        int ranks[30];
+        for(int i = 0; i < 30; i++) {
+            ranks[i] = sRaceStates[i].rank;
+        }
+
+        Cup_RecordRaceResults(ranks, 30);
+        GameState_Change(STATE_RESULT);
+    }
 }

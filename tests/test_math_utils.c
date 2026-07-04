@@ -6,15 +6,15 @@
 int tests_run = 0;
 
 // Declaration of function from game_2B20.c (if not in header)
-// s32 func_8006A9E0(f32 arg0); // Already in functions.h
+s32 Math_RoundF(f32 arg0);
 
 static char * test_math_roundf() {
-    mu_assert("Round 0.0 failed", func_8006A9E0(0.0f) == 0);
-    mu_assert("Round 0.5 failed", func_8006A9E0(0.5f) == 1);
-    mu_assert("Round 0.4 failed", func_8006A9E0(0.4f) == 0);
-    mu_assert("Round -0.5 failed", func_8006A9E0(-0.5f) == -1);
-    mu_assert("Round -0.4 failed", func_8006A9E0(-0.4f) == 0);
-    mu_assert("Round 1.9 failed", func_8006A9E0(1.9f) == 2);
+    mu_assert("Round 0.0 failed", Math_RoundF(0.0f) == 0);
+    mu_assert("Round 0.5 failed", Math_RoundF(0.5f) == 1);
+    mu_assert("Round 0.4 failed", Math_RoundF(0.4f) == 0);
+    mu_assert("Round -0.5 failed", Math_RoundF(-0.5f) == -1);
+    mu_assert("Round -0.4 failed", Math_RoundF(-0.4f) == 0);
+    mu_assert("Round 1.9 failed", Math_RoundF(1.9f) == 2);
     return 0;
 }
 

@@ -1,5 +1,5 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F0B0/func_800750B0.s")
+void func_800750B0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F0B0/func_8007515C.s")
+void func_8007515C(void) { /* TODO: SHIFTABLE - Implement */ }

@@ -1,6 +1,6 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_44620/func_800AA620.s")
+void func_800AA620(void) { /* TODO: SHIFTABLE - Implement */ }
 
 // Music Library (libmus) function
-#pragma GLOBAL_ASM("asm/nonmatchings/game_44620/MusFxBankNumberOfEffects.s")
+void MusFxBankNumberOfEffects(void) { /* TODO: SHIFTABLE - Implement */ }

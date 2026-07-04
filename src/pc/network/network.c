@@ -48,16 +48,42 @@ typedef struct {
     // State Data
     float x, y, z;
     float yaw, pitch, roll;
+    float up[3];      // Normal vector
+    float forward[3]; // Direction of travel
     float velocity;
     bool boost;
 } NetPacket;
 
 #define MAX_NET_MACHINES 30
 
+
+#define HISTORY_BUFFER_SIZE 16
+
+typedef struct {
+    float x, y, z;
+    float yaw, pitch, roll;
+    float up[3];
+    float forward[3];
+    float velocity;
+    uint32_t timestamp; // Sender's local time when this state was recorded
+} NetStateEntry;
+
+typedef struct {
+    NetStateEntry history[HISTORY_BUFFER_SIZE];
+    int head;
+    int tail;
+    int count;
+    uint32_t lastRecvTime; // Local time
+} NetBuffer;
+
+static NetBuffer sNetRingBuffers[MAX_NET_MACHINES];
+
 // Buffer for interpolation
 typedef struct {
     float x, y, z;
     float yaw, pitch, roll;
+    float up[3];
+    float forward[3];
     float velocity;
     uint32_t recvTimestamp; // Local time when received
     uint32_t sentTimestamp; // Remote time when sent
@@ -157,6 +183,10 @@ void Net_BroadcastPos(Vehicle* v) {
 
     pkt.x = v->x; pkt.y = v->y; pkt.z = v->z;
     pkt.yaw = v->yaw; pkt.pitch = v->pitch; pkt.roll = v->roll;
+
+    pkt.up[0] = v->up[0]; pkt.up[1] = v->up[1]; pkt.up[2] = v->up[2];
+    pkt.forward[0] = v->forward[0]; pkt.forward[1] = v->forward[1]; pkt.forward[2] = v->forward[2];
+
     pkt.velocity = v->velocity;
     pkt.boost = v->boost_active;
 
@@ -191,29 +221,78 @@ void Net_Receive(void) {
 
             if (pkt.type != PACKET_STATE) continue;
 
+            // Implement basic history buffer array logic for Rollback Netcode Interpolation
+            // We can extend NetState to a cyclic buffer, but for now we'll stick to prediction and smoothing.
+
+
             int slot = pkt.id % 29 + 1; // Basic hashing to array
 
+            // Add to ring buffer
+            NetBuffer* buf = &sNetRingBuffers[slot];
+            buf->history[buf->head].x = pkt.x;
+            buf->history[buf->head].y = pkt.y;
+            buf->history[buf->head].z = pkt.z;
+            buf->history[buf->head].yaw = pkt.yaw;
+            buf->history[buf->head].pitch = pkt.pitch;
+            buf->history[buf->head].roll = pkt.roll;
+
+            buf->history[buf->head].up[0] = pkt.up[0];
+            buf->history[buf->head].up[1] = pkt.up[1];
+            buf->history[buf->head].up[2] = pkt.up[2];
+            buf->history[buf->head].forward[0] = pkt.forward[0];
+            buf->history[buf->head].forward[1] = pkt.forward[1];
+            buf->history[buf->head].forward[2] = pkt.forward[2];
+
+            buf->history[buf->head].velocity = pkt.velocity;
+            buf->history[buf->head].timestamp = pkt.timestamp;
+
+            buf->head = (buf->head + 1) % HISTORY_BUFFER_SIZE;
+            if (buf->count < HISTORY_BUFFER_SIZE) {
+                buf->count++;
+            } else {
+                buf->tail = (buf->tail + 1) % HISTORY_BUFFER_SIZE; // Overwrite oldest
+            }
+            buf->lastRecvTime = HAL_GetTimeMillis();
+
+            // Legacy fallback update
             sNetBuffer[slot].x = pkt.x;
             sNetBuffer[slot].y = pkt.y;
             sNetBuffer[slot].z = pkt.z;
             sNetBuffer[slot].yaw = pkt.yaw;
             sNetBuffer[slot].pitch = pkt.pitch;
             sNetBuffer[slot].roll = pkt.roll;
+
+            sNetBuffer[slot].up[0] = pkt.up[0];
+            sNetBuffer[slot].up[1] = pkt.up[1];
+            sNetBuffer[slot].up[2] = pkt.up[2];
+            sNetBuffer[slot].forward[0] = pkt.forward[0];
+            sNetBuffer[slot].forward[1] = pkt.forward[1];
+            sNetBuffer[slot].forward[2] = pkt.forward[2];
+
             sNetBuffer[slot].velocity = pkt.velocity;
             sNetBuffer[slot].sentTimestamp = pkt.timestamp;
             sNetBuffer[slot].recvTimestamp = HAL_GetTimeMillis();
             sNetActive[slot] = true;
+
         }
     }
 }
 
+
+
 void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
     uint32_t now = HAL_GetTimeMillis();
 
+    // To implement proper rollback/interpolation we want to target a time in the past
+    // corresponding to our input delay / rollback frames.
+    uint32_t renderTime = now - (gConfig.input_delay * 16); // Assuming 60fps ~16ms per frame
+
     for (int i = 1; i < max_machines; i++) {
         if (sNetActive[i]) {
+            NetBuffer* buf = &sNetRingBuffers[i];
+
             // 1. Calculate Latency/Age of packet
-            uint32_t ageMs = now - sNetBuffer[i].recvTimestamp;
+            uint32_t ageMs = now - buf->lastRecvTime;
             float ageSec = (float)ageMs / 1000.0f;
 
             // Timeout disconnect
@@ -223,57 +302,160 @@ void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
                 continue;
             }
 
-            // 2. Dead Reckoning: Predict where they are NOW
-            // Forward Vector
-            float radYaw = sNetBuffer[i].yaw * DEGTORAD;
-            float radPitch = sNetBuffer[i].pitch * DEGTORAD;
+            // Interpolation Logic
+            // We want to find the two states that bracket our `renderTime`
+            if (buf->count >= 2) {
+                NetStateEntry* newer = NULL;
+                NetStateEntry* older = NULL;
+
+                // Scan backwards through history (head-1 is newest)
+                for (int j = 1; j <= buf->count; j++) {
+                    int idx = (buf->head - j + HISTORY_BUFFER_SIZE) % HISTORY_BUFFER_SIZE;
+                    NetStateEntry* entry = &buf->history[idx];
+
+                    if (entry->timestamp <= renderTime) {
+                        older = entry;
+                        // The one just before it (newer)
+                        if (j > 1) {
+                            int newerIdx = (buf->head - (j - 1) + HISTORY_BUFFER_SIZE) % HISTORY_BUFFER_SIZE;
+                            newer = &buf->history[newerIdx];
+                        }
+                        break;
+                    }
+                }
+
+                if (older && newer) {
+                    // We found our bracket, perform linear interpolation (lerp)
+                    uint32_t timeDiff = newer->timestamp - older->timestamp;
+                    if (timeDiff > 0) {
+                        float t = (float)(renderTime - older->timestamp) / (float)timeDiff;
+
+                        machines[i].x = older->x + (newer->x - older->x) * t;
+                        machines[i].y = older->y + (newer->y - older->y) * t;
+                        machines[i].z = older->z + (newer->z - older->z) * t;
+
+                        // Shortest Path Angle Lerp for Yaw
+                        float diffYaw = newer->yaw - older->yaw;
+                        while (diffYaw > 180.0f) diffYaw -= 360.0f;
+                        while (diffYaw < -180.0f) diffYaw += 360.0f;
+                        machines[i].yaw = older->yaw + diffYaw * t;
+
+                        // Same for pitch and roll if necessary
+                        float diffPitch = newer->pitch - older->pitch;
+                        while (diffPitch > 180.0f) diffPitch -= 360.0f;
+                        while (diffPitch < -180.0f) diffPitch += 360.0f;
+                        machines[i].pitch = older->pitch + diffPitch * t;
+
+                        float diffRoll = newer->roll - older->roll;
+                        while (diffRoll > 180.0f) diffRoll -= 360.0f;
+                        while (diffRoll < -180.0f) diffRoll += 360.0f;
+                        machines[i].roll = older->roll + diffRoll * t;
+
+                        machines[i].up[0] = older->up[0] + (newer->up[0] - older->up[0]) * t;
+                        machines[i].up[1] = older->up[1] + (newer->up[1] - older->up[1]) * t;
+                        machines[i].up[2] = older->up[2] + (newer->up[2] - older->up[2]) * t;
+                        machines[i].forward[0] = older->forward[0] + (newer->forward[0] - older->forward[0]) * t;
+                        machines[i].forward[1] = older->forward[1] + (newer->forward[1] - older->forward[1]) * t;
+                        machines[i].forward[2] = older->forward[2] + (newer->forward[2] - older->forward[2]) * t;
+
+                        // Re-normalize up and forward vectors after interpolation
+                        float upLen = sqrtf(machines[i].up[0]*machines[i].up[0] + machines[i].up[1]*machines[i].up[1] + machines[i].up[2]*machines[i].up[2]);
+                        if (upLen > 0.0f) {
+                            machines[i].up[0] /= upLen;
+                            machines[i].up[1] /= upLen;
+                            machines[i].up[2] /= upLen;
+                        }
+
+                        float fwdLen = sqrtf(machines[i].forward[0]*machines[i].forward[0] + machines[i].forward[1]*machines[i].forward[1] + machines[i].forward[2]*machines[i].forward[2]);
+                        if (fwdLen > 0.0f) {
+                            machines[i].forward[0] /= fwdLen;
+                            machines[i].forward[1] /= fwdLen;
+                            machines[i].forward[2] /= fwdLen;
+                        }
+
+                        machines[i].velocity = older->velocity + (newer->velocity - older->velocity) * t;
+                        continue; // Done updating this machine via precise interpolation
+                    }
+                }
+            }
+
+            // Fallback to Dead Reckoning if we lack history or renderTime is too new/old
+            // Forward Vector based on the latest state
+            int latestIdx = (buf->head - 1 + HISTORY_BUFFER_SIZE) % HISTORY_BUFFER_SIZE;
+            NetStateEntry* latest = &buf->history[latestIdx];
+
+            float radYaw = latest->yaw * DEGTORAD;
+            float radPitch = latest->pitch * DEGTORAD;
             float fwdX = sinf(radYaw) * cosf(radPitch);
             float fwdY = sinf(radPitch);
             float fwdZ = -cosf(radYaw) * cosf(radPitch);
 
-            float speed = sNetBuffer[i].velocity; // Units per frame? Assuming 60fps
+            float speed = latest->velocity;
             float speedPerSec = speed * 60.0f;
 
-            // We want to account for the velocity damping (drag) and network jitter.
-            // Instead of linear extrapolation to infinity, we cap the prediction time.
-            float predAgeSec = ageSec;
+            // Extrapolate from the time of the latest packet
+            uint32_t extrapolationTimeMs = renderTime > latest->timestamp ? renderTime - latest->timestamp : 0;
+            float predAgeSec = (float)extrapolationTimeMs / 1000.0f;
+
             if (predAgeSec > 0.5f) predAgeSec = 0.5f; // Cap prediction to 500ms max
 
-            float predX = sNetBuffer[i].x + (fwdX * speedPerSec * predAgeSec);
-            float predY = sNetBuffer[i].y + (fwdY * speedPerSec * predAgeSec);
-            float predZ = sNetBuffer[i].z + (fwdZ * speedPerSec * predAgeSec);
+            float predX = latest->x + (fwdX * speedPerSec * predAgeSec);
+            float predY = latest->y + (fwdY * speedPerSec * predAgeSec);
+            float predZ = latest->z + (fwdZ * speedPerSec * predAgeSec);
 
-            // 3. Interpolate Towards Predicted Position
-            // We use an exponential decay lerp for smoother visual arrival
+            // Interpolate smoothly towards the dead reckoned position
             float dx = predX - machines[i].x;
             float dy = predY - machines[i].y;
             float dz = predZ - machines[i].z;
             float distSq = dx*dx + dy*dy + dz*dz;
 
-            // k is the lerp factor. 1.0 means snap instantly.
-            // If the predicted distance is very large (e.g., > 100 units), we snap harder.
             float k = 0.15f;
-            if (distSq > 2500.0f) { // > 50 units away
-                k = 0.5f;
-            }
-            if (distSq > 10000.0f) { // > 100 units away
-                k = 1.0f; // Instant snap to correct extreme desync
-            }
+            if (distSq > 2500.0f) k = 0.5f;
+            if (distSq > 10000.0f) k = 1.0f;
 
             machines[i].x += dx * k;
             machines[i].y += dy * k;
             machines[i].z += dz * k;
 
-            // Shortest Path Angle Lerp for Yaw
-            float diffYaw = sNetBuffer[i].yaw - machines[i].yaw;
+            float diffYaw = latest->yaw - machines[i].yaw;
             while (diffYaw > 180.0f) diffYaw -= 360.0f;
             while (diffYaw < -180.0f) diffYaw += 360.0f;
             machines[i].yaw += diffYaw * k;
 
-            machines[i].pitch += (sNetBuffer[i].pitch - machines[i].pitch) * k;
-            machines[i].roll += (sNetBuffer[i].roll - machines[i].roll) * k;
+            float diffPitch = latest->pitch - machines[i].pitch;
+            while (diffPitch > 180.0f) diffPitch -= 360.0f;
+            while (diffPitch < -180.0f) diffPitch += 360.0f;
+            machines[i].pitch += diffPitch * k;
 
-            machines[i].velocity = sNetBuffer[i].velocity;
+            float diffRoll = latest->roll - machines[i].roll;
+            while (diffRoll > 180.0f) diffRoll -= 360.0f;
+            while (diffRoll < -180.0f) diffRoll += 360.0f;
+            machines[i].roll += diffRoll * k;
+
+            // Lerp vectors
+            machines[i].up[0] += (latest->up[0] - machines[i].up[0]) * k;
+            machines[i].up[1] += (latest->up[1] - machines[i].up[1]) * k;
+            machines[i].up[2] += (latest->up[2] - machines[i].up[2]) * k;
+            machines[i].forward[0] += (latest->forward[0] - machines[i].forward[0]) * k;
+            machines[i].forward[1] += (latest->forward[1] - machines[i].forward[1]) * k;
+            machines[i].forward[2] += (latest->forward[2] - machines[i].forward[2]) * k;
+
+            // Re-normalize up and forward vectors after interpolation
+            float upLen = sqrtf(machines[i].up[0]*machines[i].up[0] + machines[i].up[1]*machines[i].up[1] + machines[i].up[2]*machines[i].up[2]);
+            if (upLen > 0.0f) {
+                machines[i].up[0] /= upLen;
+                machines[i].up[1] /= upLen;
+                machines[i].up[2] /= upLen;
+            }
+
+            float fwdLen = sqrtf(machines[i].forward[0]*machines[i].forward[0] + machines[i].forward[1]*machines[i].forward[1] + machines[i].forward[2]*machines[i].forward[2]);
+            if (fwdLen > 0.0f) {
+                machines[i].forward[0] /= fwdLen;
+                machines[i].forward[1] /= fwdLen;
+                machines[i].forward[2] /= fwdLen;
+            }
+
+            machines[i].velocity = latest->velocity;
         }
     }
 }

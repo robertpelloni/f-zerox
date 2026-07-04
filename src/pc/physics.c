@@ -14,6 +14,11 @@ void Physics_Init(Vehicle* v) {
     v->yaw = 0.0f;
     v->pitch = 0.0f;
     v->roll = 0.0f;
+
+    // Default vectors
+    v->up[0] = 0.0f; v->up[1] = 1.0f; v->up[2] = 0.0f;
+    v->forward[0] = 0.0f; v->forward[1] = 0.0f; v->forward[2] = -1.0f;
+
     v->energy = 100.0f;
     v->boost_active = false;
     v->speed_kph = 0.0f;
@@ -112,4 +117,28 @@ void Physics_Update(Vehicle* v, OSContPad* pad) {
 
     // 5. Update Speed KPH
     v->speed_kph = v->velocity * 10.0f; // Arbitrary scale
+
+    // 6. Update Forward and Up vectors
+    // Using simple yaw for forward for now, but in a full 360 loop engine this would use quaternions or matrix math
+    float yawRad = v->yaw * DEGTORAD;
+    float pitchRad = v->pitch * DEGTORAD;
+    float rollRad = v->roll * DEGTORAD;
+
+    // Calculate forward vector based on yaw and pitch
+    v->forward[0] = sinf(yawRad) * cosf(pitchRad);
+    v->forward[1] = -sinf(pitchRad);
+    v->forward[2] = -cosf(yawRad) * cosf(pitchRad);
+
+    // Calculate up vector (simplified for now, ideally derived from track normal in a 360 loop engine)
+    TrackSurfaceInfo surface = Track_GetInfoAt(v->x, v->y, v->z);
+    if (surface.isValid) {
+        v->up[0] = surface.normal[0];
+        v->up[1] = surface.normal[1];
+        v->up[2] = surface.normal[2];
+    } else {
+        // Fallback to world up if off track
+        v->up[0] = 0.0f;
+        v->up[1] = 1.0f;
+        v->up[2] = 0.0f;
+    }
 }

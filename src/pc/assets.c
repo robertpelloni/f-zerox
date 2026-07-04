@@ -1,3 +1,4 @@
+#include "pc/assets/dynamic_asset_loader.h"
 #include "pc/gfx/tex_loader.h"
 #include "pc/assets/obj_loader.h"
 #include "pc/assets.h"
@@ -57,11 +58,17 @@ void Assets_Init(void) {
         Fast3D_RegisterTexture(0x100, texID);
     }
 
+
     // Try Load Mod
     gBlueFalconModel = OBJ_Load("mods/blue_falcon.obj");
     if (gBlueFalconModel) {
         printf("Assets: Using modded machine model.\n");
+        // We use a made-up ROM address 0x80800000 for testing dynamic asset loader relocation
+        Asset_RegisterMapping(0x80800000, gBlueFalconModel);
     } else {
         printf("Assets: Using internal machine model.\n");
     }
+
+    // Verify dynamic texture relocation
+    Asset_RegisterMapping(0x80800100, (void*)(uintptr_t)texID);
 }

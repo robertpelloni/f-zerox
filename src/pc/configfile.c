@@ -67,6 +67,9 @@ void Config_SetDefaults(void) {
     gConfig.cockpit_view = false;
     gConfig.hud_style = 0; // Classic
 
+    gConfig.light_dir[0] = 0.5f; gConfig.light_dir[1] = 1.0f; gConfig.light_dir[2] = 0.5f;
+    gConfig.light_color[0] = 1.0f; gConfig.light_color[1] = 1.0f; gConfig.light_color[2] = 1.0f;
+
     gConfig.color_primary[0] = 0.8f; gConfig.color_primary[1] = 0.1f; gConfig.color_primary[2] = 0.1f;
     gConfig.color_secondary[0] = 0.1f; gConfig.color_secondary[1] = 0.1f; gConfig.color_secondary[2] = 0.8f;
     gConfig.color_tertiary[0] = 0.1f; gConfig.color_tertiary[1] = 0.1f; gConfig.color_tertiary[2] = 0.1f;

@@ -14,19 +14,19 @@ void func_80067AE0(void) {
     D_800DCD0C = temp_t7;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1AE0/func_80067B14.s")
+void func_80067B14(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_80067BA8(void) {
     D_800DCCF8 = func_80076C08(D_800DCCF8);
 }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1AE0/func_80067BD0.s")
+void func_80067BD0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1AE0/func_80067C0C.s")
+void func_80067C0C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1AE0/func_80067D64.s")
+void func_80067D64(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1AE0/func_80067E98.s")
+void func_80067E98(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1AE0/func_80068008.s")
+void func_80068008(void) { /* TODO: SHIFTABLE - Implement */ }

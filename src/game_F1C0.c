@@ -1,45 +1,45 @@
 #include "common.h"
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800751C0.s")
+void func_800751C0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800751FC.s")
+void func_800751FC(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void __dummy(void) {
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/osViExtendVStart.s")
+void osViExtendVStart(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_8007523C.s")
+void func_8007523C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800752EC.s")
+void func_800752EC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800753EC.s")
+void func_800753EC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_80075534.s")
+void func_80075534(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_80075690.s")
+void func_80075690(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_80075738.s")
+void func_80075738(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_80075800.s")
+void func_80075800(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800758F8.s")
+void func_800758F8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800759AC.s")
+void func_800759AC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_80075D10.s")
+void func_80075D10(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800760F8.s")
+void func_800760F8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800761D4.s")
+void func_800761D4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800762B0.s")
+void func_800762B0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_80076310.s")
+void func_80076310(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_80076340.s")
+void func_80076340(void) { /* TODO: SHIFTABLE - Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_F1C0/func_800763A8.s")
+void func_800763A8(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007647C(void) {
 }

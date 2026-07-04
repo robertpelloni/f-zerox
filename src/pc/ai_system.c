@@ -1,5 +1,6 @@
 #include "pc/ai_system.h"
 #include "pc/track_data.h"
+#include "pc/track_system.h"
 #include "pc/configfile.h" // reuse grip loss if needed
 #include <math.h>
 #include <stdlib.h>

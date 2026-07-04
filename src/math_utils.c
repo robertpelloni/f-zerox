@@ -1,4 +1,23 @@
 #include "common.h"
+#include <math.h>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#include "pc/assets/dynamic_asset_loader.h"
+
+RandState gRandState;
+TimeState gTimeState;
+s16 gDebugMode = 0;
+s32 gStateHandlers[32] = {0};
+s16 gSystemFullyInitialized = 0;
+s32 gCurrentStateIndex = 0;
+s32 gUnknownStateVar = 0;
+s32 gSystemInitialized = 0;
+u8 gMachineStates[592] = {0};
+u8 gSpecialMachineState[256] = {0};
+s16 gStateMachineActive = 0;
 
 /**
  * @brief Initialize the game system and all subsystems
@@ -8,13 +27,13 @@
  * Uses state check to avoid re-initialization on soft resets.
  */
 void System_Init(void) {
-    D_800DCE44 = -1;
-    D_800DCE48 = 0x8000;
+    gCurrentStateIndex = -1;
+    gUnknownStateVar = 0x8000;
 
     // Check if already initialized using magic number
-    if (D_800DCE60 != 0x20DE1529) {
+    if (gSystemInitialized != 0x20DE1529) {
         func_8008DB98(); // Audio system init (cold boot)
-        D_800DCE60 = 0x20DE1529; // Set initialized flag
+        gSystemInitialized = 0x20DE1529; // Set initialized flag
         func_800A4BAC(); // Additional audio init
     } else {
         func_8008DA68(); // Audio system re-init (warm boot)
@@ -27,14 +46,14 @@ void System_Init(void) {
     func_80076848(); // Input system init
     func_8007D9D0(); // Timing system init
 
-    D_800CD16C = 1; // Mark system as fully initialized
+    gSystemFullyInitialized = 1; // Mark system as fully initialized
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068BC0.s")
+void func_80068BC0(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068DCC.s")
+void func_80068DCC(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80068F04.s")
+void func_80068F04(void) { /* TODO: Implement */ }
 
 /**
  * @brief Execute the current game state function from the state machine
@@ -47,11 +66,11 @@ void System_Init(void) {
 s32 StateMachine_ExecuteCurrentState(void) {
     s32 result = 0; // Default return value
 
-    if (D_800CD044 != 3) { // If not in debug/demo mode
-        if (D_80106DA0 != 0) { // If state machine is active
+    if (gDebugMode != 3) { // If not in debug/demo mode
+        if (gStateMachineActive != 0) { // If state machine is active
             typedef s32 (*StateHandler)(void);
             // Calculate index with modulo from state value
-            StateHandler handler = (StateHandler)D_800CD0FC[D_800DCE44 & 0x1F];
+            StateHandler handler = (StateHandler)gStateHandlers[gCurrentStateIndex & 0x1F];
             result = handler();
         }
     }
@@ -60,7 +79,7 @@ s32 StateMachine_ExecuteCurrentState(void) {
     return result;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069700.s")
+void func_80069700(void) { /* TODO: Implement */ }
 
 /**
  * @brief Initialize or reset the machine state array
@@ -70,9 +89,9 @@ s32 StateMachine_ExecuteCurrentState(void) {
  * Also resets a special machine at a fixed memory offset.
  */
 void Controller_ResetMachineStates(void) {
-    u8* end = D_800DCE98 + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
+    u8* end = gMachineStates + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
     u8* curr = end;
-    u8* start = D_800DCE98;
+    u8* start = gMachineStates;
 
     // Iterate backwards through machine states
     while (1) {
@@ -103,7 +122,7 @@ void Controller_ResetMachineStates(void) {
     }
 
     // Reset special machine at fixed offset
-    u8* specialMachine = D_800DD180;
+    u8* specialMachine = gSpecialMachineState;
     *(u8*)(specialMachine + 0x6D) = 0;
     u8 temp = *(u8*)(specialMachine + 0x6D); // 0
     *(s16*)(specialMachine + 0x7E) = 0;
@@ -116,21 +135,28 @@ void Controller_ResetMachineStates(void) {
     *(u8*)(specialMachine + 0x6C) = temp;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069820.s")
+// TODO: Refactor pointer logic
+void func_80069820(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069D44.s")
+// TODO: Refactor pointer logic
+void func_80069D44(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069ED0.s")
+// TODO: Refactor pointer logic
+void func_80069ED0(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_80069F5C.s")
+// TODO: Refactor pointer logic
+void func_80069F5C(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006A00C.s")
+// TODO: Refactor pointer logic
+void func_8006A00C(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006A3AC.s")
+// TODO: Refactor pointer logic
+void func_8006A3AC(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006A6E4.s")
+// TODO: Refactor pointer logic
+void func_8006A6E4(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/osSetTime.s")
+void osSetTime(OSTime time) { (void)time; /* TODO: Implement */ }
 
 /**
  * @brief Set the time-related global variables
@@ -139,8 +165,8 @@ void Controller_ResetMachineStates(void) {
  * @param timeValue2 Second timing value (likely seconds or frame count)
  */
 void System_SetTime(s32 timeValue1, s32 timeValue2) {
-    D_800CD178 = timeValue1;
-    D_800CD17C = timeValue2;
+    gTimeState.timeValue1 = timeValue1;
+    gTimeState.timeValue2 = timeValue2;
 }
 
 /**
@@ -151,7 +177,7 @@ void System_SetTime(s32 timeValue1, s32 timeValue2) {
  * AI behavior, particle effects, and random game events.
  *
  * The algorithm:
- * - Uses two 32-bit state values (D_800CD170 and D_800CD174)
+ * - Uses two 32-bit state values (gRandState.state1 and gRandState.state2)
  * - Updates state1 using linear congruential generation
  * - Conditionally updates state2 based on its LSB
  * - Returns XOR of the two states
@@ -159,19 +185,19 @@ void System_SetTime(s32 timeValue1, s32 timeValue2) {
  * @return 32-bit pseudo-random value
  */
 s32 Math_Rand(void) {
-    s32 state1 = D_800CD170;
+    s32 state1 = gRandState.state1;
     u32 next_state1 = (u32)state1 * 0x41C64E6D + 0x3039;
 
-    s32 state2 = D_800CD174;
+    s32 state2 = gRandState.state2;
     if (state2 & 1) {
-        D_800CD170 = next_state1;
+        gRandState.state1 = next_state1;
         state2 ^= 0x11020;
-        D_800CD174 = state2;
+        gRandState.state2 = state2;
     }
 
-    state1 = D_800CD170;
+    state1 = gRandState.state1;
     s32 final_state2 = (u32)state2 >> 1;
-    D_800CD174 = final_state2;
+    gRandState.state2 = final_state2;
 
     return state1 ^ final_state2;
 }
@@ -198,9 +224,25 @@ s32 Math_RoundF(f32 value) {
     return (s32)(value + 0.5f);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006AA38.s")
+// TODO: Refactor pointer logic
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006ADE4.s")
+float Math_SinS(int16_t angle) {
+    // N64 angle: 0-65535 map to 0-2PI
+    return sinf(angle * (M_PI / 32768.0f));
+}
+
+float Math_CosS(int16_t angle) {
+    return cosf(angle * (M_PI / 32768.0f));
+}
+
+float Math_SqrtF(float value) {
+    return sqrtf(value);
+}
+
+void func_8006AA38(void) { /* TODO: Implement */ }
+
+// TODO: Refactor pointer logic
+void func_8006ADE4(void) { /* TODO: Implement */ }
 
 /**
  * @brief Set a dual-vector structure (both vectors to same values)
@@ -255,34 +297,50 @@ void Vector_SetTriple(struct UnkStruct_8* vecStruct, s32 compX, s32 compY, s32 c
     vecStruct->unkA = compZ;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B010.s")
+// TODO: Refactor pointer logic
+void func_8006B010(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B07C.s")
+// TODO: Refactor pointer logic
+void func_8006B07C(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B18C.s")
+// TODO: Refactor pointer logic
+void func_8006B18C(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B33C.s")
+// TODO: Refactor pointer logic
+void func_8006B33C(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006B908.s")
+// TODO: Refactor pointer logic
+void func_8006B908(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006BB80.s")
+// TODO: Refactor pointer logic
+void func_8006BB80(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006BBE8.s")
+// TODO: Refactor pointer logic
+void func_8006BBE8(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006BC84.s")
+// TODO: Refactor pointer logic
+void func_8006BC84(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006BFCC.s")
+// TODO: Refactor pointer logic
+void func_8006BFCC(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006C278.s")
+// TODO: Refactor pointer logic
+void func_8006C278(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006C378.s")
+// TODO: Refactor pointer logic
+void func_8006C378(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006C520.s")
+// TODO: Refactor pointer logic
+void func_8006C520(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006CB0C.s")
+// TODO: Refactor pointer logic
+void func_8006CB0C(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006CC98.s")
+// TODO: Refactor pointer logic
+void func_8006CC98(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006D03C.s")
+// TODO: Refactor pointer logic
+void func_8006D03C(void) { /* TODO: Implement */ }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/math_utils/func_8006D2E0.s")
+// TODO: Refactor pointer logic
+void func_8006D2E0(void) { /* TODO: Implement */ }
