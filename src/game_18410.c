@@ -1,21 +1,11 @@
 #include "common.h"
 
-s32 func_8007E410() {
-    return 0;
-}
+void func_8007E410(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007ECCC() {
-    return 0;
-}
+void func_8007ECCC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007EF68() {
-    return 0;
-}
+void func_8007EF68(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007EFBC() {
-    return 0;
-}
+void func_8007EFBC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007F090() {
-    return 0;
-}
+void func_8007F090(void) { /* TODO: SHIFTABLE - Implement */ }

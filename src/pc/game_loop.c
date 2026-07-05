@@ -11,6 +11,7 @@
 #include "pc/gfx/particles.h"
 #include "pc/audio/audio_engine.h"
 #include "pc/hal.h"
+#include "pc/race_logic.h"
 #include <stdio.h>
 #include <SDL2/SDL_opengl.h>
 
@@ -25,6 +26,7 @@ void Game_Init(void) {
     printf("Game Loop: Initializing...\n");
     Physics_Init(&gPlayerVehicle);
     Track_Init();
+    Race_Init();
 }
 
 void Game_RunFrame(void) {
@@ -32,11 +34,27 @@ void Game_RunFrame(void) {
     HAL_Input_Poll();
     HAL_Input_GetState(0, &gInputState);
 
+
     // 2. Physics Update
     Physics_Update(&gPlayerVehicle, &gInputState);
 
+    // Update Ghost System
+    extern int gGhostState; // Assuming definition somewhere, we can just stub or declare
+    // Actually let's just do Netplay
+
+    // Netplay Update (Supervisor Priority)
+    extern void Net_BroadcastPos(Vehicle* v);
+    extern void Net_Receive(void);
+    extern void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines);
+    extern Vehicle gMachines[30]; // External array from weapons/race_logic
+
+    Net_BroadcastPos(&gPlayerVehicle);
+    Net_Receive();
+    Net_UpdateRemoteMachines(gMachines, 30);
+
     // Update Audio Pitch
     gPlayerSpeedRatio = gPlayerVehicle.velocity / 300.0f; // Normalize max speed ~1200 kph
+
 
     // Hook up 3D Doppler audio for remote machines
     // For simplicity, we query a few global slots (e.g. slot 1-4) or mock it.
@@ -83,6 +101,23 @@ void Game_RunFrame(void) {
         }
     }
 
+    // 2.5 Race Logic Update
+    // We update rankings by providing the active machines.
+    // For now, let's construct an array with the player at index 0 and others if active.
+    Vehicle activeMachines[30];
+    activeMachines[0] = gPlayerVehicle;
+    int numActive = 1;
+
+    for (int i = 1; i < 30; i++) {
+        if (gMachines[i].y > -9000.0f) {
+            activeMachines[numActive] = gMachines[i];
+            numActive++;
+        }
+    }
+
+    Race_UpdateRankings(activeMachines, numActive);
+    Race_Update();
+
     // 3. Camera Update
     Camera_Update(&gPlayerVehicle);
 
@@ -92,6 +127,10 @@ void Game_RunFrame(void) {
     // Apply Camera Transform
     Camera_Apply();
 
+    // Update dynamic lighting
+    Fast3D_SetLightDirection(gConfig.light_dir[0], gConfig.light_dir[1], gConfig.light_dir[2]);
+    Fast3D_SetLightColor(gConfig.light_color[0], gConfig.light_color[1], gConfig.light_color[2]);
+
     // Draw Track
     Track_Render();
 
@@ -100,7 +139,38 @@ void Game_RunFrame(void) {
     // Translate slightly above ground (assuming y is altitude, we should query TrackSurfaceInfo)
     // For now, render it just below the vehicle's center.
     glTranslatef(gPlayerVehicle.x, gPlayerVehicle.y - 15.0f, gPlayerVehicle.z);
-    glRotatef(90.0f, 1.0f, 0.0f, 0.0f); // Face flat on the ground
+
+    // Align blob shadow with vehicle's up and forward vectors using lookAt logic conceptually
+    // Create a rotation matrix manually from forward and up vectors
+    float up[3] = {gPlayerVehicle.up[0], gPlayerVehicle.up[1], gPlayerVehicle.up[2]};
+    float fwd[3] = {gPlayerVehicle.forward[0], gPlayerVehicle.forward[1], gPlayerVehicle.forward[2]};
+
+    // Calculate right vector = cross(fwd, up)
+    float right[3] = {
+        fwd[1]*up[2] - fwd[2]*up[1],
+        fwd[2]*up[0] - fwd[0]*up[2],
+        fwd[0]*up[1] - fwd[1]*up[0]
+    };
+
+    // Normalize right
+    float rLen = sqrtf(right[0]*right[0] + right[1]*right[1] + right[2]*right[2]);
+    if (rLen > 0.0f) {
+        right[0] /= rLen; right[1] /= rLen; right[2] /= rLen;
+    }
+
+    // Re-orthogonalize fwd = cross(up, right)
+    fwd[0] = up[1]*right[2] - up[2]*right[1];
+    fwd[1] = up[2]*right[0] - up[0]*right[2];
+    fwd[2] = up[0]*right[1] - up[1]*right[0];
+
+    // Construct 4x4 matrix for OpenGL
+    float matrix[16] = {
+        right[0], right[1], right[2], 0.0f,
+        fwd[0],   fwd[1],   fwd[2],   0.0f, // Use fwd as "up" for the polygon on the ground
+        up[0],    up[1],    up[2],    0.0f, // Use up as the normal "Z"
+        0.0f,     0.0f,     0.0f,     1.0f
+    };
+    glMultMatrixf(matrix);
 
     glDisable(GL_LIGHTING);
     glDisable(GL_TEXTURE_2D);

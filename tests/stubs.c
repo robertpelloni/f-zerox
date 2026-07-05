@@ -26,3 +26,18 @@ void HAL_Video_SetFullscreen(bool enabled) { (void)enabled; }
 bool HAL_Audio_Init(AudioConfig* config) { (void)config; return true; }
 void HAL_Audio_Shutdown(void) {}
 void HAL_Audio_QueueSamples(const int16_t* samples, int count) { (void)samples; (void)count; }
+
+// Provide definitions for externs used by math_utils.c
+#include "../include/variables.h"
+
+
+
+
+
+
+
+
+
+
+
+void DebugText_AddString(void* a, void* b) {}

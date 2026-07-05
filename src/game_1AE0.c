@@ -14,31 +14,19 @@ void func_80067AE0(void) {
     D_800DCD0C = temp_t7;
 }
 
-s32 func_80067B14() {
-    return 0;
-}
+void func_80067B14(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_80067BA8(void) {
     D_800DCCF8 = func_80076C08(D_800DCCF8);
 }
 
 
-s32 func_80067BD0() {
-    return 0;
-}
+void func_80067BD0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80067C0C() {
-    return 0;
-}
+void func_80067C0C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80067D64() {
-    return 0;
-}
+void func_80067D64(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80067E98() {
-    return 0;
-}
+void func_80067E98(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80068008() {
-    return 0;
-}
+void func_80068008(void) { /* TODO: SHIFTABLE - Implement */ }

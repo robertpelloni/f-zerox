@@ -1,10 +1,6 @@
 #include "common.h"
 
-s32 func_800AA620() {
-    return 0;
-}
+void func_800AA620(void) { /* TODO: SHIFTABLE - Implement */ }
 
 // Music Library (libmus) function
-s32 MusFxBankNumberOfEffects() {
-    return 0;
-}
+void MusFxBankNumberOfEffects(void) { /* TODO: SHIFTABLE - Implement */ }

@@ -9,9 +9,7 @@ void func_8007F4E0(s32 arg0, s32 arg1) {
     D_800E4260 = arg1;
 }
 
-s32 func_8007F500() {
-    return 0;
-}
+void func_8007F500(void) { /* TODO: SHIFTABLE - Implement */ }
 // void func_8007F500(void) {
 //     static struct UnkStruct_0 D_800E42C9;
 //     D_800E42C9.unk0 = 0;
@@ -21,10 +19,6 @@ s32 func_8007F500() {
 //     D_800E42CC = 0;
 // }
 
-s32 func_8007F520() {
-    return 0;
-}
+void func_8007F520(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007F5EC() {
-    return 0;
-}
+void func_8007F5EC(void) { /* TODO: SHIFTABLE - Implement */ }

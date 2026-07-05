@@ -7,3 +7,5 @@ def apply(config, args):
     config["myimg"] = f"build/f-zerox.{VERSION}.z64"
     config["mapfile"] = f"build/f-zerox.{VERSION}.map"
     config["source_directories"] = ["src", "include"]
+
+    config["objdump_executable"] = "objdump"

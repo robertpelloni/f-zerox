@@ -32,3 +32,11 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 *   **Code Style:** PascalCase for functions, gCamelCase for globals.
 *   **Config:** Binary struct dumping (`fzerox_pc.bin`) for simplicity, but JSON is planned.
 *   **Networking:** UDP Broadcast for zero-config LAN play.
+
+### 6. Netplay Handshake & Dead Reckoning
+*   **Protocol:** Uses a handshake protocol via `Net_ConnectLobby` (`PACKET_HANDSHAKE`) to securely assign client IDs by resolving timestamp collisions.
+*   **Extrapolation:** Remote clients implement time-stamped Dead Reckoning by extrapolating positions from velocity and smoothing out network jitter via exponential decay lerp.
+
+### 7. Blob Shadows & Particles
+*   **Shadows:** Semi-transparent, fixed-function `GL_TRIANGLE_FAN` blob shadows render directly beneath vehicles, adding visual grounding.
+*   **Particles:** Uses a fast ring-buffer object pool that avoids stuttering even under heavy combat effects.

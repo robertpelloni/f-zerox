@@ -5,7 +5,8 @@
 
 int tests_run = 0;
 
-s32 Math_RoundF(f32 value);
+// Declaration of function from game_2B20.c (if not in header)
+s32 Math_RoundF(f32 arg0);
 
 static char * test_math_roundf() {
     mu_assert("Round 0.0 failed", Math_RoundF(0.0f) == 0);

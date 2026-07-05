@@ -11,6 +11,10 @@ typedef struct {
     float pitch; // Rotation X (0 = Flat)
     float roll;  // Rotation Z (0 = Flat)
 
+    // Physics Vectors for rendering and track alignment
+    float up[3];      // Normal vector
+    float forward[3]; // Direction of travel
+
     // Gameplay state
     float energy; // 0.0 - 100.0
     bool boost_active;

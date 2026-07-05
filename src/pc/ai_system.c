@@ -4,6 +4,7 @@
 #include "pc/PR/gbi.h"
 #include "pc/track_system.h"
 #include "pc/track_data.h"
+#include "pc/track_system.h"
 #include "pc/configfile.h" // reuse grip loss if needed
 #include <math.h>
 

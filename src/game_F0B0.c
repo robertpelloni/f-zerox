@@ -1,9 +1,5 @@
 #include "common.h"
 
-s32 func_800750B0() {
-    return 0;
-}
+void func_800750B0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007515C() {
-    return 0;
-}
+void func_8007515C(void) { /* TODO: SHIFTABLE - Implement */ }

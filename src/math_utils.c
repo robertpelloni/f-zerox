@@ -1,4 +1,23 @@
 #include "common.h"
+#include <math.h>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#include "pc/assets/dynamic_asset_loader.h"
+
+RandState gRandState;
+TimeState gTimeState;
+s16 gDebugMode = 0;
+s32 gStateHandlers[32] = {0};
+s16 gSystemFullyInitialized = 0;
+s32 gCurrentStateIndex = 0;
+s32 gUnknownStateVar = 0;
+s32 gSystemInitialized = 0;
+u8 gMachineStates[592] = {0};
+u8 gSpecialMachineState[256] = {0};
+s16 gStateMachineActive = 0;
 
 /**
  * @brief Initialize the game system and all subsystems
@@ -9,12 +28,12 @@
  */
 void System_Init(void) {
     gCurrentStateIndex = -1;
-    D_800DCE48 = 0x8000;
+    gUnknownStateVar = 0x8000;
 
     // Check if already initialized using magic number
-    if (gSystemInitializedFlag != 0x20DE1529) {
+    if (gSystemInitialized != 0x20DE1529) {
         func_8008DB98(); // Audio system init (cold boot)
-        gSystemInitializedFlag = 0x20DE1529; // Set initialized flag
+        gSystemInitialized = 0x20DE1529; // Set initialized flag
         func_800A4BAC(); // Additional audio init
     } else {
         func_8008DA68(); // Audio system re-init (warm boot)
@@ -27,20 +46,14 @@ void System_Init(void) {
     func_80076848(); // Input system init
     func_8007D9D0(); // Timing system init
 
-    gSystemReadyFlag = 1; // Mark system as fully initialized
+    gSystemFullyInitialized = 1; // Mark system as fully initialized
 }
 
-s32 func_80068BC0() {
-    return 0;
-}
+void func_80068BC0(void) { /* TODO: Implement */ }
 
-s32 func_80068DCC() {
-    return 0;
-}
+void func_80068DCC(void) { /* TODO: Implement */ }
 
-s32 func_80068F04() {
-    return 0;
-}
+void func_80068F04(void) { /* TODO: Implement */ }
 
 /**
  * @brief Execute the current game state function from the state machine
@@ -53,11 +66,11 @@ s32 func_80068F04() {
 s32 StateMachine_ExecuteCurrentState(void) {
     s32 result = 0; // Default return value
 
-    if (gDebugModeFlag != 3) { // If not in debug/demo mode
-        if (gStateMachineActiveFlag != 0) { // If state machine is active
+    if (gDebugMode != 3) { // If not in debug/demo mode
+        if (gStateMachineActive != 0) { // If state machine is active
             typedef s32 (*StateHandler)(void);
             // Calculate index with modulo from state value
-            StateHandler handler = (StateHandler)gStateHandlerJumpTable[gCurrentStateIndex & 0x1F];
+            StateHandler handler = (StateHandler)gStateHandlers[gCurrentStateIndex & 0x1F];
             result = handler();
         }
     }
@@ -66,9 +79,7 @@ s32 StateMachine_ExecuteCurrentState(void) {
     return result;
 }
 
-s32 func_80069700() {
-    return 0;
-}
+void func_80069700(void) { /* TODO: Implement */ }
 
 /**
  * @brief Initialize or reset the machine state array
@@ -78,9 +89,9 @@ s32 func_80069700() {
  * Also resets a special machine at a fixed memory offset.
  */
 void Controller_ResetMachineStates(void) {
-    u8* end = gMachineStateArray + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
+    u8* end = gMachineStates + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
     u8* curr = end;
-    u8* start = gMachineStateArray;
+    u8* start = gMachineStates;
 
     // Iterate backwards through machine states
     while (1) {
@@ -124,35 +135,28 @@ void Controller_ResetMachineStates(void) {
     *(u8*)(specialMachine + 0x6C) = temp;
 }
 
+// TODO: Refactor pointer logic
+void func_80069820(void) { /* TODO: Implement */ }
 
+// TODO: Refactor pointer logic
+void func_80069D44(void) { /* TODO: Implement */ }
 
-s32 func_80069D44() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_80069ED0(void) { /* TODO: Implement */ }
 
-s32 func_80069ED0() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_80069F5C(void) { /* TODO: Implement */ }
 
-s32 func_80069F5C() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006A00C(void) { /* TODO: Implement */ }
 
-s32 func_8006A00C() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006A3AC(void) { /* TODO: Implement */ }
 
-s32 func_8006A3AC() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006A6E4(void) { /* TODO: Implement */ }
 
-s32 func_8006A6E4() {
-    return 0;
-}
-
-s32 osSetTime() {
-    return 0;
-}
+void osSetTime(OSTime time) { (void)time; /* TODO: Implement */ }
 
 /**
  * @brief Set the time-related global variables
@@ -161,8 +165,8 @@ s32 osSetTime() {
  * @param timeValue2 Second timing value (likely seconds or frame count)
  */
 void System_SetTime(s32 timeValue1, s32 timeValue2) {
-    gTimer1 = timeValue1;
-    gTimer2 = timeValue2;
+    gTimeState.timeValue1 = timeValue1;
+    gTimeState.timeValue2 = timeValue2;
 }
 
 /**
@@ -173,7 +177,7 @@ void System_SetTime(s32 timeValue1, s32 timeValue2) {
  * AI behavior, particle effects, and random game events.
  *
  * The algorithm:
- * - Uses two 32-bit state values (gRngState1 and gRngState2)
+ * - Uses two 32-bit state values (gRandState.state1 and gRandState.state2)
  * - Updates state1 using linear congruential generation
  * - Conditionally updates state2 based on its LSB
  * - Returns XOR of the two states
@@ -181,19 +185,19 @@ void System_SetTime(s32 timeValue1, s32 timeValue2) {
  * @return 32-bit pseudo-random value
  */
 s32 Math_Rand(void) {
-    s32 state1 = gRngState1;
+    s32 state1 = gRandState.state1;
     u32 next_state1 = (u32)state1 * 0x41C64E6D + 0x3039;
 
-    s32 state2 = gRngState2;
+    s32 state2 = gRandState.state2;
     if (state2 & 1) {
-        gRngState1 = next_state1;
+        gRandState.state1 = next_state1;
         state2 ^= 0x11020;
-        gRngState2 = state2;
+        gRandState.state2 = state2;
     }
 
-    state1 = gRngState1;
+    state1 = gRandState.state1;
     s32 final_state2 = (u32)state2 >> 1;
-    gRngState2 = final_state2;
+    gRandState.state2 = final_state2;
 
     return state1 ^ final_state2;
 }
@@ -220,24 +224,25 @@ s32 Math_RoundF(f32 value) {
     return (s32)(value + 0.5f);
 }
 
-/**
- * @brief Round a floating point number to the nearest integer
- *
- * Uses standard rounding where values at exactly 0.5 round to the nearest
- * integer with ties rounding away from zero.
- *
- * Examples:
- * - Math_RoundF(3.4f) → 3
- * - Math_RoundF(3.6f) → 4
- * - Math_RoundF(-2.4f) → -2
- * - Math_RoundF(-2.6f) → -3
- *
- * @param value Input float value to round
- * @return Rounded integer value
- */
-s32 func_8006ADE4() {
-    return 0;
+// TODO: Refactor pointer logic
+
+float Math_SinS(int16_t angle) {
+    // N64 angle: 0-65535 map to 0-2PI
+    return sinf(angle * (M_PI / 32768.0f));
 }
+
+float Math_CosS(int16_t angle) {
+    return cosf(angle * (M_PI / 32768.0f));
+}
+
+float Math_SqrtF(float value) {
+    return sqrtf(value);
+}
+
+void func_8006AA38(void) { /* TODO: Implement */ }
+
+// TODO: Refactor pointer logic
+void func_8006ADE4(void) { /* TODO: Implement */ }
 
 /**
  * @brief Set a dual-vector structure (both vectors to same values)
@@ -292,66 +297,50 @@ void Vector_SetTriple(struct UnkStruct_8* vecStruct, s32 compX, s32 compY, s32 c
     vecStruct->unkA = compZ;
 }
 
-s32 func_8006B010() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006B010(void) { /* TODO: Implement */ }
 
-s32 func_8006B07C() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006B07C(void) { /* TODO: Implement */ }
 
-s32 func_8006B18C() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006B18C(void) { /* TODO: Implement */ }
 
-s32 func_8006B33C() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006B33C(void) { /* TODO: Implement */ }
 
-s32 func_8006B908() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006B908(void) { /* TODO: Implement */ }
 
-s32 func_8006BB80() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006BB80(void) { /* TODO: Implement */ }
 
-s32 func_8006BBE8() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006BBE8(void) { /* TODO: Implement */ }
 
-s32 func_8006BC84() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006BC84(void) { /* TODO: Implement */ }
 
-s32 func_8006BFCC() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006BFCC(void) { /* TODO: Implement */ }
 
-s32 func_8006C278() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006C278(void) { /* TODO: Implement */ }
 
-s32 func_8006C378() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006C378(void) { /* TODO: Implement */ }
 
-s32 func_8006C520() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006C520(void) { /* TODO: Implement */ }
 
-s32 func_8006CB0C() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006CB0C(void) { /* TODO: Implement */ }
 
-s32 func_8006CC98() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006CC98(void) { /* TODO: Implement */ }
 
-s32 func_8006D03C() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006D03C(void) { /* TODO: Implement */ }
 
-s32 func_8006D2E0() {
-    return 0;
-}
+// TODO: Refactor pointer logic
+void func_8006D2E0(void) { /* TODO: Implement */ }

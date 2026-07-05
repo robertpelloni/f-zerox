@@ -1,60 +1,32 @@
 #include "common.h"
 
-s32 func_80077CF0() {
-    return 0;
-}
+void func_80077CF0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 myfree() {
-    return 0;
-}
+void myfree(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80077D50() {
-    return 0;
-}
+void func_80077D50(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80078104() {
-    return 0;
-}
+void func_80078104(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800783AC() {
-    return 0;
-}
+void func_800783AC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800783F4() {
-    return 0;
-}
+void func_800783F4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007857C() {
-    return 0;
-}
+void func_8007857C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007870C() {
-    return 0;
-}
+void func_8007870C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800788A4() {
-    return 0;
-}
+void func_800788A4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80078A4C() {
-    return 0;
-}
+void func_80078A4C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80078BF8() {
-    return 0;
-}
+void func_80078BF8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80078DB4() {
-    return 0;
-}
+void func_80078DB4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80078EA0() {
-    return 0;
-}
+void func_80078EA0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80078F80() {
-    return 0;
-}
+void func_80078F80(void) { /* TODO: SHIFTABLE - Implement */ }
 
 /**
  * @brief Initialization loop (Unknown purpose).
@@ -72,86 +44,44 @@ void func_80079080(void) {
     };
 }
 
-s32 func_800790A4() {
-    return 0;
-}
+void func_800790A4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800790D4() {
-    return 0;
-}
+void func_800790D4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800792A8() {
-    return 0;
-}
+void func_800792A8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800792D8() {
-    return 0;
-}
+void func_800792D8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800793E8() {
-    return 0;
-}
+void func_800793E8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80079480() {
-    return 0;
-}
+void func_80079480(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800794B0() {
-    return 0;
-}
+void func_800794B0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800797CC() {
-    return 0;
-}
+void func_800797CC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80079BC8() {
-    return 0;
-}
+void func_80079BC8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80079E88() {
-    return 0;
-}
+void func_80079E88(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80079EC8() {
-    return 0;
-}
+void func_80079EC8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80079F1C() {
-    return 0;
-}
+void func_80079F1C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80079F54() {
-    return 0;
-}
+void func_80079F54(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80079FFC() {
-    return 0;
-}
+void func_80079FFC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007A06C() {
-    return 0;
-}
+void func_8007A06C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007A0A0() {
-    return 0;
-}
+void func_8007A0A0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007A154() {
-    return 0;
-}
+void func_8007A154(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007A208() {
-    return 0;
-}
+void func_8007A208(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007A278() {
-    return 0;
-}
+void func_8007A278(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007A334() {
-    return 0;
-}
+void func_8007A334(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007A3B8() {
-    return 0;
-}
+void func_8007A3B8(void) { /* TODO: SHIFTABLE - Implement */ }

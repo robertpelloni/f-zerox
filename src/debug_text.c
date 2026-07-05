@@ -1,12 +1,8 @@
 #include "common.h"
 
-s32 func_8007F7D0() {
-    return 0;
-}
+void func_8007F7D0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007F86C() {
-    return 0;
-}
+void func_8007F86C(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007F904(void) {
     func_8007F86C(&D_800CD520, &D_80400008, &D_800E4350, &D_800E44D0, &D_800E4650);
@@ -16,24 +12,16 @@ void func_8007F904(void) {
  * @brief Updates the global framebuffer pointer with the current framebuffer.
  */
 void func_8007F94C(void) {
-    gCurrentFramebuffer = osViGetCurrentFramebuffer();
+    D_800E4348 = osViGetCurrentFramebuffer();
 }
 
-s32 func_8007F970() {
-    return 0;
-}
+void func_8007F970(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007F9E0() {
-    return 0;
-}
+void func_8007F9E0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007FA64() {
-    return 0;
-}
+void func_8007FA64(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007FB80() {
-    return 0;
-}
+void func_8007FB80(void) { /* TODO: SHIFTABLE - Implement */ }
 
 /**
  * @brief Draws a debug integer to the screen.

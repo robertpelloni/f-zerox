@@ -1,83 +1,45 @@
 #include "common.h"
 
-s32 func_800751C0() {
-    return 0;
-}
+void func_800751C0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800751FC() {
-    return 0;
-}
+void func_800751FC(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void __dummy(void) {
 }
 
-s32 osViExtendVStart() {
-    return 0;
-}
+void osViExtendVStart(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_8007523C() {
-    return 0;
-}
+void func_8007523C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800752EC() {
-    return 0;
-}
+void func_800752EC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800753EC() {
-    return 0;
-}
+void func_800753EC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80075534() {
-    return 0;
-}
+void func_80075534(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80075690() {
-    return 0;
-}
+void func_80075690(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80075738() {
-    return 0;
-}
+void func_80075738(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80075800() {
-    return 0;
-}
+void func_80075800(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800758F8() {
-    return 0;
-}
+void func_800758F8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800759AC() {
-    return 0;
-}
+void func_800759AC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80075D10() {
-    return 0;
-}
+void func_80075D10(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800760F8() {
-    return 0;
-}
+void func_800760F8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800761D4() {
-    return 0;
-}
+void func_800761D4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800762B0() {
-    return 0;
-}
+void func_800762B0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80076310() {
-    return 0;
-}
+void func_80076310(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_80076340() {
-    return 0;
-}
+void func_80076340(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800763A8() {
-    return 0;
-}
+void func_800763A8(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007647C(void) {
 }

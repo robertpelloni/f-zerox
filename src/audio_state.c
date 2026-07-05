@@ -1,76 +1,40 @@
 #include "common.h"
 
-s32 func_800B71D0() {
-    return 0;
-}
+void func_800B71D0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B7244() {
-    return 0;
-}
+void func_800B7244(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B759C() {
-    return 0;
-}
+void func_800B759C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B7600() {
-    return 0;
-}
+void func_800B7600(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B7C40() {
-    return 0;
-}
+void func_800B7C40(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B7CA4() {
-    return 0;
-}
+void func_800B7CA4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B82C8() {
-    return 0;
-}
+void func_800B82C8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B84B8() {
-    return 0;
-}
+void func_800B84B8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B8598() {
-    return 0;
-}
+void func_800B8598(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B8640() {
-    return 0;
-}
+void func_800B8640(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B899C() {
-    return 0;
-}
+void func_800B899C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B8DAC() {
-    return 0;
-}
+void func_800B8DAC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B9240() {
-    return 0;
-}
+void func_800B9240(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B9C54() {
-    return 0;
-}
+void func_800B9C54(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B9D3C() {
-    return 0;
-}
+void func_800B9D3C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B9E28() {
-    return 0;
-}
+void func_800B9E28(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B9E50() {
-    return 0;
-}
+void func_800B9E50(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800B9E94() {
-    return 0;
-}
+void func_800B9E94(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B9EBC(s32 arg0, s32 arg1, s32 arg2) {
 }
@@ -78,9 +42,7 @@ void func_800B9EBC(s32 arg0, s32 arg1, s32 arg2) {
 void func_800B9ECC(void) {
 }
 
-s32 func_800B9ED4() {
-    return 0;
-}
+void func_800B9ED4(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800BA248(void) {
     func_800B6F58();
@@ -94,9 +56,7 @@ void func_800BA28C(u8 arg0) {
     func_800B6910(0xF0000000, arg0);
 }
 
-s32 func_800BA2B4() {
-    return 0;
-}
+void func_800BA2B4(void) { /* TODO: SHIFTABLE - Implement */ }
 
 // Audio/Sound State Management
 
@@ -114,69 +74,37 @@ void func_800BA2E0(s8 arg0) {
     D_800D1A20 = arg0;
 }
 
-s32 func_800BA2F0() {
-    return 0;
-}
+void func_800BA2F0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BA3E4() {
-    return 0;
-}
+void func_800BA3E4(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BA67C() {
-    return 0;
-}
+void func_800BA67C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BA710() {
-    return 0;
-}
+void func_800BA710(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BA7C0() {
-    return 0;
-}
+void func_800BA7C0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BA7F8() {
-    return 0;
-}
+void func_800BA7F8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BA8D8() {
-    return 0;
-}
+void func_800BA8D8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BAA88() {
-    return 0;
-}
+void func_800BAA88(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BAB34() {
-    return 0;
-}
+void func_800BAB34(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BAB50() {
-    return 0;
-}
+void func_800BAB50(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BAB68() {
-    return 0;
-}
+void func_800BAB68(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BABA0() {
-    return 0;
-}
+void func_800BABA0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BAE5C() {
-    return 0;
-}
+void func_800BAE5C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 n_alSynFreeFX() {
-    return 0;
-}
+void n_alSynFreeFX(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BAE98() {
-    return 0;
-}
+void func_800BAE98(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BAEDC() {
-    return 0;
-}
+void func_800BAEDC(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800BAF18(s32 arg0) {
 }
@@ -187,17 +115,11 @@ void func_800BAF20(s32 arg0) {
 void func_800BAF28(void) {
 }
 
-s32 func_800BAF30() {
-    return 0;
-}
+void func_800BAF30(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 n_alSynRemovePlayer() {
-    return 0;
-}
+void n_alSynRemovePlayer(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BAFA4() {
-    return 0;
-}
+void func_800BAFA4(void) { /* TODO: SHIFTABLE - Implement */ }
 
 /**
  * @brief Sets audio state D_800D1A48 to 1 if currently 0.
@@ -218,13 +140,9 @@ void func_800BB038(void) {
     D_800D19E0 = 1;
 }
 
-s32 func_800BB048() {
-    return 0;
-}
+void func_800BB048(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BB078() {
-    return 0;
-}
+void func_800BB078(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800BB09C(void) {
     if (D_800D1A48 == 0) {
@@ -232,42 +150,30 @@ void func_800BB09C(void) {
     }
 }
 
-s32 func_800BB0C0() {
-    return 0;
-}
+void func_800BB0C0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BB2E0() {
-    return 0;
-}
+void func_800BB2E0(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800BB324(s8 arg0) {
     D_800D1A18 = arg0;
 }
 
-s32 func_800BB334() {
-    return 0;
-}
+void func_800BB334(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BB370() {
-    return 0;
-}
+void func_800BB370(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800BB39C(s32 arg0) {
     func_800B9ED4();
     func_800B6994();
 }
 
-s32 func_800BB3C4() {
-    return 0;
-}
+void func_800BB3C4(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800BB45C(void) {
     D_800D1A0C = 1;
 }
 
-s32 func_800BB46C() {
-    return 0;
-}
+void func_800BB46C(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800BB49C(void) {
     func_800B82C8();
@@ -277,10 +183,6 @@ void func_800BB49C(void) {
     D_800D1C18 = func_800B5FB0();
 }
 
-s32 func_800BB4E0() {
-    return 0;
-}
+void func_800BB4E0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800BB61C() {
-    return 0;
-}
+void func_800BB61C(void) { /* TODO: SHIFTABLE - Implement */ }

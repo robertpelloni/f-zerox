@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MAX_CUP_TRACKS 6
+#define MAX_CUP_TRACKS 5
 #define MAX_CUP_MACHINES 30
 
 typedef enum {

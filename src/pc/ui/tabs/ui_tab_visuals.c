@@ -23,6 +23,22 @@ void UI_Tab_Visuals(struct nk_context *ctx) {
     UI_Checkbox(ctx, "Enable Cockpit View (VR Ready)", &cockpit, "First-person perspective from inside the machine.");
     gConfig.cockpit_view = cockpit;
 
+
+    UI_Header(ctx, "Directional Lighting (GX)");
+    nk_layout_row_dynamic(ctx, 25, 1);
+    UI_Property_Float(ctx, "Light Dir X", -1.0f, &gConfig.light_dir[0], 1.0f, 0.05f, 0.01f, "Direction of primary light source (X axis).");
+    UI_Property_Float(ctx, "Light Dir Y", -1.0f, &gConfig.light_dir[1], 1.0f, 0.05f, 0.01f, "Direction of primary light source (Y axis).");
+    UI_Property_Float(ctx, "Light Dir Z", -1.0f, &gConfig.light_dir[2], 1.0f, 0.05f, 0.01f, "Direction of primary light source (Z axis).");
+
+    nk_label(ctx, "Light Color:", NK_TEXT_LEFT);
+    nk_layout_row_dynamic(ctx, 120, 1);
+    struct nk_colorf color = {gConfig.light_color[0], gConfig.light_color[1], gConfig.light_color[2], 1.0f};
+    if (nk_color_pick(ctx, &color, NK_RGB)) {
+        gConfig.light_color[0] = color.r;
+        gConfig.light_color[1] = color.g;
+        gConfig.light_color[2] = color.b;
+    }
+
     UI_Header(ctx, "Heads-Up Display (HUD)");
     nk_layout_row_dynamic(ctx, 25, 1);
     nk_label(ctx, "HUD Style:", NK_TEXT_LEFT);
