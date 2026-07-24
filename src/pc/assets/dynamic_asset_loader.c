@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
+#include "pc/assets/dynamic_asset_loader.h"
 
 // Represents a mapping between a hardcoded ROM address and a dynamically loaded asset
 typedef struct {

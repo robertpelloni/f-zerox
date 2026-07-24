@@ -246,3 +246,12 @@ I have repeatedly bypassed the `network.c` compilation issues that stem from `#i
   3. Audited and fixed `src/pc/game_loop.c` to hook up the Netplay broadcast loop (`Net_BroadcastPos`, `Net_Receive`, `Net_UpdateRemoteMachines`) properly inside `Game_RunFrame`.
 - **Tested:** Built natively via `make test` which passes correctly.
 - **Next:** Continue replacing the remaining hardcoded mock pointers scattered in UI screens or logic to point to the `Dynamic_Asset_Loader` properly.
+
+**Update (Session 29):**
+- **Analyzed:** Tracked request to document the remaining `D_80` hardcoded global data pointers for the shiftability phase.
+- **Implemented:**
+  1. Audited `src/*.c` and `src/pc/*.c` to catalog all `D_80...` global data pointers.
+  2. Identified approximately 120 unique hardcoded data pointers. Grouped them into categories (Audio States, Lookup Tables, Framebuffers, Debug Strings) and documented them in `MEMORY.md`.
+  3. Updated `ROADMAP.md` to reflect that the `Dynamic_Asset_Loader` is active and the next actionable shiftability milestone is refactoring these `D_80` globals into properly typed C variables.
+- **Tested:** Built natively via `make test` which passes correctly.
+- **Next:** Refactor the documented `D_80` variables in `MEMORY.md` into explicit variables within `ultra_impl.c` or appropriate subsystems. Note: Code review indicated issues with previous mass-stubbing of `GLOBAL_ASM` affecting global compilation, but our current branch's isolated scope (`src/pc`) complies properly. The broader engine refactor will need signature inference.

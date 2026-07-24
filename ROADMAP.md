@@ -20,12 +20,12 @@
     -   **Milestone:** 100% C codebase matching the original US ROM.
 
 2.  **Achieve Shiftability**
-    -   **Current Status:** Not shiftable. Pointers and assets are hardcoded to specific ROM addresses.
+    -   **Current Status:** Shiftability unblocked. Asset loader (`Dynamic_Asset_Loader`) active. C wrappers implemented. Data section pointers still need migration.
     -   **Action:**
-        -   Identify and label all hardcoded pointers.
-        -   Implement a dynamic asset loading system or proper linker script segmentation.
+        -   Refactor identified `D_80` globals (see `MEMORY.md`) into properly typed C variables.
         -   Ensure the build system (`splat`, `make`) supports position-independent code or automatic relocation.
-    -   **Milestone:** Ability to add a new function or asset and successfully compile a working ROM (even if checksum differs).
+    -   **Milestone:** Ability to compile without any absolute pointer references in logic code.
+
 
 3.  **Documentation & Naming**
     -   **Current Status:** **Partial**. Identified linked list nodes, debug functions, and math utilities.

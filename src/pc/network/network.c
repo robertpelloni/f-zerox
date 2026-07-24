@@ -280,6 +280,13 @@ void Net_Receive(void) {
 
 
 
+bool Net_IsMachineActive(int index) {
+    if (index >= 0 && index < MAX_NET_MACHINES) {
+        return sNetActive[index];
+    }
+    return false;
+}
+
 void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
     uint32_t now = HAL_GetTimeMillis();
 
@@ -336,19 +343,19 @@ void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
 
                         // Shortest Path Angle Lerp for Yaw
                         float diffYaw = newer->yaw - older->yaw;
-                        while (diffYaw > 180.0f) diffYaw -= 360.0f;
-                        while (diffYaw < -180.0f) diffYaw += 360.0f;
+                        diffYaw = fmodf(diffYaw + 180.0f, 360.0f) - 180.0f;
+                        if (diffYaw < -180.0f) diffYaw += 360.0f;
                         machines[i].yaw = older->yaw + diffYaw * t;
 
                         // Same for pitch and roll if necessary
                         float diffPitch = newer->pitch - older->pitch;
-                        while (diffPitch > 180.0f) diffPitch -= 360.0f;
-                        while (diffPitch < -180.0f) diffPitch += 360.0f;
+                        diffPitch = fmodf(diffPitch + 180.0f, 360.0f) - 180.0f;
+                        if (diffPitch < -180.0f) diffPitch += 360.0f;
                         machines[i].pitch = older->pitch + diffPitch * t;
 
                         float diffRoll = newer->roll - older->roll;
-                        while (diffRoll > 180.0f) diffRoll -= 360.0f;
-                        while (diffRoll < -180.0f) diffRoll += 360.0f;
+                        diffRoll = fmodf(diffRoll + 180.0f, 360.0f) - 180.0f;
+                        if (diffRoll < -180.0f) diffRoll += 360.0f;
                         machines[i].roll = older->roll + diffRoll * t;
 
                         machines[i].up[0] = older->up[0] + (newer->up[0] - older->up[0]) * t;
@@ -418,18 +425,18 @@ void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
             machines[i].z += dz * k;
 
             float diffYaw = latest->yaw - machines[i].yaw;
-            while (diffYaw > 180.0f) diffYaw -= 360.0f;
-            while (diffYaw < -180.0f) diffYaw += 360.0f;
+            diffYaw = fmodf(diffYaw + 180.0f, 360.0f) - 180.0f;
+            if (diffYaw < -180.0f) diffYaw += 360.0f;
             machines[i].yaw += diffYaw * k;
 
             float diffPitch = latest->pitch - machines[i].pitch;
-            while (diffPitch > 180.0f) diffPitch -= 360.0f;
-            while (diffPitch < -180.0f) diffPitch += 360.0f;
+            diffPitch = fmodf(diffPitch + 180.0f, 360.0f) - 180.0f;
+            if (diffPitch < -180.0f) diffPitch += 360.0f;
             machines[i].pitch += diffPitch * k;
 
             float diffRoll = latest->roll - machines[i].roll;
-            while (diffRoll > 180.0f) diffRoll -= 360.0f;
-            while (diffRoll < -180.0f) diffRoll += 360.0f;
+            diffRoll = fmodf(diffRoll + 180.0f, 360.0f) - 180.0f;
+            if (diffRoll < -180.0f) diffRoll += 360.0f;
             machines[i].roll += diffRoll * k;
 
             // Lerp vectors
