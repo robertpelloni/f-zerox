@@ -24,6 +24,11 @@ extern float gPlayerSpeedRatio;
 
 void Game_Init(void) {
     printf("Game Loop: Initializing...\n");
+
+    // Initialize procedural assets
+    extern void Assets_Init(void);
+    Assets_Init();
+
     Physics_Init(&gPlayerVehicle);
     Track_Init();
     Race_Init();
@@ -102,20 +107,10 @@ void Game_RunFrame(void) {
     }
 
     // 2.5 Race Logic Update
-    // We update rankings by providing the active machines.
-    // For now, let's construct an array with the player at index 0 and others if active.
-    Vehicle activeMachines[30];
-    activeMachines[0] = gPlayerVehicle;
-    int numActive = 1;
-
-    for (int i = 1; i < 30; i++) {
-        if (gMachines[i].y > -9000.0f) {
-            activeMachines[numActive] = gMachines[i];
-            numActive++;
-        }
-    }
-
-    Race_UpdateRankings(activeMachines, numActive);
+    // Update rankings using the full array of machines to preserve indices
+    // Make sure player is mapped to index 0.
+    gMachines[0] = gPlayerVehicle;
+    Race_UpdateRankings(gMachines, 30);
     Race_Update();
 
     // 3. Camera Update
@@ -207,4 +202,29 @@ void Game_RunFrame(void) {
     Particles_Render();
 
     Fast3D_Render();
+
+    // Debug Visualization output for integration tests
+    if (gConfig.debug_overlay) {
+        static int frameCount = 0;
+        if (frameCount % 60 == 0) { // Print once a second to avoid spam
+            extern void* Asset_GetByAddress(uint32_t address);
+            extern bool Net_IsMachineActive(int index);
+
+            int activeNetMachines = 0;
+            for (int i = 0; i < 30; i++) {
+                if (Net_IsMachineActive(i)) {
+                    activeNetMachines++;
+                }
+            }
+
+            printf("[DEBUG] --- Runtime Integration Validation ---\n");
+            printf("[DEBUG] Procedural Model Asset (0x80800000): %s\n", Asset_GetByAddress(0x80800000) ? "OK" : "MISSING");
+            printf("[DEBUG] Procedural Texture Asset (0x80800100): %s\n", Asset_GetByAddress(0x80800100) ? "OK" : "MISSING");
+            printf("[DEBUG] Netplay Active Connections: %d/30\n", activeNetMachines);
+            printf("[DEBUG] Player Velocity: %.2f | XYZ: (%.1f, %.1f, %.1f)\n",
+                   gPlayerVehicle.velocity, gPlayerVehicle.x, gPlayerVehicle.y, gPlayerVehicle.z);
+            printf("[DEBUG] ----------------------------------------\n");
+        }
+        frameCount++;
+    }
 }

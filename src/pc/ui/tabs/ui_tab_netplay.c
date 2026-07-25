@@ -47,6 +47,26 @@ void UI_Tab_Netplay(struct nk_context *ctx) {
         nk_group_end(ctx);
     }
 
+    UI_Header(ctx, "Active Players in Lobby");
+    nk_layout_row_dynamic(ctx, 150, 1);
+    if (nk_group_begin(ctx, "PlayerList", NK_WINDOW_BORDER)) {
+        nk_layout_row_dynamic(ctx, 20, 1);
+        extern bool Net_IsMachineActive(int index);
+        int activeCount = 0;
+        for (int i = 0; i < 30; i++) {
+            if (Net_IsMachineActive(i)) {
+                char playerText[64];
+                snprintf(playerText, sizeof(playerText), "Machine %d - ACTIVE", i);
+                nk_label(ctx, playerText, NK_TEXT_LEFT);
+                activeCount++;
+            }
+        }
+        if (activeCount == 0) {
+            nk_label(ctx, "No active remote machines detected.", NK_TEXT_LEFT);
+        }
+        nk_group_end(ctx);
+    }
+
     UI_Header(ctx, "Direct Connection");
     nk_layout_row_dynamic(ctx, 30, 2);
     nk_edit_string_zero_terminated(ctx, NK_EDIT_FIELD, gConfig.server_ip, sizeof(gConfig.server_ip), nk_filter_default);
