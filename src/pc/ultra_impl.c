@@ -42,6 +42,12 @@ s32 D_800E4650 = 0;
 
 s16 D_800CD168 = 0;
 
+// Shiftable Game State Cycle variables (formerly D_800DCD04, D_800DCD08, D_800DCD0C, D_800DCCF8)
+s32 gGameStateCycleA = 0;
+s32 gGameStateCycleB = 0;
+s32 gGameStateCycleC = 0;
+s32 gGameStateControlMask = 0;
+
 
 
 // Stubs for functions called by func_80068B20

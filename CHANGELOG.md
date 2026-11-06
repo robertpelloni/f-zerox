@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.26] - 2026-11-06
+### Added
+- **Decompilation**: Expanded comprehensive unit tests in `tests/test_math_utils.c` covering `System_Init`, `System_SetTime`, `StateMachine_ExecuteCurrentState`, `Controller_ResetMachineStates`, `Math_Rand`, and trigonometry functions (`Math_SinS`, `Math_CosS`, `Math_SqrtF`).
+- **UI**: Added a "Decompilation & Shiftability Monitor" to `src/pc/ui/tabs/ui_tab_debug.c` with live indicators for `gSystemInitialized`, `gCurrentStateIndex`, and `gGameStateCycleA/B/C`, accompanied by tooltips and interactive debug triggers.
+- **Engine**: Integrated `System_Init()` execution directly into `Game_Init()` in `src/pc/game_loop.c`.
+
+### Changed
+- **Shiftability**: Refactored `D_800DCD04`, `D_800DCD08`, `D_800DCD0C`, and `D_800DCCF8` in `src/game_1AE0.c` and `include/variables.h` into named shiftable symbols (`gGameStateCycleA`, `gGameStateCycleB`, `gGameStateCycleC`, `gGameStateControlMask`) with legacy macro aliases.
+- **Architecture**: Refactored `gStateHandlers` jump table in `src/math_utils.c` to `uintptr_t` for 64-bit safe pointer handling without integer-to-pointer truncation.
+
+### Fixed
+- **Testing**: Resolved duplicate `DebugText_AddString` linker error in `tests/stubs.c`.
+- **Logic**: Corrected reverse iteration boundary logic in `Controller_ResetMachineStates()` in `src/math_utils.c`.
+
 ## [0.1.22] - 2026-05-21
 ### Added
 - **Netplay**: Implemented `Net_ConnectLobby` handshake protocol to negotiate and assign Player IDs dynamically, resolving collisions instead of relying on immediate randomized broadcast.

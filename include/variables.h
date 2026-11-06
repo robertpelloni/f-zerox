@@ -6,7 +6,8 @@ extern s32 D_80025D78;
 extern s32 D_8002AA18;
 extern s32 D_800CD510;
 extern s16 gDebugMode;
-extern s32 gStateHandlers[];
+#include <stdint.h>
+extern uintptr_t gStateHandlers[];
 extern s32 D_800CD520;
 extern s32 D_800D0AC0;
 extern s32 D_800D0AC4;
@@ -31,10 +32,16 @@ extern s32 D_800D4854;
 extern s32 D_800D4870;
 extern s32 D_800D488C;
 extern s16 gSystemFullyInitialized;
-extern s32 D_800DCCF8;
-extern s32 D_800DCD04;
-extern s32 D_800DCD08;
-extern s32 D_800DCD0C;
+// Shiftable Game State Cycle variables (formerly D_800DCD04, D_800DCD08, D_800DCD0C, D_800DCCF8)
+extern s32 gGameStateCycleA;
+extern s32 gGameStateCycleB;
+extern s32 gGameStateCycleC;
+extern s32 gGameStateControlMask;
+
+#define D_800DCD04 gGameStateCycleA
+#define D_800DCD08 gGameStateCycleB
+#define D_800DCD0C gGameStateCycleC
+#define D_800DCCF8 gGameStateControlMask
 extern s32 gCurrentStateIndex;
 extern s32 gUnknownStateVar;
 extern s32 gSystemInitialized;

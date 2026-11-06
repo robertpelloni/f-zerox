@@ -1,5 +1,6 @@
 #include "pc/ui/ui_helpers.h"
 #include "pc/configfile.h"
+#include "variables.h"
 #include <stdio.h>
 
 // Mock Game State for Debugging (since we don't have full decomp yet)
@@ -8,6 +9,9 @@ static float sMockPlayerY = 50.0f;
 static float sMockPlayerZ = -200.0f;
 static float sMockSpeed = 1200.0f;
 
+extern void System_Init(void);
+extern void GameState_RotateCycle(void);
+
 void UI_Tab_Debug(struct nk_context *ctx) {
     UI_Header(ctx, "Developer Tools");
 
@@ -15,6 +19,36 @@ void UI_Tab_Debug(struct nk_context *ctx) {
     int overlay = gConfig.debug_overlay;
     UI_Checkbox(ctx, "Enable Debug Overlay", &overlay, "Show debug text.");
     gConfig.debug_overlay = overlay;
+
+    if (nk_tree_push(ctx, NK_TREE_TAB, "Decompilation & Shiftability Monitor", NK_MINIMIZED)) {
+        nk_layout_row_dynamic(ctx, 20, 1);
+
+        char initBuf[96];
+        snprintf(initBuf, sizeof(initBuf), "System Init: 0x%08X (Ready: %s)",
+                 gSystemInitialized,
+                 gSystemFullyInitialized ? "YES" : "NO");
+        UI_Label(ctx, initBuf, NK_TEXT_LEFT, "Status of authentic N64 System_Init boot state (magic 0x20DE1529).");
+
+        char stateBuf[64];
+        snprintf(stateBuf, sizeof(stateBuf), "State Index: %d | Active: %d",
+                 gCurrentStateIndex, gStateMachineActive);
+        UI_Label(ctx, stateBuf, NK_TEXT_LEFT, "Current N64 state machine index and active execution flag.");
+
+        char cycleBuf[96];
+        snprintf(cycleBuf, sizeof(cycleBuf), "Cycle A:%d B:%d C:%d",
+                 gGameStateCycleA, gGameStateCycleB, gGameStateCycleC);
+        UI_Label(ctx, cycleBuf, NK_TEXT_LEFT, "Shifted 3-register cycle (formerly D_800DCD04-0C) in game_1AE0.c.");
+
+        nk_layout_row_dynamic(ctx, 25, 2);
+        if (nk_button_label(ctx, "Re-trigger System_Init")) {
+            System_Init();
+        }
+        if (nk_button_label(ctx, "Step Rotate Cycle")) {
+            GameState_RotateCycle();
+        }
+
+        nk_tree_pop(ctx);
+    }
 
     if (nk_tree_push(ctx, NK_TREE_TAB, "Variable Watcher (Live)", NK_MINIMIZED)) {
         nk_layout_row_dynamic(ctx, 20, 1);

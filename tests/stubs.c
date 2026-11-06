@@ -40,4 +40,3 @@ void HAL_Audio_QueueSamples(const int16_t* samples, int count) { (void)samples; 
 
 
 
-void DebugText_AddString(void* a, void* b) {}

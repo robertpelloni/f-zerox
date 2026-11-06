@@ -47,7 +47,8 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 - `D_800E33C0`: A lookup array or table. Populated via `func_8006D414` and accessed via `func_8006D448` in `game_73F0.c`.
 - `D_800D1A3C` / `D_800D1A20` / `D_800D1A48` / `D_800D19E0` / `D_800D1C18`: Audio state machine flags used in `game_511D0.c` (libaudio backend interactions).
 - `D_800D0AC0` / `D_800D0AC4`: Unknown subsystem globals set in `game_459A0.c`.
-- `D_800DCD04` through `D_800DCD0C`: Cycle registers managed in `game_1AE0.c`.
+- `D_800DCD04` through `D_800DCD0C`: Cycle registers managed in `game_1AE0.c` (Refactored to `gGameStateCycleA/B/C`, `gGameStateControlMask`).
+- `gStateHandlers`: State machine function pointer table in `src/math_utils.c` converted to `uintptr_t` for 64-bit portability.
 - `D_800D46C0` through `D_800D488C`: A block of variables exclusively used as format or parameter strings for `func_8007FB80` (debug text rendering) in `debug_text.c`.
 - `D_800CD170` / `D_800CD174`: Seed states for `Math_Rand` PRNG in `math_utils.c` (successfully mapped in the PC port).
 - `D_8010B7B0`: Struct containing unknowns, initialized in `game_73F0.c`.

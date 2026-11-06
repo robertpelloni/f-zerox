@@ -1,6 +1,17 @@
 # Session Handoff & Memory Log
 
-## Recent Activity
+## Recent Activity (Version 0.1.26)
+- **Unit Test Runner Fixed**: Resolved duplicate `DebugText_AddString` symbol between `tests/stubs.c` and `debug_text_hook.c`. `make -f Makefile.pc test` now builds and passes all test suites cleanly.
+- **Decompilation & Shiftability Advancement**:
+  - Converted `gStateHandlers` from `s32` to `uintptr_t` across `include/variables.h` and `src/math_utils.c`, ensuring 64-bit safe function pointer invocations without integer-to-pointer casting warnings.
+  - Refactored hardcoded N64 cycle registers `D_800DCD04`, `D_800DCD08`, `D_800DCD0C`, and `D_800DCCF8` in `src/game_1AE0.c` into named shiftable globals `gGameStateCycleA`, `gGameStateCycleB`, `gGameStateCycleC`, and `gGameStateControlMask`, retaining macro compatibility in `include/variables.h`.
+  - Wired `System_Init()` execution directly into the PC `Game_Init()` lifecycle in `src/pc/game_loop.c`.
+  - Fixed backward iteration boundary handling in `Controller_ResetMachineStates()` in `src/math_utils.c`.
+  - Expanded unit tests in `tests/test_math_utils.c` to test `System_Init`, `System_SetTime`, `StateMachine_ExecuteCurrentState`, `Math_Rand`, `Controller_ResetMachineStates`, and trigonometric functions.
+- **UI Enhancements**: Added an interactive "Decompilation & Shiftability Monitor" to `src/pc/ui/tabs/ui_tab_debug.c` with live indicators for `gSystemInitialized`, `gCurrentStateIndex`, and the rotated cycle registers, complete with tooltips and manual debug trigger actions.
+- Bumped version to `0.1.26` across `VERSION.md`, `CHANGELOG.md`, `ROADMAP.md`, `TODO.md`, `MEMORY.md`, and `PROJECT_DASHBOARD.md`.
+
+## Previous Activity
 - Fixed catastrophic build linkage issues. Bypassed custom N64 macro redefinition issues by adjusting header includes across multiple source files: `ai_system.c`, `assets.c`, `race_logic.c`, `track_editor.c`, `particles.c` and `debug_text_hook.c`.
 - Restored standard include files (`stdlib.h`, `stdbool.h`, `stdint.h`) enabling stable isolated compilation (`make -f Makefile.pc` completes successfully) for `fzerox_pc`.
 - Resolved missing `Model` definition in `include/pc/assets/obj_loader.h`.

@@ -12,6 +12,7 @@
 | **Arcade I/O** | Calibration UI | **Implemented** | Serial output for motion seats. |
 | **Save/Load** | Editor UI | **Implemented** | Binary format for tracks. |
 | **Modding** | N/A | **Implemented** | OBJ Loader active for Blue Falcon replacement. |
+| **Decomp & Shiftability** | Monitor in Debug Tab | **Active** | System_Init wired, 64-bit safe pointer tables, cycle registers decoupled. |
 
 1.  **Complete Decompilation**
     -   **Current Status:** ~10% decompiled. **Documentation Phase Active** (due to missing ROM).

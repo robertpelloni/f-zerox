@@ -24,6 +24,10 @@
 
 ## Decompilation
 - [x] **Math Utils:** Decompile all 100% logic in `src/math_utils.c`.
+- [x] **Unit Testing:** Comprehensive test runner validation for `System_Init`, `StateMachine`, `Controller_ResetMachineStates`, `Math_Rand`, and trig.
+- [ ] **State Logic:** Progressively decompile and match remaining stubs in `src/game_10490.c` and `src/game_73F0.c`.
 
 ## Engine / Shiftability
 - [x] **Data:** Decouple hardcoded IDO pointers into linkable symbols.
+- [x] **64-bit Portability:** Convert state handler function pointer tables (`gStateHandlers`) to `uintptr_t`.
+- [x] **Cycle Registers:** Decouple and name cycle registers in `game_1AE0.c` (`gGameStateCycleA/B/C`, `gGameStateControlMask`).
