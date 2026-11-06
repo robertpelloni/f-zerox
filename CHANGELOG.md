@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.27] - 2026-11-06
+### Added
+- **Audio Shiftability**: Refactored audio state globals (`D_800D1A3C`, `D_800D1A20`, `D_800D1A48`, `D_800D19E0`, `D_800D1A18`, `D_800D1A0C`, `D_800D1C18`) into typed C symbols (`gAudioStateParamA/B/C`, `gAudioStateActiveFlag`, `gAudioStatePlayTrigger`, `gAudioStateResetFlag`, `gAudioStateStatus`) with PascalCase function aliases in `src/audio_state.c` and `src/game_511D0.c`.
+- **UI**: Added Audio State monitoring and trigger controls to the Decompilation & Shiftability monitor in `src/pc/ui/tabs/ui_tab_debug.c`.
+- **Testing**: Added `test_audio_state_mutations` in `tests/test_math_utils.c` covering all audio state mutations.
+
 ## [0.1.26] - 2026-11-06
 ### Added
 - **Decompilation**: Expanded comprehensive unit tests in `tests/test_math_utils.c` covering `System_Init`, `System_SetTime`, `StateMachine_ExecuteCurrentState`, `Controller_ResetMachineStates`, `Math_Rand`, and trigonometry functions (`Math_SinS`, `Math_CosS`, `Math_SqrtF`).

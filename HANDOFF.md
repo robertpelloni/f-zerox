@@ -1,6 +1,15 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.26)
+## Recent Activity (Version 0.1.27)
+- **Audio State Machine Shiftability**:
+  - Decoupled hardcoded N64 audio state registers (`D_800D1A3C`, `D_800D1A20`, `D_800D1A48`, `D_800D19E0`, `D_800D1A18`, `D_800D1A0C`, `D_800D1C18`) into typed C symbols (`gAudioStateParamA/B/C`, `gAudioStateActiveFlag`, `gAudioStatePlayTrigger`, `gAudioStateResetFlag`, `gAudioStateStatus`) across `include/variables.h`, `src/pc/libaudio_impl.c`, `src/audio_state.c`, and `src/game_511D0.c`.
+  - Added PascalCase aliases (`AudioState_SetParamA`, `AudioState_SetParamB`, `AudioState_Activate`, `AudioState_TriggerPlay`, `AudioState_SetAlternativeMode`, `AudioState_SetParamC`, `AudioState_TriggerReset`).
+  - Added `test_audio_state_mutations` in `tests/test_math_utils.c` validating state transformations; test suite increased to 7 passing tests.
+  - Linked `src/audio_state.o` into `Makefile.pc` test runner.
+  - Added live audio state monitoring and trigger controls to the UI debug tab in `src/pc/ui/tabs/ui_tab_debug.c`.
+  - Bumped version to `0.1.27` across all documentation.
+
+## Previous Activity (Version 0.1.26)
 - **Unit Test Runner Fixed**: Resolved duplicate `DebugText_AddString` symbol between `tests/stubs.c` and `debug_text_hook.c`. `make -f Makefile.pc test` now builds and passes all test suites cleanly.
 - **Decompilation & Shiftability Advancement**:
   - Converted `gStateHandlers` from `s32` to `uintptr_t` across `include/variables.h` and `src/math_utils.c`, ensuring 64-bit safe function pointer invocations without integer-to-pointer casting warnings.

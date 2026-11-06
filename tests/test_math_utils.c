@@ -16,6 +16,15 @@ float Math_SinS(int16_t angle);
 float Math_CosS(int16_t angle);
 float Math_SqrtF(float value);
 
+// Declarations of decompiled audio state functions from audio_state.c
+void func_800BA2D0(s8 arg0);
+void func_800BA2E0(s8 arg0);
+void func_800BAFF4(void);
+void func_800BB038(void);
+void func_800BB09C(void);
+void func_800BB324(s8 arg0);
+void func_800BB45C(void);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -104,6 +113,37 @@ static char * test_trig_functions() {
     return 0;
 }
 
+static char * test_audio_state_mutations() {
+    gAudioStateParamA = 0;
+    func_800BA2D0(15);
+    mu_assert("func_800BA2D0 failed", gAudioStateParamA == 15);
+
+    gAudioStateParamB = 0;
+    func_800BA2E0(-8);
+    mu_assert("func_800BA2E0 failed", gAudioStateParamB == -8);
+
+    gAudioStateActiveFlag = 0;
+    func_800BAFF4();
+    mu_assert("func_800BAFF4 failed", gAudioStateActiveFlag == 1);
+
+    gAudioStatePlayTrigger = 0;
+    func_800BB038();
+    mu_assert("func_800BB038 failed", gAudioStatePlayTrigger == 1);
+
+    gAudioStateParamC = 0;
+    func_800BB324(25);
+    mu_assert("func_800BB324 failed", gAudioStateParamC == 25);
+
+    gAudioStateResetFlag = 0;
+    func_800BB45C();
+    mu_assert("func_800BB45C failed", gAudioStateResetFlag == 1);
+
+    gAudioStateActiveFlag = 0;
+    func_800BB09C();
+    mu_assert("func_800BB09C failed", gAudioStateActiveFlag == 3);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -111,6 +151,7 @@ static char * all_tests() {
     mu_run_test(test_math_rand);
     mu_run_test(test_controller_reset_machine_states);
     mu_run_test(test_trig_functions);
+    mu_run_test(test_audio_state_mutations);
     return 0;
 }
 

@@ -59,11 +59,23 @@ extern s32 D_A4500000;
 extern s32 D_A4500004;
 extern s32 D_A450000C;
 extern s8 D_8002B348;
-extern s8 D_800D19E0;
-extern s8 D_800D1A0C;
-extern s8 D_800D1A18;
-extern s8 D_800D1A20;
-extern s8 D_800D1A3C;
+// Shiftable Audio State Variables
+extern s8 gAudioStateParamA;
+extern s8 gAudioStateParamB;
+extern u8 gAudioStateActiveFlag;
+extern s8 gAudioStatePlayTrigger;
+extern s8 gAudioStateParamC;
+extern s8 gAudioStateResetFlag;
+extern s32 gAudioStateStatus;
+
+#define D_800D1A3C gAudioStateParamA
+#define D_800D1A20 gAudioStateParamB
+#define D_800D1A48 gAudioStateActiveFlag
+#define D_800D19E0 gAudioStatePlayTrigger
+#define D_800D1A18 gAudioStateParamC
+#define D_800D1A0C gAudioStateResetFlag
+#define D_800D1C18 gAudioStateStatus
+
 extern s16 D_800CD168;
 extern s8 D_800D4690;
 extern s8 D_800E4175;
@@ -72,7 +84,6 @@ extern s16 gStateMachineActive;
 extern u8 D_8002B346;
 extern u8 D_8002B347;
 extern u8 D_800D16D0;
-extern u8 D_800D1A48;
 extern void* D_800F8510;
 extern s32 D_800E33C0[];
 extern s32 D_800E4068;

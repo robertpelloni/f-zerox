@@ -39,12 +39,21 @@ void UI_Tab_Debug(struct nk_context *ctx) {
                  gGameStateCycleA, gGameStateCycleB, gGameStateCycleC);
         UI_Label(ctx, cycleBuf, NK_TEXT_LEFT, "Shifted 3-register cycle (formerly D_800DCD04-0C) in game_1AE0.c.");
 
-        nk_layout_row_dynamic(ctx, 25, 2);
+        char audioStateBuf[96];
+        snprintf(audioStateBuf, sizeof(audioStateBuf), "Audio State Act:%d Play:%d Reset:%d",
+                 gAudioStateActiveFlag, gAudioStatePlayTrigger, gAudioStateResetFlag);
+        UI_Label(ctx, audioStateBuf, NK_TEXT_LEFT, "Shifted audio state flags (formerly D_800D1A48, D_800D19E0, D_800D1A0C).");
+
+        nk_layout_row_dynamic(ctx, 25, 3);
         if (nk_button_label(ctx, "Re-trigger System_Init")) {
             System_Init();
         }
         if (nk_button_label(ctx, "Step Rotate Cycle")) {
             GameState_RotateCycle();
+        }
+        if (nk_button_label(ctx, "Toggle Audio Trigger")) {
+            extern void AudioState_TriggerPlay(void);
+            AudioState_TriggerPlay();
         }
 
         nk_tree_pop(ctx);

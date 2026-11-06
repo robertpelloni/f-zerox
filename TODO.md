@@ -31,3 +31,4 @@
 - [x] **Data:** Decouple hardcoded IDO pointers into linkable symbols.
 - [x] **64-bit Portability:** Convert state handler function pointer tables (`gStateHandlers`) to `uintptr_t`.
 - [x] **Cycle Registers:** Decouple and name cycle registers in `game_1AE0.c` (`gGameStateCycleA/B/C`, `gGameStateControlMask`).
+- [x] **Audio State Globals:** Decouple and name audio state variables (`gAudioStateParamA/B/C`, `gAudioStateActiveFlag`, `gAudioStatePlayTrigger`, `gAudioStateResetFlag`, `gAudioStateStatus`).
