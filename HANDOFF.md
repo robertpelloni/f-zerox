@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.27)
+## Recent Activity (Version 0.1.28)
+- **Linked List Node 64-bit Shiftability**:
+  - Refactored `struct UnkStruct_1` into a 64-bit safe self-referencing structure `ListNode` with union-aliased pointers (`next`, `prev`) and `uintptr_t unk8` in `include/structs.h`.
+  - Implemented `List_InitNode` in `src/linked_list.c`, safely linking nodes circularly (`node->next = node; node->prev = node; node->unk8 = 0;`).
+  - Added unit test `test_linked_list_init` in `tests/test_math_utils.c`.
+  - Integrated `src/linked_list.o` into `Makefile.pc` test suite (all 8 tests passing).
+  - Bumped version to `0.1.28` across all documentation.
+
+## Previous Activity (Version 0.1.27)
 - **Audio State Machine Shiftability**:
   - Decoupled hardcoded N64 audio state registers (`D_800D1A3C`, `D_800D1A20`, `D_800D1A48`, `D_800D19E0`, `D_800D1A18`, `D_800D1A0C`, `D_800D1C18`) into typed C symbols (`gAudioStateParamA/B/C`, `gAudioStateActiveFlag`, `gAudioStatePlayTrigger`, `gAudioStateResetFlag`, `gAudioStateStatus`) across `include/variables.h`, `src/pc/libaudio_impl.c`, `src/audio_state.c`, and `src/game_511D0.c`.
   - Added PascalCase aliases (`AudioState_SetParamA`, `AudioState_SetParamB`, `AudioState_Activate`, `AudioState_TriggerPlay`, `AudioState_SetAlternativeMode`, `AudioState_SetParamC`, `AudioState_TriggerReset`).

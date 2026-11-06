@@ -25,6 +25,10 @@ void func_800BB09C(void);
 void func_800BB324(s8 arg0);
 void func_800BB45C(void);
 
+// Declarations of linked list functions
+void List_InitNode(struct UnkStruct_1* node);
+void func_800AAF9C(struct UnkStruct_1* node);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -144,6 +148,19 @@ static char * test_audio_state_mutations() {
     return 0;
 }
 
+static char * test_linked_list_init() {
+    struct UnkStruct_1 node;
+    node.next = NULL;
+    node.prev = NULL;
+    node.unk8 = 0x1234;
+
+    func_800AAF9C(&node);
+    mu_assert("List_InitNode next ptr self-reference failed", node.next == &node);
+    mu_assert("List_InitNode prev ptr self-reference failed", node.prev == &node);
+    mu_assert("List_InitNode unk8 zero failed", node.unk8 == 0);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -152,6 +169,7 @@ static char * all_tests() {
     mu_run_test(test_controller_reset_machine_states);
     mu_run_test(test_trig_functions);
     mu_run_test(test_audio_state_mutations);
+    mu_run_test(test_linked_list_init);
     return 0;
 }
 

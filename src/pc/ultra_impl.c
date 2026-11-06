@@ -71,6 +71,10 @@ void* osViGetCurrentFramebuffer(void) {
     return NULL; // Stub
 }
 
+// Stubs for functions called by linked_list.c
+s32 func_800AC830(void) { return 0; }
+void func_800AC7F0(s32 a, s32 b) { (void)a; (void)b; }
+
 // Stubs for functions called by game_197D0.c
 void func_8007F86C(void* a, void* b, void* c, void* d, void* e) { (void)a; }
 void func_8007F970(void) {}

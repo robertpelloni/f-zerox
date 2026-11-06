@@ -11,12 +11,20 @@ struct UnkStruct_0 {
     s8 unk3;
 };
 
-// Likely a Linked List Node (circular)
+// Likely a Linked List Node (circular) - 64-bit safe representation
 struct UnkStruct_1 {
-    s32 unk0; // next or prev
-    s32 unk4; // prev or next
-    s32 unk8; // value or type?
+    union {
+        struct UnkStruct_1* next;
+        void* unk0;
+    };
+    union {
+        struct UnkStruct_1* prev;
+        void* unk4;
+    };
+    uintptr_t unk8; // value or flags
 };
+
+typedef struct UnkStruct_1 ListNode;
 
 struct UnkStruct_2 {
     s32 unk0;

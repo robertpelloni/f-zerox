@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.28] - 2026-11-06
+### Added
+- **Shiftability & Data Structures**: Refactored `struct UnkStruct_1` into 64-bit safe self-referencing `ListNode` with typed `next`/`prev` pointers in `include/structs.h`.
+- **Linked List Decomp**: Implemented `List_InitNode` in `src/linked_list.c` for circular node self-initialization.
+- **Testing**: Added `test_linked_list_init` to `tests/test_math_utils.c` and integrated `src/linked_list.o` into `Makefile.pc` test suite (8 tests passing).
+
 ## [0.1.27] - 2026-11-06
 ### Added
 - **Audio Shiftability**: Refactored audio state globals (`D_800D1A3C`, `D_800D1A20`, `D_800D1A48`, `D_800D19E0`, `D_800D1A18`, `D_800D1A0C`, `D_800D1C18`) into typed C symbols (`gAudioStateParamA/B/C`, `gAudioStateActiveFlag`, `gAudioStatePlayTrigger`, `gAudioStateResetFlag`, `gAudioStateStatus`) with PascalCase function aliases in `src/audio_state.c` and `src/game_511D0.c`.
