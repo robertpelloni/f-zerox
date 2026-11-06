@@ -1,6 +1,7 @@
 #include "pc/ultra64.h"
 #include "pc/hal.h"
 #include "pc/debug_text_hook.h"
+#include "structs.h"
 #include <stdio.h>
 
 // Mock Global Variables (usually defined in ld script or asm)
@@ -47,6 +48,10 @@ s32 gGameStateCycleA = 0;
 s32 gGameStateCycleB = 0;
 s32 gGameStateCycleC = 0;
 s32 gGameStateControlMask = 0;
+
+// Shiftable Track / Subsystem Lookup Table
+s32 gTrackLookupTable[22] = {0};
+struct UnkStruct_4 D_8010B7B0;
 
 
 

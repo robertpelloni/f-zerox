@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.29] - 2026-11-06
+### Added
+- **Track Subsystem Shiftability**: Decompiled and shifted `D_800E33C0` into typed `gTrackLookupTable[22]` with helper functions `TrackLookup_ValidateIndex`, `TrackLookup_SetEntry`, and `TrackLookup_GetEntry` in `src/game_73F0.c` and `include/variables.h`.
+- **Testing**: Added `test_track_lookup_table` in `tests/test_math_utils.c` and integrated `src/game_73F0.o` into the `Makefile.pc` test runner (9 tests passing).
+
 ## [0.1.28] - 2026-11-06
 ### Added
 - **Shiftability & Data Structures**: Refactored `struct UnkStruct_1` into 64-bit safe self-referencing `ListNode` with typed `next`/`prev` pointers in `include/structs.h`.

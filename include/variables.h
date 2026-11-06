@@ -85,7 +85,9 @@ extern u8 D_8002B346;
 extern u8 D_8002B347;
 extern u8 D_800D16D0;
 extern void* D_800F8510;
-extern s32 D_800E33C0[];
+// Shiftable Track / Subsystem Lookup Table (22 entries)
+extern s32 gTrackLookupTable[22];
+#define D_800E33C0 gTrackLookupTable
 extern s32 D_800E4068;
 
 

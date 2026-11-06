@@ -29,6 +29,11 @@ void func_800BB45C(void);
 void List_InitNode(struct UnkStruct_1* node);
 void func_800AAF9C(struct UnkStruct_1* node);
 
+// Declarations of track lookup functions from game_73F0.c
+s32 TrackLookup_ValidateIndex(s32 idx);
+void TrackLookup_SetEntry(s32 idx, s32 val);
+s32 TrackLookup_GetEntry(s32 idx);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -161,6 +166,21 @@ static char * test_linked_list_init() {
     return 0;
 }
 
+static char * test_track_lookup_table() {
+    mu_assert("TrackLookup_ValidateIndex(0) valid", TrackLookup_ValidateIndex(0) == 1);
+    mu_assert("TrackLookup_ValidateIndex(21) valid", TrackLookup_ValidateIndex(21) == 1);
+    mu_assert("TrackLookup_ValidateIndex(22) invalid", TrackLookup_ValidateIndex(22) == 0);
+    mu_assert("TrackLookup_ValidateIndex(-1) invalid", TrackLookup_ValidateIndex(-1) == 0);
+
+    TrackLookup_SetEntry(5, 4242);
+    mu_assert("TrackLookup_GetEntry(5) match", TrackLookup_GetEntry(5) == 4242);
+
+    // Invalid index should return 0 and not crash
+    TrackLookup_SetEntry(99, 1234);
+    mu_assert("TrackLookup_GetEntry(99) out of bounds", TrackLookup_GetEntry(99) == 0);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -170,6 +190,7 @@ static char * all_tests() {
     mu_run_test(test_trig_functions);
     mu_run_test(test_audio_state_mutations);
     mu_run_test(test_linked_list_init);
+    mu_run_test(test_track_lookup_table);
     return 0;
 }
 

@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.28)
+## Recent Activity (Version 0.1.29)
+- **Track Subsystem Lookup Shiftability**:
+  - Decoupled `D_800E33C0` into typed `gTrackLookupTable[22]` with accessor functions `TrackLookup_ValidateIndex`, `TrackLookup_SetEntry`, and `TrackLookup_GetEntry` in `src/game_73F0.c`, `include/variables.h`, and `src/pc/ultra_impl.c`.
+  - Added unit test `test_track_lookup_table` in `tests/test_math_utils.c`.
+  - Linked `src/game_73F0.o` into `Makefile.pc` test suite (all 9 unit tests passing).
+  - Bumped version to `0.1.29` across all documentation.
+
+## Previous Activity (Version 0.1.28)
 - **Linked List Node 64-bit Shiftability**:
   - Refactored `struct UnkStruct_1` into a 64-bit safe self-referencing structure `ListNode` with union-aliased pointers (`next`, `prev`) and `uintptr_t unk8` in `include/structs.h`.
   - Implemented `List_InitNode` in `src/linked_list.c`, safely linking nodes circularly (`node->next = node; node->prev = node; node->unk8 = 0;`).
