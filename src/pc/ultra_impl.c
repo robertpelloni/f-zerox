@@ -61,6 +61,10 @@ s32 gInitLoopCounter = 0;
 s32 gSystemStateFlag = 0;
 s32 gSystemStateParamA = 0;
 s32 gSystemStateParamB = 0;
+s32 gLowMemStatus = 0;
+u8 gLowMemInputPrev = 0;
+u8 gLowMemInputCurrent = 0;
+s8 gLowMemInputFlag = 0;
 
 
 

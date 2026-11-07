@@ -48,6 +48,7 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 - `D_800D1A3C` / `D_800D1A20` / `D_800D1A48` / `D_800D19E0` / `D_800D1C18`: Audio state machine flags used in `game_511D0.c` (libaudio backend interactions).
 - `D_800D0AC0` / `D_800D0AC4`: Machine dynamic config globals set in `game_459A0.c` (Refactored to `gDynamicMachineConfigA` / `gDynamicMachineConfigB` with `Machine_SetConfigA` / `Machine_SetConfigB`).
 - `D_800CD510` / `D_800E4264` / `D_800E4260`: System state flags and parameters in `game_194E0.c` (Refactored to `gSystemStateFlag`, `gSystemStateParamA`, `gSystemStateParamB` with `System_SetStateFlags`).
+- `D_8002B346` / `D_8002B347` / `D_8002B348` / `D_80025D78`: Low memory input and status variables in `game_4FFB0.c` (Refactored to `gLowMemInputPrev`, `gLowMemInputCurrent`, `gLowMemInputFlag`, and `gLowMemStatus` with `Input_UpdateLowMemState` and `Input_ClearLowMemStatus`).
 - `Dynamic Asset Loader`: `src/pc/assets/dynamic_asset_loader.c` maps hardcoded ROM addresses (such as `0x80800000`, `0x80800100`) to dynamically loaded PC assets; supports `Asset_GetMappingCount()` and `Asset_ClearMappings()`.
 - `D_800E5E84`: Active vehicle index in `game_1F510.c` (Refactored to `gActiveVehicleIndex` with `Vehicle_SetActiveIndex`).
 - `D_800E4068`: System initialization delay loop counter in `game_11CF0.c` (Refactored to `gInitLoopCounter` with `System_RunInitDelayLoop`).

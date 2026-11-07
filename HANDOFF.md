@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.37)
+## Recent Activity (Version 0.1.38)
+- **Low Memory State Shiftability**:
+  - Decoupled `D_8002B346`, `D_8002B347`, `D_8002B348`, and `D_80025D78` into typed `gLowMemInputPrev`, `gLowMemInputCurrent`, `gLowMemInputFlag`, and `gLowMemStatus` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `Input_UpdateLowMemState(void)` and `Input_ClearLowMemStatus(void)` with PascalCase naming in `src/game_4FFB0.c`.
+  - Added unit test `test_low_mem_state` in `tests/test_math_utils.c`.
+  - Integrated `src/game_4FFB0.o` into the `Makefile.pc` test runner (all 17 unit tests passing).
+  - Bumped version to `0.1.38` across all documentation.
+
+## Previous Activity (Version 0.1.37)
 - **Dynamic Asset Loader API & Testing**:
   - Implemented `Asset_GetMappingCount(void)` and `Asset_ClearMappings(void)` in `src/pc/assets/dynamic_asset_loader.c` and `include/pc/assets/dynamic_asset_loader.h`.
   - Added unit test `test_dynamic_asset_loader` in `tests/test_math_utils.c`.

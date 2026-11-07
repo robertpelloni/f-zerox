@@ -2,7 +2,16 @@
 #define VARIABLES_H
 
 extern s16 D_800E42CC;
-extern s32 D_80025D78;
+// Shiftable Low Memory Globals (formerly D_80025D78, D_8002B346, D_8002B347, D_8002B348)
+extern s32 gLowMemStatus;
+extern u8 gLowMemInputPrev;
+extern u8 gLowMemInputCurrent;
+extern s8 gLowMemInputFlag;
+#define D_80025D78 gLowMemStatus
+#define D_8002B346 gLowMemInputPrev
+#define D_8002B347 gLowMemInputCurrent
+#define D_8002B348 gLowMemInputFlag
+
 extern s32 D_8002AA18;
 // Shiftable System State Flag & Params (formerly D_800CD510, D_800E4264, D_800E4260)
 extern s32 gSystemStateFlag;
@@ -68,7 +77,6 @@ extern s32 D_80400008;
 extern s32 D_A4500000;
 extern s32 D_A4500004;
 extern s32 D_A450000C;
-extern s8 D_8002B348;
 // Shiftable Audio State Variables
 extern s8 gAudioStateParamA;
 extern s8 gAudioStateParamB;
@@ -93,8 +101,6 @@ extern s8 gSoundEffectBankMap;
 extern s8 D_800E4175;
 extern struct UnkStruct_4 D_8010B7B0;
 extern s16 gStateMachineActive;
-extern u8 D_8002B346;
-extern u8 D_8002B347;
 extern u8 D_800D16D0;
 extern void* D_800F8510;
 // Shiftable Track / Subsystem Lookup Table (22 entries)

@@ -63,6 +63,10 @@ void* Asset_GetByAddress(uint32_t address);
 int Asset_GetMappingCount(void);
 void Asset_ClearMappings(void);
 
+// Declarations of low memory functions from game_4FFB0.c
+void Input_UpdateLowMemState(void);
+void Input_ClearLowMemStatus(void);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -282,6 +286,21 @@ static char * test_dynamic_asset_loader() {
     return 0;
 }
 
+static char * test_low_mem_state() {
+    gLowMemInputPrev = 0x5A;
+    gLowMemInputCurrent = 0x00;
+    gLowMemInputFlag = 1;
+
+    Input_UpdateLowMemState();
+    mu_assert("Input_UpdateLowMemState copies prev to current", gLowMemInputCurrent == 0x5A);
+    mu_assert("Input_UpdateLowMemState clears flag", gLowMemInputFlag == 0);
+
+    gLowMemStatus = 0xDEAD;
+    Input_ClearLowMemStatus();
+    mu_assert("Input_ClearLowMemStatus zeroes status", gLowMemStatus == 0);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -299,6 +318,7 @@ static char * all_tests() {
     mu_run_test(test_system_init_delay_loop);
     mu_run_test(test_system_set_state_flags);
     mu_run_test(test_dynamic_asset_loader);
+    mu_run_test(test_low_mem_state);
     return 0;
 }
 

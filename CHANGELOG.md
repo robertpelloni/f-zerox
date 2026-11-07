@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.38] - 2026-11-06
+### Added
+- **Low Memory State Shiftability**: Decoupled `D_8002B346`, `D_8002B347`, `D_8002B348`, and `D_80025D78` into typed `gLowMemInputPrev`, `gLowMemInputCurrent`, `gLowMemInputFlag`, and `gLowMemStatus` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Low Memory Input Logic**: Implemented `Input_UpdateLowMemState` and `Input_ClearLowMemStatus` in `src/game_4FFB0.c`.
+- **Testing**: Added `test_low_mem_state` in `tests/test_math_utils.c` and integrated `src/game_4FFB0.o` into `Makefile.pc` (17 tests passing).
+
 ## [0.1.37] - 2026-11-06
 ### Added
 - **Dynamic Asset Loader**: Implemented `Asset_GetMappingCount` and `Asset_ClearMappings` in `src/pc/assets/dynamic_asset_loader.c` and `include/pc/assets/dynamic_asset_loader.h`.

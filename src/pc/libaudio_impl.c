@@ -2,11 +2,7 @@
 #include <stdio.h>
 
 
-// Functions called by game_511D0.c / audio_state.c
-void func_800B6994(void) {}
-s32 func_800B5FB0(void) { return 0; }
-void func_800B6F58(void) {}
-void func_800B6910(s32 a, u8 b) { (void)a; (void)b; }
+// Functions called by game_511D0.c / audio_state.c are defined in game_4FFB0.c
 
 // Variables used in game_511D0.c (externs)
 s8 gAudioStateParamA = 0;
