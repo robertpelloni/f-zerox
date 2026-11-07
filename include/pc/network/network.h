@@ -21,6 +21,8 @@ void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines);
 
 // Get lobby connections state
 bool Net_IsMachineActive(int index);
+int Net_GetConnectedCount(void);
+uint8_t Net_GetLocalPlayerId(void);
 
 // Shutdown sockets
 void Net_Shutdown(void);

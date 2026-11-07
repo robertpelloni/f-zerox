@@ -45,6 +45,8 @@ void Machine_SetConfigB(s32 val);
 
 // Declarations of network protocol functions from network.h
 bool Net_IsMachineActive(int index);
+int Net_GetConnectedCount(void);
+uint8_t Net_GetLocalPlayerId(void);
 
 // Declarations of vehicle functions from game_1F510.c
 void Vehicle_SetActiveIndex(s32 idx);
@@ -224,6 +226,9 @@ static char * test_net_is_machine_active() {
     mu_assert("Net_IsMachineActive(30) out of bounds", !Net_IsMachineActive(30));
     mu_assert("Net_IsMachineActive(99) out of bounds", !Net_IsMachineActive(99));
     mu_assert("Net_IsMachineActive(0) default local player active", Net_IsMachineActive(0));
+
+    mu_assert("Net_GetConnectedCount at least 1", Net_GetConnectedCount() >= 1);
+    mu_assert("Net_GetLocalPlayerId matches default", Net_GetLocalPlayerId() == 0);
     return 0;
 }
 

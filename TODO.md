@@ -39,3 +39,4 @@
 - [x] **Vehicle State Globals:** Decouple `D_800E5E84` into `gActiveVehicleIndex` with `Vehicle_SetActiveIndex`.
 - [x] **Init Loop Globals:** Decouple `D_800E4068` into `gInitLoopCounter` with `System_RunInitDelayLoop`.
 - [x] **Network Cleanup:** Fix duplicate function redefinitions in `network.c` and test active machine state verification.
+- [x] **Network Telemetry:** Implement `Net_GetConnectedCount` and `Net_GetLocalPlayerId` with UI status telemetry.

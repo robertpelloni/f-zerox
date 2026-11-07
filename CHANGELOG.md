@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.35] - 2026-11-06
+### Added
+- **Network Telemetry**: Implemented `Net_GetConnectedCount` and `Net_GetLocalPlayerId` in `src/pc/network/network.c` and `include/pc/network/network.h`.
+- **UI Integration**: Added live participant counter and local player ID indicator in `src/pc/ui/tabs/ui_tab_netplay.c`.
+- **Testing**: Added telemetry assertions in `tests/test_math_utils.c`.
+
 ## [0.1.34] - 2026-11-06
 ### Added
 - **Init Loop Shiftability**: Decoupled `D_800E4068` into typed `gInitLoopCounter` in `include/variables.h` and `src/pc/ultra_impl.c`.

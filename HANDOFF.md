@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.34)
+## Recent Activity (Version 0.1.35)
+- **Network Telemetry & UI Dashboard Integration**:
+  - Implemented `Net_GetConnectedCount(void)` and `Net_GetLocalPlayerId(void)` in `include/pc/network/network.h` and `src/pc/network/network.c`.
+  - Updated `src/pc/ui/tabs/ui_tab_netplay.c` to display live lobby participant count and identify the local player machine.
+  - Added unit test coverage for `Net_GetConnectedCount` and `Net_GetLocalPlayerId` in `tests/test_math_utils.c`.
+  - Bumped version to `0.1.35` across all documentation.
+
+## Previous Activity (Version 0.1.34)
 - **Initialization Loop Shiftability**:
   - Decoupled `D_800E4068` into typed `gInitLoopCounter` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `System_RunInitDelayLoop(void)` with PascalCase naming in `src/game_11CF0.c`.

@@ -467,6 +467,20 @@ bool Net_IsMachineActive(int index) {
     return sNetActive[index];
 }
 
+int Net_GetConnectedCount(void) {
+    int count = 0;
+    for (int i = 0; i < MAX_NET_MACHINES; i++) {
+        if (Net_IsMachineActive(i)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+uint8_t Net_GetLocalPlayerId(void) {
+    return sMyPlayerId;
+}
+
 void Net_Shutdown(void) {
     if (sSocket != INVALID_SOCKET) {
         closesocket(sSocket);
