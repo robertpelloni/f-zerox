@@ -1,8 +1,11 @@
 #include "common.h"
+#include <stdio.h>
 
 void func_8007F7D0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_8007F86C(void) { /* TODO: SHIFTABLE - Implement */ }
+#ifndef _PC
+void func_8007F86C(void* a, void* b, void* c, void* d, void* e);
+#endif
 
 void func_8007F904(void) {
     func_8007F86C(&D_800CD520, &D_80400008, &D_800E4350, &D_800E44D0, &D_800E4650);
@@ -11,8 +14,12 @@ void func_8007F904(void) {
 /**
  * @brief Updates the global framebuffer pointer with the current framebuffer.
  */
+void DebugText_UpdateFramebuffer(void) {
+    gCurrentFramebuffer = osViGetCurrentFramebuffer();
+}
+
 void func_8007F94C(void) {
-    D_800E4348 = osViGetCurrentFramebuffer();
+    DebugText_UpdateFramebuffer();
 }
 
 void func_8007F970(void) { /* TODO: SHIFTABLE - Implement */ }
@@ -21,7 +28,9 @@ void func_8007F9E0(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007FA64(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_8007FB80(void) { /* TODO: SHIFTABLE - Implement */ }
+#ifndef _PC
+void func_8007FB80(s32 x, s32 y, void* str);
+#endif
 
 /**
  * @brief Draws a debug integer to the screen.
@@ -31,11 +40,11 @@ void func_8007FB80(void) { /* TODO: SHIFTABLE - Implement */ }
  * @param arg0 The integer to display.
  */
 void func_8007FC68(s32 arg0) {
-    s8* sp1C;
+    char sp1C[32];
 
-    sprintf(&sp1C, &D_800D46C0, arg0);
+    sprintf(sp1C, (const char*)&D_800D46C0, arg0);
     func_8007FB80(0x61, 0x50, &D_800D46C8);
-    func_8007FB80(0xC9, 0x50, &sp1C);
+    func_8007FB80(0xC9, 0x50, sp1C);
 }
 
 void func_8007FCB8(void) {

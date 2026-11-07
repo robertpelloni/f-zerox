@@ -66,7 +66,9 @@ extern s32 gUnknownStateVar;
 extern s32 gSystemInitialized;
 extern u8 gMachineStates[592];
 extern u8 gSpecialMachineState[256];
-extern s32 D_800E4348; // gCurrentFramebuffer (Updated in game_197D0.c)
+// Shiftable Current Framebuffer pointer (formerly D_800E4348)
+extern void* gCurrentFramebuffer;
+#define D_800E4348 gCurrentFramebuffer
 extern s32 D_800E4350;
 extern s32 D_800E44D0;
 extern s32 D_800E4650;

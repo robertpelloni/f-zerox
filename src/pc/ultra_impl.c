@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 // Mock Global Variables (usually defined in ld script or asm)
-s32 D_800E4348 = 0; // gCurrentFramebuffer
+void* gCurrentFramebuffer = NULL;
 s32 D_800D46C0 = 0; // gDebugPrintFormat?
 s32 D_800D46C8 = 0;
 s32 D_800D46D8 = 0;
@@ -72,7 +72,6 @@ s8 gLowMemInputFlag = 0;
 void func_800A4BAC(void) {}
 void func_800A4B54(void) {}
 void func_800FC730(void) {}
-void func_80076848(void) {}
 void func_800FD184(s32 arg0) { (void)arg0; }
 s32 __osMotorAccess(void* pfs, s32 flag) { (void)pfs; (void)flag; return 0; }
 
@@ -80,17 +79,18 @@ OSTime osGetTime(void) {
     return (OSTime)HAL_GetTimeMillis();
 }
 
+static u32 sMockFramebuffer[320 * 240];
+
 void* osViGetCurrentFramebuffer(void) {
-    return NULL; // Stub
+    return (void*)sMockFramebuffer;
 }
 
 // Stubs for functions called by linked_list.c are implemented in game_459A0.c
 
 // Stubs for functions called by game_197D0.c
-void func_8007F86C(void* a, void* b, void* c, void* d, void* e) { (void)a; }
-void func_8007F970(void) {}
-void func_8007F9E0(void) {}
-void func_8007FA64(void) {}
+void func_8007F86C(void* a, void* b, void* c, void* d, void* e) {
+    (void)a; (void)b; (void)c; (void)d; (void)e;
+}
 
 // Hook N64 debug text into PC UI overlay
 void func_8007FB80(s32 x, s32 y, void* str) {

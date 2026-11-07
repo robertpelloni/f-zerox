@@ -67,6 +67,9 @@ void Asset_ClearMappings(void);
 void Input_UpdateLowMemState(void);
 void Input_ClearLowMemStatus(void);
 
+// Declarations of direct track lookup from game_10490.c
+s32 TrackLookup_GetEntryDirect(s32 idx, s32 unused);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -301,6 +304,27 @@ static char * test_low_mem_state() {
     return 0;
 }
 
+extern void DebugText_UpdateFramebuffer(void);
+extern void func_8007F94C(void);
+
+static char * test_track_lookup_direct() {
+    gTrackLookupTable[10] = 8888;
+    mu_assert("TrackLookup_GetEntryDirect(10, 0) matches", TrackLookup_GetEntryDirect(10, 0) == 8888);
+    mu_assert("TrackLookup_GetEntryDirect(99, 0) out of bounds returns 0", TrackLookup_GetEntryDirect(99, 0) == 0);
+    return 0;
+}
+
+static char * test_debug_text_framebuffer() {
+    gCurrentFramebuffer = NULL;
+    DebugText_UpdateFramebuffer();
+    mu_assert("error, DebugText_UpdateFramebuffer failed to populate gCurrentFramebuffer", gCurrentFramebuffer != NULL);
+
+    gCurrentFramebuffer = NULL;
+    func_8007F94C();
+    mu_assert("error, func_8007F94C alias failed to populate gCurrentFramebuffer", gCurrentFramebuffer != NULL);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -319,6 +343,8 @@ static char * all_tests() {
     mu_run_test(test_system_set_state_flags);
     mu_run_test(test_dynamic_asset_loader);
     mu_run_test(test_low_mem_state);
+    mu_run_test(test_track_lookup_direct);
+    mu_run_test(test_debug_text_framebuffer);
     return 0;
 }
 

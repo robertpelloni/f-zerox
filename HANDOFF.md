@@ -1,6 +1,21 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.38)
+## Recent Activity (Version 0.1.40)
+- **Framebuffer Pointer Decoupling & Shiftability**:
+  - Decoupled `D_800E4348` into shiftable `void* gCurrentFramebuffer` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `DebugText_UpdateFramebuffer(void)` and alias `func_8007F94C(void)` in `src/debug_text.c` and `src/game_197D0.c`.
+  - Added unit test `test_debug_text_framebuffer` in `tests/test_math_utils.c`.
+  - Integrated `src/debug_text.o` into the `Makefile.pc` test runner (all 19 unit tests passing).
+  - Bumped version to `0.1.40` across all documentation.
+
+## Previous Activity (Version 0.1.39)
+- **Track Lookup Direct Decompilation**:
+  - Implemented `TrackLookup_GetEntryDirect(s32 idx, s32 unused)` with bounds checking in `src/game_10490.c`, replacing raw `D_800E33C0[arg0]` access.
+  - Added unit test `test_track_lookup_direct` in `tests/test_math_utils.c`.
+  - Integrated `src/game_10490.o` into the `Makefile.pc` test runner (all 18 unit tests passing).
+  - Bumped version to `0.1.39` across all documentation.
+
+## Previous Activity (Version 0.1.38)
 - **Low Memory State Shiftability**:
   - Decoupled `D_8002B346`, `D_8002B347`, `D_8002B348`, and `D_80025D78` into typed `gLowMemInputPrev`, `gLowMemInputCurrent`, `gLowMemInputFlag`, and `gLowMemStatus` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `Input_UpdateLowMemState(void)` and `Input_ClearLowMemStatus(void)` with PascalCase naming in `src/game_4FFB0.c`.
