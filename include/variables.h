@@ -95,7 +95,9 @@ extern void* D_800F8510;
 // Shiftable Track / Subsystem Lookup Table (22 entries)
 extern s32 gTrackLookupTable[22];
 #define D_800E33C0 gTrackLookupTable
-extern s32 D_800E4068;
+// Shiftable Init Loop Counter (formerly D_800E4068)
+extern s32 gInitLoopCounter;
+#define D_800E4068 gInitLoopCounter
 
 
 typedef struct {

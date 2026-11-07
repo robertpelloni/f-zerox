@@ -57,6 +57,7 @@ s32 gGameStateControlMask = 0;
 s32 gTrackLookupTable[22] = {0};
 struct UnkStruct_4 D_8010B7B0;
 s32 gActiveVehicleIndex = 0;
+s32 gInitLoopCounter = 0;
 
 
 

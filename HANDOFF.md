@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.33)
+## Recent Activity (Version 0.1.34)
+- **Initialization Loop Shiftability**:
+  - Decoupled `D_800E4068` into typed `gInitLoopCounter` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `System_RunInitDelayLoop(void)` with PascalCase naming in `src/game_11CF0.c`.
+  - Added unit test `test_system_init_delay_loop` in `tests/test_math_utils.c`.
+  - Integrated `src/game_11CF0.o` into the `Makefile.pc` test runner (all 14 unit tests passing).
+  - Bumped version to `0.1.34` across all documentation.
+
+## Previous Activity (Version 0.1.33)
 - **Vehicle State Shiftability**:
   - Decoupled `D_800E5E84` into typed `gActiveVehicleIndex` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `Vehicle_SetActiveIndex(s32 idx)` with PascalCase naming in `src/game_1F510.c`.

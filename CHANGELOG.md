@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.34] - 2026-11-06
+### Added
+- **Init Loop Shiftability**: Decoupled `D_800E4068` into typed `gInitLoopCounter` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **System Logic**: Implemented `System_RunInitDelayLoop` in `src/game_11CF0.c`.
+- **Testing**: Added `test_system_init_delay_loop` in `tests/test_math_utils.c` and integrated `src/game_11CF0.o` into the `Makefile.pc` test runner (14 tests passing).
+
 ## [0.1.33] - 2026-11-06
 ### Added
 - **Vehicle State Shiftability**: Decoupled `D_800E5E84` into typed `gActiveVehicleIndex` in `include/variables.h` and `src/pc/ultra_impl.c`.
