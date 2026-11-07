@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.31)
+## Recent Activity (Version 0.1.32)
+- **Network Protocol & Active Machine Verification**:
+  - Removed duplicate definition of `Net_IsMachineActive` in `src/pc/network/network.c`, consolidating on the bounds-checked version that considers local player ID (`sMyPlayerId`) and remote states (`sNetActive`).
+  - Added unit test `test_net_is_machine_active` in `tests/test_math_utils.c`.
+  - Integrated `src/pc/network/network.o` and `src/pc/configfile.o` into the `Makefile.pc` test runner (all 12 unit tests passing).
+  - Bumped version to `0.1.32` across all documentation.
+
+## Previous Activity (Version 0.1.31)
 - **Machine Dynamic Configuration Shiftability**:
   - Decoupled `D_800D0AC0` and `D_800D0AC4` into typed `gDynamicMachineConfigA` and `gDynamicMachineConfigB` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `Machine_SetConfigA(s32 val)` and `Machine_SetConfigB(s32 val)` with PascalCase naming in `src/game_459A0.c`.

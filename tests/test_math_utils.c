@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "minunit.h"
 #include "../include/pc/ultra64.h"
 #include "../include/functions.h"
@@ -41,6 +42,9 @@ s8 Audio_GetSoundEffectByte(s32 idx);
 // Declarations of machine configuration functions from game_459A0.c
 void Machine_SetConfigA(s32 val);
 void Machine_SetConfigB(s32 val);
+
+// Declarations of network protocol functions from network.h
+bool Net_IsMachineActive(int index);
 
 #include "../include/variables.h"
 
@@ -209,6 +213,14 @@ static char * test_machine_dynamic_config() {
     return 0;
 }
 
+static char * test_net_is_machine_active() {
+    mu_assert("Net_IsMachineActive(-1) invalid", !Net_IsMachineActive(-1));
+    mu_assert("Net_IsMachineActive(30) out of bounds", !Net_IsMachineActive(30));
+    mu_assert("Net_IsMachineActive(99) out of bounds", !Net_IsMachineActive(99));
+    mu_assert("Net_IsMachineActive(0) default local player active", Net_IsMachineActive(0));
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -221,6 +233,7 @@ static char * all_tests() {
     mu_run_test(test_track_lookup_table);
     mu_run_test(test_audio_utils);
     mu_run_test(test_machine_dynamic_config);
+    mu_run_test(test_net_is_machine_active);
     return 0;
 }
 

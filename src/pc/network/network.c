@@ -280,13 +280,6 @@ void Net_Receive(void) {
 
 
 
-bool Net_IsMachineActive(int index) {
-    if (index >= 0 && index < MAX_NET_MACHINES) {
-        return sNetActive[index];
-    }
-    return false;
-}
-
 void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
     uint32_t now = HAL_GetTimeMillis();
 

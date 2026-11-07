@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.32] - 2026-11-06
+### Fixed
+- **Network**: Removed redundant redefinition of `Net_IsMachineActive` in `src/pc/network/network.c`.
+### Added
+- **Testing**: Added `test_net_is_machine_active` verifying ID validation, range checks, and local player identification in `tests/test_math_utils.c`.
+- **Infrastructure**: Integrated `src/pc/network/network.o` and `src/pc/configfile.o` into the `Makefile.pc` test runner (12 tests passing).
+
 ## [0.1.31] - 2026-11-06
 ### Added
 - **Machine Config Shiftability**: Decoupled `D_800D0AC0` and `D_800D0AC4` into typed `gDynamicMachineConfigA` and `gDynamicMachineConfigB` in `include/variables.h` and `src/pc/ultra_impl.c`.
