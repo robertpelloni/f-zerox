@@ -4,7 +4,14 @@
 extern s16 D_800E42CC;
 extern s32 D_80025D78;
 extern s32 D_8002AA18;
-extern s32 D_800CD510;
+// Shiftable System State Flag & Params (formerly D_800CD510, D_800E4264, D_800E4260)
+extern s32 gSystemStateFlag;
+extern s32 gSystemStateParamA;
+extern s32 gSystemStateParamB;
+#define D_800CD510 gSystemStateFlag
+#define D_800E4264 gSystemStateParamA
+#define D_800E4260 gSystemStateParamB
+
 extern s16 gDebugMode;
 #include <stdint.h>
 extern uintptr_t gStateHandlers[];
@@ -50,8 +57,6 @@ extern s32 gUnknownStateVar;
 extern s32 gSystemInitialized;
 extern u8 gMachineStates[592];
 extern u8 gSpecialMachineState[256];
-extern s32 D_800E4260;
-extern s32 D_800E4264;
 extern s32 D_800E4348; // gCurrentFramebuffer (Updated in game_197D0.c)
 extern s32 D_800E4350;
 extern s32 D_800E44D0;

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.36] - 2026-11-06
+### Added
+- **System State Flags Shiftability**: Decoupled `D_800CD510`, `D_800E4264`, and `D_800E4260` into typed `gSystemStateFlag`, `gSystemStateParamA`, and `gSystemStateParamB` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **System Logic**: Implemented `System_SetStateFlags` in `src/game_194E0.c`.
+- **Testing**: Added `test_system_set_state_flags` in `tests/test_math_utils.c` and integrated `src/game_194E0.o` into the `Makefile.pc` test runner (15 tests passing).
+
 ## [0.1.35] - 2026-11-06
 ### Added
 - **Network Telemetry**: Implemented `Net_GetConnectedCount` and `Net_GetLocalPlayerId` in `src/pc/network/network.c` and `include/pc/network/network.h`.

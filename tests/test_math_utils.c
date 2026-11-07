@@ -54,6 +54,9 @@ void Vehicle_SetActiveIndex(s32 idx);
 // Declarations of init functions from game_11CF0.c
 void System_RunInitDelayLoop(void);
 
+// Declarations of system state functions from game_194E0.c
+void System_SetStateFlags(s32 paramA, s32 paramB);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -246,6 +249,18 @@ static char * test_system_init_delay_loop() {
     return 0;
 }
 
+static char * test_system_set_state_flags() {
+    gSystemStateFlag = 0;
+    gSystemStateParamA = 0;
+    gSystemStateParamB = 0;
+
+    System_SetStateFlags(101, 202);
+    mu_assert("System_SetStateFlags flag set", gSystemStateFlag == 1);
+    mu_assert("System_SetStateFlags paramA set", gSystemStateParamA == 101);
+    mu_assert("System_SetStateFlags paramB set", gSystemStateParamB == 202);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -261,6 +276,7 @@ static char * all_tests() {
     mu_run_test(test_net_is_machine_active);
     mu_run_test(test_vehicle_active_index);
     mu_run_test(test_system_init_delay_loop);
+    mu_run_test(test_system_set_state_flags);
     return 0;
 }
 

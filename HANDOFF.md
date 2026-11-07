@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.35)
+## Recent Activity (Version 0.1.36)
+- **System State Flag & Parameter Shiftability**:
+  - Decoupled `D_800CD510`, `D_800E4264`, and `D_800E4260` into typed `gSystemStateFlag`, `gSystemStateParamA`, and `gSystemStateParamB` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `System_SetStateFlags(s32 paramA, s32 paramB)` with PascalCase naming in `src/game_194E0.c`.
+  - Added unit test `test_system_set_state_flags` in `tests/test_math_utils.c`.
+  - Integrated `src/game_194E0.o` into the `Makefile.pc` test runner (all 15 unit tests passing).
+  - Bumped version to `0.1.36` across all documentation.
+
+## Previous Activity (Version 0.1.35)
 - **Network Telemetry & UI Dashboard Integration**:
   - Implemented `Net_GetConnectedCount(void)` and `Net_GetLocalPlayerId(void)` in `include/pc/network/network.h` and `src/pc/network/network.c`.
   - Updated `src/pc/ui/tabs/ui_tab_netplay.c` to display live lobby participant count and identify the local player machine.

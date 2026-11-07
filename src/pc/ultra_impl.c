@@ -58,6 +58,9 @@ s32 gTrackLookupTable[22] = {0};
 struct UnkStruct_4 D_8010B7B0;
 s32 gActiveVehicleIndex = 0;
 s32 gInitLoopCounter = 0;
+s32 gSystemStateFlag = 0;
+s32 gSystemStateParamA = 0;
+s32 gSystemStateParamB = 0;
 
 
 
@@ -65,7 +68,6 @@ s32 gInitLoopCounter = 0;
 void func_800A4BAC(void) {}
 void func_800A4B54(void) {}
 void func_800FC730(void) {}
-void func_8007F500(void) {}
 void func_80076848(void) {}
 void func_800FD184(s32 arg0) { (void)arg0; }
 s32 __osMotorAccess(void* pfs, s32 flag) { (void)pfs; (void)flag; return 0; }

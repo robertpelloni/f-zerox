@@ -40,3 +40,4 @@
 - [x] **Init Loop Globals:** Decouple `D_800E4068` into `gInitLoopCounter` with `System_RunInitDelayLoop`.
 - [x] **Network Cleanup:** Fix duplicate function redefinitions in `network.c` and test active machine state verification.
 - [x] **Network Telemetry:** Implement `Net_GetConnectedCount` and `Net_GetLocalPlayerId` with UI status telemetry.
+- [x] **System State Globals:** Decouple `D_800CD510`, `D_800E4264`, `D_800E4260` into `gSystemStateFlag`/`A`/`B` with `System_SetStateFlags`.
