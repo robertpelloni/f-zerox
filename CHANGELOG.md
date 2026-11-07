@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.40] - 2026-11-06
+### Added
+- **Framebuffer Pointer Decoupling & Shiftability**: Decoupled `D_800E4348` into shiftable `void* gCurrentFramebuffer` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Framebuffer Decompilation**: Implemented `DebugText_UpdateFramebuffer` with backward-compatible `func_8007F94C` alias in `src/debug_text.c` and `src/game_197D0.c`.
+- **Testing**: Added `test_debug_text_framebuffer` in `tests/test_math_utils.c` and integrated `src/debug_text.o` into the `Makefile.pc` test runner (19 tests passing).
+
 ## [0.1.39] - 2026-11-06
 ### Added
 - **Track Lookup Direct Decomp**: Implemented `TrackLookup_GetEntryDirect` in `src/game_10490.c` with safe array bounds checking.

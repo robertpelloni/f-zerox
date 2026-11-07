@@ -11,8 +11,12 @@ void func_8007F904(void) {
 /**
  * @brief Updates the global framebuffer pointer with the current framebuffer.
  */
+void DebugText_UpdateFramebuffer(void) {
+    gCurrentFramebuffer = osViGetCurrentFramebuffer();
+}
+
 void func_8007F94C(void) {
-    D_800E4348 = osViGetCurrentFramebuffer();
+    DebugText_UpdateFramebuffer();
 }
 
 void func_8007F970(void) { /* TODO: SHIFTABLE - Implement */ }

@@ -21,7 +21,8 @@ s32 func_8006D3F0(s32 arg0); // BoundsCheck_0_22
 /* src/debug_text.c (game_197D0.c) - Debug & Framebuffer */
 void func_8007F94C(void); // UpdateFramebufferPointer
 void func_8007FC68(s32 arg0); // DrawDebugInt
-// void func_8007FB80(...); // DrawText (Signature unknown/varargs?)
+void func_8007F86C(void* a, void* b, void* c, void* d, void* e);
+void func_8007FB80(s32 x, s32 y, void* str);
 
 /* src/audio_state.c (game_511D0.c) - Audio State */
 void func_800BA2D0(s8 arg0);

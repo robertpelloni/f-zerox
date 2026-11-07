@@ -43,7 +43,7 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 
 ## Known Hardcoded Globals (D_80...)
 
-- `D_800E4348`: Likely `gCurrentFramebuffer` or a rendering target. Used in `ultra_impl.c` and debug output.
+- `D_800E4348`: Current Framebuffer pointer in `debug_text.c`, `game_197D0.c`, and `ultra_impl.c` (Refactored to `gCurrentFramebuffer` with `DebugText_UpdateFramebuffer` and `func_8007F94C`).
 - `D_800E33C0`: A lookup array or table. Populated via `func_8006D414` and accessed via `func_8006D448` in `game_73F0.c`, and directly accessed via `TrackLookup_GetEntryDirect` in `game_10490.c` (Refactored to `gTrackLookupTable[22]`).
 - `D_800D1A3C` / `D_800D1A20` / `D_800D1A48` / `D_800D19E0` / `D_800D1C18`: Audio state machine flags used in `game_511D0.c` (libaudio backend interactions).
 - `D_800D0AC0` / `D_800D0AC4`: Machine dynamic config globals set in `game_459A0.c` (Refactored to `gDynamicMachineConfigA` / `gDynamicMachineConfigB` with `Machine_SetConfigA` / `Machine_SetConfigB`).
