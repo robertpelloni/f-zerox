@@ -14,7 +14,7 @@ void func_800B6894(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B68EC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800B6910(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800B6910(s32 a, u8 b) { (void)a; (void)b; /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B6934(void) { /* TODO: SHIFTABLE - Implement */ }
 
@@ -23,11 +23,15 @@ void func_800B6964(void) { /* TODO: SHIFTABLE - Implement */ }
 void func_800B6994(void) { /* TODO: SHIFTABLE - Implement */ }
 
 /**
- * @brief Updates global state variables in low memory (possibly input related).
+ * @brief Updates global state variables in low memory (input related).
  */
+void Input_UpdateLowMemState(void) {
+    gLowMemInputCurrent = gLowMemInputPrev;
+    gLowMemInputFlag = 0;
+}
+
 void func_800B6A18(void) {
-    D_8002B347 = D_8002B346;
-    D_8002B348 = 0;
+    Input_UpdateLowMemState();
 }
 
 void func_800B6A34(void) { /* TODO: SHIFTABLE - Implement */ }
@@ -52,8 +56,12 @@ void func_800B7000(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B7030(void) { /* TODO: SHIFTABLE - Implement */ }
 
+void Input_ClearLowMemStatus(void) {
+    gLowMemStatus = 0;
+}
+
 void func_800B7060(void) {
-    D_80025D78 = 0;
+    Input_ClearLowMemStatus();
 }
 
 void func_800B706C(void) { /* TODO: SHIFTABLE - Implement */ }

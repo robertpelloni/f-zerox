@@ -1,5 +1,6 @@
 #include "common.h"
 #include <math.h>
+#include <stdint.h>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -10,7 +11,7 @@
 RandState gRandState;
 TimeState gTimeState;
 s16 gDebugMode = 0;
-s32 gStateHandlers[32] = {0};
+uintptr_t gStateHandlers[32] = {0};
 s16 gSystemFullyInitialized = 0;
 s32 gCurrentStateIndex = 0;
 s32 gUnknownStateVar = 0;
@@ -70,8 +71,10 @@ s32 StateMachine_ExecuteCurrentState(void) {
         if (gStateMachineActive != 0) { // If state machine is active
             typedef s32 (*StateHandler)(void);
             // Calculate index with modulo from state value
-            StateHandler handler = (StateHandler)gStateHandlers[gCurrentStateIndex & 0x1F];
-            result = handler();
+            StateHandler handler = (StateHandler)(uintptr_t)gStateHandlers[gCurrentStateIndex & 0x1F];
+            if (handler != NULL) {
+                result = handler();
+            }
         }
     }
 
@@ -89,22 +92,19 @@ void func_80069700(void) { /* TODO: Implement */ }
  * Also resets a special machine at a fixed memory offset.
  */
 void Controller_ResetMachineStates(void) {
-    u8* end = gMachineStates + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
-    u8* curr = end;
     u8* start = gMachineStates;
+    u8* curr = gMachineStates + (0x94 * 4); // End of machine array (4 machines * 0x94 bytes)
 
-    // Iterate backwards through machine states
-    while (1) {
+    // Iterate backwards through machine states (machines 3 down to 0)
+    while (curr > start) {
+        curr -= 0x94;
         u8 isActive = *(curr + 0x6B);
         if (isActive != 0) {
             // Skip active machine, continue to previous
-            curr -= 0x94;
-            if (curr < start) break;
             continue;
         }
 
         // Clear all fields for inactive machine
-        curr -= 0x94;
         *(s16*)(curr + 0x80) = 0; // Unknown field A
         *(s16*)(curr + 0x7E) = 0; // Unknown field B
         *(s16*)(curr + 0x7C) = 0; // Unknown field C
@@ -117,8 +117,6 @@ void Controller_ResetMachineStates(void) {
         *(u8*)(curr + 0x6D) = 0;  // Flag E
         *(u8*)(curr + 0x6C) = 0;  // Flag F
         *(s32*)(curr + 0x84) = 0; // Unknown pointer/value
-
-        if (curr < start) break;
     }
 
     // Reset special machine at fixed offset

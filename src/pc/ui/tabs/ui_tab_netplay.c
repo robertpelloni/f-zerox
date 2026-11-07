@@ -10,6 +10,13 @@ void UI_Tab_Netplay(struct nk_context *ctx) {
     nk_edit_string_zero_terminated(ctx, NK_EDIT_FIELD, gConfig.player_name, sizeof(gConfig.player_name), nk_filter_default);
 
     UI_Header(ctx, "Lobby Participants (LAN Broadcast)");
+
+    char netInfoBuf[96];
+    snprintf(netInfoBuf, sizeof(netInfoBuf), "Local Player ID: %d | Total Active: %d/30",
+             Net_GetLocalPlayerId(), Net_GetConnectedCount());
+    nk_layout_row_dynamic(ctx, 20, 1);
+    UI_Label(ctx, netInfoBuf, NK_TEXT_LEFT, "Local player identification and total verified participants in this lobby.");
+
     nk_layout_row_dynamic(ctx, 150, 1);
     if (nk_group_begin(ctx, "ParticipantList", NK_WINDOW_BORDER)) {
         nk_layout_row_dynamic(ctx, 25, 2);
@@ -17,7 +24,7 @@ void UI_Tab_Netplay(struct nk_context *ctx) {
         for (int i = 0; i < 30; i++) {
             if (Net_IsMachineActive(i)) {
                 char label[64];
-                snprintf(label, sizeof(label), "Machine %d", i);
+                snprintf(label, sizeof(label), "Machine %d%s", i, (i == Net_GetLocalPlayerId()) ? " (You)" : "");
                 nk_label(ctx, label, NK_TEXT_LEFT);
                 nk_label(ctx, "Connected", NK_TEXT_RIGHT);
                 connected_count++;

@@ -162,17 +162,25 @@ void func_800B0754(s32 arg0) {
 }
 
 /**
- * @brief Sets global variable D_800D0AC0.
+ * @brief Sets global variable gDynamicMachineConfigA (formerly D_800D0AC0).
  */
+void Machine_SetConfigA(s32 val) {
+    gDynamicMachineConfigA = val;
+}
+
 void func_800B0784(s32 arg0) {
-    D_800D0AC0 = arg0;
+    Machine_SetConfigA(arg0);
 }
 
 /**
- * @brief Sets global variable D_800D0AC4.
+ * @brief Sets global variable gDynamicMachineConfigB (formerly D_800D0AC4).
  */
+void Machine_SetConfigB(s32 val) {
+    gDynamicMachineConfigB = val;
+}
+
 void func_800B0790(s32 arg0) {
-    D_800D0AC4 = arg0;
+    Machine_SetConfigB(arg0);
 }
 
 void func_800B079C(void) { /* TODO: SHIFTABLE - Implement */ }
@@ -195,7 +203,7 @@ void func_800B11C4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 void func_800B11D8(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800B12EC(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800B12EC(s32 arg0) { (void)arg0; /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B1370(void) { /* TODO: SHIFTABLE - Implement */ }
 
@@ -208,7 +216,7 @@ void func_800B166C(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B17AC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800B1B40(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800B1B40(s32 arg0) { (void)arg0; /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B1D00(void) { /* TODO: SHIFTABLE - Implement */ }
 

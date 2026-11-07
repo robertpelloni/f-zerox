@@ -37,10 +37,16 @@ void func_80088660(void) { /* TODO: SHIFTABLE - Implement */ }
 void func_800888D0(void) { /* TODO: SHIFTABLE - Implement */ }
 
 /**
- * @brief Sets global variable D_800E5E84.
+ * @brief Sets global active vehicle index (formerly D_800E5E84).
+ *
+ * @param idx The vehicle index to set as active.
  */
+void Vehicle_SetActiveIndex(s32 idx) {
+    gActiveVehicleIndex = idx;
+}
+
 void func_80088CAC(s32 arg0) {
-    D_800E5E84 = arg0;
+    Vehicle_SetActiveIndex(arg0);
 }
 
 void func_80088CB8(void) { /* TODO: SHIFTABLE - Implement */ }
@@ -95,7 +101,7 @@ void func_8008C7C8(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8008D33C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_8008D3C4(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_8008D3C4(s32 a, s32 b) { (void)a; (void)b; /* TODO: SHIFTABLE - Implement */ }
 
 void func_8008D5F4(void) { /* TODO: SHIFTABLE - Implement */ }
 

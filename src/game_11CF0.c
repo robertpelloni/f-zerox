@@ -29,19 +29,22 @@ void func_80078EA0(void) { /* TODO: SHIFTABLE - Implement */ }
 void func_80078F80(void) { /* TODO: SHIFTABLE - Implement */ }
 
 /**
- * @brief Initialization loop (Unknown purpose).
+ * @brief Initialization delay loop.
  *
- * Iterates from 1 to 16. The body is empty, suggesting an optimized-out operation
- * or a delay.
+ * Resets gInitLoopCounter (formerly D_800E4068) and iterates from 1 to 16.
  */
-void func_80079080(void) {
+void System_RunInitDelayLoop(void) {
     s32 var_v0;
 
-    D_800E4068 = 0;
+    gInitLoopCounter = 0;
     var_v0 = 1;
-     while (var_v0 != 0x11){
+    while (var_v0 != 0x11) {
         var_v0 += 1;
-    };
+    }
+}
+
+void func_80079080(void) {
+    System_RunInitDelayLoop();
 }
 
 void func_800790A4(void) { /* TODO: SHIFTABLE - Implement */ }

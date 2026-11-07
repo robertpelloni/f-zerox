@@ -1,32 +1,54 @@
 #include "common.h"
 
 /**
- * @brief Checks if the argument is within the range [0, 22).
+ * @brief Checks if the argument is within the valid track lookup range [0, 22).
  *
- * @param arg0 The value to check.
+ * @param idx The index to check.
  * @return s32 1 if valid, 0 otherwise.
  */
-s32 func_8006D3F0(s32 arg0) {
-    if ((arg0 >= 0) && (arg0 < 0x16)) {
+s32 TrackLookup_ValidateIndex(s32 idx) {
+    if ((idx >= 0) && (idx < 22)) {
         return 1;
     }
     return 0;
 }
 
+s32 func_8006D3F0(s32 arg0) {
+    return TrackLookup_ValidateIndex(arg0);
+}
 
-void func_8006D414(s32 arg0, s32 arg1, s32 arg2) {
-    if (func_8006D3F0(arg0)) {
-        D_800E33C0[arg0] = arg1;
+/**
+ * @brief Sets an entry in the track lookup table.
+ *
+ * @param idx Index into gTrackLookupTable (0 to 21).
+ * @param val Value to assign.
+ */
+void TrackLookup_SetEntry(s32 idx, s32 val) {
+    if (TrackLookup_ValidateIndex(idx)) {
+        gTrackLookupTable[idx] = val;
     }
 }
 
+void func_8006D414(s32 arg0, s32 arg1, s32 arg2) {
+    (void)arg2;
+    TrackLookup_SetEntry(arg0, arg1);
+}
 
-
-s32 func_8006D448(s32 arg0) {
-    if (func_8006D3F0(arg0)) {
-        return D_800E33C0[arg0];
+/**
+ * @brief Retrieves an entry from the track lookup table.
+ *
+ * @param idx Index into gTrackLookupTable (0 to 21).
+ * @return s32 Entry value, or 0 if index is out of bounds.
+ */
+s32 TrackLookup_GetEntry(s32 idx) {
+    if (TrackLookup_ValidateIndex(idx)) {
+        return gTrackLookupTable[idx];
     }
     return 0;
+}
+
+s32 func_8006D448(s32 arg0) {
+    return TrackLookup_GetEntry(arg0);
 }
 
 
@@ -94,11 +116,11 @@ void func_80072BB0(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_80072D00(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_80072ECC(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_80072ECC(s32 arg0) { (void)arg0; /* TODO: SHIFTABLE - Implement */ }
 
-void func_800730A4(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800730A4(s32 arg0) { (void)arg0; /* TODO: SHIFTABLE - Implement */ }
 
-void func_8007327C(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_8007327C(s32 arg0) { (void)arg0; /* TODO: SHIFTABLE - Implement */ }
 
 void func_80073510(s32 arg0) {
     func_80072D00();
@@ -111,7 +133,7 @@ void func_80073548(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_80073894(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_8007392C(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_8007392C(s32 arg0) { (void)arg0; /* TODO: SHIFTABLE - Implement */ }
 
 void func_80073A04(void) { /* TODO: SHIFTABLE - Implement */ }
 

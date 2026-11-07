@@ -29,6 +29,10 @@ void Game_Init(void) {
     extern void Assets_Init(void);
     Assets_Init();
 
+    // Call authentic decompiled system initialization
+    extern void System_Init(void);
+    System_Init();
+
     Physics_Init(&gPlayerVehicle);
     Track_Init();
     Race_Init();

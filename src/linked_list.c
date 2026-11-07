@@ -16,7 +16,7 @@ void func_800AAD2C(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800AAD58(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800AAD84(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800AAD84(s32 arg0, s32 arg1) { (void)arg0; (void)arg1; /* TODO: SHIFTABLE - Implement */ }
 
 void func_800AAF5C(s32 arg0) {
     func_800AAD84(arg0, 6);
@@ -32,12 +32,18 @@ void func_800AAF7C(s32 arg0) {
  * Sets the next and prev pointers (unk0, unk4) to point to itself,
  * effectively creating an empty list or isolated node.
  *
- * @param arg0 Pointer to the list node.
+ * @param node Pointer to the list node.
  */
+void List_InitNode(struct UnkStruct_1* node) {
+    if (node != NULL) {
+        node->next = node;
+        node->prev = node;
+        node->unk8 = 0;
+    }
+}
+
 void func_800AAF9C(struct UnkStruct_1* arg0) {
-    arg0->unk0 = arg0;
-    arg0->unk4 = arg0;
-    arg0->unk8 = 0;
+    List_InitNode(arg0);
 }
 
 void func_800AAFAC(void) { /* TODO: SHIFTABLE - Implement */ }
@@ -48,17 +54,17 @@ void func_800AB0AC(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800AB204(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800AB340(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800AB340(s32 arg0, s32 arg1) { (void)arg0; (void)arg1; /* TODO: SHIFTABLE - Implement */ }
 
 void func_800AB380(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800AB3AC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800AB41C(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800AB41C(s32 arg0, s32 arg1) { (void)arg0; (void)arg1; /* TODO: SHIFTABLE - Implement */ }
 
 void func_800AB51C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800AB550(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800AB550(s32 arg0, s32 arg1) { (void)arg0; (void)arg1; /* TODO: SHIFTABLE - Implement */ }
 
 s32 func_800AB57C(s32 arg0, s32 arg1) {
     s32 temp_v0;

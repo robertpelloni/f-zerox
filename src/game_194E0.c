@@ -1,12 +1,19 @@
 #include "common.h"
 
 /**
- * @brief Sets a state flag and saves arguments.
+ * @brief Sets system state flag and saves arguments.
+ *
+ * @param paramA First state parameter (formerly D_800E4264).
+ * @param paramB Second state parameter (formerly D_800E4260).
  */
+void System_SetStateFlags(s32 paramA, s32 paramB) {
+    gSystemStateFlag = 1;
+    gSystemStateParamA = paramA;
+    gSystemStateParamB = paramB;
+}
+
 void func_8007F4E0(s32 arg0, s32 arg1) {
-    D_800CD510 = 1;
-    D_800E4264 = arg0;
-    D_800E4260 = arg1;
+    System_SetStateFlags(arg0, arg1);
 }
 
 void func_8007F500(void) { /* TODO: SHIFTABLE - Implement */ }

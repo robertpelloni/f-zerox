@@ -280,13 +280,6 @@ void Net_Receive(void) {
 
 
 
-bool Net_IsMachineActive(int index) {
-    if (index >= 0 && index < MAX_NET_MACHINES) {
-        return sNetActive[index];
-    }
-    return false;
-}
-
 void Net_UpdateRemoteMachines(Vehicle* machines, int max_machines) {
     uint32_t now = HAL_GetTimeMillis();
 
@@ -472,6 +465,20 @@ bool Net_IsMachineActive(int index) {
     // Also consider our own ID active
     if (index == sMyPlayerId) return true;
     return sNetActive[index];
+}
+
+int Net_GetConnectedCount(void) {
+    int count = 0;
+    for (int i = 0; i < MAX_NET_MACHINES; i++) {
+        if (Net_IsMachineActive(i)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+uint8_t Net_GetLocalPlayerId(void) {
+    return sMyPlayerId;
 }
 
 void Net_Shutdown(void) {
