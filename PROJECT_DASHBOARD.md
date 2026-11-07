@@ -21,6 +21,6 @@
 | **splat** | `tools/splat` | `f44113b` | ROM Splitter. |
 
 ## Build Status
-*   **Version:** 0.1.38 (See VERSION.md)
+*   **Version:** 0.1.39 (See VERSION.md)
 *   **Target:** `fzerox_pc` (Linux/Windows via MinGW)
 *   **Dependencies:** SDL2, OpenGL, Python 3.10+

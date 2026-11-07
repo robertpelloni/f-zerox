@@ -38,7 +38,7 @@ $(TARGET): $(OBJS)
 # Link game logic (Math) but NOT the main PC entry point or SDL/Audio stubs if not needed.
 # For this simple test, we only need game_2B20.o and the test runner.
 # But game_2B20 might have dependencies.
-$(TEST_TARGET): tests/test_math_utils.c tests/stubs.c $(BUILD_DIR)/src/math_utils.o $(BUILD_DIR)/src/audio_state.o $(BUILD_DIR)/src/linked_list.o $(BUILD_DIR)/src/game_73F0.o $(BUILD_DIR)/src/audio_util.o $(BUILD_DIR)/src/game_459A0.o $(BUILD_DIR)/src/game_1F510.o $(BUILD_DIR)/src/game_11CF0.o $(BUILD_DIR)/src/game_194E0.o $(BUILD_DIR)/src/game_4FFB0.o $(BUILD_DIR)/src/pc/assets/dynamic_asset_loader.o $(BUILD_DIR)/src/pc/network/network.o $(BUILD_DIR)/src/pc/configfile.o $(BUILD_DIR)/src/pc/ultra_impl.o $(BUILD_DIR)/src/pc/libaudio_impl.o $(BUILD_DIR)/src/pc/ui/debug_text_hook.o
+$(TEST_TARGET): tests/test_math_utils.c tests/stubs.c $(BUILD_DIR)/src/math_utils.o $(BUILD_DIR)/src/audio_state.o $(BUILD_DIR)/src/linked_list.o $(BUILD_DIR)/src/game_73F0.o $(BUILD_DIR)/src/audio_util.o $(BUILD_DIR)/src/game_459A0.o $(BUILD_DIR)/src/game_1F510.o $(BUILD_DIR)/src/game_11CF0.o $(BUILD_DIR)/src/game_194E0.o $(BUILD_DIR)/src/game_4FFB0.o $(BUILD_DIR)/src/game_10490.o $(BUILD_DIR)/src/pc/assets/dynamic_asset_loader.o $(BUILD_DIR)/src/pc/network/network.o $(BUILD_DIR)/src/pc/configfile.o $(BUILD_DIR)/src/pc/ultra_impl.o $(BUILD_DIR)/src/pc/libaudio_impl.o $(BUILD_DIR)/src/pc/ui/debug_text_hook.o
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 
