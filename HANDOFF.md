@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.40)
+## Recent Activity (Version 0.1.41)
+- **Memory/System State Decompilation & Shiftability**:
+  - Decoupled `D_800E42CC` into shiftable `s16 gSystemMemoryStateValue` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `System_InitMemoryState(void)` and alias `func_8007F500(void)` in `src/game_194E0.c`.
+  - Added unit test `test_system_init_memory_state` in `tests/test_math_utils.c` (all 20 unit tests passing).
+  - Bumped version to `0.1.41` across all documentation.
+
+## Previous Activity (Version 0.1.40)
 - **Framebuffer Pointer Decoupling & Shiftability**:
   - Decoupled `D_800E4348` into shiftable `void* gCurrentFramebuffer` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `DebugText_UpdateFramebuffer(void)` and alias `func_8007F94C(void)` in `src/debug_text.c` and `src/game_197D0.c`.

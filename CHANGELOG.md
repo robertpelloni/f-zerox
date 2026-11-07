@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.41] - 2026-11-06
+### Added
+- **Memory/System State Decompilation & Shiftability**: Decoupled `D_800E42CC` into shiftable `s16 gSystemMemoryStateValue` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Memory State Initialization Logic**: Implemented `System_InitMemoryState` with backward-compatible `func_8007F500` alias in `src/game_194E0.c`.
+- **Testing**: Added `test_system_init_memory_state` in `tests/test_math_utils.c` (20 tests passing).
+
 ## [0.1.40] - 2026-11-06
 ### Added
 - **Framebuffer Pointer Decoupling & Shiftability**: Decoupled `D_800E4348` into shiftable `void* gCurrentFramebuffer` in `include/variables.h` and `src/pc/ultra_impl.c`.

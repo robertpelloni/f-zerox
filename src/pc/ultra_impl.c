@@ -65,6 +65,7 @@ s32 gLowMemStatus = 0;
 u8 gLowMemInputPrev = 0;
 u8 gLowMemInputCurrent = 0;
 s8 gLowMemInputFlag = 0;
+s16 gSystemMemoryStateValue = 0;
 
 
 

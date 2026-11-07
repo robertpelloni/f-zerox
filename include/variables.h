@@ -1,7 +1,9 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-extern s16 D_800E42CC;
+// Shiftable System Memory State Value (formerly D_800E42CC)
+extern s16 gSystemMemoryStateValue;
+#define D_800E42CC gSystemMemoryStateValue
 // Shiftable Low Memory Globals (formerly D_80025D78, D_8002B346, D_8002B347, D_8002B348)
 extern s32 gLowMemStatus;
 extern u8 gLowMemInputPrev;

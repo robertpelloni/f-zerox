@@ -314,6 +314,9 @@ static char * test_track_lookup_direct() {
     return 0;
 }
 
+extern void System_InitMemoryState(void);
+extern void func_8007F500(void);
+
 static char * test_debug_text_framebuffer() {
     gCurrentFramebuffer = NULL;
     DebugText_UpdateFramebuffer();
@@ -322,6 +325,17 @@ static char * test_debug_text_framebuffer() {
     gCurrentFramebuffer = NULL;
     func_8007F94C();
     mu_assert("error, func_8007F94C alias failed to populate gCurrentFramebuffer", gCurrentFramebuffer != NULL);
+    return 0;
+}
+
+static char * test_system_init_memory_state() {
+    gSystemMemoryStateValue = 1234;
+    System_InitMemoryState();
+    mu_assert("error, System_InitMemoryState failed to zero gSystemMemoryStateValue", gSystemMemoryStateValue == 0);
+
+    gSystemMemoryStateValue = 5678;
+    func_8007F500();
+    mu_assert("error, func_8007F500 alias failed to zero gSystemMemoryStateValue", gSystemMemoryStateValue == 0);
     return 0;
 }
 
@@ -345,6 +359,7 @@ static char * all_tests() {
     mu_run_test(test_low_mem_state);
     mu_run_test(test_track_lookup_direct);
     mu_run_test(test_debug_text_framebuffer);
+    mu_run_test(test_system_init_memory_state);
     return 0;
 }
 

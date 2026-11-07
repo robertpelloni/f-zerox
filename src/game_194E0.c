@@ -16,15 +16,22 @@ void func_8007F4E0(s32 arg0, s32 arg1) {
     System_SetStateFlags(arg0, arg1);
 }
 
-void func_8007F500(void) { /* TODO: SHIFTABLE - Implement */ }
-// void func_8007F500(void) {
-//     static struct UnkStruct_0 D_800E42C9;
-//     D_800E42C9.unk0 = 0;
-//     D_800E42C9.unk1 = 0;
-//     D_800E42C9.unk2 = 0;
-//     D_800E42C9.unk3 = 0;
-//     D_800E42CC = 0;
-// }
+/**
+ * @brief Initializes memory and system state parameters.
+ */
+void System_InitMemoryState(void) {
+    static struct UnkStruct_0 sMemoryStateControl;
+    sMemoryStateControl.unk0 = 0;
+    sMemoryStateControl.unk1 = 0;
+    sMemoryStateControl.unk2 = 0;
+    sMemoryStateControl.unk3 = 0;
+    (void)sMemoryStateControl;
+    gSystemMemoryStateValue = 0;
+}
+
+void func_8007F500(void) {
+    System_InitMemoryState();
+}
 
 void func_8007F520(void) { /* TODO: SHIFTABLE - Implement */ }
 
