@@ -34,6 +34,10 @@ s32 TrackLookup_ValidateIndex(s32 idx);
 void TrackLookup_SetEntry(s32 idx, s32 val);
 s32 TrackLookup_GetEntry(s32 idx);
 
+// Declarations of audio utility functions from audio_util.c
+void Audio_SetSoundId(s32 soundId);
+s8 Audio_GetSoundEffectByte(s32 idx);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -181,6 +185,15 @@ static char * test_track_lookup_table() {
     return 0;
 }
 
+static char * test_audio_utils() {
+    gSoundEffectBankMap = 77;
+    mu_assert("Audio_GetSoundEffectByte(0) match", Audio_GetSoundEffectByte(0) == 77);
+
+    // Call Audio_SetSoundId to verify 8-bit masking logic doesn't crash
+    Audio_SetSoundId(0x1F2A);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -191,6 +204,7 @@ static char * all_tests() {
     mu_run_test(test_audio_state_mutations);
     mu_run_test(test_linked_list_init);
     mu_run_test(test_track_lookup_table);
+    mu_run_test(test_audio_utils);
     return 0;
 }
 

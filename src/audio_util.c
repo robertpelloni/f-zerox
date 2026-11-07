@@ -45,28 +45,40 @@ void func_8007E038(void) { /* TODO: SHIFTABLE - Implement */ }
 void osAfterPreNMI(void) { /* TODO: SHIFTABLE - Implement */ }
 
 /**
- * @brief Sets a sound/audio ID (likely).
+ * @brief Sets a sound/audio ID.
  *
- * Masks the argument to 8 bits and calls the audio library function func_800BAF30.
+ * Masks the argument to 8 bits and forwards to the audio library function func_800BAF30.
+ *
+ * @param soundId The sound effect ID.
  */
-void func_8007E0AC(s32 arg0) {
-    func_800BAF30(arg0 & 0xFF);
+void Audio_SetSoundId(s32 soundId) {
+    extern void func_800BAF30(s32);
+    func_800BAF30(soundId & 0xFF);
 }
 
-void n_alSeqpDelete(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_8007E0AC(s32 arg0) {
+    Audio_SetSoundId(arg0);
+}
+
+void n_alSeqpDelete(ALSeqPlayer *seqp) { (void)seqp; /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007E0EC(void) {
+    extern void func_800BB078(void);
     func_800BB078();
 }
 
 /**
- * @brief Gets a byte from a global array.
+ * @brief Gets a byte from the sound effect bank map.
  *
- * @param arg0 Index.
- * @return s8 The value at D_800D4690[arg0].
+ * @param idx Byte index.
+ * @return s8 The byte value at gSoundEffectBankMap + idx.
  */
+s8 Audio_GetSoundEffectByte(s32 idx) {
+    return *(&gSoundEffectBankMap + idx);
+}
+
 s8 func_8007E10C(s32 arg0) {
-    return *(&D_800D4690 + arg0);
+    return Audio_GetSoundEffectByte(arg0);
 }
 
 void func_8007E11C(void) { /* TODO: SHIFTABLE - Implement */ }

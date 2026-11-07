@@ -1,10 +1,6 @@
 #include "pc/ultra64.h"
 #include <stdio.h>
 
-void n_alSeqpDelete(ALSeqPlayer *seqp) {
-    (void)seqp;
-    // Stub
-}
 
 // Functions called by game_511D0.c / audio_state.c
 void func_800B6994(void) {}
@@ -22,5 +18,5 @@ s8 gAudioStateParamC = 0;
 s8 gAudioStateResetFlag = 0;
 s32 gAudioStateStatus = 0;
 
-// Variables used in game_14440.c
-s8 D_800D4690 = 0;
+// Variables used in game_14440.c / audio_util.c
+s8 gSoundEffectBankMap = 0;

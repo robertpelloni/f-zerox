@@ -64,7 +64,6 @@ void func_80085510(void) {}
 void func_800FC730(void) {}
 void func_8007F500(void) {}
 void func_80076848(void) {}
-void func_8007D9D0(void) {}
 void func_800FD184(s32 arg0) { (void)arg0; }
 s32 __osMotorAccess(void* pfs, s32 flag) { (void)pfs; (void)flag; return 0; }
 

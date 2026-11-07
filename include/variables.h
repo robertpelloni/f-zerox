@@ -77,7 +77,9 @@ extern s32 gAudioStateStatus;
 #define D_800D1C18 gAudioStateStatus
 
 extern s16 D_800CD168;
-extern s8 D_800D4690;
+// Shiftable Sound Effect Bank Map / Table (formerly D_800D4690)
+extern s8 gSoundEffectBankMap;
+#define D_800D4690 gSoundEffectBankMap
 extern s8 D_800E4175;
 extern struct UnkStruct_4 D_8010B7B0;
 extern s16 gStateMachineActive;

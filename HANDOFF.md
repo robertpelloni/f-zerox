@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.29)
+## Recent Activity (Version 0.1.30)
+- **Audio Utility Shiftability**:
+  - Decoupled `D_800D4690` into typed `gSoundEffectBankMap` in `include/variables.h` and `src/pc/libaudio_impl.c`.
+  - Implemented `Audio_SetSoundId(s32 soundId)` and `Audio_GetSoundEffectByte(s32 idx)` with PascalCase naming in `src/audio_util.c` and `src/game_14440.c`.
+  - Added unit test `test_audio_utils` in `tests/test_math_utils.c`.
+  - Integrated `src/audio_util.o` into `Makefile.pc` test suite (all 10 unit tests passing).
+  - Bumped version to `0.1.30` across all documentation.
+
+## Previous Activity (Version 0.1.29)
 - **Track Subsystem Lookup Shiftability**:
   - Decoupled `D_800E33C0` into typed `gTrackLookupTable[22]` with accessor functions `TrackLookup_ValidateIndex`, `TrackLookup_SetEntry`, and `TrackLookup_GetEntry` in `src/game_73F0.c`, `include/variables.h`, and `src/pc/ultra_impl.c`.
   - Added unit test `test_track_lookup_table` in `tests/test_math_utils.c`.

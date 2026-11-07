@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.30] - 2026-11-06
+### Added
+- **Audio Utility Shiftability**: Decoupled `D_800D4690` into typed `gSoundEffectBankMap` in `include/variables.h` and `src/pc/libaudio_impl.c`.
+- **Audio Utilities**: Implemented `Audio_SetSoundId` (masking sound ID to 8-bit) and `Audio_GetSoundEffectByte` in `src/audio_util.c` and `src/game_14440.c`.
+- **Testing**: Added `test_audio_utils` to `tests/test_math_utils.c` and integrated `src/audio_util.o` into the `Makefile.pc` test runner (10 tests passing).
+
 ## [0.1.29] - 2026-11-06
 ### Added
 - **Track Subsystem Shiftability**: Decompiled and shifted `D_800E33C0` into typed `gTrackLookupTable[22]` with helper functions `TrackLookup_ValidateIndex`, `TrackLookup_SetEntry`, and `TrackLookup_GetEntry` in `src/game_73F0.c` and `include/variables.h`.
