@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.32)
+## Recent Activity (Version 0.1.33)
+- **Vehicle State Shiftability**:
+  - Decoupled `D_800E5E84` into typed `gActiveVehicleIndex` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `Vehicle_SetActiveIndex(s32 idx)` with PascalCase naming in `src/game_1F510.c`.
+  - Added unit test `test_vehicle_active_index` in `tests/test_math_utils.c`.
+  - Integrated `src/game_1F510.o` into the `Makefile.pc` test runner (all 13 unit tests passing).
+  - Bumped version to `0.1.33` across all documentation.
+
+## Previous Activity (Version 0.1.32)
 - **Network Protocol & Active Machine Verification**:
   - Removed duplicate definition of `Net_IsMachineActive` in `src/pc/network/network.c`, consolidating on the bounds-checked version that considers local player ID (`sMyPlayerId`) and remote states (`sNetActive`).
   - Added unit test `test_net_is_machine_active` in `tests/test_math_utils.c`.

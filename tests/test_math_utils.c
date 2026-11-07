@@ -46,6 +46,9 @@ void Machine_SetConfigB(s32 val);
 // Declarations of network protocol functions from network.h
 bool Net_IsMachineActive(int index);
 
+// Declarations of vehicle functions from game_1F510.c
+void Vehicle_SetActiveIndex(s32 idx);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -221,6 +224,13 @@ static char * test_net_is_machine_active() {
     return 0;
 }
 
+static char * test_vehicle_active_index() {
+    gActiveVehicleIndex = 0;
+    Vehicle_SetActiveIndex(7);
+    mu_assert("Vehicle_SetActiveIndex match", gActiveVehicleIndex == 7);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -234,6 +244,7 @@ static char * all_tests() {
     mu_run_test(test_audio_utils);
     mu_run_test(test_machine_dynamic_config);
     mu_run_test(test_net_is_machine_active);
+    mu_run_test(test_vehicle_active_index);
     return 0;
 }
 

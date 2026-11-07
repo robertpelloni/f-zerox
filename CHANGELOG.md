@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.33] - 2026-11-06
+### Added
+- **Vehicle State Shiftability**: Decoupled `D_800E5E84` into typed `gActiveVehicleIndex` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Vehicle State Logic**: Implemented `Vehicle_SetActiveIndex` in `src/game_1F510.c`.
+- **Testing**: Added `test_vehicle_active_index` in `tests/test_math_utils.c` and integrated `src/game_1F510.o` into the `Makefile.pc` test runner (13 tests passing).
+
 ## [0.1.32] - 2026-11-06
 ### Fixed
 - **Network**: Removed redundant redefinition of `Net_IsMachineActive` in `src/pc/network/network.c`.

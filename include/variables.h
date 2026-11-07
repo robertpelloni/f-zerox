@@ -56,7 +56,9 @@ extern s32 D_800E4348; // gCurrentFramebuffer (Updated in game_197D0.c)
 extern s32 D_800E4350;
 extern s32 D_800E44D0;
 extern s32 D_800E4650;
-extern s32 D_800E5E84;
+// Shiftable Active Vehicle Index (formerly D_800E5E84)
+extern s32 gActiveVehicleIndex;
+#define D_800E5E84 gActiveVehicleIndex
 extern s32 D_80400008;
 extern s32 D_A4500000;
 extern s32 D_A4500004;

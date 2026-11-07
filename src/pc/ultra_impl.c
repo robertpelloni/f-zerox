@@ -56,15 +56,13 @@ s32 gGameStateControlMask = 0;
 // Shiftable Track / Subsystem Lookup Table
 s32 gTrackLookupTable[22] = {0};
 struct UnkStruct_4 D_8010B7B0;
+s32 gActiveVehicleIndex = 0;
 
 
 
 // Stubs for functions called by func_80068B20
-void func_8008DB98(void) {}
 void func_800A4BAC(void) {}
-void func_8008DA68(void) {}
 void func_800A4B54(void) {}
-void func_80085510(void) {}
 void func_800FC730(void) {}
 void func_8007F500(void) {}
 void func_80076848(void) {}

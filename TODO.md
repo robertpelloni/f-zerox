@@ -36,4 +36,5 @@
 - [x] **Track Lookup Table:** Decouple `D_800E33C0` into `gTrackLookupTable[22]` with bounds-checked accessors.
 - [x] **Audio Bank Map:** Decouple `D_800D4690` into `gSoundEffectBankMap` with `Audio_SetSoundId` and `Audio_GetSoundEffectByte`.
 - [x] **Machine Config Globals:** Decouple `D_800D0AC0`/`D_800D0AC4` into `gDynamicMachineConfigA`/`B` with `Machine_SetConfigA`/`B`.
+- [x] **Vehicle State Globals:** Decouple `D_800E5E84` into `gActiveVehicleIndex` with `Vehicle_SetActiveIndex`.
 - [x] **Network Cleanup:** Fix duplicate function redefinitions in `network.c` and test active machine state verification.
