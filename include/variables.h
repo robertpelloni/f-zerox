@@ -9,8 +9,11 @@ extern s16 gDebugMode;
 #include <stdint.h>
 extern uintptr_t gStateHandlers[];
 extern s32 D_800CD520;
-extern s32 D_800D0AC0;
-extern s32 D_800D0AC4;
+// Shiftable Machine Dynamic Configuration variables (formerly D_800D0AC0, D_800D0AC4)
+extern s32 gDynamicMachineConfigA;
+extern s32 gDynamicMachineConfigB;
+#define D_800D0AC0 gDynamicMachineConfigA
+#define D_800D0AC4 gDynamicMachineConfigB
 extern s32 D_800D1C18;
 extern s32 D_800D46C0; // gDebugPrintFormat (Used in game_197D0.c)
 extern s32 D_800D46C8;

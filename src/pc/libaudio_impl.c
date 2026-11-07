@@ -6,7 +6,6 @@
 void func_800B6994(void) {}
 s32 func_800B5FB0(void) { return 0; }
 void func_800B6F58(void) {}
-void func_800B079C(s32 a, s32 b) { (void)a; (void)b; }
 void func_800B6910(s32 a, u8 b) { (void)a; (void)b; }
 
 // Variables used in game_511D0.c (externs)

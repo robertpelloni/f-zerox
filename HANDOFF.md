@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.30)
+## Recent Activity (Version 0.1.31)
+- **Machine Dynamic Configuration Shiftability**:
+  - Decoupled `D_800D0AC0` and `D_800D0AC4` into typed `gDynamicMachineConfigA` and `gDynamicMachineConfigB` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `Machine_SetConfigA(s32 val)` and `Machine_SetConfigB(s32 val)` with PascalCase naming in `src/game_459A0.c`.
+  - Added unit test `test_machine_dynamic_config` in `tests/test_math_utils.c`.
+  - Integrated `src/game_459A0.o` into `Makefile.pc` test suite (all 11 unit tests passing).
+  - Bumped version to `0.1.31` across all documentation.
+
+## Previous Activity (Version 0.1.30)
 - **Audio Utility Shiftability**:
   - Decoupled `D_800D4690` into typed `gSoundEffectBankMap` in `include/variables.h` and `src/pc/libaudio_impl.c`.
   - Implemented `Audio_SetSoundId(s32 soundId)` and `Audio_GetSoundEffectByte(s32 idx)` with PascalCase naming in `src/audio_util.c` and `src/game_14440.c`.

@@ -46,7 +46,7 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 - `D_800E4348`: Likely `gCurrentFramebuffer` or a rendering target. Used in `ultra_impl.c` and debug output.
 - `D_800E33C0`: A lookup array or table. Populated via `func_8006D414` and accessed via `func_8006D448` in `game_73F0.c` (Refactored to `gTrackLookupTable[22]` with `TrackLookup_ValidateIndex`, `TrackLookup_SetEntry`, `TrackLookup_GetEntry`).
 - `D_800D1A3C` / `D_800D1A20` / `D_800D1A48` / `D_800D19E0` / `D_800D1C18`: Audio state machine flags used in `game_511D0.c` (libaudio backend interactions).
-- `D_800D0AC0` / `D_800D0AC4`: Unknown subsystem globals set in `game_459A0.c`.
+- `D_800D0AC0` / `D_800D0AC4`: Machine dynamic config globals set in `game_459A0.c` (Refactored to `gDynamicMachineConfigA` / `gDynamicMachineConfigB` with `Machine_SetConfigA` / `Machine_SetConfigB`).
 - `D_800DCD04` through `D_800DCD0C`: Cycle registers managed in `game_1AE0.c` (Refactored to `gGameStateCycleA/B/C`, `gGameStateControlMask`).
 - `D_800D1A3C` through `D_800D1C18`: Audio state machine variables in `src/audio_state.c` (Refactored to `gAudioStateParamA/B/C`, `gAudioStateActiveFlag`, `gAudioStatePlayTrigger`, `gAudioStateResetFlag`, `gAudioStateStatus`).
 - `struct UnkStruct_1` / `ListNode`: In `include/structs.h` and `src/linked_list.c`, circular linked list nodes refactored into union-aliased 64-bit safe self-referencing pointers.

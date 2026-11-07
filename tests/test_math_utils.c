@@ -38,6 +38,10 @@ s32 TrackLookup_GetEntry(s32 idx);
 void Audio_SetSoundId(s32 soundId);
 s8 Audio_GetSoundEffectByte(s32 idx);
 
+// Declarations of machine configuration functions from game_459A0.c
+void Machine_SetConfigA(s32 val);
+void Machine_SetConfigB(s32 val);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -194,6 +198,17 @@ static char * test_audio_utils() {
     return 0;
 }
 
+static char * test_machine_dynamic_config() {
+    gDynamicMachineConfigA = 0;
+    Machine_SetConfigA(999);
+    mu_assert("Machine_SetConfigA match", gDynamicMachineConfigA == 999);
+
+    gDynamicMachineConfigB = 0;
+    Machine_SetConfigB(-777);
+    mu_assert("Machine_SetConfigB match", gDynamicMachineConfigB == -777);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -205,6 +220,7 @@ static char * all_tests() {
     mu_run_test(test_linked_list_init);
     mu_run_test(test_track_lookup_table);
     mu_run_test(test_audio_utils);
+    mu_run_test(test_machine_dynamic_config);
     return 0;
 }
 

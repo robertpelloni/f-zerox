@@ -35,3 +35,4 @@
 - [x] **Linked List Structs:** Decouple `UnkStruct_1` into 64-bit safe `ListNode` with self-referencing pointers.
 - [x] **Track Lookup Table:** Decouple `D_800E33C0` into `gTrackLookupTable[22]` with bounds-checked accessors.
 - [x] **Audio Bank Map:** Decouple `D_800D4690` into `gSoundEffectBankMap` with `Audio_SetSoundId` and `Audio_GetSoundEffectByte`.
+- [x] **Machine Config Globals:** Decouple `D_800D0AC0`/`D_800D0AC4` into `gDynamicMachineConfigA`/`B` with `Machine_SetConfigA`/`B`.

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.31] - 2026-11-06
+### Added
+- **Machine Config Shiftability**: Decoupled `D_800D0AC0` and `D_800D0AC4` into typed `gDynamicMachineConfigA` and `gDynamicMachineConfigB` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Machine Logic**: Implemented `Machine_SetConfigA` and `Machine_SetConfigB` in `src/game_459A0.c`.
+- **Testing**: Added `test_machine_dynamic_config` to `tests/test_math_utils.c` and integrated `src/game_459A0.o` into the `Makefile.pc` test runner (11 tests passing).
+
 ## [0.1.30] - 2026-11-06
 ### Added
 - **Audio Utility Shiftability**: Decoupled `D_800D4690` into typed `gSoundEffectBankMap` in `include/variables.h` and `src/pc/libaudio_impl.c`.

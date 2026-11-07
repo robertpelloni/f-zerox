@@ -43,6 +43,10 @@ s32 D_800E4650 = 0;
 
 s16 D_800CD168 = 0;
 
+// Shiftable Machine Dynamic Configuration variables (formerly D_800D0AC0, D_800D0AC4)
+s32 gDynamicMachineConfigA = 0;
+s32 gDynamicMachineConfigB = 0;
+
 // Shiftable Game State Cycle variables (formerly D_800DCD04, D_800DCD08, D_800DCD0C, D_800DCCF8)
 s32 gGameStateCycleA = 0;
 s32 gGameStateCycleB = 0;
@@ -75,9 +79,7 @@ void* osViGetCurrentFramebuffer(void) {
     return NULL; // Stub
 }
 
-// Stubs for functions called by linked_list.c
-s32 func_800AC830(void) { return 0; }
-void func_800AC7F0(s32 a, s32 b) { (void)a; (void)b; }
+// Stubs for functions called by linked_list.c are implemented in game_459A0.c
 
 // Stubs for functions called by game_197D0.c
 void func_8007F86C(void* a, void* b, void* c, void* d, void* e) { (void)a; }
