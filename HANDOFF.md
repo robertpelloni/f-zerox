@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.36)
+## Recent Activity (Version 0.1.37)
+- **Dynamic Asset Loader API & Testing**:
+  - Implemented `Asset_GetMappingCount(void)` and `Asset_ClearMappings(void)` in `src/pc/assets/dynamic_asset_loader.c` and `include/pc/assets/dynamic_asset_loader.h`.
+  - Added unit test `test_dynamic_asset_loader` in `tests/test_math_utils.c`.
+  - Integrated `src/pc/assets/dynamic_asset_loader.o` into the `Makefile.pc` test runner (all 16 unit tests passing).
+  - Bumped version to `0.1.37` across all documentation.
+
+## Previous Activity (Version 0.1.36)
 - **System State Flag & Parameter Shiftability**:
   - Decoupled `D_800CD510`, `D_800E4264`, and `D_800E4260` into typed `gSystemStateFlag`, `gSystemStateParamA`, and `gSystemStateParamB` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `System_SetStateFlags(s32 paramA, s32 paramB)` with PascalCase naming in `src/game_194E0.c`.

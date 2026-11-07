@@ -35,6 +35,15 @@ void* Asset_GetByAddress(uint32_t address) {
     return NULL;
 }
 
+int Asset_GetMappingCount(void) {
+    return sAssetMapCount;
+}
+
+void Asset_ClearMappings(void) {
+    memset(sAssetMap, 0, sizeof(sAssetMap));
+    sAssetMapCount = 0;
+}
+
 // Example usage to replace a hardcoded pointer in game logic
 // Instead of:
 // void* myAsset = (void*)0x80400000;

@@ -5,5 +5,7 @@
 
 void Asset_RegisterMapping(uint32_t address, void* asset);
 void* Asset_GetByAddress(uint32_t address);
+int Asset_GetMappingCount(void);
+void Asset_ClearMappings(void);
 
 #endif

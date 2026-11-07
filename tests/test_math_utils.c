@@ -57,6 +57,12 @@ void System_RunInitDelayLoop(void);
 // Declarations of system state functions from game_194E0.c
 void System_SetStateFlags(s32 paramA, s32 paramB);
 
+// Declarations of dynamic asset loader functions
+void Asset_RegisterMapping(uint32_t address, void* asset);
+void* Asset_GetByAddress(uint32_t address);
+int Asset_GetMappingCount(void);
+void Asset_ClearMappings(void);
+
 #include "../include/variables.h"
 
 static char * test_math_roundf() {
@@ -261,6 +267,21 @@ static char * test_system_set_state_flags() {
     return 0;
 }
 
+static char * test_dynamic_asset_loader() {
+    Asset_ClearMappings();
+    mu_assert("Asset_GetMappingCount initially 0", Asset_GetMappingCount() == 0);
+
+    int dummyModel = 12345;
+    Asset_RegisterMapping(0x80800000, &dummyModel);
+    mu_assert("Asset_GetMappingCount is 1", Asset_GetMappingCount() == 1);
+    mu_assert("Asset_GetByAddress found correct ptr", Asset_GetByAddress(0x80800000) == &dummyModel);
+    mu_assert("Asset_GetByAddress missing ptr returns NULL", Asset_GetByAddress(0x80999999) == NULL);
+
+    Asset_ClearMappings();
+    mu_assert("Asset_ClearMappings resets count to 0", Asset_GetMappingCount() == 0);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -277,6 +298,7 @@ static char * all_tests() {
     mu_run_test(test_vehicle_active_index);
     mu_run_test(test_system_init_delay_loop);
     mu_run_test(test_system_set_state_flags);
+    mu_run_test(test_dynamic_asset_loader);
     return 0;
 }
 

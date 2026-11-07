@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.37] - 2026-11-06
+### Added
+- **Dynamic Asset Loader**: Implemented `Asset_GetMappingCount` and `Asset_ClearMappings` in `src/pc/assets/dynamic_asset_loader.c` and `include/pc/assets/dynamic_asset_loader.h`.
+- **Testing**: Added `test_dynamic_asset_loader` in `tests/test_math_utils.c` and integrated `src/pc/assets/dynamic_asset_loader.o` into `Makefile.pc` (16 tests passing).
+
 ## [0.1.36] - 2026-11-06
 ### Added
 - **System State Flags Shiftability**: Decoupled `D_800CD510`, `D_800E4264`, and `D_800E4260` into typed `gSystemStateFlag`, `gSystemStateParamA`, and `gSystemStateParamB` in `include/variables.h` and `src/pc/ultra_impl.c`.
