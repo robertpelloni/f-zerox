@@ -29,19 +29,10 @@ void func_8007FA64(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007FB80(void) { /* TODO: SHIFTABLE - Implement */ }
 
-/**
- * @brief Draws a debug integer to the screen.
- *
- * Uses sprintf to format the integer and then draws it.
- *
- * @param arg0 The integer to display.
- */
-void func_8007FC68(s32 arg0) {
-    s8* sp1C;
+void DebugText_DrawInteger(s32 val);
 
-    sprintf(&sp1C, &D_800D46C0, arg0);
-    func_8007FB80(0x61, 0x50, &D_800D46C8);
-    func_8007FB80(0xC9, 0x50, &sp1C);
+void func_8007FC68(s32 arg0) {
+    DebugText_DrawInteger(arg0);
 }
 
 void func_8007FCB8(void) {

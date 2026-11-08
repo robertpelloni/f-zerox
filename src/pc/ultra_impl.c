@@ -6,8 +6,8 @@
 
 // Mock Global Variables (usually defined in ld script or asm)
 void* gCurrentFramebuffer = NULL;
-s32 D_800D46C0 = 0; // gDebugPrintFormat?
-s32 D_800D46C8 = 0;
+const char gDebugFormatInteger[] = "%d";
+const char gDebugLabelInteger[] = "INT:";
 s32 D_800D46D8 = 0;
 s32 D_800D46FC = 0;
 s32 D_800D471C = 0;

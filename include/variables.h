@@ -43,8 +43,11 @@ extern s32 gDynamicMachineConfigB;
 #define D_800D0AC0 gDynamicMachineConfigA
 #define D_800D0AC4 gDynamicMachineConfigB
 extern s32 D_800D1C18;
-extern s32 D_800D46C0; // gDebugPrintFormat (Used in game_197D0.c)
-extern s32 D_800D46C8;
+// Shiftable Debug Format and Label Strings (formerly D_800D46C0, D_800D46C8)
+extern const char gDebugFormatInteger[];
+extern const char gDebugLabelInteger[];
+#define D_800D46C0 gDebugFormatInteger
+#define D_800D46C8 gDebugLabelInteger
 extern s32 D_800D46D8;
 extern s32 D_800D46FC;
 extern s32 D_800D471C;

@@ -362,6 +362,8 @@ static char * test_state_struct_reset() {
 extern void SystemConfig_Reset(void);
 extern void DebugText_InitBuffers(void);
 extern void func_8007F904(void);
+extern void DebugText_DrawInteger(s32 val);
+extern void func_8007FC68(s32 arg0);
 
 static char * test_system_config_reset() {
     gSystemConfigState.unk2 = 5;
@@ -385,6 +387,13 @@ static char * test_debug_text_init_buffers() {
 
     func_8007F904();
     mu_assert("error, func_8007F904 alias execution failed", 1);
+    return 0;
+}
+
+static char * test_debug_text_draw_integer() {
+    DebugText_DrawInteger(42);
+    func_8007FC68(99);
+    mu_assert("error, DebugText_DrawInteger execution failed", 1);
     return 0;
 }
 
@@ -412,6 +421,7 @@ static char * all_tests() {
     mu_run_test(test_state_struct_reset);
     mu_run_test(test_system_config_reset);
     mu_run_test(test_debug_text_init_buffers);
+    mu_run_test(test_debug_text_draw_integer);
     return 0;
 }
 

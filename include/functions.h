@@ -21,6 +21,7 @@ s32 func_8006D3F0(s32 arg0); // BoundsCheck_0_22
 /* src/debug_text.c (game_197D0.c) - Debug & Framebuffer */
 void DebugText_InitBuffers(void);
 void func_8007F904(void);
+void DebugText_DrawInteger(s32 val);
 void func_8007F94C(void); // UpdateFramebufferPointer
 void func_8007FC68(s32 arg0); // DrawDebugInt
 void func_8007F86C(void* a, void* b, void* c, void* d, void* e);

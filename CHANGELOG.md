@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.45] - 2026-11-06
+### Added
+- **Debug Text Formatting Shiftability & Decompilation**: Decoupled `D_800D46C0` and `D_800D46C8` into shiftable `gDebugFormatInteger` and `gDebugLabelInteger` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Debug Text Draw Integer Logic**: Implemented `DebugText_DrawInteger` in `src/debug_text.c` with backward-compatible `func_8007FC68` alias in `src/debug_text.c` and `src/game_197D0.c`.
+- **Testing**: Added `test_debug_text_draw_integer` in `tests/test_math_utils.c` (24 tests passing).
+
 ## [0.1.44] - 2026-11-06
 ### Added
 - **Debug Text Buffers Shiftability & Decompilation**: Decoupled `D_800CD520`, `D_80400008`, `D_800E4350`, `D_800E44D0`, and `D_800E4650` into shiftable `gDebugBufferState`, `gDebugBufferAux`, `gDebugBufferA`, `gDebugBufferB`, `gDebugBufferC` in `include/variables.h` and `src/pc/ultra_impl.c`.

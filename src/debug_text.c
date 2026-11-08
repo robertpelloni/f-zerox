@@ -44,14 +44,18 @@ void func_8007FB80(s32 x, s32 y, void* str);
  *
  * Uses sprintf to format the integer and then draws it.
  *
- * @param arg0 The integer to display.
+ * @param val The integer to display.
  */
-void func_8007FC68(s32 arg0) {
+void DebugText_DrawInteger(s32 val) {
     char sp1C[32];
 
-    sprintf(sp1C, (const char*)&D_800D46C0, arg0);
-    func_8007FB80(0x61, 0x50, &D_800D46C8);
+    sprintf(sp1C, gDebugFormatInteger, val);
+    func_8007FB80(0x61, 0x50, (void*)gDebugLabelInteger);
     func_8007FB80(0xC9, 0x50, sp1C);
+}
+
+void func_8007FC68(s32 arg0) {
+    DebugText_DrawInteger(arg0);
 }
 
 void func_8007FCB8(void) {
