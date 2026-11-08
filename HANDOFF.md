@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.42)
+## Recent Activity (Version 0.1.43)
+- **System Config Shiftability & Decompilation**:
+  - Decoupled `D_8010B7B0` into typed shiftable `struct UnkStruct_4 gSystemConfigState` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `SystemConfig_Reset(void)` with backward-compatible alias `func_800742D0` in `src/game_73F0.c` and declared in `include/functions.h`.
+  - Added unit test `test_system_config_reset` in `tests/test_math_utils.c` (all 22 unit tests passing).
+  - Bumped version to `0.1.43` across all documentation.
+
+## Previous Activity (Version 0.1.42)
 - **State Struct Reset Decompilation**:
   - Implemented `StateStruct_Reset(struct UnkStruct_5* state)` with backward-compatible alias `func_800B2B50` in `src/game_459A0.c` and declared in `include/functions.h`.
   - Added unit test `test_state_struct_reset` in `tests/test_math_utils.c` (all 21 unit tests passing).

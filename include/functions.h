@@ -64,6 +64,10 @@ void func_80076848(void);
 void func_8007D9D0(void);
 void func_800FD184(s32 arg0);
 
+/* src/game_73F0.c - System Config */
+void SystemConfig_Reset(void);
+void func_800742D0(void);
+
 /* src/game_459A0.c - Variable Setters */
 void func_800B0784(s32 arg0);
 void func_800B0790(s32 arg0);

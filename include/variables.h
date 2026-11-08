@@ -103,7 +103,9 @@ extern s16 D_800CD168;
 extern s8 gSoundEffectBankMap;
 #define D_800D4690 gSoundEffectBankMap
 extern s8 D_800E4175;
-extern struct UnkStruct_4 D_8010B7B0;
+// Shiftable System Configuration / State Struct (formerly D_8010B7B0)
+extern struct UnkStruct_4 gSystemConfigState;
+#define D_8010B7B0 gSystemConfigState
 extern s16 gStateMachineActive;
 extern u8 D_800D16D0;
 extern void* D_800F8510;

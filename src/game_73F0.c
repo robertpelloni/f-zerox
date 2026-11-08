@@ -152,10 +152,17 @@ void func_800741DC(s32 arg0) {
 
 void func_80074204(void) { /* TODO: SHIFTABLE - Implement */ }
 
+/**
+ * @brief Resets the system config state fields unk2 and unk3 to 0.
+ */
+void SystemConfig_Reset(void) {
+    gSystemConfigState.unk2 = 0;
+    gSystemConfigState.unk3 = 0;
+}
+
 void func_800742D0(void) {
     func_80074204();
-    D_8010B7B0.unk2 = 0;
-    D_8010B7B0.unk3 = 0;
+    SystemConfig_Reset();
 }
 
 void func_800742FC(void) { /* TODO: SHIFTABLE - Implement */ }

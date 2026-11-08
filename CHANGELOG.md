@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.43] - 2026-11-06
+### Added
+- **System Config Shiftability & Decompilation**: Decoupled `D_8010B7B0` into typed shiftable `struct UnkStruct_4 gSystemConfigState` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **System Config Reset Logic**: Implemented `SystemConfig_Reset` in `src/game_73F0.c` with backward-compatible `func_800742D0` alias.
+- **Testing**: Added `test_system_config_reset` in `tests/test_math_utils.c` (22 tests passing).
+
 ## [0.1.42] - 2026-11-06
 ### Added
 - **State Struct Reset Decompilation**: Implemented `StateStruct_Reset` in `src/game_459A0.c` with forward declarations and backward-compatible `func_800B2B50` alias.

@@ -61,4 +61,4 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 - `D_800D4690`: Sound effect bank map byte table in `src/audio_util.c` and `src/game_14440.c` (Refactored to `gSoundEffectBankMap` with `Audio_SetSoundId` and `Audio_GetSoundEffectByte`).
 - `D_800D46C0` through `D_800D488C`: A block of variables exclusively used as format or parameter strings for `func_8007FB80` (debug text rendering) in `debug_text.c`.
 - `D_800CD170` / `D_800CD174`: Seed states for `Math_Rand` PRNG in `math_utils.c` (successfully mapped in the PC port).
-- `D_8010B7B0`: Struct containing unknowns, initialized in `game_73F0.c`.
+- `D_8010B7B0`: System config state struct initialized/reset in `game_73F0.c` (Refactored to `gSystemConfigState` with `SystemConfig_Reset` and `func_800742D0`).

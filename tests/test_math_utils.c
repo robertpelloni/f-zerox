@@ -359,6 +359,18 @@ static char * test_state_struct_reset() {
     return 0;
 }
 
+extern void SystemConfig_Reset(void);
+
+static char * test_system_config_reset() {
+    gSystemConfigState.unk2 = 5;
+    gSystemConfigState.unk3 = 10;
+
+    SystemConfig_Reset();
+    mu_assert("error, SystemConfig_Reset failed to zero unk2", gSystemConfigState.unk2 == 0);
+    mu_assert("error, SystemConfig_Reset failed to zero unk3", gSystemConfigState.unk3 == 0);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -381,6 +393,7 @@ static char * all_tests() {
     mu_run_test(test_debug_text_framebuffer);
     mu_run_test(test_system_init_memory_state);
     mu_run_test(test_state_struct_reset);
+    mu_run_test(test_system_config_reset);
     return 0;
 }
 
