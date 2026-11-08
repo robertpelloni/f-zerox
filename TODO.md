@@ -53,3 +53,4 @@
 - [x] **Debug Text Notice:** Decouple `D_800D46D8` with `DebugText_DrawScreenNotice`.
 - [x] **Debug Text Info Group A:** Decouple `D_800D46FC-473C` with `DebugText_DrawInfoGroupA`.
 - [x] **Debug Text Info Group B:** Decouple `D_800D474C-479C` with `DebugText_DrawInfoGroupB`.
+- [x] **Debug Text Info Group C:** Decouple `D_800D47B4-480C` with `DebugText_DrawInfoGroupC`.

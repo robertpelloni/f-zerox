@@ -102,13 +102,20 @@ void func_8007FD58(void) {
     DebugText_DrawInfoGroupB();
 }
 
-void func_8007FDD0(void) {
+/**
+ * @brief Draws debug information group C strings to the screen.
+ */
+void DebugText_DrawInfoGroupC(void) {
     func_8007F94C();
     func_8007F970();
-    func_8007FB80(0x35, 0x6E, &D_800D47B4);
-    func_8007FB80(0x35, 0x82, &D_800D47D0);
-    func_8007FB80(0x35, 0x96, &D_800D47EC);
-    func_8007FB80(0x35, 0xAA, &D_800D480C);
+    func_8007FB80(0x35, 0x6E, (void*)gDebugInfoGroupC1);
+    func_8007FB80(0x35, 0x82, (void*)gDebugInfoGroupC2);
+    func_8007FB80(0x35, 0x96, (void*)gDebugInfoGroupC3);
+    func_8007FB80(0x35, 0xAA, (void*)gDebugInfoGroupC4);
+}
+
+void func_8007FDD0(void) {
+    DebugText_DrawInfoGroupC();
 }
 
 void func_8007FE48(void) {
