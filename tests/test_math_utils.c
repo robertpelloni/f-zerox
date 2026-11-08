@@ -339,6 +339,26 @@ static char * test_system_init_memory_state() {
     return 0;
 }
 
+static char * test_state_struct_reset() {
+    struct UnkStruct_5 s;
+    s.unk0 = 0x4321;
+    s.unk4 = 0;
+    s.unk8 = 0x5555;
+    s.unkC = 0x9999;
+
+    StateStruct_Reset(&s);
+    mu_assert("error, StateStruct_Reset failed to set unk4 = unk0", s.unk4 == s.unk0);
+    mu_assert("error, StateStruct_Reset failed to zero unkC", s.unkC == 0);
+
+    s.unk0 = 0x8765;
+    s.unk4 = 0;
+    s.unkC = 0xAAAA;
+    func_800B2B50(&s);
+    mu_assert("error, func_800B2B50 alias failed to set unk4 = unk0", s.unk4 == s.unk0);
+    mu_assert("error, func_800B2B50 alias failed to zero unkC", s.unkC == 0);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -360,6 +380,7 @@ static char * all_tests() {
     mu_run_test(test_track_lookup_direct);
     mu_run_test(test_debug_text_framebuffer);
     mu_run_test(test_system_init_memory_state);
+    mu_run_test(test_state_struct_reset);
     return 0;
 }
 

@@ -67,5 +67,7 @@ void func_800FD184(s32 arg0);
 /* src/game_459A0.c - Variable Setters */
 void func_800B0784(s32 arg0);
 void func_800B0790(s32 arg0);
+void StateStruct_Reset(struct UnkStruct_5* state);
+void func_800B2B50(struct UnkStruct_5* arg0);
 
 #endif

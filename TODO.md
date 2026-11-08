@@ -46,3 +46,4 @@
 - [x] **Direct Track Lookup:** Implement `TrackLookup_GetEntryDirect` in `game_10490.c` with bounds checks.
 - [x] **Framebuffer Globals:** Decouple `D_800E4348` into `gCurrentFramebuffer` with `DebugText_UpdateFramebuffer`.
 - [x] **Memory State Globals:** Decouple `D_800E42CC` into `gSystemMemoryStateValue` with `System_InitMemoryState`.
+- [x] **State Struct Logic:** Decompile `StateStruct_Reset` in `src/game_459A0.c` with tests.

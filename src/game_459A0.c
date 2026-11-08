@@ -155,6 +155,10 @@ void func_800B04A4(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B04C4(void) { /* TODO: SHIFTABLE - Implement */ }
 
+void func_800B0FB4(void);
+void func_800B1B40(s32 arg0);
+void func_800B12EC(s32 arg0);
+
 void func_800B0754(s32 arg0) {
     func_800B0FB4();
     func_800B1B40(arg0);
@@ -246,9 +250,18 @@ void func_800B2B0C(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B2B20(void) { /* TODO: SHIFTABLE - Implement */ }
 
+/**
+ * @brief Resets an UnkStruct_5 state, zeroing unkC and syncing unk4 to unk0.
+ *
+ * @param state Pointer to the UnkStruct_5 state instance.
+ */
+void StateStruct_Reset(struct UnkStruct_5* state) {
+    state->unkC = 0;
+    state->unk4 = state->unk0;
+}
+
 void func_800B2B50(struct UnkStruct_5* arg0) {
-    arg0->unkC = 0;
-    arg0->unk4 = arg0->unk0;
+    StateStruct_Reset(arg0);
 }
 
 void func_800B2B60(void) { /* TODO: SHIFTABLE - Implement */ }

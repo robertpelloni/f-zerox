@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.42] - 2026-11-06
+### Added
+- **State Struct Reset Decompilation**: Implemented `StateStruct_Reset` in `src/game_459A0.c` with forward declarations and backward-compatible `func_800B2B50` alias.
+- **Testing**: Added `test_state_struct_reset` in `tests/test_math_utils.c` (21 tests passing).
+
 ## [0.1.41] - 2026-11-06
 ### Added
 - **Memory/System State Decompilation & Shiftability**: Decoupled `D_800E42CC` into shiftable `s16 gSystemMemoryStateValue` in `include/variables.h` and `src/pc/ultra_impl.c`.

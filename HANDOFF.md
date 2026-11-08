@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.41)
+## Recent Activity (Version 0.1.42)
+- **State Struct Reset Decompilation**:
+  - Implemented `StateStruct_Reset(struct UnkStruct_5* state)` with backward-compatible alias `func_800B2B50` in `src/game_459A0.c` and declared in `include/functions.h`.
+  - Added unit test `test_state_struct_reset` in `tests/test_math_utils.c` (all 21 unit tests passing).
+  - Bumped version to `0.1.42` across all documentation.
+
+## Previous Activity (Version 0.1.41)
 - **Memory/System State Decompilation & Shiftability**:
   - Decoupled `D_800E42CC` into shiftable `s16 gSystemMemoryStateValue` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `System_InitMemoryState(void)` and alias `func_8007F500(void)` in `src/game_194E0.c`.
