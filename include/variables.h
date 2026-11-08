@@ -182,5 +182,7 @@ extern s32 gLastStateResult;
 extern s32 gSystemTickCount;
 extern s32 gSystemIdleWaitCount;
 extern s32 gSystemPollEventsCount;
+extern s32 gMachineStateInitAllCount;
+extern s32 gMachineStateInitSpecialCount;
 
 #endif

@@ -68,6 +68,10 @@ void func_8007E0AC(s32 arg0);
 s8 func_8007E10C(s32 arg0);
 
 /* src/math_utils.c - Decompiled Logic */
+void MachineState_InitAll(void);
+void func_80069700(void);
+void MachineState_InitSpecial(void);
+void func_80069820(void);
 void System_Tick(void);
 void func_80068BC0(void);
 void System_IdleWait(void);

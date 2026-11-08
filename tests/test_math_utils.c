@@ -596,6 +596,22 @@ static char * test_system_tick_idle_poll() {
     return 0;
 }
 
+static char * test_machinestate_init_all_and_special() {
+    gMachineStateInitAllCount = 0;
+    MachineState_InitAll();
+    mu_assert("MachineState_InitAll should increment gMachineStateInitAllCount", gMachineStateInitAllCount == 1);
+    func_80069700();
+    mu_assert("func_80069700 should alias MachineState_InitAll and increment count", gMachineStateInitAllCount == 2);
+
+    gMachineStateInitSpecialCount = 0;
+    MachineState_InitSpecial();
+    mu_assert("MachineState_InitSpecial should increment gMachineStateInitSpecialCount", gMachineStateInitSpecialCount == 1);
+    func_80069820();
+    mu_assert("func_80069820 should alias MachineState_InitSpecial and increment count", gMachineStateInitSpecialCount == 2);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -634,6 +650,7 @@ static char * all_tests() {
     mu_run_test(test_audio_aux_and_shutdown);
     mu_run_test(test_gfx_init_and_state_result);
     mu_run_test(test_system_tick_idle_poll);
+    mu_run_test(test_machinestate_init_all_and_special);
     return 0;
 }
 

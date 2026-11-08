@@ -83,6 +83,8 @@ s32 gLastStateResult = 0;
 s32 gSystemTickCount = 0;
 s32 gSystemIdleWaitCount = 0;
 s32 gSystemPollEventsCount = 0;
+s32 gMachineStateInitAllCount = 0;
+s32 gMachineStateInitSpecialCount = 0;
 
 /**
  * @brief Initializes the graphics subsystem.

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.59] - 2026-11-06
+### Added
+- **Machine State Initialization Routines**: Implemented `MachineState_InitAll` and `MachineState_InitSpecial` in `src/math_utils.c` with backward-compatible aliases `func_80069700` and `func_80069820`.
+- **Shiftable Tracking**: Added typed tracking symbols `gMachineStateInitAllCount` and `gMachineStateInitSpecialCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_machinestate_init_all_and_special` in `tests/test_math_utils.c` (38 tests passing).
+
 ## [0.1.58] - 2026-11-06
 ### Added
 - **System Tick, Idle & Poll Routines**: Implemented `System_Tick`, `System_IdleWait`, and `System_PollEvents` in `src/math_utils.c` with backward-compatible aliases `func_80068BC0`, `func_80068DCC`, and `func_80068F04`.

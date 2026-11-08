@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.58)
+## Recent Activity (Version 0.1.59)
+- **Machine State Initialization Routines**:
+  - Implemented `MachineState_InitAll()` and `MachineState_InitSpecial()` in `src/math_utils.c` with backward-compatible aliases `func_80069700` and `func_80069820`.
+  - Decoupled tracking into shiftable C globals `gMachineStateInitAllCount` and `gMachineStateInitSpecialCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_machinestate_init_all_and_special` in `tests/test_math_utils.c` (all 38 unit tests passing).
+  - Bumped version to `0.1.59` across all documentation.
+
+## Previous Activity (Version 0.1.58)
 - **System Tick, Idle & Poll Routines**:
   - Implemented `System_Tick()`, `System_IdleWait()`, and `System_PollEvents()` in `src/math_utils.c` with backward-compatible aliases `func_80068BC0`, `func_80068DCC`, and `func_80068F04`.
   - Decoupled tracking into shiftable C globals `gSystemTickCount`, `gSystemIdleWaitCount`, and `gSystemPollEventsCount` in `include/variables.h` and `src/pc/ultra_impl.c`.

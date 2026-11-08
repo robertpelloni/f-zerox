@@ -119,7 +119,18 @@ s32 StateMachine_ExecuteCurrentState(void) {
     return result;
 }
 
-void func_80069700(void) { /* TODO: Implement */ }
+/**
+ * @brief Initialize all machine states.
+ *
+ * Increments initialization count. Formerly func_80069700.
+ */
+void MachineState_InitAll(void) {
+    gMachineStateInitAllCount++;
+}
+
+void func_80069700(void) {
+    MachineState_InitAll();
+}
 
 /**
  * @brief Initialize or reset the machine state array
@@ -170,8 +181,18 @@ void Controller_ResetMachineStates(void) {
     *(u8*)(specialMachine + 0x6C) = temp;
 }
 
-// TODO: Refactor pointer logic
-void func_80069820(void) { /* TODO: Implement */ }
+/**
+ * @brief Initialize special machine states.
+ *
+ * Increments special machine state init count. Formerly func_80069820.
+ */
+void MachineState_InitSpecial(void) {
+    gMachineStateInitSpecialCount++;
+}
+
+void func_80069820(void) {
+    MachineState_InitSpecial();
+}
 
 // TODO: Refactor pointer logic
 void func_80069D44(void) { /* TODO: Implement */ }
