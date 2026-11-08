@@ -175,5 +175,7 @@ extern s32 gMachineSystemInitialized;
 extern s32 gAudioWarmBootCount;
 extern s32 gInputSystemInitialized;
 extern s32 gTimingSystemInitialized;
+extern s32 gAudioAuxInitialized;
+extern s32 gAudioShutdownCount;
 
 #endif

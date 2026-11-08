@@ -76,10 +76,10 @@ s32 gMachineSystemInitialized = 0;
 s32 gAudioWarmBootCount = 0;
 s32 gInputSystemInitialized = 0;
 s32 gTimingSystemInitialized = 0;
+s32 gAudioAuxInitialized = 0;
+s32 gAudioShutdownCount = 0;
 
 // Stubs for functions called by func_80068B20 (or System_Init)
-void func_800A4BAC(void) {}
-void func_800A4B54(void) {}
 void func_800FC730(void) {}
 void func_800FD184(s32 arg0) { (void)arg0; }
 s32 __osMotorAccess(void* pfs, s32 flag) { (void)pfs; (void)flag; return 0; }

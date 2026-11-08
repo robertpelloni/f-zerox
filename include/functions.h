@@ -71,9 +71,11 @@ s8 func_8007E10C(s32 arg0);
 void func_80068B20(void);
 // Dependencies of func_80068B20
 void func_8008DB98(void);
+void Audio_AuxInit(void);
 void func_800A4BAC(void);
 void Audio_WarmBootInit(void);
 void func_8008DA68(void);
+void Audio_Shutdown(void);
 void func_800A4B54(void);
 void Machine_SystemInit(void);
 void func_80085510(void);

@@ -536,6 +536,25 @@ static char * test_input_and_timing_init() {
     return 0;
 }
 
+static char * test_audio_aux_and_shutdown() {
+    gAudioAuxInitialized = 0;
+    Audio_AuxInit();
+    mu_assert("Audio_AuxInit should set gAudioAuxInitialized to 1", gAudioAuxInitialized == 1);
+
+    gAudioAuxInitialized = 0;
+    func_800A4BAC();
+    mu_assert("func_800A4BAC should alias Audio_AuxInit and set flag to 1", gAudioAuxInitialized == 1);
+
+    gAudioShutdownCount = 0;
+    Audio_Shutdown();
+    mu_assert("Audio_Shutdown should increment gAudioShutdownCount", gAudioShutdownCount == 1);
+
+    func_800A4B54();
+    mu_assert("func_800A4B54 should alias Audio_Shutdown and increment count", gAudioShutdownCount == 2);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -571,6 +590,7 @@ static char * all_tests() {
     mu_run_test(test_system_init_alias);
     mu_run_test(test_machine_and_audio_init);
     mu_run_test(test_input_and_timing_init);
+    mu_run_test(test_audio_aux_and_shutdown);
     return 0;
 }
 

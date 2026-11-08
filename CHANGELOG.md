@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.56] - 2026-11-06
+### Added
+- **Auxiliary Audio System Inits**: Implemented `Audio_AuxInit` and `Audio_Shutdown` in `src/game_36ED0.c` with backward-compatible aliases `func_800A4BAC` and `func_800A4B54`.
+- **Shiftable Tracking**: Added typed symbols `gAudioAuxInitialized` and `gAudioShutdownCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Linked `src/game_36ED0.o` into test runner and added `test_audio_aux_and_shutdown` in `tests/test_math_utils.c` (35 tests passing).
+
 ## [0.1.55] - 2026-11-06
 ### Added
 - **Input & Timing Subsystem Inits**: Implemented `Input_SystemInit` in `src/game_10490.c` and `Timing_SystemInit` in `src/audio_util.c` / `src/game_14440.c` with backward-compatible aliases `func_80076848` and `func_8007D9D0`.
