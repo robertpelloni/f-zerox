@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.52] - 2026-11-06
+### Added
+- **Data Section Shiftability**: Decoupled `D_800CD168`, `D_800E4175`, `D_800D16D0`, `D_800F8510`, and `D_8002AA18` into typed shiftable symbols in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_shiftable_data_globals` in `tests/test_math_utils.c` (31 tests passing).
+
 ## [0.1.51] - 2026-11-06
 ### Added
 - **UI Diagnostics & Telemetry**: Added dynamic asset loader active count display and mapping clearance button in `src/pc/ui/tabs/ui_tab_debug.c`.

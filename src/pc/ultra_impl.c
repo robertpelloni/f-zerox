@@ -41,7 +41,11 @@ s32 gDebugBufferC = 0;
 
 
 
-s16 D_800CD168 = 0;
+s16 gGlobalState_800CD168 = 0;
+s8 gGlobalState_800E4175 = 0;
+u8 gGlobalState_800D16D0 = 0;
+void* gGlobalPtr_800F8510 = NULL;
+s32 gGlobalState_8002AA18 = 0;
 
 // Shiftable Machine Dynamic Configuration variables (formerly D_800D0AC0, D_800D0AC4)
 s32 gDynamicMachineConfigA = 0;

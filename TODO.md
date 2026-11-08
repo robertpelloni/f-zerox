@@ -56,3 +56,4 @@
 - [x] **Debug Text Info Group C:** Decouple `D_800D47B4-480C` with `DebugText_DrawInfoGroupC`.
 - [x] **Debug Text Info Group D-F:** Decouple `D_800D481C-488C` with `DebugText_DrawInfoGroupD/E/F`.
 - [x] **Asset Loader Telemetry:** Wire asset loader mapping count and clear action into debug UI tab.
+- [x] **Data Section Symbols:** Decouple `D_800CD168`, `D_800E4175`, `D_800D16D0`, `D_800F8510`, `D_8002AA18` into typed globals.

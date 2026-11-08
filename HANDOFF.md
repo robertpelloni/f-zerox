@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.51)
+## Recent Activity (Version 0.1.52)
+- **Data Section Shiftability**:
+  - Decoupled `D_800CD168`, `D_800E4175`, `D_800D16D0`, `D_800F8510`, and `D_8002AA18` into typed shiftable symbols `gGlobalState_800CD168`, `gGlobalState_800E4175`, `gGlobalState_800D16D0`, `gGlobalPtr_800F8510`, and `gGlobalState_8002AA18` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_shiftable_data_globals` in `tests/test_math_utils.c` (all 31 unit tests passing).
+  - Bumped version to `0.1.52` across all documentation.
+
+## Previous Activity (Version 0.1.51)
 - **Dynamic Asset Loader UI Integration & Multiple Mappings**:
   - Integrated dynamic asset loader telemetry (`Mapped Assets: %d`) and clearance action into `src/pc/ui/tabs/ui_tab_debug.c`.
   - Added unit test `test_dynamic_asset_loader_multiple_mappings` in `tests/test_math_utils.c` (all 30 unit tests passing).

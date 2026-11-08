@@ -469,6 +469,25 @@ static char * test_dynamic_asset_loader_multiple_mappings() {
     return 0;
 }
 
+static char * test_shiftable_data_globals() {
+    gGlobalState_800CD168 = 0x1234;
+    mu_assert("gGlobalState_800CD168 set failed", gGlobalState_800CD168 == 0x1234);
+
+    gGlobalState_800E4175 = -42;
+    mu_assert("gGlobalState_800E4175 set failed", gGlobalState_800E4175 == -42);
+
+    gGlobalState_800D16D0 = 0xAA;
+    mu_assert("gGlobalState_800D16D0 set failed", gGlobalState_800D16D0 == 0xAA);
+
+    static int sDummyHeap = 999;
+    gGlobalPtr_800F8510 = &sDummyHeap;
+    mu_assert("gGlobalPtr_800F8510 set failed", gGlobalPtr_800F8510 == &sDummyHeap);
+
+    gGlobalState_8002AA18 = 0x7FFFFFFF;
+    mu_assert("gGlobalState_8002AA18 set failed", gGlobalState_8002AA18 == 0x7FFFFFFF);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -500,6 +519,7 @@ static char * all_tests() {
     mu_run_test(test_debug_text_draw_info_group_c);
     mu_run_test(test_debug_text_draw_info_remaining);
     mu_run_test(test_dynamic_asset_loader_multiple_mappings);
+    mu_run_test(test_shiftable_data_globals);
     return 0;
 }
 

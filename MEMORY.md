@@ -65,6 +65,7 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 - `D_800D474C`, `D_800D476C`, `D_800D478C`, `D_800D479C`: Debug info group B strings in `debug_text.c` (Refactored to `gDebugInfoGroupB1-4` with `DebugText_DrawInfoGroupB` and `func_8007FD58`).
 - `D_800D47B4`, `D_800D47D0`, `D_800D47EC`, `D_800D480C`: Debug info group C strings in `debug_text.c` (Refactored to `gDebugInfoGroupC1-4` with `DebugText_DrawInfoGroupC` and `func_8007FDD0`).
 - `D_800D481C` through `D_800D488C`: Debug info groups D, E, F strings in `debug_text.c` (Refactored to `gDebugInfoGroupD1-2`, `gDebugInfoGroupE1`, `gDebugInfoGroupF1-2` with `DebugText_DrawInfoGroupD/E/F`).
+- `D_800CD168`, `D_800E4175`, `D_800D16D0`, `D_800F8510`, `D_8002AA18`: Shiftable data and pointer symbols in `ultra_impl.c` and `variables.h` (`gGlobalState_800CD168`, `gGlobalState_800E4175`, `gGlobalState_800D16D0`, `gGlobalPtr_800F8510`, `gGlobalState_8002AA18`).
 - `D_800CD170` / `D_800CD174`: Seed states for `Math_Rand` PRNG in `math_utils.c` (successfully mapped in the PC port).
 - `D_8010B7B0`: System config state struct initialized/reset in `game_73F0.c` (Refactored to `gSystemConfigState` with `SystemConfig_Reset` and `func_800742D0`).
 - `D_800CD520`, `D_80400008`, `D_800E4350`, `D_800E44D0`, `D_800E4650`: Debug text buffers (Refactored to `gDebugBufferState`, `gDebugBufferAux`, `gDebugBufferA/B/C` with `DebugText_InitBuffers` and `func_8007F904`).

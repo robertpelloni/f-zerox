@@ -14,7 +14,9 @@ extern s8 gLowMemInputFlag;
 #define D_8002B347 gLowMemInputCurrent
 #define D_8002B348 gLowMemInputFlag
 
-extern s32 D_8002AA18;
+// Shiftable Global State 8002AA18 (formerly D_8002AA18)
+extern s32 gGlobalState_8002AA18;
+#define D_8002AA18 gGlobalState_8002AA18
 // Shiftable System State Flag & Params (formerly D_800CD510, D_800E4264, D_800E4260)
 extern s32 gSystemStateFlag;
 extern s32 gSystemStateParamA;
@@ -124,17 +126,30 @@ extern s32 gAudioStateStatus;
 #define D_800D1A0C gAudioStateResetFlag
 #define D_800D1C18 gAudioStateStatus
 
-extern s16 D_800CD168;
+// Shiftable Global State 800CD168 (formerly D_800CD168)
+extern s16 gGlobalState_800CD168;
+#define D_800CD168 gGlobalState_800CD168
+
 // Shiftable Sound Effect Bank Map / Table (formerly D_800D4690)
 extern s8 gSoundEffectBankMap;
 #define D_800D4690 gSoundEffectBankMap
-extern s8 D_800E4175;
+
+// Shiftable Global State 800E4175 (formerly D_800E4175)
+extern s8 gGlobalState_800E4175;
+#define D_800E4175 gGlobalState_800E4175
+
 // Shiftable System Configuration / State Struct (formerly D_8010B7B0)
 extern struct UnkStruct_4 gSystemConfigState;
 #define D_8010B7B0 gSystemConfigState
 extern s16 gStateMachineActive;
-extern u8 D_800D16D0;
-extern void* D_800F8510;
+
+// Shiftable Global State 800D16D0 (formerly D_800D16D0)
+extern u8 gGlobalState_800D16D0;
+#define D_800D16D0 gGlobalState_800D16D0
+
+// Shiftable Global Ptr 800F8510 (formerly D_800F8510)
+extern void* gGlobalPtr_800F8510;
+#define D_800F8510 gGlobalPtr_800F8510
 // Shiftable Track / Subsystem Lookup Table (22 entries)
 extern s32 gTrackLookupTable[22];
 #define D_800E33C0 gTrackLookupTable
