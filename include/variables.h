@@ -72,11 +72,16 @@ extern const char gDebugInfoGroupC4[];
 #define D_800D47D0 gDebugInfoGroupC2
 #define D_800D47EC gDebugInfoGroupC3
 #define D_800D480C gDebugInfoGroupC4
-extern s32 D_800D481C;
-extern s32 D_800D4834;
-extern s32 D_800D4854;
-extern s32 D_800D4870;
-extern s32 D_800D488C;
+extern const char gDebugInfoGroupD1[];
+extern const char gDebugInfoGroupD2[];
+extern const char gDebugInfoGroupE1[];
+extern const char gDebugInfoGroupF1[];
+extern const char gDebugInfoGroupF2[];
+#define D_800D481C gDebugInfoGroupD1
+#define D_800D4834 gDebugInfoGroupD2
+#define D_800D4854 gDebugInfoGroupE1
+#define D_800D4870 gDebugInfoGroupF1
+#define D_800D488C gDebugInfoGroupF2
 extern s16 gSystemFullyInitialized;
 // Shiftable Game State Cycle variables (formerly D_800DCD04, D_800DCD08, D_800DCD0C, D_800DCCF8)
 extern s32 gGameStateCycleA;

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.50] - 2026-11-06
+### Added
+- **Debug Text Remaining Info Groups Shiftability & Decompilation**: Decoupled `D_800D481C` through `D_800D488C` into shiftable `gDebugInfoGroupD1/2`, `gDebugInfoGroupE1`, and `gDebugInfoGroupF1/2` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Debug Text Draw Helpers**: Implemented `DebugText_DrawInfoGroupD`, `DebugText_DrawInfoGroupE`, and `DebugText_DrawInfoGroupF` with aliases `func_8007FE48`, `func_8007FE98`, and `func_8007FED4` in `src/debug_text.c` and `src/game_197D0.c`.
+- **Testing**: Added `test_debug_text_draw_info_remaining` in `tests/test_math_utils.c` (29 tests passing).
+
 ## [0.1.49] - 2026-11-06
 ### Added
 - **Debug Text Info Group C Shiftability & Decompilation**: Decoupled `D_800D47B4`, `D_800D47D0`, `D_800D47EC`, and `D_800D480C` into shiftable `gDebugInfoGroupC1-4` in `include/variables.h` and `src/pc/ultra_impl.c`.

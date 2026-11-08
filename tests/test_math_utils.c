@@ -372,6 +372,12 @@ extern void DebugText_DrawInfoGroupB(void);
 extern void func_8007FD58(void);
 extern void DebugText_DrawInfoGroupC(void);
 extern void func_8007FDD0(void);
+extern void DebugText_DrawInfoGroupD(void);
+extern void func_8007FE48(void);
+extern void DebugText_DrawInfoGroupE(void);
+extern void func_8007FE98(void);
+extern void DebugText_DrawInfoGroupF(void);
+extern void func_8007FED4(void);
 
 static char * test_system_config_reset() {
     gSystemConfigState.unk2 = 5;
@@ -433,6 +439,17 @@ static char * test_debug_text_draw_info_group_c() {
     return 0;
 }
 
+static char * test_debug_text_draw_info_remaining() {
+    DebugText_DrawInfoGroupD();
+    func_8007FE48();
+    DebugText_DrawInfoGroupE();
+    func_8007FE98();
+    DebugText_DrawInfoGroupF();
+    func_8007FED4();
+    mu_assert("error, remaining debug text drawing execution failed", 1);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -462,6 +479,7 @@ static char * all_tests() {
     mu_run_test(test_debug_text_draw_info_group_a);
     mu_run_test(test_debug_text_draw_info_group_b);
     mu_run_test(test_debug_text_draw_info_group_c);
+    mu_run_test(test_debug_text_draw_info_remaining);
     return 0;
 }
 

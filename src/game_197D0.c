@@ -59,22 +59,18 @@ void func_8007FDD0(void) {
     DebugText_DrawInfoGroupC();
 }
 
+void DebugText_DrawInfoGroupD(void);
+void DebugText_DrawInfoGroupE(void);
+void DebugText_DrawInfoGroupF(void);
+
 void func_8007FE48(void) {
-    func_8007F94C();
-    func_8007F970();
-    func_8007FB80(0x38, 0x64, &D_800D481C);
-    func_8007FB80(0x38, 0x78, &D_800D4834);
+    DebugText_DrawInfoGroupD();
 }
 
 void func_8007FE98(void) {
-    func_8007F94C();
-    func_8007F970();
-    func_8007FB80(0x3B, 0x6E, &D_800D4854);
+    DebugText_DrawInfoGroupE();
 }
 
 void func_8007FED4(void) {
-    func_8007F94C();
-    func_8007F970();
-    func_8007FB80(0x37, 0x64, &D_800D4870);
-    func_8007FB80(0x37, 0x78, &D_800D488C);
+    DebugText_DrawInfoGroupF();
 }
