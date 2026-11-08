@@ -28,7 +28,18 @@ void func_8007B14C(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007CDB0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_8007D9D0(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Initializes the timing subsystem.
+ *
+ * Marks timing system state as initialized. Formerly func_8007D9D0.
+ */
+void Timing_SystemInit(void) {
+    gTimingSystemInitialized = 1;
+}
+
+void func_8007D9D0(void) {
+    Timing_SystemInit();
+}
 
 void func_8007DABC(void) { /* TODO: SHIFTABLE - Implement */ }
 

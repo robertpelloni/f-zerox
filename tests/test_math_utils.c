@@ -516,6 +516,26 @@ static char * test_machine_and_audio_init() {
     return 0;
 }
 
+static char * test_input_and_timing_init() {
+    gInputSystemInitialized = 0;
+    Input_SystemInit();
+    mu_assert("Input_SystemInit should set gInputSystemInitialized to 1", gInputSystemInitialized == 1);
+
+    gInputSystemInitialized = 0;
+    func_80076848();
+    mu_assert("func_80076848 should alias Input_SystemInit and set flag to 1", gInputSystemInitialized == 1);
+
+    gTimingSystemInitialized = 0;
+    Timing_SystemInit();
+    mu_assert("Timing_SystemInit should set gTimingSystemInitialized to 1", gTimingSystemInitialized == 1);
+
+    gTimingSystemInitialized = 0;
+    func_8007D9D0();
+    mu_assert("func_8007D9D0 should alias Timing_SystemInit and set flag to 1", gTimingSystemInitialized == 1);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -550,6 +570,7 @@ static char * all_tests() {
     mu_run_test(test_shiftable_data_globals);
     mu_run_test(test_system_init_alias);
     mu_run_test(test_machine_and_audio_init);
+    mu_run_test(test_input_and_timing_init);
     return 0;
 }
 

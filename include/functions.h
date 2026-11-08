@@ -79,7 +79,9 @@ void Machine_SystemInit(void);
 void func_80085510(void);
 void func_800FC730(void);
 void func_8007F500(void);
+void Input_SystemInit(void);
 void func_80076848(void);
+void Timing_SystemInit(void);
 void func_8007D9D0(void);
 void func_800FD184(s32 arg0);
 

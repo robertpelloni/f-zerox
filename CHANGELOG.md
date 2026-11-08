@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.55] - 2026-11-06
+### Added
+- **Input & Timing Subsystem Inits**: Implemented `Input_SystemInit` in `src/game_10490.c` and `Timing_SystemInit` in `src/audio_util.c` / `src/game_14440.c` with backward-compatible aliases `func_80076848` and `func_8007D9D0`.
+- **Shiftable Tracking**: Added typed symbols `gInputSystemInitialized` and `gTimingSystemInitialized` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_input_and_timing_init` in `tests/test_math_utils.c` (34 tests passing).
+
 ## [0.1.54] - 2026-11-06
 ### Added
 - **Machine & Audio Subsystem Inits**: Implemented `Machine_SystemInit` and `Audio_WarmBootInit` in `src/game_1F510.c` with backward-compatible aliases `func_80085510` and `func_8008DA68`.

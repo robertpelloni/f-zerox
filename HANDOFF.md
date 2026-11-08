@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.54)
+## Recent Activity (Version 0.1.55)
+- **Input & Timing Subsystem Inits**:
+  - Implemented `Input_SystemInit()` in `src/game_10490.c` and `Timing_SystemInit()` in `src/audio_util.c` / `src/game_14440.c` with backward-compatible aliases `func_80076848` and `func_8007D9D0`.
+  - Decoupled subsystem tracking into shiftable C globals `gInputSystemInitialized` and `gTimingSystemInitialized` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_input_and_timing_init` in `tests/test_math_utils.c` (all 34 unit tests passing).
+  - Bumped version to `0.1.55` across all documentation.
+
+## Previous Activity (Version 0.1.54)
 - **Machine & Audio Subsystem Inits**:
   - Implemented `Machine_SystemInit()` and `Audio_WarmBootInit()` in `src/game_1F510.c` with backward-compatible aliases `func_80085510` and `func_8008DA68`.
   - Decoupled subsystem tracking into shiftable C globals `gMachineSystemInitialized` and `gAudioWarmBootCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
