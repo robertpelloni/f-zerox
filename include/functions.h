@@ -72,8 +72,10 @@ void func_80068B20(void);
 // Dependencies of func_80068B20
 void func_8008DB98(void);
 void func_800A4BAC(void);
+void Audio_WarmBootInit(void);
 void func_8008DA68(void);
 void func_800A4B54(void);
+void Machine_SystemInit(void);
 void func_80085510(void);
 void func_800FC730(void);
 void func_8007F500(void);

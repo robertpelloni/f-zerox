@@ -497,6 +497,25 @@ static char * test_system_init_alias() {
     return 0;
 }
 
+static char * test_machine_and_audio_init() {
+    gMachineSystemInitialized = 0;
+    Machine_SystemInit();
+    mu_assert("Machine_SystemInit should set gMachineSystemInitialized to 1", gMachineSystemInitialized == 1);
+
+    gMachineSystemInitialized = 0;
+    func_80085510();
+    mu_assert("func_80085510 should alias Machine_SystemInit and set flag to 1", gMachineSystemInitialized == 1);
+
+    gAudioWarmBootCount = 0;
+    Audio_WarmBootInit();
+    mu_assert("Audio_WarmBootInit should increment gAudioWarmBootCount", gAudioWarmBootCount == 1);
+
+    func_8008DA68();
+    mu_assert("func_8008DA68 should alias Audio_WarmBootInit and increment count", gAudioWarmBootCount == 2);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -530,6 +549,7 @@ static char * all_tests() {
     mu_run_test(test_dynamic_asset_loader_multiple_mappings);
     mu_run_test(test_shiftable_data_globals);
     mu_run_test(test_system_init_alias);
+    mu_run_test(test_machine_and_audio_init);
     return 0;
 }
 

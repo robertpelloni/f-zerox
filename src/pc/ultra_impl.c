@@ -71,9 +71,11 @@ u8 gLowMemInputCurrent = 0;
 s8 gLowMemInputFlag = 0;
 s16 gSystemMemoryStateValue = 0;
 
+// Subsystem Initialization Tracking Flags
+s32 gMachineSystemInitialized = 0;
+s32 gAudioWarmBootCount = 0;
 
-
-// Stubs for functions called by func_80068B20
+// Stubs for functions called by func_80068B20 (or System_Init)
 void func_800A4BAC(void) {}
 void func_800A4B54(void) {}
 void func_800FC730(void) {}

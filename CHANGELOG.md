@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.54] - 2026-11-06
+### Added
+- **Machine & Audio Subsystem Inits**: Implemented `Machine_SystemInit` and `Audio_WarmBootInit` in `src/game_1F510.c` with backward-compatible aliases `func_80085510` and `func_8008DA68`.
+- **Shiftable Subsystem Tracking**: Added typed symbols `gMachineSystemInitialized` and `gAudioWarmBootCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_machine_and_audio_init` in `tests/test_math_utils.c` (33 tests passing).
+
 ## [0.1.53] - 2026-11-06
 ### Added
 - **System Init Alias**: Implemented `func_80068B20` forwarder alias to `System_Init` in `src/math_utils.c`.

@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.53)
+## Recent Activity (Version 0.1.54)
+- **Machine & Audio Subsystem Inits**:
+  - Implemented `Machine_SystemInit()` and `Audio_WarmBootInit()` in `src/game_1F510.c` with backward-compatible aliases `func_80085510` and `func_8008DA68`.
+  - Decoupled subsystem tracking into shiftable C globals `gMachineSystemInitialized` and `gAudioWarmBootCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_machine_and_audio_init` in `tests/test_math_utils.c` (all 33 unit tests passing).
+  - Bumped version to `0.1.54` across all documentation.
+
+## Previous Activity (Version 0.1.53)
 - **System Init Alias**:
   - Implemented `func_80068B20(void)` forwarding directly to authentic `System_Init()` in `src/math_utils.c`.
   - Added unit test `test_system_init_alias` in `tests/test_math_utils.c` (all 32 unit tests passing).

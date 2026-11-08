@@ -170,4 +170,8 @@ typedef struct {
 } TimeState;
 extern TimeState gTimeState;
 
+// Subsystem Initialization Tracking Flags (Shiftable & Introspectable)
+extern s32 gMachineSystemInitialized;
+extern s32 gAudioWarmBootCount;
+
 #endif
