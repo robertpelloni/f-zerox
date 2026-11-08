@@ -177,5 +177,7 @@ extern s32 gInputSystemInitialized;
 extern s32 gTimingSystemInitialized;
 extern s32 gAudioAuxInitialized;
 extern s32 gAudioShutdownCount;
+extern s32 gGfxSystemInitialized;
+extern s32 gLastStateResult;
 
 #endif

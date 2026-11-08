@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.57] - 2026-11-06
+### Added
+- **Graphics Init & State Result Processing**: Implemented `Gfx_SystemInit` and `State_ProcessResult` in `src/pc/ultra_impl.c` with backward-compatible aliases `func_800FC730` and `func_800FD184`.
+- **Shiftable Tracking**: Added typed symbols `gGfxSystemInitialized` and `gLastStateResult` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_gfx_init_and_state_result` in `tests/test_math_utils.c` (36 tests passing).
+
 ## [0.1.56] - 2026-11-06
 ### Added
 - **Auxiliary Audio System Inits**: Implemented `Audio_AuxInit` and `Audio_Shutdown` in `src/game_36ED0.c` with backward-compatible aliases `func_800A4BAC` and `func_800A4B54`.

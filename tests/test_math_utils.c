@@ -555,6 +555,25 @@ static char * test_audio_aux_and_shutdown() {
     return 0;
 }
 
+static char * test_gfx_init_and_state_result() {
+    gGfxSystemInitialized = 0;
+    Gfx_SystemInit();
+    mu_assert("Gfx_SystemInit should set gGfxSystemInitialized to 1", gGfxSystemInitialized == 1);
+
+    gGfxSystemInitialized = 0;
+    func_800FC730();
+    mu_assert("func_800FC730 should alias Gfx_SystemInit and set flag to 1", gGfxSystemInitialized == 1);
+
+    gLastStateResult = 0;
+    State_ProcessResult(42);
+    mu_assert("State_ProcessResult should update gLastStateResult", gLastStateResult == 42);
+
+    func_800FD184(100);
+    mu_assert("func_800FD184 should alias State_ProcessResult and update gLastStateResult", gLastStateResult == 100);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -591,6 +610,7 @@ static char * all_tests() {
     mu_run_test(test_machine_and_audio_init);
     mu_run_test(test_input_and_timing_init);
     mu_run_test(test_audio_aux_and_shutdown);
+    mu_run_test(test_gfx_init_and_state_result);
     return 0;
 }
 

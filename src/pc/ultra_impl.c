@@ -78,10 +78,35 @@ s32 gInputSystemInitialized = 0;
 s32 gTimingSystemInitialized = 0;
 s32 gAudioAuxInitialized = 0;
 s32 gAudioShutdownCount = 0;
+s32 gGfxSystemInitialized = 0;
+s32 gLastStateResult = 0;
 
-// Stubs for functions called by func_80068B20 (or System_Init)
-void func_800FC730(void) {}
-void func_800FD184(s32 arg0) { (void)arg0; }
+/**
+ * @brief Initializes the graphics subsystem.
+ *
+ * Marks graphics system state as initialized. Formerly func_800FC730.
+ */
+void Gfx_SystemInit(void) {
+    gGfxSystemInitialized = 1;
+}
+
+void func_800FC730(void) {
+    Gfx_SystemInit();
+}
+
+/**
+ * @brief Processes the result of a state handler execution.
+ *
+ * Stores the last state result. Formerly func_800FD184.
+ */
+void State_ProcessResult(s32 result) {
+    gLastStateResult = result;
+}
+
+void func_800FD184(s32 arg0) {
+    State_ProcessResult(arg0);
+}
+
 s32 __osMotorAccess(void* pfs, s32 flag) { (void)pfs; (void)flag; return 0; }
 
 OSTime osGetTime(void) {

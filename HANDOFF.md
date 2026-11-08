@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.56)
+## Recent Activity (Version 0.1.57)
+- **Graphics Init & State Result Processing**:
+  - Implemented `Gfx_SystemInit()` and `State_ProcessResult()` in `src/pc/ultra_impl.c` with backward-compatible aliases `func_800FC730` and `func_800FD184`.
+  - Decoupled tracking into shiftable C globals `gGfxSystemInitialized` and `gLastStateResult` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_gfx_init_and_state_result` in `tests/test_math_utils.c` (all 36 unit tests passing).
+  - Bumped version to `0.1.57` across all documentation.
+
+## Previous Activity (Version 0.1.56)
 - **Auxiliary Audio System Inits**:
   - Implemented `Audio_AuxInit()` and `Audio_Shutdown()` in `src/game_36ED0.c` with backward-compatible aliases `func_800A4BAC` and `func_800A4B54`.
   - Decoupled tracking into shiftable C globals `gAudioAuxInitialized` and `gAudioShutdownCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
