@@ -85,7 +85,8 @@ void func_8007E0EC(void) {
  * @return s8 The byte value at gSoundEffectBankMap + idx.
  */
 s8 Audio_GetSoundEffectByte(s32 idx) {
-    return *(&gSoundEffectBankMap + idx);
+    if (idx < 0 || idx >= 256) return 0;
+    return gSoundEffectBankMap[idx];
 }
 
 s8 func_8007E10C(s32 arg0) {

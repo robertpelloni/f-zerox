@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.57)
+## Recent Activity (Version 0.1.58)
+- **System Tick, Idle & Poll Routines**:
+  - Implemented `System_Tick()`, `System_IdleWait()`, and `System_PollEvents()` in `src/math_utils.c` with backward-compatible aliases `func_80068BC0`, `func_80068DCC`, and `func_80068F04`.
+  - Decoupled tracking into shiftable C globals `gSystemTickCount`, `gSystemIdleWaitCount`, and `gSystemPollEventsCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_system_tick_idle_poll` in `tests/test_math_utils.c` (all 37 unit tests passing).
+  - Bumped version to `0.1.58` across all documentation.
+
+## Previous Activity (Version 0.1.57)
 - **Graphics Init & State Result Processing**:
   - Implemented `Gfx_SystemInit()` and `State_ProcessResult()` in `src/pc/ultra_impl.c` with backward-compatible aliases `func_800FC730` and `func_800FD184`.
   - Decoupled tracking into shiftable C globals `gGfxSystemInitialized` and `gLastStateResult` in `include/variables.h` and `src/pc/ultra_impl.c`.

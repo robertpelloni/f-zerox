@@ -80,6 +80,9 @@ s32 gAudioAuxInitialized = 0;
 s32 gAudioShutdownCount = 0;
 s32 gGfxSystemInitialized = 0;
 s32 gLastStateResult = 0;
+s32 gSystemTickCount = 0;
+s32 gSystemIdleWaitCount = 0;
+s32 gSystemPollEventsCount = 0;
 
 /**
  * @brief Initializes the graphics subsystem.

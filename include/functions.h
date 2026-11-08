@@ -68,6 +68,12 @@ void func_8007E0AC(s32 arg0);
 s8 func_8007E10C(s32 arg0);
 
 /* src/math_utils.c - Decompiled Logic */
+void System_Tick(void);
+void func_80068BC0(void);
+void System_IdleWait(void);
+void func_80068DCC(void);
+void System_PollEvents(void);
+void func_80068F04(void);
 void func_80068B20(void);
 // Dependencies of func_80068B20
 void func_8008DB98(void);

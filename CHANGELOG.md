@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.58] - 2026-11-06
+### Added
+- **System Tick, Idle & Poll Routines**: Implemented `System_Tick`, `System_IdleWait`, and `System_PollEvents` in `src/math_utils.c` with backward-compatible aliases `func_80068BC0`, `func_80068DCC`, and `func_80068F04`.
+- **Shiftable Tracking**: Added typed tracking symbols `gSystemTickCount`, `gSystemIdleWaitCount`, and `gSystemPollEventsCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_system_tick_idle_poll` in `tests/test_math_utils.c` (37 tests passing).
+
 ## [0.1.57] - 2026-11-06
 ### Added
 - **Graphics Init & State Result Processing**: Implemented `Gfx_SystemInit` and `State_ProcessResult` in `src/pc/ultra_impl.c` with backward-compatible aliases `func_800FC730` and `func_800FD184`.

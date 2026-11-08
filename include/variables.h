@@ -130,9 +130,9 @@ extern s32 gAudioStateStatus;
 extern s16 gGlobalState_800CD168;
 #define D_800CD168 gGlobalState_800CD168
 
-// Shiftable Sound Effect Bank Map / Table (formerly D_800D4690)
-extern s8 gSoundEffectBankMap;
-#define D_800D4690 gSoundEffectBankMap
+// Shiftable Sound Effect Bank Map (formerly D_800D4690, 256 bytes)
+extern s8 gSoundEffectBankMap[256];
+#define D_800D4690 gSoundEffectBankMap[0]
 
 // Shiftable Global State 800E4175 (formerly D_800E4175)
 extern s8 gGlobalState_800E4175;
@@ -179,5 +179,8 @@ extern s32 gAudioAuxInitialized;
 extern s32 gAudioShutdownCount;
 extern s32 gGfxSystemInitialized;
 extern s32 gLastStateResult;
+extern s32 gSystemTickCount;
+extern s32 gSystemIdleWaitCount;
+extern s32 gSystemPollEventsCount;
 
 #endif

@@ -14,4 +14,4 @@ s8 gAudioStateResetFlag = 0;
 s32 gAudioStateStatus = 0;
 
 // Variables used in game_14440.c / audio_util.c
-s8 gSoundEffectBankMap = 0;
+s8 gSoundEffectBankMap[256] = {0};

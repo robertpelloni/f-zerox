@@ -218,7 +218,7 @@ static char * test_track_lookup_table() {
 }
 
 static char * test_audio_utils() {
-    gSoundEffectBankMap = 77;
+    gSoundEffectBankMap[0] = 77;
     mu_assert("Audio_GetSoundEffectByte(0) match", Audio_GetSoundEffectByte(0) == 77);
 
     // Call Audio_SetSoundId to verify 8-bit masking logic doesn't crash
@@ -574,6 +574,28 @@ static char * test_gfx_init_and_state_result() {
     return 0;
 }
 
+static char * test_system_tick_idle_poll() {
+    gSystemTickCount = 0;
+    System_Tick();
+    mu_assert("System_Tick should increment gSystemTickCount", gSystemTickCount == 1);
+    func_80068BC0();
+    mu_assert("func_80068BC0 should alias System_Tick and increment count", gSystemTickCount == 2);
+
+    gSystemIdleWaitCount = 0;
+    System_IdleWait();
+    mu_assert("System_IdleWait should increment gSystemIdleWaitCount", gSystemIdleWaitCount == 1);
+    func_80068DCC();
+    mu_assert("func_80068DCC should alias System_IdleWait and increment count", gSystemIdleWaitCount == 2);
+
+    gSystemPollEventsCount = 0;
+    System_PollEvents();
+    mu_assert("System_PollEvents should increment gSystemPollEventsCount", gSystemPollEventsCount == 1);
+    func_80068F04();
+    mu_assert("func_80068F04 should alias System_PollEvents and increment count", gSystemPollEventsCount == 2);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -611,6 +633,7 @@ static char * all_tests() {
     mu_run_test(test_input_and_timing_init);
     mu_run_test(test_audio_aux_and_shutdown);
     mu_run_test(test_gfx_init_and_state_result);
+    mu_run_test(test_system_tick_idle_poll);
     return 0;
 }
 

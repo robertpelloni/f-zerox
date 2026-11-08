@@ -54,11 +54,44 @@ void func_80068B20(void) {
     System_Init();
 }
 
-void func_80068BC0(void) { /* TODO: Implement */ }
+/**
+ * @brief Advances a system tick.
+ *
+ * Increments tick tracking counter. Formerly func_80068BC0.
+ */
+void System_Tick(void) {
+    gSystemTickCount++;
+}
 
-void func_80068DCC(void) { /* TODO: Implement */ }
+void func_80068BC0(void) {
+    System_Tick();
+}
 
-void func_80068F04(void) { /* TODO: Implement */ }
+/**
+ * @brief System idle wait routine.
+ *
+ * Increments idle wait tracking counter. Formerly func_80068DCC.
+ */
+void System_IdleWait(void) {
+    gSystemIdleWaitCount++;
+}
+
+void func_80068DCC(void) {
+    System_IdleWait();
+}
+
+/**
+ * @brief Polls system events.
+ *
+ * Increments event poll tracking counter. Formerly func_80068F04.
+ */
+void System_PollEvents(void) {
+    gSystemPollEventsCount++;
+}
+
+void func_80068F04(void) {
+    System_PollEvents();
+}
 
 /**
  * @brief Execute the current game state function from the state machine
