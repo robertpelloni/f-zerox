@@ -56,10 +56,14 @@ extern const char gDebugInfoGroupA3[];
 #define D_800D46FC gDebugInfoGroupA1
 #define D_800D471C gDebugInfoGroupA2
 #define D_800D473C gDebugInfoGroupA3
-extern s32 D_800D474C;
-extern s32 D_800D476C;
-extern s32 D_800D478C;
-extern s32 D_800D479C;
+extern const char gDebugInfoGroupB1[];
+extern const char gDebugInfoGroupB2[];
+extern const char gDebugInfoGroupB3[];
+extern const char gDebugInfoGroupB4[];
+#define D_800D474C gDebugInfoGroupB1
+#define D_800D476C gDebugInfoGroupB2
+#define D_800D478C gDebugInfoGroupB3
+#define D_800D479C gDebugInfoGroupB4
 extern s32 D_800D47B4;
 extern s32 D_800D47D0;
 extern s32 D_800D47EC;

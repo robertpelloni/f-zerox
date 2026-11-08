@@ -47,13 +47,10 @@ void func_8007FCF4(void) {
     DebugText_DrawInfoGroupA();
 }
 
+void DebugText_DrawInfoGroupB(void);
+
 void func_8007FD58(void) {
-    func_8007F94C();
-    func_8007F970();
-    func_8007FB80(0x2D, 0x6E, &D_800D474C);
-    func_8007FB80(0x2D, 0x82, &D_800D476C);
-    func_8007FB80(0x2D, 0x96, &D_800D478C);
-    func_8007FB80(0x2D, 0xAA, &D_800D479C);
+    DebugText_DrawInfoGroupB();
 }
 
 void func_8007FDD0(void) {

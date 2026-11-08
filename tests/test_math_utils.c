@@ -368,6 +368,8 @@ extern void DebugText_DrawScreenNotice(void);
 extern void func_8007FCB8(void);
 extern void DebugText_DrawInfoGroupA(void);
 extern void func_8007FCF4(void);
+extern void DebugText_DrawInfoGroupB(void);
+extern void func_8007FD58(void);
 
 static char * test_system_config_reset() {
     gSystemConfigState.unk2 = 5;
@@ -415,6 +417,13 @@ static char * test_debug_text_draw_info_group_a() {
     return 0;
 }
 
+static char * test_debug_text_draw_info_group_b() {
+    DebugText_DrawInfoGroupB();
+    func_8007FD58();
+    mu_assert("error, DebugText_DrawInfoGroupB execution failed", 1);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -442,6 +451,7 @@ static char * all_tests() {
     mu_run_test(test_debug_text_draw_integer);
     mu_run_test(test_debug_text_draw_notice);
     mu_run_test(test_debug_text_draw_info_group_a);
+    mu_run_test(test_debug_text_draw_info_group_b);
     return 0;
 }
 
