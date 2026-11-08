@@ -8,7 +8,7 @@
 void* gCurrentFramebuffer = NULL;
 const char gDebugFormatInteger[] = "%d";
 const char gDebugLabelInteger[] = "INT:";
-s32 D_800D46D8 = 0;
+const char gDebugScreenNotice[] = "NOTICE";
 s32 D_800D46FC = 0;
 s32 D_800D471C = 0;
 s32 D_800D473C = 0;

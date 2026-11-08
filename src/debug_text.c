@@ -58,10 +58,17 @@ void func_8007FC68(s32 arg0) {
     DebugText_DrawInteger(arg0);
 }
 
-void func_8007FCB8(void) {
+/**
+ * @brief Draws the debug screen notice label to the screen.
+ */
+void DebugText_DrawScreenNotice(void) {
     func_8007F94C();
     func_8007F970();
-    func_8007FB80(0x28, 0x6E, &D_800D46D8);
+    func_8007FB80(0x28, 0x6E, (void*)gDebugScreenNotice);
+}
+
+void func_8007FCB8(void) {
+    DebugText_DrawScreenNotice();
 }
 
 void func_8007FCF4(void) {

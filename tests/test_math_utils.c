@@ -364,6 +364,8 @@ extern void DebugText_InitBuffers(void);
 extern void func_8007F904(void);
 extern void DebugText_DrawInteger(s32 val);
 extern void func_8007FC68(s32 arg0);
+extern void DebugText_DrawScreenNotice(void);
+extern void func_8007FCB8(void);
 
 static char * test_system_config_reset() {
     gSystemConfigState.unk2 = 5;
@@ -397,6 +399,13 @@ static char * test_debug_text_draw_integer() {
     return 0;
 }
 
+static char * test_debug_text_draw_notice() {
+    DebugText_DrawScreenNotice();
+    func_8007FCB8();
+    mu_assert("error, DebugText_DrawScreenNotice execution failed", 1);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -422,6 +431,7 @@ static char * all_tests() {
     mu_run_test(test_system_config_reset);
     mu_run_test(test_debug_text_init_buffers);
     mu_run_test(test_debug_text_draw_integer);
+    mu_run_test(test_debug_text_draw_notice);
     return 0;
 }
 
