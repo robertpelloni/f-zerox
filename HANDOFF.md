@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.50)
+## Recent Activity (Version 0.1.51)
+- **Dynamic Asset Loader UI Integration & Multiple Mappings**:
+  - Integrated dynamic asset loader telemetry (`Mapped Assets: %d`) and clearance action into `src/pc/ui/tabs/ui_tab_debug.c`.
+  - Added unit test `test_dynamic_asset_loader_multiple_mappings` in `tests/test_math_utils.c` (all 30 unit tests passing).
+  - Bumped version to `0.1.51` across all documentation.
+
+## Previous Activity (Version 0.1.50)
 - **Debug Text Remaining Info Groups Shiftability & Decompilation**:
   - Decoupled `D_800D481C` through `D_800D488C` into shiftable string globals `gDebugInfoGroupD1-2`, `gDebugInfoGroupE1`, and `gDebugInfoGroupF1-2` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `DebugText_DrawInfoGroupD(void)`, `DebugText_DrawInfoGroupE(void)`, and `DebugText_DrawInfoGroupF(void)` with backward-compatible aliases in `src/debug_text.c` and `src/game_197D0.c`.

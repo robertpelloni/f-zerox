@@ -1,6 +1,7 @@
 #include "pc/ui/ui_helpers.h"
 #include "pc/configfile.h"
 #include "variables.h"
+#include "pc/assets/dynamic_asset_loader.h"
 #include <stdio.h>
 
 // Mock Game State for Debugging (since we don't have full decomp yet)
@@ -44,7 +45,11 @@ void UI_Tab_Debug(struct nk_context *ctx) {
                  gAudioStateActiveFlag, gAudioStatePlayTrigger, gAudioStateResetFlag);
         UI_Label(ctx, audioStateBuf, NK_TEXT_LEFT, "Shifted audio state flags (formerly D_800D1A48, D_800D19E0, D_800D1A0C).");
 
-        nk_layout_row_dynamic(ctx, 25, 3);
+        char assetBuf[64];
+        snprintf(assetBuf, sizeof(assetBuf), "Mapped Assets: %d", Asset_GetMappingCount());
+        UI_Label(ctx, assetBuf, NK_TEXT_LEFT, "Active count of dynamically relocated ROM address asset mappings.");
+
+        nk_layout_row_dynamic(ctx, 25, 4);
         if (nk_button_label(ctx, "Re-trigger System_Init")) {
             System_Init();
         }
@@ -54,6 +59,9 @@ void UI_Tab_Debug(struct nk_context *ctx) {
         if (nk_button_label(ctx, "Toggle Audio Trigger")) {
             extern void AudioState_TriggerPlay(void);
             AudioState_TriggerPlay();
+        }
+        if (nk_button_label(ctx, "Clear Asset Mappings")) {
+            Asset_ClearMappings();
         }
 
         nk_tree_pop(ctx);

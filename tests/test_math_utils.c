@@ -450,6 +450,25 @@ static char * test_debug_text_draw_info_remaining() {
     return 0;
 }
 
+static char * test_dynamic_asset_loader_multiple_mappings() {
+    Asset_ClearMappings();
+    mu_assert("Asset mappings cleared", Asset_GetMappingCount() == 0);
+
+    int valA = 100, valB = 200, valC = 300;
+    Asset_RegisterMapping(0x80800010, &valA);
+    Asset_RegisterMapping(0x80800020, &valB);
+    Asset_RegisterMapping(0x80800030, &valC);
+
+    mu_assert("Count is 3", Asset_GetMappingCount() == 3);
+    mu_assert("Get valA match", Asset_GetByAddress(0x80800010) == &valA);
+    mu_assert("Get valB match", Asset_GetByAddress(0x80800020) == &valB);
+    mu_assert("Get valC match", Asset_GetByAddress(0x80800030) == &valC);
+
+    Asset_ClearMappings();
+    mu_assert("Asset mappings cleared to 0", Asset_GetMappingCount() == 0);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -480,6 +499,7 @@ static char * all_tests() {
     mu_run_test(test_debug_text_draw_info_group_b);
     mu_run_test(test_debug_text_draw_info_group_c);
     mu_run_test(test_debug_text_draw_info_remaining);
+    mu_run_test(test_dynamic_asset_loader_multiple_mappings);
     return 0;
 }
 

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.51] - 2026-11-06
+### Added
+- **UI Diagnostics & Telemetry**: Added dynamic asset loader active count display and mapping clearance button in `src/pc/ui/tabs/ui_tab_debug.c`.
+- **Testing**: Added `test_dynamic_asset_loader_multiple_mappings` in `tests/test_math_utils.c` (30 tests passing).
+
 ## [0.1.50] - 2026-11-06
 ### Added
 - **Debug Text Remaining Info Groups Shiftability & Decompilation**: Decoupled `D_800D481C` through `D_800D488C` into shiftable `gDebugInfoGroupD1/2`, `gDebugInfoGroupE1`, and `gDebugInfoGroupF1/2` in `include/variables.h` and `src/pc/ultra_impl.c`.
