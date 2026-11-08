@@ -51,3 +51,4 @@
 - [x] **Debug Text Buffers:** Decouple `D_800CD520`, `D_80400008`, `D_800E4350-650` into shiftable globals with `DebugText_InitBuffers`.
 - [x] **Debug Text Formatting:** Decouple `D_800D46C0/8` with `DebugText_DrawInteger`.
 - [x] **Debug Text Notice:** Decouple `D_800D46D8` with `DebugText_DrawScreenNotice`.
+- [x] **Debug Text Info Group A:** Decouple `D_800D46FC-473C` with `DebugText_DrawInfoGroupA`.

@@ -61,7 +61,8 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 - `D_800D4690`: Sound effect bank map byte table in `src/audio_util.c` and `src/game_14440.c` (Refactored to `gSoundEffectBankMap` with `Audio_SetSoundId` and `Audio_GetSoundEffectByte`).
 - `D_800D46C0` and `D_800D46C8`: Integer format and label string in `debug_text.c` (Refactored to `gDebugFormatInteger` and `gDebugLabelInteger` with `DebugText_DrawInteger` and `func_8007FC68`).
 - `D_800D46D8`: Screen notice string in `debug_text.c` (Refactored to `gDebugScreenNotice` with `DebugText_DrawScreenNotice` and `func_8007FCB8`).
-- `D_800D46FC` through `D_800D488C`: A block of variables exclusively used as format or parameter strings for `func_8007FB80` (debug text rendering) in `debug_text.c`.
+- `D_800D46FC`, `D_800D471C`, `D_800D473C`: Debug info group A strings in `debug_text.c` (Refactored to `gDebugInfoGroupA1/2/3` with `DebugText_DrawInfoGroupA` and `func_8007FCF4`).
+- `D_800D474C` through `D_800D488C`: A block of variables exclusively used as format or parameter strings for `func_8007FB80` (debug text rendering) in `debug_text.c`.
 - `D_800CD170` / `D_800CD174`: Seed states for `Math_Rand` PRNG in `math_utils.c` (successfully mapped in the PC port).
 - `D_8010B7B0`: System config state struct initialized/reset in `game_73F0.c` (Refactored to `gSystemConfigState` with `SystemConfig_Reset` and `func_800742D0`).
 - `D_800CD520`, `D_80400008`, `D_800E4350`, `D_800E44D0`, `D_800E4650`: Debug text buffers (Refactored to `gDebugBufferState`, `gDebugBufferAux`, `gDebugBufferA/B/C` with `DebugText_InitBuffers` and `func_8007F904`).

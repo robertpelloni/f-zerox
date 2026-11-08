@@ -23,9 +23,11 @@ void DebugText_InitBuffers(void);
 void func_8007F904(void);
 void DebugText_DrawInteger(s32 val);
 void DebugText_DrawScreenNotice(void);
+void DebugText_DrawInfoGroupA(void);
 void func_8007F94C(void); // UpdateFramebufferPointer
 void func_8007FC68(s32 arg0); // DrawDebugInt
 void func_8007FCB8(void);
+void func_8007FCF4(void);
 void func_8007F86C(void* a, void* b, void* c, void* d, void* e);
 void func_8007FB80(s32 x, s32 y, void* str);
 

@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.46)
+## Recent Activity (Version 0.1.47)
+- **Debug Text Info Group A Shiftability & Decompilation**:
+  - Decoupled `D_800D46FC`, `D_800D471C`, and `D_800D473C` into shiftable string globals `gDebugInfoGroupA1`, `gDebugInfoGroupA2`, `gDebugInfoGroupA3` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `DebugText_DrawInfoGroupA(void)` with backward-compatible alias `func_8007FCF4` in `src/debug_text.c` and `src/game_197D0.c`.
+  - Added unit test `test_debug_text_draw_info_group_a` in `tests/test_math_utils.c` (all 26 unit tests passing).
+  - Bumped version to `0.1.47` across all documentation.
+
+## Previous Activity (Version 0.1.46)
 - **Debug Text Notice Shiftability & Decompilation**:
   - Decoupled `D_800D46D8` into shiftable string global `gDebugScreenNotice` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `DebugText_DrawScreenNotice(void)` with backward-compatible alias `func_8007FCB8` in `src/debug_text.c` and `src/game_197D0.c`.
