@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.43)
+## Recent Activity (Version 0.1.44)
+- **Debug Text Buffers Shiftability & Decompilation**:
+  - Decoupled `D_800CD520`, `D_80400008`, `D_800E4350`, `D_800E44D0`, and `D_800E4650` into shiftable globals `gDebugBufferState`, `gDebugBufferAux`, `gDebugBufferA`, `gDebugBufferB`, `gDebugBufferC` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Implemented `DebugText_InitBuffers(void)` with backward-compatible alias `func_8007F904` in `src/debug_text.c` and `src/game_197D0.c`.
+  - Added unit test `test_debug_text_init_buffers` in `tests/test_math_utils.c` (all 23 unit tests passing).
+  - Bumped version to `0.1.44` across all documentation.
+
+## Previous Activity (Version 0.1.43)
 - **System Config Shiftability & Decompilation**:
   - Decoupled `D_8010B7B0` into typed shiftable `struct UnkStruct_4 gSystemConfigState` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Implemented `SystemConfig_Reset(void)` with backward-compatible alias `func_800742D0` in `src/game_73F0.c` and declared in `include/functions.h`.

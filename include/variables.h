@@ -26,7 +26,17 @@ extern s32 gSystemStateParamB;
 extern s16 gDebugMode;
 #include <stdint.h>
 extern uintptr_t gStateHandlers[];
-extern s32 D_800CD520;
+// Shiftable Debug Text Buffers (formerly D_800CD520, D_80400008, D_800E4350, D_800E44D0, D_800E4650)
+extern s32 gDebugBufferState;
+extern s32 gDebugBufferAux;
+extern s32 gDebugBufferA;
+extern s32 gDebugBufferB;
+extern s32 gDebugBufferC;
+#define D_800CD520 gDebugBufferState
+#define D_80400008 gDebugBufferAux
+#define D_800E4350 gDebugBufferA
+#define D_800E44D0 gDebugBufferB
+#define D_800E4650 gDebugBufferC
 // Shiftable Machine Dynamic Configuration variables (formerly D_800D0AC0, D_800D0AC4)
 extern s32 gDynamicMachineConfigA;
 extern s32 gDynamicMachineConfigB;
@@ -71,13 +81,9 @@ extern u8 gSpecialMachineState[256];
 // Shiftable Current Framebuffer pointer (formerly D_800E4348)
 extern void* gCurrentFramebuffer;
 #define D_800E4348 gCurrentFramebuffer
-extern s32 D_800E4350;
-extern s32 D_800E44D0;
-extern s32 D_800E4650;
 // Shiftable Active Vehicle Index (formerly D_800E5E84)
 extern s32 gActiveVehicleIndex;
 #define D_800E5E84 gActiveVehicleIndex
-extern s32 D_80400008;
 extern s32 D_A4500000;
 extern s32 D_A4500004;
 extern s32 D_A450000C;

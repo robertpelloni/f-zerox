@@ -25,11 +25,11 @@ s32 D_800D4834 = 0;
 s32 D_800D4854 = 0;
 s32 D_800D4870 = 0;
 s32 D_800D488C = 0;
-s32 D_800CD520 = 0;
-s32 D_80400008 = 0;
-s32 D_800E4350 = 0;
-s32 D_800E44D0 = 0;
-s32 D_800E4650 = 0;
+s32 gDebugBufferState = 0;
+s32 gDebugBufferAux = 0;
+s32 gDebugBufferA = 0;
+s32 gDebugBufferB = 0;
+s32 gDebugBufferC = 0;
 
 
 

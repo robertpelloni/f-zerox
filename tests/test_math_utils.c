@@ -360,6 +360,8 @@ static char * test_state_struct_reset() {
 }
 
 extern void SystemConfig_Reset(void);
+extern void DebugText_InitBuffers(void);
+extern void func_8007F904(void);
 
 static char * test_system_config_reset() {
     gSystemConfigState.unk2 = 5;
@@ -368,6 +370,21 @@ static char * test_system_config_reset() {
     SystemConfig_Reset();
     mu_assert("error, SystemConfig_Reset failed to zero unk2", gSystemConfigState.unk2 == 0);
     mu_assert("error, SystemConfig_Reset failed to zero unk3", gSystemConfigState.unk3 == 0);
+    return 0;
+}
+
+static char * test_debug_text_init_buffers() {
+    gDebugBufferState = 1;
+    gDebugBufferAux = 2;
+    gDebugBufferA = 3;
+    gDebugBufferB = 4;
+    gDebugBufferC = 5;
+
+    DebugText_InitBuffers();
+    mu_assert("error, DebugText_InitBuffers execution failed", 1);
+
+    func_8007F904();
+    mu_assert("error, func_8007F904 alias execution failed", 1);
     return 0;
 }
 
@@ -394,6 +411,7 @@ static char * all_tests() {
     mu_run_test(test_system_init_memory_state);
     mu_run_test(test_state_struct_reset);
     mu_run_test(test_system_config_reset);
+    mu_run_test(test_debug_text_init_buffers);
     return 0;
 }
 

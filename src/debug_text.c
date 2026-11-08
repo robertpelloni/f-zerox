@@ -7,8 +7,15 @@ void func_8007F7D0(void) { /* TODO: SHIFTABLE - Implement */ }
 void func_8007F86C(void* a, void* b, void* c, void* d, void* e);
 #endif
 
+/**
+ * @brief Initializes the debug text rendering buffers.
+ */
+void DebugText_InitBuffers(void) {
+    func_8007F86C(&gDebugBufferState, &gDebugBufferAux, &gDebugBufferA, &gDebugBufferB, &gDebugBufferC);
+}
+
 void func_8007F904(void) {
-    func_8007F86C(&D_800CD520, &D_80400008, &D_800E4350, &D_800E44D0, &D_800E4650);
+    DebugText_InitBuffers();
 }
 
 /**

@@ -62,3 +62,4 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 - `D_800D46C0` through `D_800D488C`: A block of variables exclusively used as format or parameter strings for `func_8007FB80` (debug text rendering) in `debug_text.c`.
 - `D_800CD170` / `D_800CD174`: Seed states for `Math_Rand` PRNG in `math_utils.c` (successfully mapped in the PC port).
 - `D_8010B7B0`: System config state struct initialized/reset in `game_73F0.c` (Refactored to `gSystemConfigState` with `SystemConfig_Reset` and `func_800742D0`).
+- `D_800CD520`, `D_80400008`, `D_800E4350`, `D_800E44D0`, `D_800E4650`: Debug text buffers (Refactored to `gDebugBufferState`, `gDebugBufferAux`, `gDebugBufferA/B/C` with `DebugText_InitBuffers` and `func_8007F904`).

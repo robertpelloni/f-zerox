@@ -4,8 +4,10 @@ void func_8007F7D0(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007F86C(void) { /* TODO: SHIFTABLE - Implement */ }
 
+void DebugText_InitBuffers(void);
+
 void func_8007F904(void) {
-    func_8007F86C(&D_800CD520, &D_80400008, &D_800E4350, &D_800E44D0, &D_800E4650);
+    DebugText_InitBuffers();
 }
 
 /**

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.44] - 2026-11-06
+### Added
+- **Debug Text Buffers Shiftability & Decompilation**: Decoupled `D_800CD520`, `D_80400008`, `D_800E4350`, `D_800E44D0`, and `D_800E4650` into shiftable `gDebugBufferState`, `gDebugBufferAux`, `gDebugBufferA`, `gDebugBufferB`, `gDebugBufferC` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Debug Text Buffer Initialization Logic**: Implemented `DebugText_InitBuffers` in `src/debug_text.c` with backward-compatible `func_8007F904` alias in `src/debug_text.c` and `src/game_197D0.c`.
+- **Testing**: Added `test_debug_text_init_buffers` in `tests/test_math_utils.c` (23 tests passing).
+
 ## [0.1.43] - 2026-11-06
 ### Added
 - **System Config Shiftability & Decompilation**: Decoupled `D_8010B7B0` into typed shiftable `struct UnkStruct_4 gSystemConfigState` in `include/variables.h` and `src/pc/ultra_impl.c`.
