@@ -50,6 +50,10 @@ void System_Init(void) {
     gSystemFullyInitialized = 1; // Mark system as fully initialized
 }
 
+void func_80068B20(void) {
+    System_Init();
+}
+
 void func_80068BC0(void) { /* TODO: Implement */ }
 
 void func_80068DCC(void) { /* TODO: Implement */ }

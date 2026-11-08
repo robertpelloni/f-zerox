@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.52)
+## Recent Activity (Version 0.1.53)
+- **System Init Alias**:
+  - Implemented `func_80068B20(void)` forwarding directly to authentic `System_Init()` in `src/math_utils.c`.
+  - Added unit test `test_system_init_alias` in `tests/test_math_utils.c` (all 32 unit tests passing).
+  - Bumped version to `0.1.53` across all documentation.
+
+## Previous Activity (Version 0.1.52)
 - **Data Section Shiftability**:
   - Decoupled `D_800CD168`, `D_800E4175`, `D_800D16D0`, `D_800F8510`, and `D_8002AA18` into typed shiftable symbols `gGlobalState_800CD168`, `gGlobalState_800E4175`, `gGlobalState_800D16D0`, `gGlobalPtr_800F8510`, and `gGlobalState_8002AA18` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Added unit test `test_shiftable_data_globals` in `tests/test_math_utils.c` (all 31 unit tests passing).

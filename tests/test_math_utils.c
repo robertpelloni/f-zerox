@@ -488,6 +488,15 @@ static char * test_shiftable_data_globals() {
     return 0;
 }
 
+static char * test_system_init_alias() {
+    gSystemInitialized = 0;
+    gSystemFullyInitialized = 0;
+    func_80068B20();
+    mu_assert("func_80068B20 failed to initialize system", gSystemInitialized == 0x20DE1529);
+    mu_assert("func_80068B20 failed to set fully initialized flag", gSystemFullyInitialized == 1);
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -520,6 +529,7 @@ static char * all_tests() {
     mu_run_test(test_debug_text_draw_info_remaining);
     mu_run_test(test_dynamic_asset_loader_multiple_mappings);
     mu_run_test(test_shiftable_data_globals);
+    mu_run_test(test_system_init_alias);
     return 0;
 }
 
