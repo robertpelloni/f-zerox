@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.60)
+## Recent Activity (Version 0.1.61)
+- **Machine State AI, Controls & Effects Routines**:
+  - Implemented `MachineState_UpdateAI()`, `MachineState_UpdateControls()`, and `MachineState_UpdateEffects()` in `src/math_utils.c` with backward-compatible aliases `func_8006A00C`, `func_8006A3AC`, and `func_8006A6E4`.
+  - Decoupled tracking into shiftable C globals `gMachineStateUpdateAICount`, `gMachineStateUpdateControlsCount`, and `gMachineStateUpdateEffectsCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_machinestate_ai_controls_effects` in `tests/test_math_utils.c` (all 40 unit tests passing).
+  - Bumped version to `0.1.61` across all documentation.
+
+## Previous Activity (Version 0.1.60)
 - **Machine State Update Routines**:
   - Implemented `MachineState_UpdatePhysics()`, `MachineState_UpdateCollisions()`, and `MachineState_UpdateVisuals()` in `src/math_utils.c` with backward-compatible aliases `func_80069D44`, `func_80069ED0`, and `func_80069F5C`.
   - Decoupled tracking into shiftable C globals `gMachineStateUpdatePhysicsCount`, `gMachineStateUpdateCollisionsCount`, and `gMachineStateUpdateVisualsCount` in `include/variables.h` and `src/pc/ultra_impl.c`.

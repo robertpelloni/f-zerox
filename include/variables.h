@@ -187,5 +187,8 @@ extern s32 gMachineStateInitSpecialCount;
 extern s32 gMachineStateUpdatePhysicsCount;
 extern s32 gMachineStateUpdateCollisionsCount;
 extern s32 gMachineStateUpdateVisualsCount;
+extern s32 gMachineStateUpdateAICount;
+extern s32 gMachineStateUpdateControlsCount;
+extern s32 gMachineStateUpdateEffectsCount;
 
 #endif

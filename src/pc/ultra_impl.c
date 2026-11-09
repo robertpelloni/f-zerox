@@ -88,6 +88,9 @@ s32 gMachineStateInitSpecialCount = 0;
 s32 gMachineStateUpdatePhysicsCount = 0;
 s32 gMachineStateUpdateCollisionsCount = 0;
 s32 gMachineStateUpdateVisualsCount = 0;
+s32 gMachineStateUpdateAICount = 0;
+s32 gMachineStateUpdateControlsCount = 0;
+s32 gMachineStateUpdateEffectsCount = 0;
 
 /**
  * @brief Initializes the graphics subsystem.

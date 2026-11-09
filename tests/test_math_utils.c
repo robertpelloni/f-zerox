@@ -634,6 +634,28 @@ static char * test_machinestate_updates() {
     return 0;
 }
 
+static char * test_machinestate_ai_controls_effects() {
+    gMachineStateUpdateAICount = 0;
+    MachineState_UpdateAI();
+    mu_assert("MachineState_UpdateAI should increment count", gMachineStateUpdateAICount == 1);
+    func_8006A00C();
+    mu_assert("func_8006A00C should alias MachineState_UpdateAI", gMachineStateUpdateAICount == 2);
+
+    gMachineStateUpdateControlsCount = 0;
+    MachineState_UpdateControls();
+    mu_assert("MachineState_UpdateControls should increment count", gMachineStateUpdateControlsCount == 1);
+    func_8006A3AC();
+    mu_assert("func_8006A3AC should alias MachineState_UpdateControls", gMachineStateUpdateControlsCount == 2);
+
+    gMachineStateUpdateEffectsCount = 0;
+    MachineState_UpdateEffects();
+    mu_assert("MachineState_UpdateEffects should increment count", gMachineStateUpdateEffectsCount == 1);
+    func_8006A6E4();
+    mu_assert("func_8006A6E4 should alias MachineState_UpdateEffects", gMachineStateUpdateEffectsCount == 2);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -674,6 +696,7 @@ static char * all_tests() {
     mu_run_test(test_system_tick_idle_poll);
     mu_run_test(test_machinestate_init_all_and_special);
     mu_run_test(test_machinestate_updates);
+    mu_run_test(test_machinestate_ai_controls_effects);
     return 0;
 }
 

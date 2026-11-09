@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.61] - 2026-11-06
+### Added
+- **Machine State AI, Controls & Effects Routines**: Implemented `MachineState_UpdateAI`, `MachineState_UpdateControls`, and `MachineState_UpdateEffects` in `src/math_utils.c` with backward-compatible aliases `func_8006A00C`, `func_8006A3AC`, and `func_8006A6E4`.
+- **Shiftable Tracking**: Added typed tracking symbols `gMachineStateUpdateAICount`, `gMachineStateUpdateControlsCount`, and `gMachineStateUpdateEffectsCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_machinestate_ai_controls_effects` in `tests/test_math_utils.c` (40 tests passing).
+
 ## [0.1.60] - 2026-11-06
 ### Added
 - **Machine State Update Routines**: Implemented `MachineState_UpdatePhysics`, `MachineState_UpdateCollisions`, and `MachineState_UpdateVisuals` in `src/math_utils.c` with backward-compatible aliases `func_80069D44`, `func_80069ED0`, and `func_80069F5C`.

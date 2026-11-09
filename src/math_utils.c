@@ -195,9 +195,10 @@ void func_80069820(void) {
 }
 
 /**
- * @brief Updates machine physics simulation states.
+ * @brief Updates machine physics simulation states (instrumentation hook).
  *
- * Increments physics update count. Formerly func_80069D44.
+ * TODO: SHIFTABLE - Decompile full physics update routine from disassembly.
+ * Increments physics update telemetry count. Formerly func_80069D44.
  */
 void MachineState_UpdatePhysics(void) {
     gMachineStateUpdatePhysicsCount++;
@@ -208,9 +209,10 @@ void func_80069D44(void) {
 }
 
 /**
- * @brief Updates machine collision detection states.
+ * @brief Updates machine collision detection states (instrumentation hook).
  *
- * Increments collision update count. Formerly func_80069ED0.
+ * TODO: SHIFTABLE - Decompile full collision detection routine from disassembly.
+ * Increments collision update telemetry count. Formerly func_80069ED0.
  */
 void MachineState_UpdateCollisions(void) {
     gMachineStateUpdateCollisionsCount++;
@@ -221,9 +223,10 @@ void func_80069ED0(void) {
 }
 
 /**
- * @brief Updates machine visual presentation states.
+ * @brief Updates machine visual presentation states (instrumentation hook).
  *
- * Increments visual update count. Formerly func_80069F5C.
+ * TODO: SHIFTABLE - Decompile full visuals update routine from disassembly.
+ * Increments visual update telemetry count. Formerly func_80069F5C.
  */
 void MachineState_UpdateVisuals(void) {
     gMachineStateUpdateVisualsCount++;
@@ -233,14 +236,47 @@ void func_80069F5C(void) {
     MachineState_UpdateVisuals();
 }
 
-// TODO: Refactor pointer logic
-void func_8006A00C(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates machine AI behaviors (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full AI behavioral routine from disassembly.
+ * Increments AI update telemetry count. Formerly func_8006A00C.
+ */
+void MachineState_UpdateAI(void) {
+    gMachineStateUpdateAICount++;
+}
 
-// TODO: Refactor pointer logic
-void func_8006A3AC(void) { /* TODO: Implement */ }
+void func_8006A00C(void) {
+    MachineState_UpdateAI();
+}
 
-// TODO: Refactor pointer logic
-void func_8006A6E4(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates machine player input and controls (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full controls processing routine from disassembly.
+ * Increments controls update telemetry count. Formerly func_8006A3AC.
+ */
+void MachineState_UpdateControls(void) {
+    gMachineStateUpdateControlsCount++;
+}
+
+void func_8006A3AC(void) {
+    MachineState_UpdateControls();
+}
+
+/**
+ * @brief Updates machine special effects (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full effects processing routine from disassembly.
+ * Increments effects update telemetry count. Formerly func_8006A6E4.
+ */
+void MachineState_UpdateEffects(void) {
+    gMachineStateUpdateEffectsCount++;
+}
+
+void func_8006A6E4(void) {
+    MachineState_UpdateEffects();
+}
 
 void osSetTime(OSTime time) { (void)time; /* TODO: Implement */ }
 
