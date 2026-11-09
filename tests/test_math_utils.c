@@ -65,6 +65,8 @@ bool Asset_UnregisterMapping(uint32_t address);
 bool Asset_HasAddress(uint32_t address);
 void* Asset_GetByAddress(uint32_t address);
 int Asset_GetMappingCount(void);
+uint32_t Asset_GetAddressByIndex(int index);
+void* Asset_GetAssetByIndex(int index);
 void Asset_ClearMappings(void);
 
 // Declarations of low memory functions from game_4FFB0.c
@@ -597,6 +599,33 @@ static char * test_dynamic_asset_loader_vertex_buffer_relocation() {
     return 0;
 }
 
+static char * test_dynamic_asset_loader_index_access() {
+    Asset_ClearMappings();
+    mu_assert("Asset_GetAddressByIndex(-1) returns 0", Asset_GetAddressByIndex(-1) == 0);
+    mu_assert("Asset_GetAddressByIndex(0) returns 0 when empty", Asset_GetAddressByIndex(0) == 0);
+    mu_assert("Asset_GetAssetByIndex(0) returns NULL when empty", Asset_GetAssetByIndex(0) == NULL);
+
+    int valA = 111, valB = 222;
+    Asset_RegisterMapping(0x808000A0, &valA);
+    Asset_RegisterMapping(0x808000B0, &valB);
+
+    mu_assert("Index 0 address match", Asset_GetAddressByIndex(0) == 0x808000A0);
+    mu_assert("Index 0 asset match", Asset_GetAssetByIndex(0) == &valA);
+    mu_assert("Index 1 address match", Asset_GetAddressByIndex(1) == 0x808000B0);
+    mu_assert("Index 1 asset match", Asset_GetAssetByIndex(1) == &valB);
+    mu_assert("Index 2 address out of bounds returns 0", Asset_GetAddressByIndex(2) == 0);
+    mu_assert("Index 2 asset out of bounds returns NULL", Asset_GetAssetByIndex(2) == NULL);
+
+    // After unregistering first element, second element shifts to index 0
+    Asset_UnregisterMapping(0x808000A0);
+    mu_assert("Index 0 address after unregister match", Asset_GetAddressByIndex(0) == 0x808000B0);
+    mu_assert("Index 0 asset after unregister match", Asset_GetAssetByIndex(0) == &valB);
+    mu_assert("Index 1 address after unregister returns 0", Asset_GetAddressByIndex(1) == 0);
+
+    Asset_ClearMappings();
+    return 0;
+}
+
 static char * test_shiftable_data_globals() {
     gGlobalState_800CD168 = 0x1234;
     mu_assert("gGlobalState_800CD168 set failed", gGlobalState_800CD168 == 0x1234);
@@ -907,6 +936,7 @@ static char * all_tests() {
     mu_run_test(test_dynamic_asset_loader_unregister_and_has);
     mu_run_test(test_dynamic_asset_loader_procedural_texture_relocation);
     mu_run_test(test_dynamic_asset_loader_vertex_buffer_relocation);
+    mu_run_test(test_dynamic_asset_loader_index_access);
     mu_run_test(test_math_trig_and_vector_tables_init);
     mu_run_test(test_vector_setters);
     mu_run_test(test_cartridge_registers);

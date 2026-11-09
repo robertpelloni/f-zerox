@@ -9,6 +9,8 @@ bool Asset_UnregisterMapping(uint32_t address);
 bool Asset_HasAddress(uint32_t address);
 void* Asset_GetByAddress(uint32_t address);
 int Asset_GetMappingCount(void);
+uint32_t Asset_GetAddressByIndex(int index);
+void* Asset_GetAssetByIndex(int index);
 void Asset_ClearMappings(void);
 
 #endif

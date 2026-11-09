@@ -46,8 +46,16 @@ void UI_Tab_Debug(struct nk_context *ctx) {
         UI_Label(ctx, audioStateBuf, NK_TEXT_LEFT, "Shifted audio state flags (formerly D_800D1A48, D_800D19E0, D_800D1A0C).");
 
         char assetBuf[64];
-        snprintf(assetBuf, sizeof(assetBuf), "Mapped Assets: %d", Asset_GetMappingCount());
+        int mapCount = Asset_GetMappingCount();
+        snprintf(assetBuf, sizeof(assetBuf), "Mapped Assets: %d", mapCount);
         UI_Label(ctx, assetBuf, NK_TEXT_LEFT, "Active count of dynamically relocated ROM address asset mappings.");
+
+        int inspectCount = mapCount > 4 ? 4 : mapCount;
+        for (int i = 0; i < inspectCount; i++) {
+            char itemBuf[64];
+            snprintf(itemBuf, sizeof(itemBuf), "  Asset[%d]: 0x%08X", i, Asset_GetAddressByIndex(i));
+            UI_Label(ctx, itemBuf, NK_TEXT_LEFT, "Dynamically mapped ROM address for loaded asset.");
+        }
 
         nk_layout_row_dynamic(ctx, 25, 4);
         if (nk_button_label(ctx, "Re-trigger System_Init")) {

@@ -73,6 +73,20 @@ int Asset_GetMappingCount(void) {
     return sAssetMapCount;
 }
 
+uint32_t Asset_GetAddressByIndex(int index) {
+    if (index >= 0 && index < sAssetMapCount) {
+        return sAssetMap[index].romAddress;
+    }
+    return 0;
+}
+
+void* Asset_GetAssetByIndex(int index) {
+    if (index >= 0 && index < sAssetMapCount) {
+        return sAssetMap[index].loadedAsset;
+    }
+    return NULL;
+}
+
 void Asset_ClearMappings(void) {
     memset(sAssetMap, 0, sizeof(sAssetMap));
     sAssetMapCount = 0;

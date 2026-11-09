@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.72)
+## Recent Activity (Version 0.1.73)
+- **Dynamic Asset Loader Index Queries & UI Inspection**:
+  - Implemented `Asset_GetAddressByIndex` and `Asset_GetAssetByIndex` in `src/pc/assets/dynamic_asset_loader.c` and declared in `include/pc/assets/dynamic_asset_loader.h`.
+  - Exposed dynamic asset ROM address inspection in `src/pc/ui/tabs/ui_tab_debug.c` under Decompilation & Shiftability Monitor.
+  - Added unit test `test_dynamic_asset_loader_index_access` in `tests/test_math_utils.c` (all 52 unit tests passing).
+  - Bumped version to `0.1.73` across all documentation.
+
+## Previous Activity (Version 0.1.72)
 - **Track Context & State Decompilation**:
   - Implemented `Track_InitContext` and `Track_ResetState` in `src/game_73F0.c` with backward-compatible aliases `func_80072ECC` and `func_80072D00`.
   - Added shiftable tracking telemetry globals `gTrackContextId` and `gTrackResetCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.

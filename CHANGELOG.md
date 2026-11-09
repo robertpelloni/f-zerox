@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.73] - 2026-11-06
+### Added
+- **Dynamic Asset Loader Index Queries**: Implemented `Asset_GetAddressByIndex` and `Asset_GetAssetByIndex` in `src/pc/assets/dynamic_asset_loader.c` and declared in `include/pc/assets/dynamic_asset_loader.h`.
+- **Developer UI Asset Inspection**: Exposed dynamic asset ROM address inspection in `src/pc/ui/tabs/ui_tab_debug.c` under Decompilation & Shiftability Monitor.
+- **Testing**: Added unit test `test_dynamic_asset_loader_index_access` in `tests/test_math_utils.c` (52 tests passing).
+
 ## [0.1.72] - 2026-11-06
 ### Added
 - **Track Context & State Decompilation**: Implemented `Track_InitContext` and `Track_ResetState` in `src/game_73F0.c` with backward-compatible aliases `func_80072ECC` and `func_80072D00`.
