@@ -138,7 +138,8 @@ void Fast3D_ProcessDisplayList(Gfx* dl) {
                 // On 64-bit, we might have issues if gbi.h defines it as uint32_t.
                 // Assuming standard 32-bit pointer casting or "segment address" logic.
 
-                Vtx* src = (Vtx*)(uintptr_t)w1;
+                void* mappedVtx = Asset_GetByAddress((uint32_t)w1);
+                Vtx* src = mappedVtx ? (Vtx*)mappedVtx : (Vtx*)(uintptr_t)w1;
                 if (src && num < MAX_VERTICES) {
                     for (int i = 0; i < num; i++) {
                         sVertexBuffer[i] = src[i];

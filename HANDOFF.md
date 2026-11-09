@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.66)
+## Recent Activity (Version 0.1.67)
+- **Fast3D Vertex Buffer Asset Relocation**:
+  - Hooked `Asset_GetByAddress` into Fast3D `G_VTX` command handler, allowing vertex buffers specified by ROM addresses to be dynamically mapped and loaded from mods/external assets.
+  - Added unit test `test_dynamic_asset_loader_vertex_buffer_relocation` in `tests/test_math_utils.c` (all 46 unit tests passing).
+  - Bumped version to `0.1.67` across all documentation.
+
+## Previous Activity (Version 0.1.66)
 - **Audio State Header Declarations & PascalCase Coverage**:
   - Formally declared PascalCase functions (`AudioState_SetParamA`, `AudioState_SetParamB`, `AudioState_Activate`, `AudioState_TriggerPlay`, `AudioState_SetAlternativeMode`, `AudioState_SetParamC`, `AudioState_TriggerReset`) in `include/functions.h`.
   - Added unit test `test_audio_state_pascal_case_apis` in `tests/test_math_utils.c` (all 45 unit tests passing).

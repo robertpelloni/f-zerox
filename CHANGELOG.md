@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.67] - 2026-11-06
+### Added
+- **Fast3D Vertex Buffer Asset Relocation**: Hooked `Asset_GetByAddress` into Fast3D `G_VTX` command handler, allowing vertex buffers specified by ROM addresses to be dynamically mapped and loaded from mods/external assets.
+- **Testing**: Added unit test `test_dynamic_asset_loader_vertex_buffer_relocation` in `tests/test_math_utils.c` (46 tests passing).
+
 ## [0.1.66] - 2026-11-06
 ### Added
 - **Audio State Header Declarations**: Formally exposed PascalCase functions (`AudioState_SetParamA`, `AudioState_SetParamB`, `AudioState_Activate`, `AudioState_TriggerPlay`, `AudioState_SetAlternativeMode`, `AudioState_SetParamC`, `AudioState_TriggerReset`) in `include/functions.h`.

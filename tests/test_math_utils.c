@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 #include "minunit.h"
 #include "../include/pc/ultra64.h"
+#include "../include/pc/PR/gbi.h"
 #include "../include/functions.h"
 
 int tests_run = 0;
@@ -534,6 +536,25 @@ static char * test_dynamic_asset_loader_procedural_texture_relocation() {
     return 0;
 }
 
+static char * test_dynamic_asset_loader_vertex_buffer_relocation() {
+    Asset_ClearMappings();
+    Vtx mockVertices[4];
+    memset(mockVertices, 0, sizeof(mockVertices));
+    mockVertices[0].v.ob[0] = 123;
+    mockVertices[0].v.ob[1] = 456;
+
+    Asset_RegisterMapping(0x80800200, mockVertices);
+
+    mu_assert("Has vertex mapping 0x80800200", Asset_HasAddress(0x80800200) == true);
+    Vtx* retrieved = (Vtx*)Asset_GetByAddress(0x80800200);
+    mu_assert("Retrieved vertex pointer not null", retrieved != NULL);
+    mu_assert("Retrieved vertex X component match", retrieved[0].v.ob[0] == 123);
+    mu_assert("Retrieved vertex Y component match", retrieved[0].v.ob[1] == 456);
+
+    Asset_ClearMappings();
+    return 0;
+}
+
 static char * test_shiftable_data_globals() {
     gGlobalState_800CD168 = 0x1234;
     mu_assert("gGlobalState_800CD168 set failed", gGlobalState_800CD168 == 0x1234);
@@ -796,6 +817,7 @@ static char * all_tests() {
     mu_run_test(test_machinestate_ai_controls_effects);
     mu_run_test(test_dynamic_asset_loader_unregister_and_has);
     mu_run_test(test_dynamic_asset_loader_procedural_texture_relocation);
+    mu_run_test(test_dynamic_asset_loader_vertex_buffer_relocation);
     mu_run_test(test_math_trig_and_vector_tables_init);
     return 0;
 }
