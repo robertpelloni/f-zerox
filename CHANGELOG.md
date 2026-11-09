@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.66] - 2026-11-06
+### Added
+- **Audio State Header Declarations**: Formally exposed PascalCase functions (`AudioState_SetParamA`, `AudioState_SetParamB`, `AudioState_Activate`, `AudioState_TriggerPlay`, `AudioState_SetAlternativeMode`, `AudioState_SetParamC`, `AudioState_TriggerReset`) in `include/functions.h`.
+- **Testing**: Added unit test `test_audio_state_pascal_case_apis` in `tests/test_math_utils.c` (45 tests passing).
+
 ## [0.1.65] - 2026-11-06
 ### Fixed
 - **Procedural Texture Asset Scoping**: Resolved variable scope issue in `src/pc/assets.c` for `texID` in `Assets_Init()`, ensuring proper dynamic asset loader mapping registration for `0x80800100`.

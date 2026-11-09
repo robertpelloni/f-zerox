@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.65)
+## Recent Activity (Version 0.1.66)
+- **Audio State Header Declarations & PascalCase Coverage**:
+  - Formally declared PascalCase functions (`AudioState_SetParamA`, `AudioState_SetParamB`, `AudioState_Activate`, `AudioState_TriggerPlay`, `AudioState_SetAlternativeMode`, `AudioState_SetParamC`, `AudioState_TriggerReset`) in `include/functions.h`.
+  - Added unit test `test_audio_state_pascal_case_apis` in `tests/test_math_utils.c` (all 45 unit tests passing).
+  - Bumped version to `0.1.66` across all documentation.
+
+## Previous Activity (Version 0.1.65)
 - **Procedural Texture Asset Scoping & Dynamic Asset Relocation**:
   - Resolved variable scope issue in `src/pc/assets.c` for `texID` in `Assets_Init()`, ensuring proper dynamic asset loader mapping registration for `0x80800100`.
   - Added unit test `test_dynamic_asset_loader_procedural_texture_relocation` in `tests/test_math_utils.c` (all 44 unit tests passing).

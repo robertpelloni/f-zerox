@@ -42,10 +42,20 @@ void func_8007F86C(void* a, void* b, void* c, void* d, void* e);
 void func_8007FB80(s32 x, s32 y, void* str);
 
 /* src/audio_state.c (game_511D0.c) - Audio State */
+void AudioState_SetParamA(s8 arg0);
 void func_800BA2D0(s8 arg0);
+void AudioState_SetParamB(s8 arg0);
 void func_800BA2E0(s8 arg0);
+void AudioState_Activate(void);
 void func_800BAFF4(void);
+void AudioState_TriggerPlay(void);
 void func_800BB038(void);
+void AudioState_SetAlternativeMode(void);
+void func_800BB09C(void);
+void AudioState_SetParamC(s8 arg0);
+void func_800BB324(s8 arg0);
+void AudioState_TriggerReset(void);
+void func_800BB45C(void);
 
 /* src/game_11CF0.c - Init */
 void func_80079080(void); // InitLoop

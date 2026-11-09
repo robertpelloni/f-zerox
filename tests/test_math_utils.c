@@ -191,6 +191,38 @@ static char * test_audio_state_mutations() {
     return 0;
 }
 
+static char * test_audio_state_pascal_case_apis() {
+    gAudioStateParamA = 0;
+    AudioState_SetParamA(45);
+    mu_assert("AudioState_SetParamA failed", gAudioStateParamA == 45);
+
+    gAudioStateParamB = 0;
+    AudioState_SetParamB(-33);
+    mu_assert("AudioState_SetParamB failed", gAudioStateParamB == -33);
+
+    gAudioStateActiveFlag = 0;
+    AudioState_Activate();
+    mu_assert("AudioState_Activate failed", gAudioStateActiveFlag == 1);
+
+    gAudioStatePlayTrigger = 0;
+    AudioState_TriggerPlay();
+    mu_assert("AudioState_TriggerPlay failed", gAudioStatePlayTrigger == 1);
+
+    gAudioStateActiveFlag = 0;
+    AudioState_SetAlternativeMode();
+    mu_assert("AudioState_SetAlternativeMode failed", gAudioStateActiveFlag == 3);
+
+    gAudioStateParamC = 0;
+    AudioState_SetParamC(88);
+    mu_assert("AudioState_SetParamC failed", gAudioStateParamC == 88);
+
+    gAudioStateResetFlag = 0;
+    AudioState_TriggerReset();
+    mu_assert("AudioState_TriggerReset failed", gAudioStateResetFlag == 1);
+
+    return 0;
+}
+
 static char * test_linked_list_init() {
     struct UnkStruct_1 node;
     node.next = NULL;
@@ -727,6 +759,7 @@ static char * all_tests() {
     mu_run_test(test_controller_reset_machine_states);
     mu_run_test(test_trig_functions);
     mu_run_test(test_audio_state_mutations);
+    mu_run_test(test_audio_state_pascal_case_apis);
     mu_run_test(test_linked_list_init);
     mu_run_test(test_track_lookup_table);
     mu_run_test(test_audio_utils);
