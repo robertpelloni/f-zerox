@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.68)
+## Recent Activity (Version 0.1.69)
+- **Machine Config Headers & Testing**:
+  - Formally declared `Machine_SetConfigA` and `Machine_SetConfigB` in `include/functions.h`.
+  - Added unit test `test_machine_config_direct_pascal_apis` in `tests/test_math_utils.c` (all 48 unit tests passing).
+  - Bumped version to `0.1.69` across all documentation.
+
+## Previous Activity (Version 0.1.68)
 - **Vector Setters & Legacy N64 Aliases**:
   - Wired legacy aliases `func_8006AFC8`, `func_8006AFE4`, and `func_8006B000` to `Vector_SetDual`, `Vector_SetDual_Alias`, and `Vector_SetTriple` in `src/math_utils.c`.
   - Declared function prototypes in `include/functions.h`.

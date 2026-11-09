@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.69] - 2026-11-06
+### Added
+- **Machine Config Headers & Testing**: Formally declared `Machine_SetConfigA` and `Machine_SetConfigB` in `include/functions.h`.
+- **Testing**: Added unit test `test_machine_config_direct_pascal_apis` in `tests/test_math_utils.c` (48 tests passing).
+
 ## [0.1.68] - 2026-11-06
 ### Added
 - **Vector Setters & Legacy Aliases**: Wired `func_8006AFC8`, `func_8006AFE4`, and `func_8006B000` to `Vector_SetDual`, `Vector_SetDual_Alias`, and `Vector_SetTriple` in `src/math_utils.c` and declared in `include/functions.h`.

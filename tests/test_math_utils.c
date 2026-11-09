@@ -267,9 +267,27 @@ static char * test_machine_dynamic_config() {
     Machine_SetConfigA(999);
     mu_assert("Machine_SetConfigA match", gDynamicMachineConfigA == 999);
 
+    func_800B0784(1234);
+    mu_assert("func_800B0784 alias match", gDynamicMachineConfigA == 1234);
+
     gDynamicMachineConfigB = 0;
     Machine_SetConfigB(-777);
     mu_assert("Machine_SetConfigB match", gDynamicMachineConfigB == -777);
+
+    func_800B0790(-5678);
+    mu_assert("func_800B0790 alias match", gDynamicMachineConfigB == -5678);
+
+    return 0;
+}
+
+static char * test_machine_config_direct_pascal_apis() {
+    gDynamicMachineConfigA = 0;
+    Machine_SetConfigA(5000);
+    mu_assert("Machine_SetConfigA direct verify", gDynamicMachineConfigA == 5000);
+
+    gDynamicMachineConfigB = 0;
+    Machine_SetConfigB(6000);
+    mu_assert("Machine_SetConfigB direct verify", gDynamicMachineConfigB == 6000);
     return 0;
 }
 
@@ -817,6 +835,7 @@ static char * all_tests() {
     mu_run_test(test_track_lookup_table);
     mu_run_test(test_audio_utils);
     mu_run_test(test_machine_dynamic_config);
+    mu_run_test(test_machine_config_direct_pascal_apis);
     mu_run_test(test_net_is_machine_active);
     mu_run_test(test_vehicle_active_index);
     mu_run_test(test_system_init_delay_loop);

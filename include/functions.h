@@ -134,7 +134,9 @@ void SystemConfig_Reset(void);
 void func_800742D0(void);
 
 /* src/game_459A0.c - Variable Setters */
+void Machine_SetConfigA(s32 val);
 void func_800B0784(s32 arg0);
+void Machine_SetConfigB(s32 val);
 void func_800B0790(s32 arg0);
 void StateStruct_Reset(struct UnkStruct_5* state);
 void func_800B2B50(struct UnkStruct_5* arg0);
