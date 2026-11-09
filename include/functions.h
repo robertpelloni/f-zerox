@@ -8,8 +8,11 @@ void func_800B6910(s32, u8);
 /* src/math_utils.c (game_2B20.c) - Math & Vectors */
 s32 func_8006A918(void); // Math_Rand
 s32 func_8006A9E0(f32 arg0); // Math_RoundF
+void Vector_SetDual(struct UnkStruct_10* vecStruct, s32 compX, s32 compY, s32 compZ);
 void func_8006AFC8(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3); // SetVectors
+void Vector_SetDual_Alias(struct UnkStruct_10* vecStruct, s32 compX, s32 compY, s32 compZ);
 void func_8006AFE4(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3); // SetVectors (Alias)
+void Vector_SetTriple(struct UnkStruct_8* vecStruct, s32 compX, s32 compY, s32 compZ);
 void func_8006B000(struct UnkStruct_8* arg0, s32 arg1, s32 arg2, s32 arg3); // SetVector8
 
 /* src/linked_list.c (game_446D0.c) - Linked List */

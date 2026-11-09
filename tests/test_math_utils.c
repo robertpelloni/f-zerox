@@ -772,6 +772,38 @@ static char * test_math_trig_and_vector_tables_init() {
     return 0;
 }
 
+static char * test_vector_setters() {
+    struct UnkStruct_10 dual1, dual2;
+    memset(&dual1, 0, sizeof(dual1));
+    memset(&dual2, 0, sizeof(dual2));
+
+    Vector_SetDual(&dual1, 10, 20, 30);
+    mu_assert("Vector_SetDual unk0 == unk4 == 10", dual1.unk0 == 10 && dual1.unk4 == 10);
+    mu_assert("Vector_SetDual unk1 == unk5 == 20", dual1.unk1 == 20 && dual1.unk5 == 20);
+    mu_assert("Vector_SetDual unk2 == unk6 == 30", dual1.unk2 == 30 && dual1.unk6 == 30);
+
+    func_8006AFC8(&dual2, 55, 66, 77);
+    mu_assert("func_8006AFC8 unk0 == unk4 == 55", dual2.unk0 == 55 && dual2.unk4 == 55);
+    mu_assert("func_8006AFC8 unk1 == unk5 == 66", dual2.unk1 == 66 && dual2.unk5 == 66);
+    mu_assert("func_8006AFC8 unk2 == unk6 == 77", dual2.unk2 == 77 && dual2.unk6 == 77);
+
+    struct UnkStruct_8 trip1, trip2;
+    memset(&trip1, 0, sizeof(trip1));
+    memset(&trip2, 0, sizeof(trip2));
+
+    Vector_SetTriple(&trip1, 11, 22, 33);
+    mu_assert("Vector_SetTriple unk8 == 11", trip1.unk8 == 11);
+    mu_assert("Vector_SetTriple unk9 == 22", trip1.unk9 == 22);
+    mu_assert("Vector_SetTriple unkA == 33", trip1.unkA == 33);
+
+    func_8006B000(&trip2, 44, 55, 66);
+    mu_assert("func_8006B000 unk8 == 44", trip2.unk8 == 44);
+    mu_assert("func_8006B000 unk9 == 55", trip2.unk9 == 55);
+    mu_assert("func_8006B000 unkA == 66", trip2.unkA == 66);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -819,6 +851,7 @@ static char * all_tests() {
     mu_run_test(test_dynamic_asset_loader_procedural_texture_relocation);
     mu_run_test(test_dynamic_asset_loader_vertex_buffer_relocation);
     mu_run_test(test_math_trig_and_vector_tables_init);
+    mu_run_test(test_vector_setters);
     return 0;
 }
 

@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.67)
+## Recent Activity (Version 0.1.68)
+- **Vector Setters & Legacy N64 Aliases**:
+  - Wired legacy aliases `func_8006AFC8`, `func_8006AFE4`, and `func_8006B000` to `Vector_SetDual`, `Vector_SetDual_Alias`, and `Vector_SetTriple` in `src/math_utils.c`.
+  - Declared function prototypes in `include/functions.h`.
+  - Added unit test `test_vector_setters` in `tests/test_math_utils.c` (all 47 unit tests passing).
+  - Bumped version to `0.1.68` across all documentation.
+
+## Previous Activity (Version 0.1.67)
 - **Fast3D Vertex Buffer Asset Relocation**:
   - Hooked `Asset_GetByAddress` into Fast3D `G_VTX` command handler, allowing vertex buffers specified by ROM addresses to be dynamically mapped and loaded from mods/external assets.
   - Added unit test `test_dynamic_asset_loader_vertex_buffer_relocation` in `tests/test_math_utils.c` (all 46 unit tests passing).

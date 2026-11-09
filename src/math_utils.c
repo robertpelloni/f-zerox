@@ -407,6 +407,10 @@ void Vector_SetDual(struct UnkStruct_10* vecStruct, s32 compX, s32 compY, s32 co
     vecStruct->unk2 = vecStruct->unk6 = compZ;
 }
 
+void func_8006AFC8(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    Vector_SetDual(arg0, arg1, arg2, arg3);
+}
+
 /**
  * @brief Set a dual-vector structure (alias of Vector_SetDual)
  *
@@ -422,6 +426,10 @@ void Vector_SetDual_Alias(struct UnkStruct_10* vecStruct, s32 compX, s32 compY, 
     vecStruct->unk0 = vecStruct->unk4 = compX;
     vecStruct->unk1 = vecStruct->unk5 = compY;
     vecStruct->unk2 = vecStruct->unk6 = compZ;
+}
+
+void func_8006AFE4(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    Vector_SetDual_Alias(arg0, arg1, arg2, arg3);
 }
 
 /**
@@ -440,6 +448,10 @@ void Vector_SetTriple(struct UnkStruct_8* vecStruct, s32 compX, s32 compY, s32 c
     vecStruct->unk8 = compX;
     vecStruct->unk9 = compY;
     vecStruct->unkA = compZ;
+}
+
+void func_8006B000(struct UnkStruct_8* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    Vector_SetTriple(arg0, arg1, arg2, arg3);
 }
 
 // TODO: Refactor pointer logic
