@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.62)
+## Recent Activity (Version 0.1.63)
+- **Dynamic Asset Loader Unregistration & Lookup**:
+  - Implemented `Asset_UnregisterMapping()` and `Asset_HasAddress()` in `src/pc/assets/dynamic_asset_loader.c` and `include/pc/assets/dynamic_asset_loader.h`.
+  - Added unit test `test_dynamic_asset_loader_unregister_and_has` in `tests/test_math_utils.c` (all 42 unit tests passing).
+  - Bumped version to `0.1.63` across all documentation.
+
+## Previous Activity (Version 0.1.62)
 - **Audio Cold Boot Initialization**:
   - Implemented `Audio_ColdBootInit()` in `src/game_1F510.c` calling `Audio_WarmBootInit()` with backward-compatible alias `func_8008DB98`.
   - Decoupled tracking into shiftable C global `gAudioColdBootCount` in `include/variables.h` and `src/pc/ultra_impl.c`.

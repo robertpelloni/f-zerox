@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.63] - 2026-11-06
+### Added
+- **Dynamic Asset Loader Unregistration & Lookup**: Implemented `Asset_UnregisterMapping` and `Asset_HasAddress` in `src/pc/assets/dynamic_asset_loader.c` and `include/pc/assets/dynamic_asset_loader.h`.
+- **Testing**: Added `test_dynamic_asset_loader_unregister_and_has` in `tests/test_math_utils.c` (42 tests passing).
+
 ## [0.1.62] - 2026-11-06
 ### Added
 - **Audio Cold Boot Initialization**: Implemented `Audio_ColdBootInit` in `src/game_1F510.c` with backward-compatible alias `func_8008DB98`.

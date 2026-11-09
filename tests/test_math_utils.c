@@ -59,6 +59,8 @@ void System_SetStateFlags(s32 paramA, s32 paramB);
 
 // Declarations of dynamic asset loader functions
 void Asset_RegisterMapping(uint32_t address, void* asset);
+bool Asset_UnregisterMapping(uint32_t address);
+bool Asset_HasAddress(uint32_t address);
 void* Asset_GetByAddress(uint32_t address);
 int Asset_GetMappingCount(void);
 void Asset_ClearMappings(void);
@@ -469,6 +471,24 @@ static char * test_dynamic_asset_loader_multiple_mappings() {
     return 0;
 }
 
+static char * test_dynamic_asset_loader_unregister_and_has() {
+    Asset_ClearMappings();
+    int assetVal = 999;
+    Asset_RegisterMapping(0x80800500, &assetVal);
+    mu_assert("Asset_HasAddress returns true for registered address", Asset_HasAddress(0x80800500) == true);
+    mu_assert("Asset_HasAddress returns false for unregistered address", Asset_HasAddress(0x80800504) == false);
+
+    bool unregistered = Asset_UnregisterMapping(0x80800500);
+    mu_assert("Asset_UnregisterMapping returns true on success", unregistered == true);
+    mu_assert("Asset_HasAddress returns false after unregistering", Asset_HasAddress(0x80800500) == false);
+    mu_assert("Asset_GetMappingCount returns 0 after unregister", Asset_GetMappingCount() == 0);
+
+    bool falseUnregister = Asset_UnregisterMapping(0x80800500);
+    mu_assert("Asset_UnregisterMapping returns false if not found", falseUnregister == false);
+
+    return 0;
+}
+
 static char * test_shiftable_data_globals() {
     gGlobalState_800CD168 = 0x1234;
     mu_assert("gGlobalState_800CD168 set failed", gGlobalState_800CD168 == 0x1234);
@@ -712,6 +732,7 @@ static char * all_tests() {
     mu_run_test(test_machinestate_init_all_and_special);
     mu_run_test(test_machinestate_updates);
     mu_run_test(test_machinestate_ai_controls_effects);
+    mu_run_test(test_dynamic_asset_loader_unregister_and_has);
     return 0;
 }
 
