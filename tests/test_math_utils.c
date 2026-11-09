@@ -690,6 +690,22 @@ static char * test_machinestate_ai_controls_effects() {
     return 0;
 }
 
+static char * test_math_trig_and_vector_tables_init() {
+    gMathTrigTablesInitCount = 0;
+    Math_InitTrigTables();
+    mu_assert("Math_InitTrigTables should increment gMathTrigTablesInitCount", gMathTrigTablesInitCount == 1);
+    func_8006AA38();
+    mu_assert("func_8006AA38 should alias Math_InitTrigTables", gMathTrigTablesInitCount == 2);
+
+    gVectorTablesInitCount = 0;
+    Vector_InitTables();
+    mu_assert("Vector_InitTables should increment gVectorTablesInitCount", gVectorTablesInitCount == 1);
+    func_8006ADE4();
+    mu_assert("func_8006ADE4 should alias Vector_InitTables", gVectorTablesInitCount == 2);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -733,6 +749,7 @@ static char * all_tests() {
     mu_run_test(test_machinestate_updates);
     mu_run_test(test_machinestate_ai_controls_effects);
     mu_run_test(test_dynamic_asset_loader_unregister_and_has);
+    mu_run_test(test_math_trig_and_vector_tables_init);
     return 0;
 }
 

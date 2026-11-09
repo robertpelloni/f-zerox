@@ -92,6 +92,8 @@ s32 gMachineStateUpdateVisualsCount = 0;
 s32 gMachineStateUpdateAICount = 0;
 s32 gMachineStateUpdateControlsCount = 0;
 s32 gMachineStateUpdateEffectsCount = 0;
+s32 gMathTrigTablesInitCount = 0;
+s32 gVectorTablesInitCount = 0;
 
 /**
  * @brief Initializes the graphics subsystem.

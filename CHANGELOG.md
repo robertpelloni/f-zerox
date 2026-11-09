@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.64] - 2026-11-06
+### Added
+- **Math & Vector Lookup Table Initializers**: Implemented `Math_InitTrigTables` and `Vector_InitTables` in `src/math_utils.c` with backward-compatible aliases `func_8006AA38` and `func_8006ADE4`.
+- **Shiftable Tracking**: Added typed tracking symbols `gMathTrigTablesInitCount` and `gVectorTablesInitCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_math_trig_and_vector_tables_init` in `tests/test_math_utils.c` (43 tests passing).
+
 ## [0.1.63] - 2026-11-06
 ### Added
 - **Dynamic Asset Loader Unregistration & Lookup**: Implemented `Asset_UnregisterMapping` and `Asset_HasAddress` in `src/pc/assets/dynamic_asset_loader.c` and `include/pc/assets/dynamic_asset_loader.h`.

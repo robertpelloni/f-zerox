@@ -191,5 +191,7 @@ extern s32 gMachineStateUpdateVisualsCount;
 extern s32 gMachineStateUpdateAICount;
 extern s32 gMachineStateUpdateControlsCount;
 extern s32 gMachineStateUpdateEffectsCount;
+extern s32 gMathTrigTablesInitCount;
+extern s32 gVectorTablesInitCount;
 
 #endif

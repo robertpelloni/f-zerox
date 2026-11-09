@@ -361,10 +361,33 @@ float Math_SqrtF(float value) {
     return sqrtf(value);
 }
 
-void func_8006AA38(void) { /* TODO: Implement */ }
+/**
+ * @brief Initializes mathematical trigonometry lookup tables (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full trig lookup initialization from disassembly.
+ * Increments initialization count. Formerly func_8006AA38.
+ */
+void Math_InitTrigTables(void) {
+    gMathTrigTablesInitCount++;
+}
 
-// TODO: Refactor pointer logic
-void func_8006ADE4(void) { /* TODO: Implement */ }
+void func_8006AA38(void) {
+    Math_InitTrigTables();
+}
+
+/**
+ * @brief Initializes geometric vector lookup tables (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full vector table initialization from disassembly.
+ * Increments initialization count. Formerly func_8006ADE4.
+ */
+void Vector_InitTables(void) {
+    gVectorTablesInitCount++;
+}
+
+void func_8006ADE4(void) {
+    Vector_InitTables();
+}
 
 /**
  * @brief Set a dual-vector structure (both vectors to same values)

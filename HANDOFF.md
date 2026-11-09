@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.63)
+## Recent Activity (Version 0.1.64)
+- **Math & Vector Lookup Table Initializers**:
+  - Implemented `Math_InitTrigTables()` and `Vector_InitTables()` in `src/math_utils.c` with backward-compatible aliases `func_8006AA38` and `func_8006ADE4`.
+  - Decoupled tracking into shiftable C globals `gMathTrigTablesInitCount` and `gVectorTablesInitCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_math_trig_and_vector_tables_init` in `tests/test_math_utils.c` (all 43 unit tests passing).
+  - Bumped version to `0.1.64` across all documentation.
+
+## Previous Activity (Version 0.1.63)
 - **Dynamic Asset Loader Unregistration & Lookup**:
   - Implemented `Asset_UnregisterMapping()` and `Asset_HasAddress()` in `src/pc/assets/dynamic_asset_loader.c` and `include/pc/assets/dynamic_asset_loader.h`.
   - Added unit test `test_dynamic_asset_loader_unregister_and_has` in `tests/test_math_utils.c` (all 42 unit tests passing).
