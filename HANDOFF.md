@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.73)
+## Recent Activity (Version 0.1.74)
+- **Audio State Command Dispatch Decompilation**:
+  - Implemented `AudioState_DispatchCommand` in `src/game_4FFB0.c` with backward-compatible alias `func_800B6910`.
+  - Added shiftable globals `gAudioLastCommand` and `gAudioLastParam` in `src/pc/libaudio_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+  - Added unit test `test_audio_state_dispatch_command` in `tests/test_math_utils.c` (all 53 unit tests passing).
+  - Bumped version to `0.1.74` across all documentation.
+
+## Previous Activity (Version 0.1.73)
 - **Dynamic Asset Loader Index Queries & UI Inspection**:
   - Implemented `Asset_GetAddressByIndex` and `Asset_GetAssetByIndex` in `src/pc/assets/dynamic_asset_loader.c` and declared in `include/pc/assets/dynamic_asset_loader.h`.
   - Exposed dynamic asset ROM address inspection in `src/pc/ui/tabs/ui_tab_debug.c` under Decompilation & Shiftability Monitor.

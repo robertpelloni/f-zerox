@@ -3,7 +3,8 @@
 
 #include "structs.h"
 
-void func_800B6910(s32, u8);
+void AudioState_DispatchCommand(s32 cmd, u8 param);
+void func_800B6910(s32 cmd, u8 param);
 
 /* src/math_utils.c (game_2B20.c) - Math & Vectors */
 s32 func_8006A918(void); // Math_Rand
@@ -140,6 +141,7 @@ void Track_InitContext(s32 contextId);
 void func_80072ECC(s32 arg0);
 
 /* src/game_459A0.c - Variable Setters */
+void func_800AF820(void);
 void Machine_SetConfigA(s32 val);
 void func_800B0784(s32 arg0);
 void Machine_SetConfigB(s32 val);

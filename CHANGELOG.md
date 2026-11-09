@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.74] - 2026-11-06
+### Added
+- **Audio State Command Dispatch Decompilation**: Implemented `AudioState_DispatchCommand` in `src/game_4FFB0.c` with backward-compatible alias `func_800B6910`.
+- **Shiftable Audio Telemetry**: Added shiftable globals `gAudioLastCommand` and `gAudioLastParam` in `src/pc/libaudio_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+- **Testing**: Added unit test `test_audio_state_dispatch_command` in `tests/test_math_utils.c` (53 tests passing).
+
 ## [0.1.73] - 2026-11-06
 ### Added
 - **Dynamic Asset Loader Index Queries**: Implemented `Asset_GetAddressByIndex` and `Asset_GetAssetByIndex` in `src/pc/assets/dynamic_asset_loader.c` and declared in `include/pc/assets/dynamic_asset_loader.h`.

@@ -124,6 +124,8 @@ extern s8 gAudioStatePlayTrigger;
 extern s8 gAudioStateParamC;
 extern s8 gAudioStateResetFlag;
 extern s32 gAudioStateStatus;
+extern s32 gAudioLastCommand;
+extern u8 gAudioLastParam;
 
 #define D_800D1A3C gAudioStateParamA
 #define D_800D1A20 gAudioStateParamB

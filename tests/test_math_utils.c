@@ -251,6 +251,21 @@ static char * test_audio_state_get_status() {
     return 0;
 }
 
+static char * test_audio_state_dispatch_command() {
+    gAudioLastCommand = 0;
+    gAudioLastParam = 0;
+
+    AudioState_DispatchCommand(0x12345678, 0x9A);
+    mu_assert("test_audio_state_dispatch_command: command match", gAudioLastCommand == 0x12345678);
+    mu_assert("test_audio_state_dispatch_command: param match", gAudioLastParam == 0x9A);
+
+    func_800B6910(0xF0000000, 0x42);
+    mu_assert("test_audio_state_dispatch_command: alias command match", gAudioLastCommand == (s32)0xF0000000);
+    mu_assert("test_audio_state_dispatch_command: alias param match", gAudioLastParam == 0x42);
+
+    return 0;
+}
+
 static char * test_linked_list_init() {
     struct UnkStruct_1 node;
     node.next = NULL;
@@ -898,6 +913,7 @@ static char * all_tests() {
     mu_run_test(test_audio_state_mutations);
     mu_run_test(test_audio_state_pascal_case_apis);
     mu_run_test(test_audio_state_get_status);
+    mu_run_test(test_audio_state_dispatch_command);
     mu_run_test(test_linked_list_init);
     mu_run_test(test_track_lookup_table);
     mu_run_test(test_audio_utils);

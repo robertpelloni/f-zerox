@@ -25,7 +25,20 @@ void func_800B6894(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800B68EC(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800B6910(s32 a, u8 b) { (void)a; (void)b; /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Dispatches audio state command and parameter.
+ *
+ * @param cmd The command code to send.
+ * @param param Associated 8-bit parameter.
+ */
+void AudioState_DispatchCommand(s32 cmd, u8 param) {
+    gAudioLastCommand = cmd;
+    gAudioLastParam = param;
+}
+
+void func_800B6910(s32 a, u8 b) {
+    AudioState_DispatchCommand(a, b);
+}
 
 void func_800B6934(void) { /* TODO: SHIFTABLE - Implement */ }
 
