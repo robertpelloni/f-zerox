@@ -59,6 +59,8 @@ void AudioState_SetParamC(s8 arg0);
 void func_800BB324(s8 arg0);
 void AudioState_TriggerReset(void);
 void func_800BB45C(void);
+s32 AudioState_GetStatus(void);
+s32 func_800B5FB0(void);
 
 /* src/game_11CF0.c - Init */
 void func_80079080(void); // InitLoop

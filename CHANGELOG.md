@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.70] - 2026-11-06
+### Added
+- **Audio State Status Function**: Implemented `AudioState_GetStatus` in `src/game_4FFB0.c` with backward-compatible alias `func_800B5FB0` and updated call sites in `src/audio_state.c` and `src/game_511D0.c`.
+- **Testing**: Added unit test `test_audio_state_get_status` in `tests/test_math_utils.c` (49 tests passing).
+
 ## [0.1.69] - 2026-11-06
 ### Added
 - **Machine Config Headers & Testing**: Formally declared `Machine_SetConfigA` and `Machine_SetConfigB` in `include/functions.h`.

@@ -211,7 +211,7 @@ void func_800BB49C(void) {
     func_800B7CA4();
     func_800B8598();
     func_800B6994();
-    D_800D1C18 = func_800B5FB0();
+    gAudioStateStatus = AudioState_GetStatus();
 }
 
 void func_800BB4E0(void) { /* TODO: SHIFTABLE - Implement */ }

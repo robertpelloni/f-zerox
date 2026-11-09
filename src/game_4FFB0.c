@@ -1,6 +1,17 @@
 #include "common.h"
 
-void func_800B5FB0(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Retrieves the audio subsystem status.
+ *
+ * @return s32 The current status of gAudioStateStatus. Formerly func_800B5FB0.
+ */
+s32 AudioState_GetStatus(void) {
+    return gAudioStateStatus;
+}
+
+s32 func_800B5FB0(void) {
+    return AudioState_GetStatus();
+}
 
 void func_800B641C(void) { /* TODO: SHIFTABLE - Implement */ }
 

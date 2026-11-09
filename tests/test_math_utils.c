@@ -221,7 +221,13 @@ static char * test_audio_state_pascal_case_apis() {
     gAudioStateResetFlag = 0;
     AudioState_TriggerReset();
     mu_assert("AudioState_TriggerReset failed", gAudioStateResetFlag == 1);
+    return 0;
+}
 
+static char * test_audio_state_get_status() {
+    gAudioStateStatus = 0x55AA;
+    mu_assert("AudioState_GetStatus match", AudioState_GetStatus() == 0x55AA);
+    mu_assert("func_800B5FB0 alias match", func_800B5FB0() == 0x55AA);
     return 0;
 }
 
@@ -831,6 +837,7 @@ static char * all_tests() {
     mu_run_test(test_trig_functions);
     mu_run_test(test_audio_state_mutations);
     mu_run_test(test_audio_state_pascal_case_apis);
+    mu_run_test(test_audio_state_get_status);
     mu_run_test(test_linked_list_init);
     mu_run_test(test_track_lookup_table);
     mu_run_test(test_audio_utils);

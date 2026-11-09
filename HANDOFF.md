@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.69)
+## Recent Activity (Version 0.1.70)
+- **Audio State Status Function**:
+  - Implemented `AudioState_GetStatus()` in `src/game_4FFB0.c` with backward-compatible alias `func_800B5FB0`.
+  - Declared function prototype in `include/functions.h`.
+  - Updated call sites in `src/audio_state.c` and `src/game_511D0.c`.
+  - Added unit test `test_audio_state_get_status` in `tests/test_math_utils.c` (all 49 unit tests passing).
+  - Bumped version to `0.1.70` across all documentation.
+
+## Previous Activity (Version 0.1.69)
 - **Machine Config Headers & Testing**:
   - Formally declared `Machine_SetConfigA` and `Machine_SetConfigB` in `include/functions.h`.
   - Added unit test `test_machine_config_direct_pascal_apis` in `tests/test_math_utils.c` (all 48 unit tests passing).
