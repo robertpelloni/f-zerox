@@ -106,9 +106,13 @@ extern void* gCurrentFramebuffer;
 // Shiftable Active Vehicle Index (formerly D_800E5E84)
 extern s32 gActiveVehicleIndex;
 #define D_800E5E84 gActiveVehicleIndex
-extern s32 D_A4500000;
-extern s32 D_A4500004;
-extern s32 D_A450000C;
+// Shiftable N64 PI Cartridge Hardware Registers (formerly D_A4500000, D_A4500004, D_A450000C)
+extern s32 gCartridgeRegister0;
+extern s32 gCartridgeRegister4;
+extern s32 gCartridgeRegisterC;
+#define D_A4500000 gCartridgeRegister0
+#define D_A4500004 gCartridgeRegister4
+#define D_A450000C gCartridgeRegisterC
 // Shiftable Audio State Variables
 extern s8 gAudioStateParamA;
 extern s8 gAudioStateParamB;

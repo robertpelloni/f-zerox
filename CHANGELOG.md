@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.71] - 2026-11-06
+### Added
+- **Cartridge Hardware Registers Shiftability**: Decoupled N64 PI cartridge registers `D_A4500000`, `D_A4500004`, and `D_A450000C` into typed shiftable symbols `gCartridgeRegister0`, `gCartridgeRegister4`, and `gCartridgeRegisterC` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added unit test `test_cartridge_registers` in `tests/test_math_utils.c` (50 tests passing).
+
 ## [0.1.70] - 2026-11-06
 ### Added
 - **Audio State Status Function**: Implemented `AudioState_GetStatus` in `src/game_4FFB0.c` with backward-compatible alias `func_800B5FB0` and updated call sites in `src/audio_state.c` and `src/game_511D0.c`.

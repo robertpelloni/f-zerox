@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.70)
+## Recent Activity (Version 0.1.71)
+- **Cartridge Hardware Registers Shiftability**:
+  - Decoupled N64 PI cartridge registers `D_A4500000`, `D_A4500004`, and `D_A450000C` into typed shiftable symbols `gCartridgeRegister0`, `gCartridgeRegister4`, and `gCartridgeRegisterC` in `include/variables.h` and `src/pc/ultra_impl.c`.
+  - Added unit test `test_cartridge_registers` in `tests/test_math_utils.c` (all 50 unit tests passing).
+  - Bumped version to `0.1.71` across all documentation.
+
+## Previous Activity (Version 0.1.70)
 - **Audio State Status Function**:
   - Implemented `AudioState_GetStatus()` in `src/game_4FFB0.c` with backward-compatible alias `func_800B5FB0`.
   - Declared function prototype in `include/functions.h`.

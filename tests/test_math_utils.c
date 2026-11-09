@@ -828,6 +828,19 @@ static char * test_vector_setters() {
     return 0;
 }
 
+static char * test_cartridge_registers() {
+    gCartridgeRegister0 = 0x11223344;
+    mu_assert("D_A4500000 alias matches gCartridgeRegister0", D_A4500000 == 0x11223344);
+
+    D_A4500004 = 0x55667788;
+    mu_assert("gCartridgeRegister4 matches modified D_A4500004", gCartridgeRegister4 == 0x55667788);
+
+    gCartridgeRegisterC = 0x0A0B0C0D;
+    mu_assert("D_A450000C alias matches gCartridgeRegisterC", D_A450000C == 0x0A0B0C0D);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -878,6 +891,7 @@ static char * all_tests() {
     mu_run_test(test_dynamic_asset_loader_vertex_buffer_relocation);
     mu_run_test(test_math_trig_and_vector_tables_init);
     mu_run_test(test_vector_setters);
+    mu_run_test(test_cartridge_registers);
     return 0;
 }
 
