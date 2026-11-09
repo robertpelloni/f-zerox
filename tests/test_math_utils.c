@@ -489,6 +489,19 @@ static char * test_dynamic_asset_loader_unregister_and_has() {
     return 0;
 }
 
+static char * test_dynamic_asset_loader_procedural_texture_relocation() {
+    Asset_ClearMappings();
+    uintptr_t mockTexId = 42;
+    Asset_RegisterMapping(0x80800100, (void*)mockTexId);
+
+    mu_assert("Asset_HasAddress returns true for 0x80800100", Asset_HasAddress(0x80800100) == true);
+    mu_assert("Asset_GetByAddress retrieves correct texture ID", (uintptr_t)Asset_GetByAddress(0x80800100) == mockTexId);
+
+    Asset_ClearMappings();
+    mu_assert("Asset_GetMappingCount after clear is 0", Asset_GetMappingCount() == 0);
+    return 0;
+}
+
 static char * test_shiftable_data_globals() {
     gGlobalState_800CD168 = 0x1234;
     mu_assert("gGlobalState_800CD168 set failed", gGlobalState_800CD168 == 0x1234);
@@ -749,6 +762,7 @@ static char * all_tests() {
     mu_run_test(test_machinestate_updates);
     mu_run_test(test_machinestate_ai_controls_effects);
     mu_run_test(test_dynamic_asset_loader_unregister_and_has);
+    mu_run_test(test_dynamic_asset_loader_procedural_texture_relocation);
     mu_run_test(test_math_trig_and_vector_tables_init);
     return 0;
 }

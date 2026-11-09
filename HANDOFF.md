@@ -1,6 +1,12 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.64)
+## Recent Activity (Version 0.1.65)
+- **Procedural Texture Asset Scoping & Dynamic Asset Relocation**:
+  - Resolved variable scope issue in `src/pc/assets.c` for `texID` in `Assets_Init()`, ensuring proper dynamic asset loader mapping registration for `0x80800100`.
+  - Added unit test `test_dynamic_asset_loader_procedural_texture_relocation` in `tests/test_math_utils.c` (all 44 unit tests passing).
+  - Bumped version to `0.1.65` across all documentation.
+
+## Previous Activity (Version 0.1.64)
 - **Math & Vector Lookup Table Initializers**:
   - Implemented `Math_InitTrigTables()` and `Vector_InitTables()` in `src/math_utils.c` with backward-compatible aliases `func_8006AA38` and `func_8006ADE4`.
   - Decoupled tracking into shiftable C globals `gMathTrigTablesInitCount` and `gVectorTablesInitCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
