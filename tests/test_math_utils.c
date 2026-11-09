@@ -612,6 +612,28 @@ static char * test_machinestate_init_all_and_special() {
     return 0;
 }
 
+static char * test_machinestate_updates() {
+    gMachineStateUpdatePhysicsCount = 0;
+    MachineState_UpdatePhysics();
+    mu_assert("MachineState_UpdatePhysics should increment count", gMachineStateUpdatePhysicsCount == 1);
+    func_80069D44();
+    mu_assert("func_80069D44 should alias MachineState_UpdatePhysics", gMachineStateUpdatePhysicsCount == 2);
+
+    gMachineStateUpdateCollisionsCount = 0;
+    MachineState_UpdateCollisions();
+    mu_assert("MachineState_UpdateCollisions should increment count", gMachineStateUpdateCollisionsCount == 1);
+    func_80069ED0();
+    mu_assert("func_80069ED0 should alias MachineState_UpdateCollisions", gMachineStateUpdateCollisionsCount == 2);
+
+    gMachineStateUpdateVisualsCount = 0;
+    MachineState_UpdateVisuals();
+    mu_assert("MachineState_UpdateVisuals should increment count", gMachineStateUpdateVisualsCount == 1);
+    func_80069F5C();
+    mu_assert("func_80069F5C should alias MachineState_UpdateVisuals", gMachineStateUpdateVisualsCount == 2);
+
+    return 0;
+}
+
 static char * all_tests() {
     mu_run_test(test_math_roundf);
     mu_run_test(test_system_init_and_time);
@@ -651,6 +673,7 @@ static char * all_tests() {
     mu_run_test(test_gfx_init_and_state_result);
     mu_run_test(test_system_tick_idle_poll);
     mu_run_test(test_machinestate_init_all_and_special);
+    mu_run_test(test_machinestate_updates);
     return 0;
 }
 

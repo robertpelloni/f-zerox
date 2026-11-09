@@ -184,5 +184,8 @@ extern s32 gSystemIdleWaitCount;
 extern s32 gSystemPollEventsCount;
 extern s32 gMachineStateInitAllCount;
 extern s32 gMachineStateInitSpecialCount;
+extern s32 gMachineStateUpdatePhysicsCount;
+extern s32 gMachineStateUpdateCollisionsCount;
+extern s32 gMachineStateUpdateVisualsCount;
 
 #endif

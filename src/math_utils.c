@@ -194,14 +194,44 @@ void func_80069820(void) {
     MachineState_InitSpecial();
 }
 
-// TODO: Refactor pointer logic
-void func_80069D44(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates machine physics simulation states.
+ *
+ * Increments physics update count. Formerly func_80069D44.
+ */
+void MachineState_UpdatePhysics(void) {
+    gMachineStateUpdatePhysicsCount++;
+}
 
-// TODO: Refactor pointer logic
-void func_80069ED0(void) { /* TODO: Implement */ }
+void func_80069D44(void) {
+    MachineState_UpdatePhysics();
+}
 
-// TODO: Refactor pointer logic
-void func_80069F5C(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates machine collision detection states.
+ *
+ * Increments collision update count. Formerly func_80069ED0.
+ */
+void MachineState_UpdateCollisions(void) {
+    gMachineStateUpdateCollisionsCount++;
+}
+
+void func_80069ED0(void) {
+    MachineState_UpdateCollisions();
+}
+
+/**
+ * @brief Updates machine visual presentation states.
+ *
+ * Increments visual update count. Formerly func_80069F5C.
+ */
+void MachineState_UpdateVisuals(void) {
+    gMachineStateUpdateVisualsCount++;
+}
+
+void func_80069F5C(void) {
+    MachineState_UpdateVisuals();
+}
 
 // TODO: Refactor pointer logic
 void func_8006A00C(void) { /* TODO: Implement */ }

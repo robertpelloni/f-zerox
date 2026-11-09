@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.60] - 2026-11-06
+### Added
+- **Machine State Update Routines**: Implemented `MachineState_UpdatePhysics`, `MachineState_UpdateCollisions`, and `MachineState_UpdateVisuals` in `src/math_utils.c` with backward-compatible aliases `func_80069D44`, `func_80069ED0`, and `func_80069F5C`.
+- **Shiftable Tracking**: Added typed tracking symbols `gMachineStateUpdatePhysicsCount`, `gMachineStateUpdateCollisionsCount`, and `gMachineStateUpdateVisualsCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_machinestate_updates` in `tests/test_math_utils.c` (39 tests passing).
+
 ## [0.1.59] - 2026-11-06
 ### Added
 - **Machine State Initialization Routines**: Implemented `MachineState_InitAll` and `MachineState_InitSpecial` in `src/math_utils.c` with backward-compatible aliases `func_80069700` and `func_80069820`.
