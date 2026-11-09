@@ -114,9 +114,29 @@ void func_80072758(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_80072BB0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_80072D00(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Resets track state counters and registers.
+ */
+void Track_ResetState(void) {
+    gTrackResetCount++;
+}
 
-void func_80072ECC(s32 arg0) { (void)arg0; /* TODO: SHIFTABLE - Implement */ }
+void func_80072D00(void) {
+    Track_ResetState();
+}
+
+/**
+ * @brief Initializes track context identifier.
+ *
+ * @param contextId Identifier for the track context/segment to initialize.
+ */
+void Track_InitContext(s32 contextId) {
+    gTrackContextId = contextId;
+}
+
+void func_80072ECC(s32 arg0) {
+    Track_InitContext(arg0);
+}
 
 void func_800730A4(s32 arg0) { (void)arg0; /* TODO: SHIFTABLE - Implement */ }
 

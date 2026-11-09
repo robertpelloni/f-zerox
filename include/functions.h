@@ -131,9 +131,13 @@ void func_8007D9D0(void);
 void State_ProcessResult(s32 result);
 void func_800FD184(s32 arg0);
 
-/* src/game_73F0.c - System Config */
+/* src/game_73F0.c - System Config & Track State */
 void SystemConfig_Reset(void);
 void func_800742D0(void);
+void Track_ResetState(void);
+void func_80072D00(void);
+void Track_InitContext(s32 contextId);
+void func_80072ECC(s32 arg0);
 
 /* src/game_459A0.c - Variable Setters */
 void Machine_SetConfigA(s32 val);

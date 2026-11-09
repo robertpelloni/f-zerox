@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.71)
+## Recent Activity (Version 0.1.72)
+- **Track Context & State Decompilation**:
+  - Implemented `Track_InitContext` and `Track_ResetState` in `src/game_73F0.c` with backward-compatible aliases `func_80072ECC` and `func_80072D00`.
+  - Added shiftable tracking telemetry globals `gTrackContextId` and `gTrackResetCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+  - Added unit test `test_track_init_context_and_reset` in `tests/test_math_utils.c` (all 51 unit tests passing).
+  - Bumped version to `0.1.72` across all documentation.
+
+## Previous Activity (Version 0.1.71)
 - **Cartridge Hardware Registers Shiftability**:
   - Decoupled N64 PI cartridge registers `D_A4500000`, `D_A4500004`, and `D_A450000C` into typed shiftable symbols `gCartridgeRegister0`, `gCartridgeRegister4`, and `gCartridgeRegisterC` in `include/variables.h` and `src/pc/ultra_impl.c`.
   - Added unit test `test_cartridge_registers` in `tests/test_math_utils.c` (all 50 unit tests passing).

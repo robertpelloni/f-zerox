@@ -113,6 +113,9 @@ extern s32 gCartridgeRegisterC;
 #define D_A4500000 gCartridgeRegister0
 #define D_A4500004 gCartridgeRegister4
 #define D_A450000C gCartridgeRegisterC
+// Shiftable Track Context & State Tracking
+extern s32 gTrackContextId;
+extern s32 gTrackResetCount;
 // Shiftable Audio State Variables
 extern s8 gAudioStateParamA;
 extern s8 gAudioStateParamB;

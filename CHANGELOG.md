@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.72] - 2026-11-06
+### Added
+- **Track Context & State Decompilation**: Implemented `Track_InitContext` and `Track_ResetState` in `src/game_73F0.c` with backward-compatible aliases `func_80072ECC` and `func_80072D00`.
+- **Shiftable Telemetry Tracking**: Added `gTrackContextId` and `gTrackResetCount` in `src/pc/ultra_impl.c` and declared them in `include/variables.h` and `include/functions.h`.
+- **Testing**: Added unit test `test_track_init_context_and_reset` in `tests/test_math_utils.c` (51 tests passing).
+
 ## [0.1.71] - 2026-11-06
 ### Added
 - **Cartridge Hardware Registers Shiftability**: Decoupled N64 PI cartridge registers `D_A4500000`, `D_A4500004`, and `D_A450000C` into typed shiftable symbols `gCartridgeRegister0`, `gCartridgeRegister4`, and `gCartridgeRegisterC` in `include/variables.h` and `src/pc/ultra_impl.c`.

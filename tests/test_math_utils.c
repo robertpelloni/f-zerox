@@ -224,6 +224,24 @@ static char * test_audio_state_pascal_case_apis() {
     return 0;
 }
 
+static char* test_track_init_context_and_reset(void) {
+    gTrackResetCount = 0;
+    gTrackContextId = 0;
+
+    Track_ResetState();
+    mu_assert("test_track_init_context_and_reset: Track_ResetState increment failed", gTrackResetCount == 1);
+
+    func_80072D00();
+    mu_assert("test_track_init_context_and_reset: func_80072D00 increment failed", gTrackResetCount == 2);
+
+    Track_InitContext(42);
+    mu_assert("test_track_init_context_and_reset: Track_InitContext failed", gTrackContextId == 42);
+
+    func_80072ECC(108);
+    mu_assert("test_track_init_context_and_reset: func_80072ECC failed", gTrackContextId == 108);
+    return 0;
+}
+
 static char * test_audio_state_get_status() {
     gAudioStateStatus = 0x55AA;
     mu_assert("AudioState_GetStatus match", AudioState_GetStatus() == 0x55AA);
@@ -892,6 +910,7 @@ static char * all_tests() {
     mu_run_test(test_math_trig_and_vector_tables_init);
     mu_run_test(test_vector_setters);
     mu_run_test(test_cartridge_registers);
+    mu_run_test(test_track_init_context_and_reset);
     return 0;
 }
 
