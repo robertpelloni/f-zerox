@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.62] - 2026-11-06
+### Added
+- **Audio Cold Boot Initialization**: Implemented `Audio_ColdBootInit` in `src/game_1F510.c` with backward-compatible alias `func_8008DB98`.
+- **Shiftable Tracking**: Added typed tracking symbol `gAudioColdBootCount` in `include/variables.h` and `src/pc/ultra_impl.c`.
+- **Testing**: Added `test_audio_cold_boot_init` in `tests/test_math_utils.c` (41 tests passing).
+
 ## [0.1.61] - 2026-11-06
 ### Added
 - **Machine State AI, Controls & Effects Routines**: Implemented `MachineState_UpdateAI`, `MachineState_UpdateControls`, and `MachineState_UpdateEffects` in `src/math_utils.c` with backward-compatible aliases `func_8006A00C`, `func_8006A3AC`, and `func_8006A6E4`.

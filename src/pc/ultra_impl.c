@@ -73,6 +73,7 @@ s16 gSystemMemoryStateValue = 0;
 
 // Subsystem Initialization Tracking Flags
 s32 gMachineSystemInitialized = 0;
+s32 gAudioColdBootCount = 0;
 s32 gAudioWarmBootCount = 0;
 s32 gInputSystemInitialized = 0;
 s32 gTimingSystemInitialized = 0;

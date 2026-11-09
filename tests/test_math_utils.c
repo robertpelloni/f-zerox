@@ -516,6 +516,20 @@ static char * test_machine_and_audio_init() {
     return 0;
 }
 
+static char * test_audio_cold_boot_init() {
+    gAudioColdBootCount = 0;
+    gAudioWarmBootCount = 0;
+    Audio_ColdBootInit();
+    mu_assert("Audio_ColdBootInit should increment gAudioColdBootCount", gAudioColdBootCount == 1);
+    mu_assert("Audio_ColdBootInit should call Audio_WarmBootInit", gAudioWarmBootCount == 1);
+
+    func_8008DB98();
+    mu_assert("func_8008DB98 should alias Audio_ColdBootInit", gAudioColdBootCount == 2);
+    mu_assert("func_8008DB98 should also increment warm boot count", gAudioWarmBootCount == 2);
+
+    return 0;
+}
+
 static char * test_input_and_timing_init() {
     gInputSystemInitialized = 0;
     Input_SystemInit();
@@ -690,6 +704,7 @@ static char * all_tests() {
     mu_run_test(test_shiftable_data_globals);
     mu_run_test(test_system_init_alias);
     mu_run_test(test_machine_and_audio_init);
+    mu_run_test(test_audio_cold_boot_init);
     mu_run_test(test_input_and_timing_init);
     mu_run_test(test_audio_aux_and_shutdown);
     mu_run_test(test_gfx_init_and_state_result);

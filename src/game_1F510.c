@@ -150,8 +150,18 @@ void func_8008DA68(void) {
     Audio_WarmBootInit();
 }
 
+/**
+ * @brief Cold boot initialization of the audio subsystem.
+ *
+ * Calls Audio_WarmBootInit and tracks cold boot executions. Formerly func_8008DB98.
+ */
+void Audio_ColdBootInit(void) {
+    gAudioColdBootCount++;
+    Audio_WarmBootInit();
+}
+
 void func_8008DB98(void) {
-    func_8008DA68();
+    Audio_ColdBootInit();
 }
 
 void func_8008DBB8(void) { /* TODO: SHIFTABLE - Implement */ }

@@ -92,6 +92,7 @@ void System_PollEvents(void);
 void func_80068F04(void);
 void func_80068B20(void);
 // Dependencies of func_80068B20
+void Audio_ColdBootInit(void);
 void func_8008DB98(void);
 void Audio_AuxInit(void);
 void func_800A4BAC(void);
