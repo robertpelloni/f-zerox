@@ -91,10 +91,24 @@ static char * test_math_roundf() {
 static char * test_system_init_and_time() {
     gSystemInitialized = 0;
     gSystemFullyInitialized = 0;
+    gMachineSystemInitialized = 0;
+    gGfxSystemInitialized = 0;
+    gInputSystemInitialized = 0;
+    gTimingSystemInitialized = 0;
+
+    Asset_ClearMappings();
+    int dummyAsset = 77;
+    Asset_RegisterMapping(0x80800000, &dummyAsset);
+
     System_Init();
     mu_assert("System_Init magic failed", gSystemInitialized == 0x20DE1529);
     mu_assert("System_Init fully initialized flag failed", gSystemFullyInitialized == 1);
     mu_assert("System_Init current state index failed", gCurrentStateIndex == -1);
+    mu_assert("System_Init machine init failed", gMachineSystemInitialized == 1);
+    mu_assert("System_Init gfx init failed", gGfxSystemInitialized == 1);
+    mu_assert("System_Init input init failed", gInputSystemInitialized == 1);
+    mu_assert("System_Init timing init failed", gTimingSystemInitialized == 1);
+    mu_assert("System_Init dynamic asset mapped flag failed", gSystemAssetsMapped == 1);
 
     // Warm boot branch test
     System_Init();
@@ -103,6 +117,8 @@ static char * test_system_init_and_time() {
     System_SetTime(1234, 5678);
     mu_assert("System_SetTime t1 failed", gTimeState.timeValue1 == 1234);
     mu_assert("System_SetTime t2 failed", gTimeState.timeValue2 == 5678);
+
+    Asset_ClearMappings();
     return 0;
 }
 

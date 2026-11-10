@@ -33,19 +33,22 @@ void System_Init(void) {
 
     // Check if already initialized using magic number
     if (gSystemInitialized != 0x20DE1529) {
-        func_8008DB98(); // Audio system init (cold boot)
+        Audio_ColdBootInit(); // Audio system init (cold boot)
         gSystemInitialized = 0x20DE1529; // Set initialized flag
-        func_800A4BAC(); // Additional audio init
+        Audio_AuxInit(); // Additional audio init
     } else {
-        func_8008DA68(); // Audio system re-init (warm boot)
-        func_800A4B54(); // Audio shutdown/restart
+        Audio_WarmBootInit(); // Audio system re-init (warm boot)
+        Audio_Shutdown(); // Audio shutdown/restart
     }
 
-    func_80085510(); // Machine system init
-    func_800FC730(); // Graphics system init
-    func_8007F500(); // Memory system init
-    func_80076848(); // Input system init
-    func_8007D9D0(); // Timing system init
+    Machine_SystemInit(); // Machine system init
+    Gfx_SystemInit(); // Graphics system init
+    System_InitMemoryState(); // Memory system init
+    Input_SystemInit(); // Input system init
+    Timing_SystemInit(); // Timing system init
+
+    // Validate if dynamic asset loader mappings are populated
+    gSystemAssetsMapped = (Asset_GetMappingCount() > 0) ? 1 : 0;
 
     gSystemFullyInitialized = 1; // Mark system as fully initialized
 }

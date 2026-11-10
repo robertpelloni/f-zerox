@@ -116,6 +116,9 @@ extern s32 gCartridgeRegisterC;
 // Shiftable Track Context & State Tracking
 extern s32 gTrackContextId;
 extern s32 gTrackResetCount;
+
+// Shiftable Dynamic Assets Mapped Flag
+extern s32 gSystemAssetsMapped;
 // Shiftable Audio State Variables
 extern s8 gAudioStateParamA;
 extern s8 gAudioStateParamB;

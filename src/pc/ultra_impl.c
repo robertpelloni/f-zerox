@@ -67,6 +67,7 @@ s32 gCartridgeRegister4 = 0;
 s32 gCartridgeRegisterC = 0;
 s32 gTrackContextId = 0;
 s32 gTrackResetCount = 0;
+s32 gSystemAssetsMapped = 0;
 s32 gSystemStateFlag = 0;
 s32 gSystemStateParamA = 0;
 s32 gSystemStateParamB = 0;

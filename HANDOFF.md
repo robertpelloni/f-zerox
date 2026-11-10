@@ -1,6 +1,14 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.74)
+## Recent Activity (Version 0.1.75)
+- **System Initialization Canonicalization & Asset Validation**:
+  - Refactored `System_Init` in `src/math_utils.c` to directly call PascalCase subsystem routines (`Audio_ColdBootInit`, `Audio_AuxInit`, `Audio_WarmBootInit`, `Audio_Shutdown`, `Machine_SystemInit`, `Gfx_SystemInit`, `System_InitMemoryState`, `Input_SystemInit`, `Timing_SystemInit`).
+  - Added shiftable global `gSystemAssetsMapped` in `src/pc/ultra_impl.c` and declared in `include/variables.h`.
+  - Integrated dynamic asset registration check into `System_Init`.
+  - Expanded unit test `test_system_init_and_time` in `tests/test_math_utils.c` (all 53 unit tests passing).
+  - Bumped version to `0.1.75` across all documentation.
+
+## Previous Activity (Version 0.1.74)
 - **Audio State Command Dispatch Decompilation**:
   - Implemented `AudioState_DispatchCommand` in `src/game_4FFB0.c` with backward-compatible alias `func_800B6910`.
   - Added shiftable globals `gAudioLastCommand` and `gAudioLastParam` in `src/pc/libaudio_impl.c` and declared in `include/variables.h` and `include/functions.h`.

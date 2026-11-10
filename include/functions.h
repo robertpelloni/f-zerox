@@ -124,6 +124,7 @@ void Machine_SystemInit(void);
 void func_80085510(void);
 void Gfx_SystemInit(void);
 void func_800FC730(void);
+void System_InitMemoryState(void);
 void func_8007F500(void);
 void Input_SystemInit(void);
 void func_80076848(void);

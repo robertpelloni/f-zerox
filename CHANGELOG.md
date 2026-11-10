@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.75] - 2026-11-06
+### Added
+- **System Initialization Canonicalization**: Refactored `System_Init` in `src/math_utils.c` to directly call PascalCase subsystem routines (`Audio_ColdBootInit`, `Audio_AuxInit`, `Audio_WarmBootInit`, `Audio_Shutdown`, `Machine_SystemInit`, `Gfx_SystemInit`, `System_InitMemoryState`, `Input_SystemInit`, `Timing_SystemInit`).
+- **Dynamic Asset Validation**: Integrated dynamic asset registration check into `System_Init`, recording status in `gSystemAssetsMapped`.
+- **Testing**: Expanded `test_system_init_and_time` in `tests/test_math_utils.c` (53 tests passing).
+
 ## [0.1.74] - 2026-11-06
 ### Added
 - **Audio State Command Dispatch Decompilation**: Implemented `AudioState_DispatchCommand` in `src/game_4FFB0.c` with backward-compatible alias `func_800B6910`.
