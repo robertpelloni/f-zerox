@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.79)
+## Recent Activity (Version 0.1.80)
+- **Memory Allocation Routines Decompilation**:
+  - Implemented `Memory_AllocateBlockA` and `Memory_AllocateBlockB` in `src/game_11CF0.c` with backward-compatible aliases `func_80077D50` and `func_80078104`.
+  - Added shiftable telemetry counters `gMemoryAllocBlockACount` and `gMemoryAllocBlockBCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+  - Added unit test `test_memory_allocate_blocks` in `tests/test_math_utils.c` (all 58 unit tests passing).
+  - Bumped version to `0.1.80` across all documentation.
+
+## Previous Activity (Version 0.1.79)
 - **Memory Management Subsystem Decompilation**:
   - Implemented `Memory_InitHeap` and `Memory_Free` in `src/game_11CF0.c` with backward-compatible aliases `func_80077CF0` and `myfree`.
   - Added shiftable telemetry counters `gMemoryHeapInitCount` and `gMemoryFreeCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.

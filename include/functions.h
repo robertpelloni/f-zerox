@@ -76,6 +76,10 @@ void Memory_InitHeap(void);
 void func_80077CF0(void);
 void Memory_Free(void* ptr);
 void myfree(void);
+void Memory_AllocateBlockA(void);
+void func_80077D50(void);
+void Memory_AllocateBlockB(void);
+void func_80078104(void);
 void func_80079080(void); // InitLoop
 
 /* src/game_1AE0.c - State */

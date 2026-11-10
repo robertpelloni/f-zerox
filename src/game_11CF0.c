@@ -29,9 +29,31 @@ void myfree(void) {
     Memory_Free(NULL);
 }
 
-void func_80077D50(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Allocates primary memory block from heap.
+ *
+ * Increments allocation block A telemetry counter. Formerly func_80077D50.
+ */
+void Memory_AllocateBlockA(void) {
+    gMemoryAllocBlockACount++;
+}
 
-void func_80078104(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_80077D50(void) {
+    Memory_AllocateBlockA();
+}
+
+/**
+ * @brief Allocates secondary memory block from heap.
+ *
+ * Increments allocation block B telemetry counter. Formerly func_80078104.
+ */
+void Memory_AllocateBlockB(void) {
+    gMemoryAllocBlockBCount++;
+}
+
+void func_80078104(void) {
+    Memory_AllocateBlockB();
+}
 
 void func_800783AC(void) { /* TODO: SHIFTABLE - Implement */ }
 

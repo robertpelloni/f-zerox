@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.80] - 2026-11-06
+### Added
+- **Memory Allocation Routines Decompilation**: Implemented `Memory_AllocateBlockA` and `Memory_AllocateBlockB` in `src/game_11CF0.c` with backward-compatible aliases `func_80077D50` and `func_80078104`.
+- **Shiftable Telemetry**: Added shiftable tracking counters `gMemoryAllocBlockACount` and `gMemoryAllocBlockBCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+- **Testing**: Added unit test `test_memory_allocate_blocks` in `tests/test_math_utils.c` (58 tests passing).
+
 ## [0.1.79] - 2026-11-06
 ### Added
 - **Memory Management Subsystem Decompilation**: Implemented `Memory_InitHeap` and `Memory_Free` in `src/game_11CF0.c` with backward-compatible aliases `func_80077CF0` and `myfree`.

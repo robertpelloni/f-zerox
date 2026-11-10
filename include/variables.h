@@ -129,6 +129,8 @@ extern s32 gVectorProcessStateBCount;
 // Shiftable Memory Subsystem Telemetry Counters
 extern s32 gMemoryHeapInitCount;
 extern s32 gMemoryFreeCount;
+extern s32 gMemoryAllocBlockACount;
+extern s32 gMemoryAllocBlockBCount;
 // Shiftable Audio State Variables
 extern s8 gAudioStateParamA;
 extern s8 gAudioStateParamB;

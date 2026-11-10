@@ -312,6 +312,22 @@ static char * test_audio_state_dispatch_command() {
     return 0;
 }
 
+static char * test_memory_allocate_blocks() {
+    gMemoryAllocBlockACount = 0;
+    Memory_AllocateBlockA();
+    mu_assert("Memory_AllocateBlockA increment failed", gMemoryAllocBlockACount == 1);
+    func_80077D50();
+    mu_assert("func_80077D50 alias increment failed", gMemoryAllocBlockACount == 2);
+
+    gMemoryAllocBlockBCount = 0;
+    Memory_AllocateBlockB();
+    mu_assert("Memory_AllocateBlockB increment failed", gMemoryAllocBlockBCount == 1);
+    func_80078104();
+    mu_assert("func_80078104 alias increment failed", gMemoryAllocBlockBCount == 2);
+
+    return 0;
+}
+
 static char * test_vector_process_state_updates() {
     gVectorProcessStateACount = 0;
     Vector_ProcessStateA();
@@ -1018,6 +1034,7 @@ static char * all_tests() {
     mu_run_test(test_vehicle_active_index);
     mu_run_test(test_system_init_delay_loop);
     mu_run_test(test_memory_heap_init_and_free);
+    mu_run_test(test_memory_allocate_blocks);
     mu_run_test(test_system_set_state_flags);
     mu_run_test(test_dynamic_asset_loader);
     mu_run_test(test_dynamic_asset_loader_named_mapping);
