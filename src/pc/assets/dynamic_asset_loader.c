@@ -7,6 +7,7 @@
 // Represents a mapping between a hardcoded ROM address and a dynamically loaded asset
 typedef struct {
     uint32_t romAddress;
+    char name[64];
     void* loadedAsset;
 } AssetMapEntry;
 
@@ -14,12 +15,18 @@ typedef struct {
 static AssetMapEntry sAssetMap[MAX_ASSET_MAPPINGS];
 static int sAssetMapCount = 0;
 
-// Register an asset mapping
-void Asset_RegisterMapping(uint32_t address, void* asset) {
-    // If address is already mapped, update existing entry
+// Register a named asset mapping
+void Asset_RegisterNamedMapping(const char* name, uint32_t address, void* asset) {
     for (int i = 0; i < sAssetMapCount; i++) {
-        if (sAssetMap[i].romAddress == address) {
+        if (sAssetMap[i].romAddress == address || (name && name[0] && strcmp(sAssetMap[i].name, name) == 0)) {
+            sAssetMap[i].romAddress = address;
             sAssetMap[i].loadedAsset = asset;
+            if (name) {
+                strncpy(sAssetMap[i].name, name, sizeof(sAssetMap[i].name) - 1);
+                sAssetMap[i].name[sizeof(sAssetMap[i].name) - 1] = '\0';
+            } else {
+                sAssetMap[i].name[0] = '\0';
+            }
             return;
         }
     }
@@ -27,10 +34,55 @@ void Asset_RegisterMapping(uint32_t address, void* asset) {
     if (sAssetMapCount < MAX_ASSET_MAPPINGS) {
         sAssetMap[sAssetMapCount].romAddress = address;
         sAssetMap[sAssetMapCount].loadedAsset = asset;
+        if (name) {
+            strncpy(sAssetMap[sAssetMapCount].name, name, sizeof(sAssetMap[sAssetMapCount].name) - 1);
+            sAssetMap[sAssetMapCount].name[sizeof(sAssetMap[sAssetMapCount].name) - 1] = '\0';
+        } else {
+            sAssetMap[sAssetMapCount].name[0] = '\0';
+        }
         sAssetMapCount++;
     } else {
         printf("Asset Loader: Mapping table full!\n");
     }
+}
+
+// Register an asset mapping by address
+void Asset_RegisterMapping(uint32_t address, void* asset) {
+    Asset_RegisterNamedMapping("", address, asset);
+}
+
+// Retrieve an asset by its registered string name
+void* Asset_GetByName(const char* name) {
+    if (!name || !name[0]) {
+        return NULL;
+    }
+    for (int i = 0; i < sAssetMapCount; i++) {
+        if (strcmp(sAssetMap[i].name, name) == 0) {
+            return sAssetMap[i].loadedAsset;
+        }
+    }
+    return NULL;
+}
+
+// Retrieve an address by its registered string name
+uint32_t Asset_GetAddressByName(const char* name) {
+    if (!name || !name[0]) {
+        return 0;
+    }
+    for (int i = 0; i < sAssetMapCount; i++) {
+        if (strcmp(sAssetMap[i].name, name) == 0) {
+            return sAssetMap[i].romAddress;
+        }
+    }
+    return 0;
+}
+
+// Retrieve registered name of asset by index
+const char* Asset_GetNameByIndex(int index) {
+    if (index >= 0 && index < sAssetMapCount) {
+        return sAssetMap[index].name;
+    }
+    return "";
 }
 
 // Unregister an asset mapping by address and compact table
@@ -42,6 +94,7 @@ bool Asset_UnregisterMapping(uint32_t address) {
             }
             sAssetMapCount--;
             sAssetMap[sAssetMapCount].romAddress = 0;
+            sAssetMap[sAssetMapCount].name[0] = '\0';
             sAssetMap[sAssetMapCount].loadedAsset = NULL;
             return true;
         }

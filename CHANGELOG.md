@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.77] - 2026-11-06
+### Added
+- **Dynamic Asset Loader Named Mappings**: Implemented `Asset_RegisterNamedMapping`, `Asset_GetByName`, `Asset_GetAddressByName`, and `Asset_GetNameByIndex` in `src/pc/assets/dynamic_asset_loader.c` and declared in `include/pc/assets/dynamic_asset_loader.h`.
+- **Asset Integration**: Registered `"blue_falcon_model"` and `"asphalt_texture"` with named mappings in `Assets_Init` (`src/pc/assets.c`).
+- **Testing**: Added unit test `test_dynamic_asset_loader_named_mapping` in `tests/test_math_utils.c` (55 tests passing).
+
 ## [0.1.76] - 2026-11-06
 ### Added
 - **Vector Cache Routine Decompilation**: Implemented `Vector_UpdateCacheA` and `Vector_UpdateCacheB` in `src/math_utils.c` with backward-compatible aliases `func_8006B010` and `func_8006B07C`.

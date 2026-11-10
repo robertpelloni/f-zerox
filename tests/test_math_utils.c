@@ -60,13 +60,17 @@ void System_RunInitDelayLoop(void);
 void System_SetStateFlags(s32 paramA, s32 paramB);
 
 // Declarations of dynamic asset loader functions
+void Asset_RegisterNamedMapping(const char* name, uint32_t address, void* asset);
 void Asset_RegisterMapping(uint32_t address, void* asset);
 bool Asset_UnregisterMapping(uint32_t address);
 bool Asset_HasAddress(uint32_t address);
 void* Asset_GetByAddress(uint32_t address);
+void* Asset_GetByName(const char* name);
+uint32_t Asset_GetAddressByName(const char* name);
 int Asset_GetMappingCount(void);
 uint32_t Asset_GetAddressByIndex(int index);
 void* Asset_GetAssetByIndex(int index);
+const char* Asset_GetNameByIndex(int index);
 void Asset_ClearMappings(void);
 
 // Declarations of low memory functions from game_4FFB0.c
@@ -117,6 +121,32 @@ static char * test_system_init_and_time() {
     System_SetTime(1234, 5678);
     mu_assert("System_SetTime t1 failed", gTimeState.timeValue1 == 1234);
     mu_assert("System_SetTime t2 failed", gTimeState.timeValue2 == 5678);
+
+    Asset_ClearMappings();
+    return 0;
+}
+
+static char * test_dynamic_asset_loader_named_mapping() {
+    Asset_ClearMappings();
+
+    int modelAsset = 555;
+    int textureAsset = 888;
+
+    Asset_RegisterNamedMapping("blue_falcon", 0x80800000, &modelAsset);
+    Asset_RegisterNamedMapping("track_asphalt", 0x80800100, &textureAsset);
+
+    mu_assert("Asset_GetByName found model", Asset_GetByName("blue_falcon") == &modelAsset);
+    mu_assert("Asset_GetByName found texture", Asset_GetByName("track_asphalt") == &textureAsset);
+    mu_assert("Asset_GetByName missing returns NULL", Asset_GetByName("non_existent") == NULL);
+    mu_assert("Asset_GetByName empty returns NULL", Asset_GetByName("") == NULL);
+
+    mu_assert("Asset_GetAddressByName model address match", Asset_GetAddressByName("blue_falcon") == 0x80800000);
+    mu_assert("Asset_GetAddressByName texture address match", Asset_GetAddressByName("track_asphalt") == 0x80800100);
+    mu_assert("Asset_GetAddressByName missing returns 0", Asset_GetAddressByName("non_existent") == 0);
+
+    mu_assert("Asset_GetNameByIndex 0 match", strcmp(Asset_GetNameByIndex(0), "blue_falcon") == 0);
+    mu_assert("Asset_GetNameByIndex 1 match", strcmp(Asset_GetNameByIndex(1), "track_asphalt") == 0);
+    mu_assert("Asset_GetNameByIndex out of bounds returns empty", strcmp(Asset_GetNameByIndex(99), "") == 0);
 
     Asset_ClearMappings();
     return 0;
@@ -956,6 +986,7 @@ static char * all_tests() {
     mu_run_test(test_system_init_delay_loop);
     mu_run_test(test_system_set_state_flags);
     mu_run_test(test_dynamic_asset_loader);
+    mu_run_test(test_dynamic_asset_loader_named_mapping);
     mu_run_test(test_low_mem_state);
     mu_run_test(test_track_lookup_direct);
     mu_run_test(test_debug_text_framebuffer);

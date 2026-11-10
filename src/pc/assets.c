@@ -64,13 +64,13 @@ void Assets_Init(void) {
     if (gBlueFalconModel) {
         printf("Assets: Using modded machine model.\n");
         // We use a made-up ROM address 0x80800000 for testing dynamic asset loader relocation
-        Asset_RegisterMapping(0x80800000, gBlueFalconModel);
+        Asset_RegisterNamedMapping("blue_falcon_model", 0x80800000, gBlueFalconModel);
     } else {
         printf("Assets: Using internal machine model.\n");
     }
 
     // Verify dynamic texture relocation
     if (texID != 0) {
-        Asset_RegisterMapping(0x80800100, (void*)(uintptr_t)texID);
+        Asset_RegisterNamedMapping("asphalt_texture", 0x80800100, (void*)(uintptr_t)texID);
     }
 }
