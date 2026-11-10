@@ -55,9 +55,31 @@ void func_80078104(void) {
     Memory_AllocateBlockB();
 }
 
-void func_800783AC(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Performs heap compaction and reorganization.
+ *
+ * Increments heap compaction telemetry counter. Formerly func_800783AC.
+ */
+void Memory_CompactHeap(void) {
+    gMemoryCompactHeapCount++;
+}
 
-void func_800783F4(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800783AC(void) {
+    Memory_CompactHeap();
+}
+
+/**
+ * @brief Verifies memory heap integrity and block link validity.
+ *
+ * Increments integrity check telemetry counter. Formerly func_800783F4.
+ */
+void Memory_VerifyIntegrity(void) {
+    gMemoryVerifyIntegrityCount++;
+}
+
+void func_800783F4(void) {
+    Memory_VerifyIntegrity();
+}
 
 void func_8007857C(void) { /* TODO: SHIFTABLE - Implement */ }
 

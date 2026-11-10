@@ -80,6 +80,10 @@ void Memory_AllocateBlockA(void);
 void func_80077D50(void);
 void Memory_AllocateBlockB(void);
 void func_80078104(void);
+void Memory_CompactHeap(void);
+void func_800783AC(void);
+void Memory_VerifyIntegrity(void);
+void func_800783F4(void);
 void func_80079080(void); // InitLoop
 
 /* src/game_1AE0.c - State */

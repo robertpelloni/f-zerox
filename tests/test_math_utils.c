@@ -312,6 +312,22 @@ static char * test_audio_state_dispatch_command() {
     return 0;
 }
 
+static char * test_memory_compact_and_verify() {
+    gMemoryCompactHeapCount = 0;
+    Memory_CompactHeap();
+    mu_assert("Memory_CompactHeap increment failed", gMemoryCompactHeapCount == 1);
+    func_800783AC();
+    mu_assert("func_800783AC alias increment failed", gMemoryCompactHeapCount == 2);
+
+    gMemoryVerifyIntegrityCount = 0;
+    Memory_VerifyIntegrity();
+    mu_assert("Memory_VerifyIntegrity increment failed", gMemoryVerifyIntegrityCount == 1);
+    func_800783F4();
+    mu_assert("func_800783F4 alias increment failed", gMemoryVerifyIntegrityCount == 2);
+
+    return 0;
+}
+
 static char * test_memory_allocate_blocks() {
     gMemoryAllocBlockACount = 0;
     Memory_AllocateBlockA();
@@ -1035,6 +1051,7 @@ static char * all_tests() {
     mu_run_test(test_system_init_delay_loop);
     mu_run_test(test_memory_heap_init_and_free);
     mu_run_test(test_memory_allocate_blocks);
+    mu_run_test(test_memory_compact_and_verify);
     mu_run_test(test_system_set_state_flags);
     mu_run_test(test_dynamic_asset_loader);
     mu_run_test(test_dynamic_asset_loader_named_mapping);
