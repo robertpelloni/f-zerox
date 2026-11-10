@@ -123,6 +123,8 @@ extern s32 gSystemAssetsMapped;
 // Shiftable Vector Cache Update Counters
 extern s32 gVectorCacheACount;
 extern s32 gVectorCacheBCount;
+extern s32 gVectorProcessStateACount;
+extern s32 gVectorProcessStateBCount;
 // Shiftable Audio State Variables
 extern s8 gAudioStateParamA;
 extern s8 gAudioStateParamB;

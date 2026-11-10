@@ -312,6 +312,22 @@ static char * test_audio_state_dispatch_command() {
     return 0;
 }
 
+static char * test_vector_process_state_updates() {
+    gVectorProcessStateACount = 0;
+    Vector_ProcessStateA();
+    mu_assert("Vector_ProcessStateA increment failed", gVectorProcessStateACount == 1);
+    func_8006B18C();
+    mu_assert("func_8006B18C alias increment failed", gVectorProcessStateACount == 2);
+
+    gVectorProcessStateBCount = 0;
+    Vector_ProcessStateB();
+    mu_assert("Vector_ProcessStateB increment failed", gVectorProcessStateBCount == 1);
+    func_8006B33C();
+    mu_assert("func_8006B33C alias increment failed", gVectorProcessStateBCount == 2);
+
+    return 0;
+}
+
 static char * test_vector_cache_updates() {
     gVectorCacheACount = 0;
     Vector_UpdateCacheA();
@@ -1019,6 +1035,7 @@ static char * all_tests() {
     mu_run_test(test_math_trig_and_vector_tables_init);
     mu_run_test(test_vector_setters);
     mu_run_test(test_vector_cache_updates);
+    mu_run_test(test_vector_process_state_updates);
     mu_run_test(test_cartridge_registers);
     mu_run_test(test_track_init_context_and_reset);
     return 0;

@@ -19,6 +19,10 @@ void Vector_UpdateCacheA(void);
 void func_8006B010(void);
 void Vector_UpdateCacheB(void);
 void func_8006B07C(void);
+void Vector_ProcessStateA(void);
+void func_8006B18C(void);
+void Vector_ProcessStateB(void);
+void func_8006B33C(void);
 
 /* src/linked_list.c (game_446D0.c) - Linked List */
 void func_800AAF9C(struct UnkStruct_1* arg0); // List_InitNode

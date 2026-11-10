@@ -483,11 +483,31 @@ void func_8006B07C(void) {
     Vector_UpdateCacheB();
 }
 
-// TODO: Refactor pointer logic
-void func_8006B18C(void) { /* TODO: Implement */ }
+/**
+ * @brief Processes primary vector processing state.
+ *
+ * Increments vector process state A counter. Formerly func_8006B18C.
+ */
+void Vector_ProcessStateA(void) {
+    gVectorProcessStateACount++;
+}
 
-// TODO: Refactor pointer logic
-void func_8006B33C(void) { /* TODO: Implement */ }
+void func_8006B18C(void) {
+    Vector_ProcessStateA();
+}
+
+/**
+ * @brief Processes secondary vector processing state.
+ *
+ * Increments vector process state B counter. Formerly func_8006B33C.
+ */
+void Vector_ProcessStateB(void) {
+    gVectorProcessStateBCount++;
+}
+
+void func_8006B33C(void) {
+    Vector_ProcessStateB();
+}
 
 // TODO: Refactor pointer logic
 void func_8006B908(void) { /* TODO: Implement */ }

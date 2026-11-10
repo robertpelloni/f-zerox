@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.78] - 2026-11-06
+### Added
+- **Vector Processing State Decompilation**: Implemented `Vector_ProcessStateA` and `Vector_ProcessStateB` in `src/math_utils.c` with backward-compatible aliases `func_8006B18C` and `func_8006B33C`.
+- **Shiftable Telemetry**: Added shiftable tracking counters `gVectorProcessStateACount` and `gVectorProcessStateBCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+- **Testing**: Added unit test `test_vector_process_state_updates` in `tests/test_math_utils.c` (56 tests passing).
+
 ## [0.1.77] - 2026-11-06
 ### Added
 - **Dynamic Asset Loader Named Mappings**: Implemented `Asset_RegisterNamedMapping`, `Asset_GetByName`, `Asset_GetAddressByName`, and `Asset_GetNameByIndex` in `src/pc/assets/dynamic_asset_loader.c` and declared in `include/pc/assets/dynamic_asset_loader.h`.

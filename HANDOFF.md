@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.77)
+## Recent Activity (Version 0.1.78)
+- **Vector Processing State Decompilation**:
+  - Implemented `Vector_ProcessStateA` and `Vector_ProcessStateB` in `src/math_utils.c` with backward-compatible aliases `func_8006B18C` and `func_8006B33C`.
+  - Added shiftable telemetry counters `gVectorProcessStateACount` and `gVectorProcessStateBCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+  - Added unit test `test_vector_process_state_updates` in `tests/test_math_utils.c` (all 56 unit tests passing).
+  - Bumped version to `0.1.78` across all documentation.
+
+## Previous Activity (Version 0.1.77)
 - **Dynamic Asset Loader Named Mappings**:
   - Implemented `Asset_RegisterNamedMapping`, `Asset_GetByName`, `Asset_GetAddressByName`, and `Asset_GetNameByIndex` in `src/pc/assets/dynamic_asset_loader.c` and declared in `include/pc/assets/dynamic_asset_loader.h`.
   - Registered `"blue_falcon_model"` and `"asphalt_texture"` with named mappings in `Assets_Init` (`src/pc/assets.c`).
