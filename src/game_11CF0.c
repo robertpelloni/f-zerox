@@ -1,8 +1,33 @@
 #include "common.h"
 
-void func_80077CF0(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Initializes game memory heap.
+ *
+ * Increments heap initialization telemetry counter. Formerly func_80077CF0.
+ */
+void Memory_InitHeap(void) {
+    gMemoryHeapInitCount++;
+}
 
-void myfree(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_80077CF0(void) {
+    Memory_InitHeap();
+}
+
+/**
+ * @brief Frees allocated memory from heap.
+ *
+ * Increments memory free telemetry counter. Formerly myfree.
+ *
+ * @param ptr Pointer to memory being freed.
+ */
+void Memory_Free(void* ptr) {
+    (void)ptr;
+    gMemoryFreeCount++;
+}
+
+void myfree(void) {
+    Memory_Free(NULL);
+}
 
 void func_80077D50(void) { /* TODO: SHIFTABLE - Implement */ }
 

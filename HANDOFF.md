@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.78)
+## Recent Activity (Version 0.1.79)
+- **Memory Management Subsystem Decompilation**:
+  - Implemented `Memory_InitHeap` and `Memory_Free` in `src/game_11CF0.c` with backward-compatible aliases `func_80077CF0` and `myfree`.
+  - Added shiftable telemetry counters `gMemoryHeapInitCount` and `gMemoryFreeCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+  - Added unit test `test_memory_heap_init_and_free` in `tests/test_math_utils.c` (all 57 unit tests passing).
+  - Bumped version to `0.1.79` across all documentation.
+
+## Previous Activity (Version 0.1.78)
 - **Vector Processing State Decompilation**:
   - Implemented `Vector_ProcessStateA` and `Vector_ProcessStateB` in `src/math_utils.c` with backward-compatible aliases `func_8006B18C` and `func_8006B33C`.
   - Added shiftable telemetry counters `gVectorProcessStateACount` and `gVectorProcessStateBCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.

@@ -435,6 +435,23 @@ static char * test_system_init_delay_loop() {
     return 0;
 }
 
+static char * test_memory_heap_init_and_free() {
+    gMemoryHeapInitCount = 0;
+    Memory_InitHeap();
+    mu_assert("Memory_InitHeap increment failed", gMemoryHeapInitCount == 1);
+    func_80077CF0();
+    mu_assert("func_80077CF0 alias increment failed", gMemoryHeapInitCount == 2);
+
+    gMemoryFreeCount = 0;
+    int dummy = 123;
+    Memory_Free(&dummy);
+    mu_assert("Memory_Free increment failed", gMemoryFreeCount == 1);
+    myfree();
+    mu_assert("myfree alias increment failed", gMemoryFreeCount == 2);
+
+    return 0;
+}
+
 static char * test_system_set_state_flags() {
     gSystemStateFlag = 0;
     gSystemStateParamA = 0;
@@ -1000,6 +1017,7 @@ static char * all_tests() {
     mu_run_test(test_net_is_machine_active);
     mu_run_test(test_vehicle_active_index);
     mu_run_test(test_system_init_delay_loop);
+    mu_run_test(test_memory_heap_init_and_free);
     mu_run_test(test_system_set_state_flags);
     mu_run_test(test_dynamic_asset_loader);
     mu_run_test(test_dynamic_asset_loader_named_mapping);

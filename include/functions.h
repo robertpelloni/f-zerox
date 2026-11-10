@@ -71,7 +71,11 @@ void func_800BB45C(void);
 s32 AudioState_GetStatus(void);
 s32 func_800B5FB0(void);
 
-/* src/game_11CF0.c - Init */
+/* src/game_11CF0.c - Init & Memory */
+void Memory_InitHeap(void);
+void func_80077CF0(void);
+void Memory_Free(void* ptr);
+void myfree(void);
 void func_80079080(void); // InitLoop
 
 /* src/game_1AE0.c - State */

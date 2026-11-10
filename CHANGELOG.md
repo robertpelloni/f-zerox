@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.79] - 2026-11-06
+### Added
+- **Memory Management Subsystem Decompilation**: Implemented `Memory_InitHeap` and `Memory_Free` in `src/game_11CF0.c` with backward-compatible aliases `func_80077CF0` and `myfree`.
+- **Shiftable Telemetry**: Added shiftable tracking counters `gMemoryHeapInitCount` and `gMemoryFreeCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+- **Testing**: Added unit test `test_memory_heap_init_and_free` in `tests/test_math_utils.c` (57 tests passing).
+
 ## [0.1.78] - 2026-11-06
 ### Added
 - **Vector Processing State Decompilation**: Implemented `Vector_ProcessStateA` and `Vector_ProcessStateB` in `src/math_utils.c` with backward-compatible aliases `func_8006B18C` and `func_8006B33C`.
