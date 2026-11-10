@@ -457,11 +457,31 @@ void func_8006B000(struct UnkStruct_8* arg0, s32 arg1, s32 arg2, s32 arg3) {
     Vector_SetTriple(arg0, arg1, arg2, arg3);
 }
 
-// TODO: Refactor pointer logic
-void func_8006B010(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates primary vector cache state.
+ *
+ * Increments vector cache A update counter. Formerly func_8006B010.
+ */
+void Vector_UpdateCacheA(void) {
+    gVectorCacheACount++;
+}
 
-// TODO: Refactor pointer logic
-void func_8006B07C(void) { /* TODO: Implement */ }
+void func_8006B010(void) {
+    Vector_UpdateCacheA();
+}
+
+/**
+ * @brief Updates secondary vector cache state.
+ *
+ * Increments vector cache B update counter. Formerly func_8006B07C.
+ */
+void Vector_UpdateCacheB(void) {
+    gVectorCacheBCount++;
+}
+
+void func_8006B07C(void) {
+    Vector_UpdateCacheB();
+}
 
 // TODO: Refactor pointer logic
 void func_8006B18C(void) { /* TODO: Implement */ }

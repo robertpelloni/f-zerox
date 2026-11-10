@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.76] - 2026-11-06
+### Added
+- **Vector Cache Routine Decompilation**: Implemented `Vector_UpdateCacheA` and `Vector_UpdateCacheB` in `src/math_utils.c` with backward-compatible aliases `func_8006B010` and `func_8006B07C`.
+- **Shiftable Telemetry**: Added shiftable tracking counters `gVectorCacheACount` and `gVectorCacheBCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+- **Testing**: Added unit test `test_vector_cache_updates` in `tests/test_math_utils.c` (54 tests passing).
+
 ## [0.1.75] - 2026-11-06
 ### Added
 - **System Initialization Canonicalization**: Refactored `System_Init` in `src/math_utils.c` to directly call PascalCase subsystem routines (`Audio_ColdBootInit`, `Audio_AuxInit`, `Audio_WarmBootInit`, `Audio_Shutdown`, `Machine_SystemInit`, `Gfx_SystemInit`, `System_InitMemoryState`, `Input_SystemInit`, `Timing_SystemInit`).

@@ -119,6 +119,10 @@ extern s32 gTrackResetCount;
 
 // Shiftable Dynamic Assets Mapped Flag
 extern s32 gSystemAssetsMapped;
+
+// Shiftable Vector Cache Update Counters
+extern s32 gVectorCacheACount;
+extern s32 gVectorCacheBCount;
 // Shiftable Audio State Variables
 extern s8 gAudioStateParamA;
 extern s8 gAudioStateParamB;

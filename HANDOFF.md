@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.75)
+## Recent Activity (Version 0.1.76)
+- **Vector Cache Routine Decompilation**:
+  - Implemented `Vector_UpdateCacheA` and `Vector_UpdateCacheB` in `src/math_utils.c` with backward-compatible aliases `func_8006B010` and `func_8006B07C`.
+  - Added shiftable telemetry counters `gVectorCacheACount` and `gVectorCacheBCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+  - Added unit test `test_vector_cache_updates` in `tests/test_math_utils.c` (all 54 unit tests passing).
+  - Bumped version to `0.1.76` across all documentation.
+
+## Previous Activity (Version 0.1.75)
 - **System Initialization Canonicalization & Asset Validation**:
   - Refactored `System_Init` in `src/math_utils.c` to directly call PascalCase subsystem routines (`Audio_ColdBootInit`, `Audio_AuxInit`, `Audio_WarmBootInit`, `Audio_Shutdown`, `Machine_SystemInit`, `Gfx_SystemInit`, `System_InitMemoryState`, `Input_SystemInit`, `Timing_SystemInit`).
   - Added shiftable global `gSystemAssetsMapped` in `src/pc/ultra_impl.c` and declared in `include/variables.h`.

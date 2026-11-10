@@ -282,6 +282,22 @@ static char * test_audio_state_dispatch_command() {
     return 0;
 }
 
+static char * test_vector_cache_updates() {
+    gVectorCacheACount = 0;
+    Vector_UpdateCacheA();
+    mu_assert("Vector_UpdateCacheA increment failed", gVectorCacheACount == 1);
+    func_8006B010();
+    mu_assert("func_8006B010 alias increment failed", gVectorCacheACount == 2);
+
+    gVectorCacheBCount = 0;
+    Vector_UpdateCacheB();
+    mu_assert("Vector_UpdateCacheB increment failed", gVectorCacheBCount == 1);
+    func_8006B07C();
+    mu_assert("func_8006B07C alias increment failed", gVectorCacheBCount == 2);
+
+    return 0;
+}
+
 static char * test_linked_list_init() {
     struct UnkStruct_1 node;
     node.next = NULL;
@@ -971,6 +987,7 @@ static char * all_tests() {
     mu_run_test(test_dynamic_asset_loader_index_access);
     mu_run_test(test_math_trig_and_vector_tables_init);
     mu_run_test(test_vector_setters);
+    mu_run_test(test_vector_cache_updates);
     mu_run_test(test_cartridge_registers);
     mu_run_test(test_track_init_context_and_reset);
     return 0;
