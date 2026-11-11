@@ -81,9 +81,31 @@ void func_800783F4(void) {
     Memory_VerifyIntegrity();
 }
 
-void func_8007857C(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Initializes primary memory pool structure.
+ *
+ * Increments pool A initialization telemetry counter. Formerly func_8007857C.
+ */
+void Memory_InitPoolA(void) {
+    gMemoryPoolAInitCount++;
+}
 
-void func_8007870C(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_8007857C(void) {
+    Memory_InitPoolA();
+}
+
+/**
+ * @brief Initializes secondary memory pool structure.
+ *
+ * Increments pool B initialization telemetry counter. Formerly func_8007870C.
+ */
+void Memory_InitPoolB(void) {
+    gMemoryPoolBInitCount++;
+}
+
+void func_8007870C(void) {
+    Memory_InitPoolB();
+}
 
 void func_800788A4(void) { /* TODO: SHIFTABLE - Implement */ }
 

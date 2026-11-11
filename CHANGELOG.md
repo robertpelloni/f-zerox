@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.82] - 2026-11-06
+### Added
+- **Memory Pool Initialization Decompilation**: Implemented `Memory_InitPoolA` and `Memory_InitPoolB` in `src/game_11CF0.c` with backward-compatible aliases `func_8007857C` and `func_8007870C`.
+- **Shiftable Telemetry**: Added shiftable tracking counters `gMemoryPoolAInitCount` and `gMemoryPoolBInitCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+- **Testing**: Added unit test `test_memory_pool_initialization` in `tests/test_math_utils.c` (60 tests passing).
+
 ## [0.1.81] - 2026-11-06
 ### Added
 - **Memory Compaction & Verification Decompilation**: Implemented `Memory_CompactHeap` and `Memory_VerifyIntegrity` in `src/game_11CF0.c` with backward-compatible aliases `func_800783AC` and `func_800783F4`.

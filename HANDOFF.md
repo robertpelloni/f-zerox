@@ -1,6 +1,13 @@
 # Session Handoff & Memory Log
 
-## Recent Activity (Version 0.1.81)
+## Recent Activity (Version 0.1.82)
+- **Memory Pool Initialization Decompilation**:
+  - Implemented `Memory_InitPoolA` and `Memory_InitPoolB` in `src/game_11CF0.c` with backward-compatible aliases `func_8007857C` and `func_8007870C`.
+  - Added shiftable telemetry counters `gMemoryPoolAInitCount` and `gMemoryPoolBInitCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.
+  - Added unit test `test_memory_pool_initialization` in `tests/test_math_utils.c` (all 60 unit tests passing).
+  - Bumped version to `0.1.82` across all documentation.
+
+## Previous Activity (Version 0.1.81)
 - **Memory Compaction & Verification Decompilation**:
   - Implemented `Memory_CompactHeap` and `Memory_VerifyIntegrity` in `src/game_11CF0.c` with backward-compatible aliases `func_800783AC` and `func_800783F4`.
   - Added shiftable telemetry counters `gMemoryCompactHeapCount` and `gMemoryVerifyIntegrityCount` in `src/pc/ultra_impl.c` and declared in `include/variables.h` and `include/functions.h`.

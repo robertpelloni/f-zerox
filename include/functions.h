@@ -84,6 +84,10 @@ void Memory_CompactHeap(void);
 void func_800783AC(void);
 void Memory_VerifyIntegrity(void);
 void func_800783F4(void);
+void Memory_InitPoolA(void);
+void func_8007857C(void);
+void Memory_InitPoolB(void);
+void func_8007870C(void);
 void func_80079080(void); // InitLoop
 
 /* src/game_1AE0.c - State */

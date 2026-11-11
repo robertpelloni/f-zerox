@@ -133,6 +133,8 @@ extern s32 gMemoryAllocBlockACount;
 extern s32 gMemoryAllocBlockBCount;
 extern s32 gMemoryCompactHeapCount;
 extern s32 gMemoryVerifyIntegrityCount;
+extern s32 gMemoryPoolAInitCount;
+extern s32 gMemoryPoolBInitCount;
 // Shiftable Audio State Variables
 extern s8 gAudioStateParamA;
 extern s8 gAudioStateParamB;
