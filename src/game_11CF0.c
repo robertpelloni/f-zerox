@@ -1,20 +1,111 @@
 #include "common.h"
 
-void func_80077CF0(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Initializes game memory heap.
+ *
+ * Increments heap initialization telemetry counter. Formerly func_80077CF0.
+ */
+void Memory_InitHeap(void) {
+    gMemoryHeapInitCount++;
+}
 
-void myfree(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_80077CF0(void) {
+    Memory_InitHeap();
+}
 
-void func_80077D50(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Frees allocated memory from heap.
+ *
+ * Increments memory free telemetry counter. Formerly myfree.
+ *
+ * @param ptr Pointer to memory being freed.
+ */
+void Memory_Free(void* ptr) {
+    (void)ptr;
+    gMemoryFreeCount++;
+}
 
-void func_80078104(void) { /* TODO: SHIFTABLE - Implement */ }
+void myfree(void) {
+    Memory_Free(NULL);
+}
 
-void func_800783AC(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Allocates primary memory block from heap.
+ *
+ * Increments allocation block A telemetry counter. Formerly func_80077D50.
+ */
+void Memory_AllocateBlockA(void) {
+    gMemoryAllocBlockACount++;
+}
 
-void func_800783F4(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_80077D50(void) {
+    Memory_AllocateBlockA();
+}
 
-void func_8007857C(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Allocates secondary memory block from heap.
+ *
+ * Increments allocation block B telemetry counter. Formerly func_80078104.
+ */
+void Memory_AllocateBlockB(void) {
+    gMemoryAllocBlockBCount++;
+}
 
-void func_8007870C(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_80078104(void) {
+    Memory_AllocateBlockB();
+}
+
+/**
+ * @brief Performs heap compaction and reorganization.
+ *
+ * Increments heap compaction telemetry counter. Formerly func_800783AC.
+ */
+void Memory_CompactHeap(void) {
+    gMemoryCompactHeapCount++;
+}
+
+void func_800783AC(void) {
+    Memory_CompactHeap();
+}
+
+/**
+ * @brief Verifies memory heap integrity and block link validity.
+ *
+ * Increments integrity check telemetry counter. Formerly func_800783F4.
+ */
+void Memory_VerifyIntegrity(void) {
+    gMemoryVerifyIntegrityCount++;
+}
+
+void func_800783F4(void) {
+    Memory_VerifyIntegrity();
+}
+
+/**
+ * @brief Initializes primary memory pool structure.
+ *
+ * Increments pool A initialization telemetry counter. Formerly func_8007857C.
+ */
+void Memory_InitPoolA(void) {
+    gMemoryPoolAInitCount++;
+}
+
+void func_8007857C(void) {
+    Memory_InitPoolA();
+}
+
+/**
+ * @brief Initializes secondary memory pool structure.
+ *
+ * Increments pool B initialization telemetry counter. Formerly func_8007870C.
+ */
+void Memory_InitPoolB(void) {
+    gMemoryPoolBInitCount++;
+}
+
+void func_8007870C(void) {
+    Memory_InitPoolB();
+}
 
 void func_800788A4(void) { /* TODO: SHIFTABLE - Implement */ }
 

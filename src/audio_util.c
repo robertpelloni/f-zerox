@@ -28,7 +28,18 @@ void func_8007B14C(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8007CDB0(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_8007D9D0(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Initializes the timing subsystem.
+ *
+ * Marks timing system state as initialized. Formerly func_8007D9D0.
+ */
+void Timing_SystemInit(void) {
+    gTimingSystemInitialized = 1;
+}
+
+void func_8007D9D0(void) {
+    Timing_SystemInit();
+}
 
 void func_8007DABC(void) { /* TODO: SHIFTABLE - Implement */ }
 
@@ -74,7 +85,8 @@ void func_8007E0EC(void) {
  * @return s8 The byte value at gSoundEffectBankMap + idx.
  */
 s8 Audio_GetSoundEffectByte(s32 idx) {
-    return *(&gSoundEffectBankMap + idx);
+    if (idx < 0 || idx >= 256) return 0;
+    return gSoundEffectBankMap[idx];
 }
 
 s8 func_8007E10C(s32 arg0) {

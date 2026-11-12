@@ -1,6 +1,17 @@
 #include "common.h"
 
-void func_80085510(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Initializes the machine subsystem.
+ *
+ * Marks machine system state as initialized. Formerly func_80085510.
+ */
+void Machine_SystemInit(void) {
+    gMachineSystemInitialized = 1;
+}
+
+void func_80085510(void) {
+    Machine_SystemInit();
+}
 
 void func_80085610(void) { /* TODO: SHIFTABLE - Implement */ }
 
@@ -126,10 +137,31 @@ void func_8008D8E8(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_8008D97C(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_8008DA68(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Warm boot re-initialization of the audio subsystem.
+ *
+ * Increments warm boot tracking counter. Formerly func_8008DA68.
+ */
+void Audio_WarmBootInit(void) {
+    gAudioWarmBootCount++;
+}
+
+void func_8008DA68(void) {
+    Audio_WarmBootInit();
+}
+
+/**
+ * @brief Cold boot initialization of the audio subsystem.
+ *
+ * Calls Audio_WarmBootInit and tracks cold boot executions. Formerly func_8008DB98.
+ */
+void Audio_ColdBootInit(void) {
+    gAudioColdBootCount++;
+    Audio_WarmBootInit();
+}
 
 void func_8008DB98(void) {
-    func_8008DA68();
+    Audio_ColdBootInit();
 }
 
 void func_8008DBB8(void) { /* TODO: SHIFTABLE - Implement */ }

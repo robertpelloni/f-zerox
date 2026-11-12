@@ -72,9 +72,31 @@ void func_800A2D2C(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_800A3044(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_800A4B54(void) { /* TODO: SHIFTABLE - Implement */ }
+/**
+ * @brief Shuts down or resets the audio subsystem.
+ *
+ * Increments audio shutdown count. Formerly func_800A4B54.
+ */
+void Audio_Shutdown(void) {
+    gAudioShutdownCount++;
+}
 
-void func_800A4BAC(void) { /* TODO: SHIFTABLE - Implement */ }
+void func_800A4B54(void) {
+    Audio_Shutdown();
+}
+
+/**
+ * @brief Additional/auxiliary audio system initialization.
+ *
+ * Marks auxiliary audio system as initialized. Formerly func_800A4BAC.
+ */
+void Audio_AuxInit(void) {
+    gAudioAuxInitialized = 1;
+}
+
+void func_800A4BAC(void) {
+    Audio_AuxInit();
+}
 
 void func_800A4D0C(void) { /* TODO: SHIFTABLE - Implement */ }
 

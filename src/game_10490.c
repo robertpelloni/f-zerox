@@ -15,16 +15,39 @@ void func_800766F0(void) { /* TODO: SHIFTABLE - Implement */ }
 
 void func_80076804(void) { /* TODO: SHIFTABLE - Implement */ }
 
-void func_80076848(void) { /* TODO: SHIFTABLE - Implement */ }
-
 void func_80076884(void) { /* TODO: SHIFTABLE - Implement */ }
 
-s32 func_800768B0(s32 arg0, s32 arg1) {
-    s32 ret = D_800E33C0[arg0];
-    return ret;
+/**
+ * @brief Retrieves an entry from the track lookup table with bounds safety.
+ *
+ * @param idx Index into gTrackLookupTable (0 to 21).
+ * @param unused Unused parameter.
+ * @return s32 The entry value, or 0 if out of bounds.
+ */
+s32 TrackLookup_GetEntryDirect(s32 idx, s32 unused) {
+    (void)unused;
+    if (idx >= 0 && idx < 22) {
+        return gTrackLookupTable[idx];
+    }
+    return 0;
 }
 
-void func_800768C8(void) { /* TODO: SHIFTABLE - Implement */ }
+s32 func_800768B0(s32 arg0, s32 arg1) {
+    return TrackLookup_GetEntryDirect(arg0, arg1);
+}
+
+/**
+ * @brief Initializes the input subsystem.
+ *
+ * Marks input system state as initialized. Formerly func_80076848.
+ */
+void Input_SystemInit(void) {
+    gInputSystemInitialized = 1;
+}
+
+void func_80076848(void) {
+    Input_SystemInit();
+}
 
 void func_800768F4(void) { /* TODO: SHIFTABLE - Implement */ }
 

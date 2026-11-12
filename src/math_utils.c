@@ -33,28 +33,68 @@ void System_Init(void) {
 
     // Check if already initialized using magic number
     if (gSystemInitialized != 0x20DE1529) {
-        func_8008DB98(); // Audio system init (cold boot)
+        Audio_ColdBootInit(); // Audio system init (cold boot)
         gSystemInitialized = 0x20DE1529; // Set initialized flag
-        func_800A4BAC(); // Additional audio init
+        Audio_AuxInit(); // Additional audio init
     } else {
-        func_8008DA68(); // Audio system re-init (warm boot)
-        func_800A4B54(); // Audio shutdown/restart
+        Audio_WarmBootInit(); // Audio system re-init (warm boot)
+        Audio_Shutdown(); // Audio shutdown/restart
     }
 
-    func_80085510(); // Machine system init
-    func_800FC730(); // Graphics system init
-    func_8007F500(); // Memory system init
-    func_80076848(); // Input system init
-    func_8007D9D0(); // Timing system init
+    Machine_SystemInit(); // Machine system init
+    Gfx_SystemInit(); // Graphics system init
+    System_InitMemoryState(); // Memory system init
+    Input_SystemInit(); // Input system init
+    Timing_SystemInit(); // Timing system init
+
+    // Validate if dynamic asset loader mappings are populated
+    gSystemAssetsMapped = (Asset_GetMappingCount() > 0) ? 1 : 0;
 
     gSystemFullyInitialized = 1; // Mark system as fully initialized
 }
 
-void func_80068BC0(void) { /* TODO: Implement */ }
+void func_80068B20(void) {
+    System_Init();
+}
 
-void func_80068DCC(void) { /* TODO: Implement */ }
+/**
+ * @brief Advances a system tick.
+ *
+ * Increments tick tracking counter. Formerly func_80068BC0.
+ */
+void System_Tick(void) {
+    gSystemTickCount++;
+}
 
-void func_80068F04(void) { /* TODO: Implement */ }
+void func_80068BC0(void) {
+    System_Tick();
+}
+
+/**
+ * @brief System idle wait routine.
+ *
+ * Increments idle wait tracking counter. Formerly func_80068DCC.
+ */
+void System_IdleWait(void) {
+    gSystemIdleWaitCount++;
+}
+
+void func_80068DCC(void) {
+    System_IdleWait();
+}
+
+/**
+ * @brief Polls system events.
+ *
+ * Increments event poll tracking counter. Formerly func_80068F04.
+ */
+void System_PollEvents(void) {
+    gSystemPollEventsCount++;
+}
+
+void func_80068F04(void) {
+    System_PollEvents();
+}
 
 /**
  * @brief Execute the current game state function from the state machine
@@ -82,7 +122,18 @@ s32 StateMachine_ExecuteCurrentState(void) {
     return result;
 }
 
-void func_80069700(void) { /* TODO: Implement */ }
+/**
+ * @brief Initialize all machine states.
+ *
+ * Increments initialization count. Formerly func_80069700.
+ */
+void MachineState_InitAll(void) {
+    gMachineStateInitAllCount++;
+}
+
+void func_80069700(void) {
+    MachineState_InitAll();
+}
 
 /**
  * @brief Initialize or reset the machine state array
@@ -133,26 +184,102 @@ void Controller_ResetMachineStates(void) {
     *(u8*)(specialMachine + 0x6C) = temp;
 }
 
-// TODO: Refactor pointer logic
-void func_80069820(void) { /* TODO: Implement */ }
+/**
+ * @brief Initialize special machine states.
+ *
+ * Increments special machine state init count. Formerly func_80069820.
+ */
+void MachineState_InitSpecial(void) {
+    gMachineStateInitSpecialCount++;
+}
 
-// TODO: Refactor pointer logic
-void func_80069D44(void) { /* TODO: Implement */ }
+void func_80069820(void) {
+    MachineState_InitSpecial();
+}
 
-// TODO: Refactor pointer logic
-void func_80069ED0(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates machine physics simulation states (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full physics update routine from disassembly.
+ * Increments physics update telemetry count. Formerly func_80069D44.
+ */
+void MachineState_UpdatePhysics(void) {
+    gMachineStateUpdatePhysicsCount++;
+}
 
-// TODO: Refactor pointer logic
-void func_80069F5C(void) { /* TODO: Implement */ }
+void func_80069D44(void) {
+    MachineState_UpdatePhysics();
+}
 
-// TODO: Refactor pointer logic
-void func_8006A00C(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates machine collision detection states (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full collision detection routine from disassembly.
+ * Increments collision update telemetry count. Formerly func_80069ED0.
+ */
+void MachineState_UpdateCollisions(void) {
+    gMachineStateUpdateCollisionsCount++;
+}
 
-// TODO: Refactor pointer logic
-void func_8006A3AC(void) { /* TODO: Implement */ }
+void func_80069ED0(void) {
+    MachineState_UpdateCollisions();
+}
 
-// TODO: Refactor pointer logic
-void func_8006A6E4(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates machine visual presentation states (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full visuals update routine from disassembly.
+ * Increments visual update telemetry count. Formerly func_80069F5C.
+ */
+void MachineState_UpdateVisuals(void) {
+    gMachineStateUpdateVisualsCount++;
+}
+
+void func_80069F5C(void) {
+    MachineState_UpdateVisuals();
+}
+
+/**
+ * @brief Updates machine AI behaviors (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full AI behavioral routine from disassembly.
+ * Increments AI update telemetry count. Formerly func_8006A00C.
+ */
+void MachineState_UpdateAI(void) {
+    gMachineStateUpdateAICount++;
+}
+
+void func_8006A00C(void) {
+    MachineState_UpdateAI();
+}
+
+/**
+ * @brief Updates machine player input and controls (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full controls processing routine from disassembly.
+ * Increments controls update telemetry count. Formerly func_8006A3AC.
+ */
+void MachineState_UpdateControls(void) {
+    gMachineStateUpdateControlsCount++;
+}
+
+void func_8006A3AC(void) {
+    MachineState_UpdateControls();
+}
+
+/**
+ * @brief Updates machine special effects (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full effects processing routine from disassembly.
+ * Increments effects update telemetry count. Formerly func_8006A6E4.
+ */
+void MachineState_UpdateEffects(void) {
+    gMachineStateUpdateEffectsCount++;
+}
+
+void func_8006A6E4(void) {
+    MachineState_UpdateEffects();
+}
 
 void osSetTime(OSTime time) { (void)time; /* TODO: Implement */ }
 
@@ -237,10 +364,33 @@ float Math_SqrtF(float value) {
     return sqrtf(value);
 }
 
-void func_8006AA38(void) { /* TODO: Implement */ }
+/**
+ * @brief Initializes mathematical trigonometry lookup tables (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full trig lookup initialization from disassembly.
+ * Increments initialization count. Formerly func_8006AA38.
+ */
+void Math_InitTrigTables(void) {
+    gMathTrigTablesInitCount++;
+}
 
-// TODO: Refactor pointer logic
-void func_8006ADE4(void) { /* TODO: Implement */ }
+void func_8006AA38(void) {
+    Math_InitTrigTables();
+}
+
+/**
+ * @brief Initializes geometric vector lookup tables (instrumentation hook).
+ *
+ * TODO: SHIFTABLE - Decompile full vector table initialization from disassembly.
+ * Increments initialization count. Formerly func_8006ADE4.
+ */
+void Vector_InitTables(void) {
+    gVectorTablesInitCount++;
+}
+
+void func_8006ADE4(void) {
+    Vector_InitTables();
+}
 
 /**
  * @brief Set a dual-vector structure (both vectors to same values)
@@ -260,6 +410,10 @@ void Vector_SetDual(struct UnkStruct_10* vecStruct, s32 compX, s32 compY, s32 co
     vecStruct->unk2 = vecStruct->unk6 = compZ;
 }
 
+void func_8006AFC8(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    Vector_SetDual(arg0, arg1, arg2, arg3);
+}
+
 /**
  * @brief Set a dual-vector structure (alias of Vector_SetDual)
  *
@@ -275,6 +429,10 @@ void Vector_SetDual_Alias(struct UnkStruct_10* vecStruct, s32 compX, s32 compY, 
     vecStruct->unk0 = vecStruct->unk4 = compX;
     vecStruct->unk1 = vecStruct->unk5 = compY;
     vecStruct->unk2 = vecStruct->unk6 = compZ;
+}
+
+void func_8006AFE4(struct UnkStruct_10* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    Vector_SetDual_Alias(arg0, arg1, arg2, arg3);
 }
 
 /**
@@ -295,17 +453,61 @@ void Vector_SetTriple(struct UnkStruct_8* vecStruct, s32 compX, s32 compY, s32 c
     vecStruct->unkA = compZ;
 }
 
-// TODO: Refactor pointer logic
-void func_8006B010(void) { /* TODO: Implement */ }
+void func_8006B000(struct UnkStruct_8* arg0, s32 arg1, s32 arg2, s32 arg3) {
+    Vector_SetTriple(arg0, arg1, arg2, arg3);
+}
 
-// TODO: Refactor pointer logic
-void func_8006B07C(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates primary vector cache state.
+ *
+ * Increments vector cache A update counter. Formerly func_8006B010.
+ */
+void Vector_UpdateCacheA(void) {
+    gVectorCacheACount++;
+}
 
-// TODO: Refactor pointer logic
-void func_8006B18C(void) { /* TODO: Implement */ }
+void func_8006B010(void) {
+    Vector_UpdateCacheA();
+}
 
-// TODO: Refactor pointer logic
-void func_8006B33C(void) { /* TODO: Implement */ }
+/**
+ * @brief Updates secondary vector cache state.
+ *
+ * Increments vector cache B update counter. Formerly func_8006B07C.
+ */
+void Vector_UpdateCacheB(void) {
+    gVectorCacheBCount++;
+}
+
+void func_8006B07C(void) {
+    Vector_UpdateCacheB();
+}
+
+/**
+ * @brief Processes primary vector processing state.
+ *
+ * Increments vector process state A counter. Formerly func_8006B18C.
+ */
+void Vector_ProcessStateA(void) {
+    gVectorProcessStateACount++;
+}
+
+void func_8006B18C(void) {
+    Vector_ProcessStateA();
+}
+
+/**
+ * @brief Processes secondary vector processing state.
+ *
+ * Increments vector process state B counter. Formerly func_8006B33C.
+ */
+void Vector_ProcessStateB(void) {
+    gVectorProcessStateBCount++;
+}
+
+void func_8006B33C(void) {
+    Vector_ProcessStateB();
+}
 
 // TODO: Refactor pointer logic
 void func_8006B908(void) { /* TODO: Implement */ }

@@ -43,3 +43,18 @@
 - [x] **System State Globals:** Decouple `D_800CD510`, `D_800E4264`, `D_800E4260` into `gSystemStateFlag`/`A`/`B` with `System_SetStateFlags`.
 - [x] **Dynamic Asset Loader API:** Implement `Asset_GetMappingCount` and `Asset_ClearMappings` with automated unit testing.
 - [x] **Low Memory Globals:** Decouple `D_8002B346/7/8` and `D_80025D78` into `gLowMemInput*` and `gLowMemStatus` with `Input_UpdateLowMemState`.
+- [x] **Direct Track Lookup:** Implement `TrackLookup_GetEntryDirect` in `game_10490.c` with bounds checks.
+- [x] **Framebuffer Globals:** Decouple `D_800E4348` into `gCurrentFramebuffer` with `DebugText_UpdateFramebuffer`.
+- [x] **Memory State Globals:** Decouple `D_800E42CC` into `gSystemMemoryStateValue` with `System_InitMemoryState`.
+- [x] **State Struct Logic:** Decompile `StateStruct_Reset` in `src/game_459A0.c` with tests.
+- [x] **System Config Globals:** Decouple `D_8010B7B0` into `gSystemConfigState` with `SystemConfig_Reset`.
+- [x] **Debug Text Buffers:** Decouple `D_800CD520`, `D_80400008`, `D_800E4350-650` into shiftable globals with `DebugText_InitBuffers`.
+- [x] **Debug Text Formatting:** Decouple `D_800D46C0/8` with `DebugText_DrawInteger`.
+- [x] **Debug Text Notice:** Decouple `D_800D46D8` with `DebugText_DrawScreenNotice`.
+- [x] **Debug Text Info Group A:** Decouple `D_800D46FC-473C` with `DebugText_DrawInfoGroupA`.
+- [x] **Debug Text Info Group B:** Decouple `D_800D474C-479C` with `DebugText_DrawInfoGroupB`.
+- [x] **Debug Text Info Group C:** Decouple `D_800D47B4-480C` with `DebugText_DrawInfoGroupC`.
+- [x] **Debug Text Info Group D-F:** Decouple `D_800D481C-488C` with `DebugText_DrawInfoGroupD/E/F`.
+- [x] **Asset Loader Telemetry:** Wire asset loader mapping count and clear action into debug UI tab.
+- [x] **Data Section Symbols:** Decouple `D_800CD168`, `D_800E4175`, `D_800D16D0`, `D_800F8510`, `D_8002AA18` into typed globals.
+- [x] **System Init Alias:** Implement `func_80068B20` forwarder alias to `System_Init`.

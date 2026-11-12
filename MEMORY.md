@@ -43,8 +43,10 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 
 ## Known Hardcoded Globals (D_80...)
 
-- `D_800E4348`: Likely `gCurrentFramebuffer` or a rendering target. Used in `ultra_impl.c` and debug output.
-- `D_800E33C0`: A lookup array or table. Populated via `func_8006D414` and accessed via `func_8006D448` in `game_73F0.c` (Refactored to `gTrackLookupTable[22]` with `TrackLookup_ValidateIndex`, `TrackLookup_SetEntry`, `TrackLookup_GetEntry`).
+- `D_800E4348`: Current Framebuffer pointer in `debug_text.c`, `game_197D0.c`, and `ultra_impl.c` (Refactored to `gCurrentFramebuffer` with `DebugText_UpdateFramebuffer` and `func_8007F94C`).
+- `D_800E42CC`: Memory state parameter in `game_194E0.c` (Refactored to `gSystemMemoryStateValue` with `System_InitMemoryState` and `func_8007F500`).
+- `struct UnkStruct_5`: Machine/subsystem state structure in `src/game_459A0.c` reset logic (`StateStruct_Reset` / `func_800B2B50`).
+- `D_800E33C0`: A lookup array or table. Populated via `func_8006D414` and accessed via `func_8006D448` in `game_73F0.c`, and directly accessed via `TrackLookup_GetEntryDirect` in `game_10490.c` (Refactored to `gTrackLookupTable[22]`).
 - `D_800D1A3C` / `D_800D1A20` / `D_800D1A48` / `D_800D19E0` / `D_800D1C18`: Audio state machine flags used in `game_511D0.c` (libaudio backend interactions).
 - `D_800D0AC0` / `D_800D0AC4`: Machine dynamic config globals set in `game_459A0.c` (Refactored to `gDynamicMachineConfigA` / `gDynamicMachineConfigB` with `Machine_SetConfigA` / `Machine_SetConfigB`).
 - `D_800CD510` / `D_800E4264` / `D_800E4260`: System state flags and parameters in `game_194E0.c` (Refactored to `gSystemStateFlag`, `gSystemStateParamA`, `gSystemStateParamB` with `System_SetStateFlags`).
@@ -57,6 +59,13 @@ To avoid copyright issues and build friction (requiring a ROM), we implemented:
 - `struct UnkStruct_1` / `ListNode`: In `include/structs.h` and `src/linked_list.c`, circular linked list nodes refactored into union-aliased 64-bit safe self-referencing pointers.
 - `gStateHandlers`: State machine function pointer table in `src/math_utils.c` converted to `uintptr_t` for 64-bit portability.
 - `D_800D4690`: Sound effect bank map byte table in `src/audio_util.c` and `src/game_14440.c` (Refactored to `gSoundEffectBankMap` with `Audio_SetSoundId` and `Audio_GetSoundEffectByte`).
-- `D_800D46C0` through `D_800D488C`: A block of variables exclusively used as format or parameter strings for `func_8007FB80` (debug text rendering) in `debug_text.c`.
+- `D_800D46C0` and `D_800D46C8`: Integer format and label string in `debug_text.c` (Refactored to `gDebugFormatInteger` and `gDebugLabelInteger` with `DebugText_DrawInteger` and `func_8007FC68`).
+- `D_800D46D8`: Screen notice string in `debug_text.c` (Refactored to `gDebugScreenNotice` with `DebugText_DrawScreenNotice` and `func_8007FCB8`).
+- `D_800D46FC`, `D_800D471C`, `D_800D473C`: Debug info group A strings in `debug_text.c` (Refactored to `gDebugInfoGroupA1/2/3` with `DebugText_DrawInfoGroupA` and `func_8007FCF4`).
+- `D_800D474C`, `D_800D476C`, `D_800D478C`, `D_800D479C`: Debug info group B strings in `debug_text.c` (Refactored to `gDebugInfoGroupB1-4` with `DebugText_DrawInfoGroupB` and `func_8007FD58`).
+- `D_800D47B4`, `D_800D47D0`, `D_800D47EC`, `D_800D480C`: Debug info group C strings in `debug_text.c` (Refactored to `gDebugInfoGroupC1-4` with `DebugText_DrawInfoGroupC` and `func_8007FDD0`).
+- `D_800D481C` through `D_800D488C`: Debug info groups D, E, F strings in `debug_text.c` (Refactored to `gDebugInfoGroupD1-2`, `gDebugInfoGroupE1`, `gDebugInfoGroupF1-2` with `DebugText_DrawInfoGroupD/E/F`).
+- `D_800CD168`, `D_800E4175`, `D_800D16D0`, `D_800F8510`, `D_8002AA18`: Shiftable data and pointer symbols in `ultra_impl.c` and `variables.h` (`gGlobalState_800CD168`, `gGlobalState_800E4175`, `gGlobalState_800D16D0`, `gGlobalPtr_800F8510`, `gGlobalState_8002AA18`).
 - `D_800CD170` / `D_800CD174`: Seed states for `Math_Rand` PRNG in `math_utils.c` (successfully mapped in the PC port).
-- `D_8010B7B0`: Struct containing unknowns, initialized in `game_73F0.c`.
+- `D_8010B7B0`: System config state struct initialized/reset in `game_73F0.c` (Refactored to `gSystemConfigState` with `SystemConfig_Reset` and `func_800742D0`).
+- `D_800CD520`, `D_80400008`, `D_800E4350`, `D_800E44D0`, `D_800E4650`: Debug text buffers (Refactored to `gDebugBufferState`, `gDebugBufferAux`, `gDebugBufferA/B/C` with `DebugText_InitBuffers` and `func_8007F904`).

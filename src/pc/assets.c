@@ -29,6 +29,7 @@ GLuint Tex_Create(int width, int height, const void* data) {
 }
 
 void Assets_Init(void) {
+    GLuint texID = 0;
     // Generate Asphalt Texture (64x64)
     int w = 64, h = 64;
     uint32_t* asphalt = (uint32_t*)malloc(w * h * 4);
@@ -48,7 +49,7 @@ void Assets_Init(void) {
             asphalt[i] = 0xFF000000 | (val << 16) | (val << 8) | val;
         }
 
-        GLuint texID = Tex_Create(w, h, asphalt);
+        texID = Tex_Create(w, h, asphalt);
         free(asphalt);
 
         // Register globally?
@@ -58,17 +59,18 @@ void Assets_Init(void) {
         Fast3D_RegisterTexture(0x100, texID);
     }
 
-
     // Try Load Mod
     gBlueFalconModel = OBJ_Load("mods/blue_falcon.obj");
     if (gBlueFalconModel) {
         printf("Assets: Using modded machine model.\n");
         // We use a made-up ROM address 0x80800000 for testing dynamic asset loader relocation
-        Asset_RegisterMapping(0x80800000, gBlueFalconModel);
+        Asset_RegisterNamedMapping("blue_falcon_model", 0x80800000, gBlueFalconModel);
     } else {
         printf("Assets: Using internal machine model.\n");
     }
 
     // Verify dynamic texture relocation
-    Asset_RegisterMapping(0x80800100, (void*)(uintptr_t)texID);
+    if (texID != 0) {
+        Asset_RegisterNamedMapping("asphalt_texture", 0x80800100, (void*)(uintptr_t)texID);
+    }
 }
